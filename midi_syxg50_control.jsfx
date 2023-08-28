@@ -1,0 +1,3224 @@
+//Yamaha S-YXG50 VSTi external control panel by Shiru
+//https://www.patreon.com/shiru8bit shiru@mail.ru
+//released under the CC0 terms
+
+//v1.1 13.02.20 - MIDI channel can be changed with RMB and mouse wheel;
+//                Shift+mouse wheel to precise adjustments of the sliders;
+//                Reverb/Chorus/Variation sends are per-channel settings now;
+//                RMB on a parameter to reset to a default value;
+//                Reverb/Chorus/Variation settings properly restored after loading
+//v1.0 12.06.17 - Initial release worthy version, with instument list and all effect parameters
+//v0.0 31.05.17 - Work started
+
+//Special thanks to phonymacaroni, EvilDragon
+
+//Known bugs and issues:
+
+//- When Variation tab is visible and effect Flanger 1 or below is selected,
+//  Reaper freezes on Close project. Does not freeze on exiting the program.
+
+//- Defaults for Reverb/Chorus/Variation effect values are unknown, set to .2.
+
+
+
+desc:MIDI S-YXG50 Control Panel
+
+//tags: MIDI generator
+
+
+
+in_pin:none
+out_pin:none
+
+
+
+@serialize
+
+file_var(0,gui_page);
+
+file_var(0,midi_channel);
+file_var(0,midi_program);
+file_var(0,midi_bank);
+
+file_var(0,instrument_voice);
+file_var(0,instrument_category);
+
+file_var(0,category_list_voice_cursor);
+file_var(0,category_list_reverb_cursor);
+file_var(0,category_list_chorus_cursor);
+file_var(0,category_list_variation_cursor);
+
+save_vars_ptr=0;
+
+loop(16,
+	file_var(0,gui_slider_reverb_send[save_vars_ptr]);
+	file_var(0,gui_slider_chorus_send[save_vars_ptr]);
+	file_var(0,gui_slider_variation_send[save_vars_ptr]);
+	save_vars_ptr+=1;
+);
+
+file_var(0,gui_slider_chorus_send_reverb);
+file_var(0,gui_slider_variation_send_reverb);
+file_var(0,gui_slider_variation_send_chorus);
+
+file_var(0,gui_slider_reverb_return);
+file_var(0,gui_slider_chorus_return);
+file_var(0,gui_slider_variation_return);
+
+file_var(0,gui_slider_reverb_pan);
+file_var(0,gui_slider_chorus_pan);
+file_var(0,gui_slider_variation_pan);
+
+save_vars_ptr=0;
+
+loop(40*16*3,
+	file_var(0,save_vars[save_vars_ptr]);
+	save_vars_ptr+=1;
+);
+ 
+
+
+@init
+
+CAP_LMB=0x01;
+CAP_RMB=0x02;
+CAP_MMB=0x40;
+CAP_CTRL=0x04;
+CAP_ALT=0x10;
+CAP_SHIFT=0X08;
+
+DEF_SEND=.5;
+DEF_PAN=.5;
+DEF_PARAM=.2;
+
+ext_noinit=1;
+gfx_clear=-1;
+gfx_a=1;
+
+color_bg_darkest =0x001020;
+color_bg_dark    =0x204060;
+color_bg_light   =0x5070a0;
+color_bg_cursor  =0x8090ff;
+color_list_normal=0xd0f0f0;
+color_list_hover =0xf0f8f8;
+
+gui_page=0;
+gui_mouse_lmb=0;
+gui_mouse_rmb=0;
+
+gui_slider_width=256;
+gui_slider_height=10;
+gui_slider_x=0;
+gui_slider_y=0;
+gui_slider_change=0;
+gui_slider_out=0;
+
+gui_slider_reverb_send=400000;
+gui_slider_chorus_send=401000;
+gui_slider_variation_send=402000;
+save_vars_ptr=0;
+
+loop(16,
+	gui_slider_reverb_send[save_vars_ptr]=DEF_SEND;
+	gui_slider_chorus_send[save_vars_ptr]=DEF_SEND;
+	gui_slider_variation_send[save_vars_ptr]=DEF_SEND;
+	save_vars_ptr+=1;
+);
+
+gui_slider_chorus_send_reverb=0;
+gui_slider_variation_send_reverb=0;
+gui_slider_variation_send_chorus=0;
+
+gui_slider_reverb_return=DEF_SEND;
+gui_slider_chorus_return=DEF_SEND;
+gui_slider_variation_return=DEF_SEND;
+
+gui_slider_reverb_pan=DEF_PAN;
+gui_slider_chorus_pan=DEF_PAN;
+gui_slider_variation_pan=DEF_PAN;
+	
+midi_synth_mode_xg=0;
+midi_synth_mode_tg300=1;
+
+midi_synth_mode=midi_synth_mode_xg;
+midi_synth_mode_prev=-1;                //send sysex only if changed
+
+midi_channel=0;
+midi_program=0;
+midi_bank=0;
+
+midi_first_time=1;
+
+instrument_voice=0;
+instrument_category=0;
+instrument_update=1;
+
+category_list_voice_cursor=0;
+category_list_voice_offset=0;
+
+category_list_reverb_cursor=0;
+category_list_reverb_offset=0;
+category_list_reverb_cursor_prev=-1;
+
+category_list_chorus_cursor=0;
+category_list_chorus_offset=0;
+category_list_chorus_cursor_prev=-1;
+
+category_list_variation_cursor=0;
+category_list_variation_offset=0;
+category_list_variation_cursor_prev=-1;
+
+category_list_height=0;
+category_list_width=150;
+category_list_length=0;
+
+list_item_height=22;
+list_item_width=150;
+
+menu_height=40;
+
+mouse_prev_x=-1;
+mouse_prev_y=-1;
+
+effect_reverb_send=300000;
+effect_reverb_send_prev=301000;
+effect_chorus_send=302000;
+effect_chorus_send_prev=303000;
+effect_variation_send=304000;
+effect_variation_send_prev=305000;
+save_vars_ptr=0;
+
+loop(16,
+	effect_reverb_send[save_vars_ptr]=0;
+	effect_reverb_send_prev[save_vars_ptr]=-1;
+	effect_chorus_send[save_vars_ptr]=0;
+	effect_chorus_send_prev[save_vars_ptr]=-1;
+	effect_variation_send[save_vars_ptr]=0;
+	effect_variation_send_prev[save_vars_ptr]=-1;
+);
+
+sysex_buf=100000;
+sysex_queue=100100;
+sysex_queue_ptr=0;
+sysex_delay=0;
+
+save_vars=150000;
+save_vars_ptr=0;
+
+loop(40*16*3,
+	save_vars[save_vars_ptr]=DEF_PARAM;
+	save_vars_ptr+=1;
+);
+
+ 
+
+//-----------------------------------------------------------------------------
+
+list_voice_category="
+00:Piano
+01:Chromatic Percussion
+02:Organ
+03:Guitar
+04:Bass
+05:Strings
+06:Ensemble
+07:Brass
+08:Reed
+09:Pipe
+10:Ethnic
+11:Synth Lead
+12:Synth Pad
+13:Synth Effects
+14:Sound Effects
+15:Voice Effects
+16:Percussive
+17:Drum kits
+";
+
+//-----------------------------------------------------------------------------
+
+list_reverb_category="
+00:No Effect
+01:Hall 1
+02:Hall 2
+03:Room 1
+04:Room 2
+05:Room 3
+06:Stage 1
+07:Stage 2
+08:Plate
+";
+
+//-----------------------------------------------------------------------------
+
+list_chorus_category="
+00:No Effect
+01:Chorus 1
+02:Chorus 2
+03:Chorus 3
+04:Celeste 1
+05:Celeste 2
+06:Celeste 3
+07:Flanger 1
+08:Flanger 2
+";
+
+//-----------------------------------------------------------------------------
+
+list_variation_category="
+00:No Effect
+01:Hall 1
+02:Hall 2
+03:Room 1
+04:Room 2
+05:Room 3
+06:Stage 1
+07:Stage 2
+08:Plate
+09:Delay L,C,R
+10:Delay L,R
+11:Echo
+12:Cross Delay
+13:Early Ref 1
+14:Early Ref 2
+15:Gate Reverb
+16:Reverse Gate
+17:Chorus 1
+18:Chorus 2
+19:Chorus 3
+20:Celeste 1
+21:Celeste 2
+22:Celeste 3
+23:Flanger 1
+24:Flanger 2
+25:Symphonic
+26:Rotary Speaker
+27:Tremolo
+28:Auto Pan
+29:Phaser 1
+30:Phaser 2
+31:Distortion
+32:Overdrive
+33:Amp Simulator
+34:3-Band EQ (Mono)
+35:2-Band EQ (Stereo)
+36:Auto Wah
+37:Thru
+";
+
+//-----------------------------------------------------------------------------
+//X (XG) or T (TG300), program:bank msb:bank lsb, patch name
+//numbers are decimal
+
+list_contents_piano="
+X001:000:000 GrandPno
+X001:000:001 GrndPnoK
+X001:000:018 MelloGrP
+X001:000:040 PianoStr
+X001:000:041 Dream
+X002:000:000 BritePno
+X002:000:001 BritPnoK
+X003:000:000 E.Grand
+X003:000:001 ElGrPnoK
+X003:000:032 Det.CP80
+X003:000:040 ElGrPno1
+X003:000:041 ElGrPno2
+X004:000:000 HnkyTonk
+X004:000:001 HnkyTnkK
+X005:000:000 E.Piano1
+X005:000:001 El.Pno1K
+X005:000:018 MelloEP1
+X005:000:032 Chor.EP1
+X005:000:040 HardEl.P
+X005:000:045 VX El.P1
+X005:000:064 60sEl.P
+X006:000:000 E.Piano2
+X006:000:001 El.Pno2K
+X006:000:032 Chor.EP2
+X006:000:033 DX Hard
+X006:000:034 DXLegend
+X006:000:040 DX Phase
+X006:000:041 DX+Analg
+X006:000:042 DXKotoEP
+X006:000:045 VX El.P2
+X007:000:000 Harpsi.
+X007:000:001 Harpsi.K
+X007:000:025 Harpsi.2
+X007:000:035 Harpsi.3
+X008:000:000 Clavi.
+X008:000:001 Clavi. K
+X008:000:027 ClaviWah
+X008:000:064 PulseClv
+X008:000:065 PierceCl
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_chromatic_percussion="
+X009:000:000 Celesta
+X010:000:000 Glocken
+X011:000:000 MusicBox
+X011:000:064 Orgel
+X012:000:000 Vibes
+X012:000:001 VibesK
+X012:000:045 HardVibe
+X013:000:000 Marimba
+X013:000:001 MarimbaK
+X013:000:064 SineMrmb
+X013:000:097 Balafon2
+X013:000:098 Log Drum
+X014:000:000 Xylophon
+X015:000:000 TubulBel
+X015:000:096 ChrchBel
+X015:000:097 Carillon
+X016:000:000 Dulcimer
+X016:000:035 Dulcimr2
+X016:000:096 Cimbalom
+X016:000:097 Santur
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_organ="
+X017:000:000 DrawOrgn
+X017:000:032 DetDrwOr
+X017:000:033 60sDrOr1
+X017:000:034 60sDrOr2
+X017:000:035 70sDrOr1
+X017:000:036 DrawOrg2
+X017:000:037 60sDrOr3
+X017:000:038 EvenBar
+X017:000:040 16+2^2/3
+X017:000:064 Organ Ba
+X017:000:065 70sDrOr2
+X017:000:066 CheezOrg
+X017:000:067 DrawOrg3
+X018:000:000 PercOrgn
+X018:000:024 70sPcOr1
+X018:000:032 DetPrcOr
+X018:000:033 LiteOrg
+X018:000:037 PercOrg2
+X019:000:000 RockOrgn
+X019:000:064 RotaryOr
+X019:000:065 SloRotar
+X019:000:066 FstRotar
+X020:000:000 ChrchOrg
+X020:000:032 ChurOrg3
+X020:000:035 ChurOrg2
+X020:000:040 NotreDam
+X020:000:064 OrgFlute
+X020:000:065 TrmOrgFl
+X021:000:000 ReedOrgn
+X021:000:040 Puff Org
+X022:000:000 Acordion
+X022:000:032 AccordIt
+X023:000:000 Harmnica
+X023:000:032 Harmo 2
+X024:000:000 TangoAcd
+X024:000:064 TngoAcd2
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_guitar="
+X025:000:000 NylonGtr
+X025:000:016 NylonGt2
+X025:000:025 NylonGt3
+X025:000:043 VelGtHrm
+X025:000:096 Ukulele
+X026:000:000 SteelGtr
+X026:000:016 SteelGt2
+X026:000:035 12StrGtr
+X026:000:040 Nyln&Stl
+X026:000:041 Stl&Body
+X026:000:096 Mandolin
+X027:000:000 Jazz Gtr
+X027:000:018 MelloGtr
+X027:000:032 JazzAmp
+X028:000:000 CleanGtr
+X028:000:032 ChorusGt
+X029:000:000 Mute.Gtr
+X029:000:040 FunkGtr1
+X029:000:041 MuteStlG
+X029:000:043 FunkGtr2
+X029:000:045 Jazz Man
+X030:000:000 Ovrdrive
+X030:000:043 Gt.Pinch
+X031:000:000 Dist.Gtr
+X031:000:040 FeedbkGt
+X031:000:041 FeedbGt2
+X032:000:000 GtrHarmo
+X032:000:065 GtFeedbk
+X032:000:066 GtrHrmo2
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_bass="
+X033:000:000 Aco.Bass
+X033:000:040 JazzRthm
+X033:000:045 VXUprght
+X034:000:000 FngrBass
+X034:000:018 FingrDrk
+X034:000:027 FlangeBa
+X034:000:040 Ba&DstEG
+X034:000:043 FngrSlap
+X034:000:045 FngBass2
+X034:000:065 ModAlem
+X035:000:000 PickBass
+X035:000:028 MutePkBa
+X036:000:000 Fretless
+X036:000:032 Fretles2
+X036:000:033 Fretles3
+X036:000:034 Fretles4
+X036:000:096 SynFretl
+X036:000:097 Smooth
+X037:000:000 SlapBas1
+X037:000:027 ResoSlap
+X037:000:032 PunchThm
+X038:000:000 SlapBas2
+X038:000:043 VeloSlap
+X039:000:000 SynBass1
+X039:000:018 SynBa1Dk
+X039:000:020 FastResB
+X039:000:024 AcidBass
+X039:000:035 Clv Bass
+X039:000:040 TeknoBa
+X039:000:064 Oscar
+X039:000:065 SqrBass
+X039:000:066 RubberBa
+X039:000:096 Hammer
+X040:000:000 SynBass2
+X040:000:006 MelloSB1
+X040:000:012 Seq Bass
+X040:000:018 ClkSynBa
+X040:000:019 SynBa2Dk
+X040:000:032 SmthBa 2
+X040:000:040 ModulrBa
+X040:000:041 DX Bass
+X040:000:064 X WireBa
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_strings="
+X041:000:000 Violin
+X041:000:008 SlowVln
+X042:000:000 Viola
+X043:000:000 Cello
+X044:000:000 Contrabs
+X045:000:000 Trem.Str
+X045:000:008 SlowTrStr
+X045:000:040 Susp Str
+X046:000:000 Pizz.Str
+X047:000:000 Harp
+X047:000:040 YangChin
+X048:000:000 Timpani
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_ensemble="
+X049:000:000 Strings1
+X049:000:003 S.Strngs
+X049:000:008 SlowStr
+X049:000:024 ArcoStr
+X049:000:035 60sStrng
+X049:000:040 Orchestr
+X049:000:041 Orchstr2
+X049:000:042 TremOrch
+X049:000:045 VeloStr
+X050:000:000 Strings2
+X050:000:003 S.SlwStr
+X050:000:008 LegatoSt
+X050:000:040 Warm Str
+X050:000:041 Kingdom
+X050:000:064 70s Str
+X050:000:065 Str Ens3
+X051:000:000 Syn.Str1
+X051:000:027 ResoStr
+X051:000:064 Syn Str4
+X051:000:065 SS Str
+X052:000:000 Syn.Str2
+X053:000:000 ChoirAah
+X053:000:003 S.Choir
+X053:000:016 Ch.Aahs2
+X053:000:032 MelChoir
+X053:000:040 ChoirStr
+X054:000:000 VoiceOoh
+X055:000:000 SynVoice
+X055:000:040 SynVox2
+X055:000:041 Choral
+X055:000:064 AnaVoice
+X056:000:000 Orch.Hit
+X056:000:035 OrchHit2
+X056:000:064 Impact
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_brass="
+X057:000:000 Trumpet
+X057:000:016 Trumpet2
+X057:000:017 BriteTrp
+X057:000:032 WarmTrp
+X058:000:000 Trombone
+X058:000:018 Trmbone2
+X059:000:000 Tuba
+X059:000:016 Tuba 2
+X060:000:000 Mute.Trp
+X061:000:000 Fr.Horn
+X061:000:006 FrHrSolo
+X061:000:032 FrHorn2
+X061:000:037 HornOrch
+X062:000:000 BrasSect
+X062:000:035 Tp&TbSec
+X062:000:040 BrssSec2
+X062:000:041 HiBrass
+X062:000:042 MelloBrs
+X063:000:000 SynBras1
+X063:000:012 QuackBr
+X063:000:020 RezSynBr
+X063:000:024 PolyBrss
+X063:000:027 SynBras3
+X063:000:032 JumpBrss
+X063:000:045 AnaVelBr
+X063:000:064 AnaBrss1
+X064:000:000 SynBras2
+X064:000:018 Soft Brs
+X064:000:040 SynBras4
+X064:000:041 ChorBrss
+X064:000:045 VelBras2
+X064:000:064 AnaBras2
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_reed="
+X065:000:000 SprnoSax
+X066:000:000 Alto Sax
+X066:000:040 Sax Sect
+X066:000:043 HyprAlto
+X067:000:000 TenorSax
+X067:000:040 BrthTnSx
+X067:000:041 SoftTenr
+X067:000:064 TnrSax 2
+X068:000:000 Bari.Sax
+X069:000:000 Oboe
+X070:000:000 Eng.Horn
+X071:000:000 Bassoon
+X072:000:000 Clarinet
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_pipe="
+X073:000:000 Piccolo
+X074:000:000 Flute
+X075:000:000 Recorder
+X076:000:000 PanFlute
+X077:000:000 Bottle
+X078:000:000 Shakhchi
+X079:000:000 Whistle
+X080:000:000 Ocarina
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_synth_lead="
+X081:000:000 SquareLd
+X081:000:006 Square 2
+X081:000:008 LMSquare
+X081:000:018 Hollow
+X081:000:019 Shmoog
+X081:000:064 Mellow
+X081:000:065 SoloSine
+X081:000:066 SineLead
+X082:000:000 Saw.Lead
+X082:000:006 Saw 2
+X082:000:008 ThickSaw
+X082:000:018 DynaSaw
+X082:000:019 DigiSaw
+X082:000:020 Big Lead
+X082:000:024 HeavySyn
+X082:000:025 WaspySyn
+X082:000:040 PulseSaw
+X082:000:041 Dr. Lead
+X082:000:045 VeloLead
+X082:000:096 Seq Ana
+X083:000:000 CaliopLd
+X083:000:065 Pure Pad
+X084:000:000 Chiff Ld
+X084:000:064 Rubby
+X085:000:000 CharanLd
+X085:000:064 DistLead
+X085:000:065 WireLead
+X086:000:000 Voice Ld
+X086:000:024 SynthAah
+X086:000:064 VoxLead
+X087:000:000 Fifth Ld
+X087:000:035 Big Five
+X088:000:000 Bass &Ld
+X088:000:016 Big&Low
+X088:000:064 Fat&Prky
+X088:000:065 SoftWurl
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_synth_pad="
+X089:000:000 NewAgePd
+X089:000:064 Fantasy2
+X090:000:000 Warm Pad
+X090:000:016 ThickPad
+X090:000:017 Soft Pad
+X090:000:018 SinePad
+X090:000:064 Horn Pad
+X090:000:065 RotarStr
+X091:000:000 PolySyPd
+X091:000:064 PolyPd80
+X091:000:065 ClickPad
+X091:000:066 Ana Pad
+X091:000:067 SquarPad
+X092:000:000 ChoirPad
+X092:000:064 Heaven2
+X092:000:066 Itopia
+X092:000:067 CC Pad
+X093:000:000 BowedPad
+X093:000:064 Glacier
+X093:000:065 GlassPad
+X094:000:000 MetalPad
+X094:000:064 Tine Pad
+X094:000:065 Pan Pad
+X095:000:000 Halo Pad
+X096:000:000 SweepPad
+X096:000:020 Shwimmer
+X096:000:027 Converge
+X096:000:064 PolarPad
+X096:000:066 Celstial
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_synth_effects="
+X097:000:000 Rain
+X097:000:045 ClaviPad
+X097:000:064 HrmoRain
+X097:000:065 AfrcnWnd
+X097:000:066 Caribean
+X098:000:000 SoundTrk
+X098:000:027 Prologue
+X098:000:064 Ancestrl
+X099:000:000 Crystal
+X099:000:012 SynDrCmp
+X099:000:014 Popcorn
+X099:000:018 TinyBell
+X099:000:035 RndGlock
+X099:000:040 GlockChi
+X099:000:041 ClearBel
+X099:000:042 ChorBell
+X099:000:064 SynMalet
+X099:000:065 SftCryst
+X099:000:066 LoudGlok
+X099:000:067 XmasBell
+X099:000:068 VibeBell
+X099:000:069 DigiBell
+X099:000:070 AirBells
+X099:000:071 BellHarp
+X099:000:072 Gamelmba
+X100:000:000 Atmosphr
+X100:000:018 WarmAtms
+X100:000:019 HollwRls
+X100:000:040 NylonEP
+X100:000:064 NylnHarp
+X100:000:065 Harp Vox
+X100:000:066 AtmosPad
+X100:000:067 Planet
+X101:000:000 Bright
+X101:000:064 FantaBel
+X101:000:096 Smokey
+X102:000:000 Goblins
+X102:000:064 GobSyn
+X102:000:065 50sSciFi
+X102:000:066 Ring Pad
+X102:000:067 Ritual
+X102:000:068 ToHeaven
+X102:000:070 Night
+X102:000:071 Glisten
+X102:000:096 BelChoir
+X103:000:000 Echoes
+X103:000:008 EchoPad2
+X103:000:014 Echo Pan
+X103:000:064 EchoBell
+X103:000:065 Big Pan
+X103:000:066 SynPiano
+X103:000:067 Creation
+X103:000:068 Stardust
+X103:000:069 Reso Pan
+X104:000:000 Sci-Fi
+X104:000:064 Starz
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_ethnic="
+X105:000:000 Sitar
+X105:000:032 DetSitar
+X105:000:035 Sitar 2
+X105:000:096 Tambra
+X105:000:097 Tamboura
+X106:000:000 Banjo
+X106:000:028 MuteBnjo
+X106:000:096 Rabab
+X106:000:097 Gopichnt
+X106:000:098 Oud
+X107:000:000 Shamisen
+X108:000:000 Koto
+X108:000:096 T. Koto
+X108:000:097 Kanoon
+X109:000:000 Kalimba
+X110:000:000 Bagpipe
+X111:000:000 Fiddle
+X112:000:000 Shanai
+X112:000:064 Shanai2
+X112:000:096 Pungi
+X112:000:097 Hichriki
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_percussive="
+X113:000:000 TnklBell
+X113:000:096 Bonang
+X113:000:097 Gender
+X113:000:098 Gamelan
+X113:000:099 S.Gamlan
+X113:000:100 Rama Cym
+X113:000:101 AsianBel
+X114:000:000 Agogo
+X115:000:000 SteelDrm
+X115:000:097 GlasPerc
+X115:000:098 ThaiBell
+X116:000:000 WoodBlok
+X116:000:096 Castanet
+X117:000:000 TaikoDrm
+X117:000:096 Gr.Cassa
+X118:000:000 MelodTom
+X118:000:064 Mel Tom2
+X118:000:065 Real Tom
+X118:000:066 Rock Tom
+X119:000:000 Syn.Drum
+X119:000:064 Ana Tom
+X119:000:065 ElecPerc
+X120:000:000 RevCymbl
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_sound_effects="
+X121:000:000 FretNoiz
+X122:000:000 BrthNoiz
+X123:000:000 Seashore
+X124:000:000 Tweet
+X125:000:000 Telphone
+X126:000:000 Helicptr
+X127:000:000 Applause
+X128:000:000 Gunshot
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_voice_effects="
+X001:064:000 CuttngNz
+X002:064:000 CttngNz2
+X004:064:000 Str Slap
+X017:064:000 Fl.KClik
+X033:064:000 Rain
+X034:064:000 Thunder
+X035:064:000 Wind
+X036:064:000 Stream
+X037:064:000 Bubble
+X038:064:000 Feed
+X049:064:000 Dog
+X050:064:000 Horse
+X051:064:000 Bird 2
+X055:064:000 Ghost
+X056:064:000 Maou
+X065:064:000 Tel.Dial
+X066:064:000 DoorSqek
+X067:064:000 Door Slam
+X068:064:000 Scratch
+X069:064:000 Scratch 2
+X070:064:000 WindChm
+X071:064:000 Telphon2
+X081:064:000 CarEngin
+X082:064:000 Car Stop
+X083:064:000 Car Pass
+X084:064:000 CarCrash
+X085:064:000 Siren
+X086:064:000 Train
+X087:064:000 Jetplane
+X088:064:000 Starship
+X089:064:000 Burst
+X090:064:000 Coaster 
+X091:064:000 SbMarine
+X097:064:000 Laughing
+X098:064:000 Scream
+X099:064:000 Punch
+X100:064:000 Heart
+X101:064:000 FootStep
+X113:064:000 MchinGun
+X114:064:000 LaserGun
+X115:064:000 Xplosion
+X116:064:000 FireWork
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_drum_kits="
+X001:127:000 XG Standard
+X002:127:000 XG Standard 2
+X009:127:000 XG Room
+X017:127:000 XG Rock
+X025:127:000 XG Electro
+X026:127:000 XG Analog
+X033:127:000 XG Jazz
+X041:127:000 XG Brush
+X049:127:000 XG Classic
+X001:126:000 XG SFX 1
+X002:126:000 XG SFX 2
+X001:120:000 GM2 Standard
+X009:120:000 GM2 Room
+X017:120:000 GM2 Power 
+X025:120:000 GM2 Electric
+X026:120:000 GM2 Analog
+X033:120:000 GM2 Jazz
+X041:120:000 GM2 Brush
+X049:120:000 GM2 Orchestra
+X057:120:000 GM2 SFX
+";
+
+//-----------------------------------------------------------------------------
+
+//#entry number
+//param number (translated to sysex address in code), min, max, display table, name
+//all numbers dec
+
+reverb_params_list="
+#00 Hall 1
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#01 Hall 2
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#02 Room 1
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#03 Room 2
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#04 Room 3
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#05 Stage 1
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#06 Stage 2
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#07 Plate
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+";
+
+//-----------------------------------------------------------------------------
+
+chorus_params_list="
+#00 Chorus 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#01 Chorus 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#02 Chorus 3
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#03 Celeste 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#04 Celeste 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#05 Celeste 3
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#06 Flanger 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0063|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+14|0004|0124|-|LFO Phase Difference
+#07 Flanger 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0063|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+14|0004|0124|-|LFO Phase Difference
+";
+
+//-----------------------------------------------------------------------------
+
+variation_params_list="
+#00 Hall 1
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#01 Hall 2
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#02 Room 1
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#03 Room 2
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#04 Room 3
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#05 Stage 1
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#06 Stage 2
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#07 Plate
+01|0000|0069|4|Reverb Time
+02|0000|0010|-|Diffusion
+03|0000|0063|5|Initial Delay
+04|0000|0052|3|HPF Cutoff
+05|0034|0060|3|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0063|5|Rev Delay
+12|0000|0003|-|Density
+13|0001|0127|-|Er/Rev Balance
+15|0001|0127|-|Feedback Level
+#08 Delay L,C,R
+01|0001|7150|-|Lch Delay
+02|0001|7150|-|Rch Delay
+03|0001|7150|-|Cch Delay
+04|0001|7150|-|Feedback Delay
+05|0001|0127|-|Feedback Level
+06|0000|0127|-|Cch Level
+07|0001|0010|-|High Damp
+10|0001|0127|-|Dry/Wet
+13|0008|0040|3|EQ Low Frequency
+14|0052|0076|-|EQ Low Gain
+15|0028|0058|3|EQ High Frequency
+16|0052|0076|-|EQ High Gain
+#09 Delay L,R
+01|0001|7150|-|Lch Delay
+02|0001|7150|-|Rch Delay
+03|0001|7150|-|Feedback Delay 1
+04|0001|7150|-|Feedback Delay 2
+05|0001|0127|-|Feedback Level
+06|0001|0010|-|High Damp
+10|0001|0127|-|Dry/Wet
+13|0008|0040|3|EQ Low Frequency
+14|0052|0076|-|EQ Low Gain
+15|0028|0058|3|EQ High Frequency
+16|0052|0076|-|EQ High Gain
+#10 Echo
+01|0001|3550|-|Lch Delay 1
+02|0001|0127|-|Lch Feedback Level
+03|0001|3550|-|Rch Delay 1
+04|0001|0127|-|Rch Feedback Level
+05|0001|0010|-|High Damp
+06|0001|3550|-|Lch Delay 2
+07|0001|3550|-|Rch Delay 2
+08|0000|0127|-|Delay 2 Level
+10|0001|0127|-|Dry/Wet
+13|0008|0040|3|EQ Low Frequency
+14|0052|0076|-|EQ Low Gain
+15|0028|0058|3|EQ High Frequency
+16|0052|0076|-|EQ High Gain
+#11 Cross Delay
+01|0001|3550|-|L->R Delay
+02|0001|3550|-|R->L Delay
+03|0001|0127|-|Feedback Level
+04|0000|0002|7|Input
+05|0001|0010|-|High Damp
+10|0001|0127|-|Dry/Wet
+13|0008|0040|3|EQ Low Frequency
+14|0052|0076|-|EQ Low Gain
+15|0028|0058|3|EQ High Frequency
+16|0052|0076|-|EQ High Gain
+#12 Early Ref 1
+01|0000|0005|8|Type
+02|0000|0044|6|Room Size
+03|0000|0010|-|Diffusion
+04|0000|0063|5|Initial Delay
+05|0001|0127|-|Feedback Level
+06|0000|0052|-|HPF Cutoff
+07|0034|0060|-|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0010|-|Liveness
+12|0000|0003|-|Density
+13|0001|0010|-|High Damp
+#13 Early Ref 2
+01|0000|0005|8|Type
+02|0000|0044|6|Room Size
+03|0000|0010|-|Diffusion
+04|0000|0063|5|Initial Delay
+05|0001|0127|-|Feedback Level
+06|0000|0052|-|HPF Cutoff
+07|0034|0060|-|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0010|-|Liveness
+12|0000|0003|-|Density
+13|0001|0010|-|High Damp
+#14 Gate Reverb
+01|0000|0001|-|TypeA/TypeB
+02|0000|0044|6|Room Size
+03|0000|0010|-|Diffusion
+04|0000|0063|5|Initial Delay
+05|0001|0127|-|Feedback Level
+06|0000|0052|-|HPF Cutoff
+07|0034|0060|-|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0010|-|Liveness
+12|0000|0003|-|Density
+13|0001|0010|-|High Damp
+#15 Reverse Gate
+01|0000|0001|-|TypeA/TypeB
+02|0000|0044|6|Room Size
+03|0000|0010|-|Diffusion
+04|0000|0063|5|Initial Delay
+05|0001|0127|-|Feedback Level
+06|0000|0052|-|HPF Cutoff
+07|0034|0060|-|LPF Cutoff
+10|0001|0127|-|Dry/Wet
+11|0000|0010|-|Liveness
+12|0000|0003|-|Density
+13|0001|0010|-|High Damp
+#16 Chorus 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#17 Chorus 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#18 Chorus 3
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#19 Celeste 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#20 Celeste 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#21 Celeste 3
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+15|0000|0001|A|Input
+#22 Flanger 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0063|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+14|0004|0124|-|LFO Phase Difference
+#23 Flanger 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0001|0127|-|Feedback Level
+04|0000|0063|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+14|0004|0124|-|LFO Phase Difference
+#24 Symphonic
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+03|0000|0127|2|Delay Offset
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+#25 Rotary Speaker
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO PM Depth
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+#26 Tremolo
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|AM Depth
+03|0000|0127|-|PM Depth
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+14|0004|0124|-|LFO Phase Difference
+15|0000|0001|A|Input
+#27 Auto Pan
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|L/R Depth
+03|0000|0127|-|F/R Depth
+04|0000|0005|9|PAN Direction
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+#28 Phaser 1
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO Depth
+03|0000|0127|-|Phase Shift Offset
+04|0001|0127|-|Feedback Level
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+11|0006|0010|-|Stage
+12|0000|0001|A|Diffusion
+#29 Phaser 2
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO Depth
+03|0000|0127|-|Phase Shift Offset
+04|0001|0127|-|Feedback Level
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+11|0003|0005|-|Stage
+12|0000|0001|A|Diffusion
+13|0004|0124|-|LFO Phase Difference
+#30 Distortion
+01|0000|0127|-|Drive
+02|0008|0040|3|EQ Low Frequency
+03|0052|0076|-|EQ Low Gain
+04|0034|0060|3|LPF Cutoff
+05|0000|0127|-|Output Level
+07|0028|0054|3|EQ Mid Frequency
+08|0052|0076|-|EQ Mid Gain
+09|0010|0120|-|EQ Mid Width
+10|0001|0127|-|Dry/Wet
+11|0000|0127|-|Clip Curve
+#31 Overdrive
+01|0000|0127|-|Drive
+02|0008|0040|3|EQ Low Frequency
+03|0052|0076|-|EQ Low Gain
+04|0034|0060|3|LPF Cutoff
+05|0000|0127|-|Output Level
+07|0028|0054|3|EQ Mid Frequency
+08|0052|0076|-|EQ Mid Gain
+09|0010|0120|-|EQ Mid Width
+10|0001|0127|-|Dry/Wet
+11|0000|0127|-|Clip Curve
+#32 Guitar Amp Simulator
+01|0000|0127|-|Drive
+02|0000|0003|B|AMP Type
+03|0034|0060|3|LPF Cutoff
+04|0000|0127|-|Output Level
+10|0001|0127|-|Dry/Wet
+11|0000|0127|-|Clip Curve
+#33 3-Band EQ
+01|0052|0076|-|EQ Low Gain
+02|0028|0054|3|EQ Mid Frequency
+03|0052|0076|-|EQ Mid Gain
+04|0010|0120|-|EQ Mid Width
+05|0052|0076|-|EQ High Gain
+06|0008|0040|3|EQ Low Frequency
+07|0028|0058|3|EQ High Frequency
+#34 2-Band EQ
+01|0008|0040|3|EQ Low Frequency
+02|0052|0076|-|EQ Low Gain
+03|0028|0058|3|EQ High Frequency
+04|0052|0076|-|EQ High Gain
+#35 Auto Wah
+01|0000|0127|1|LFO Frequency
+02|0000|0127|-|LFO Depth
+03|0000|0127|-|Cutoff Frequency Offset
+04|0010|0120|-|Resonance
+06|0008|0040|3|EQ Low Frequency
+07|0052|0076|-|EQ Low Gain
+08|0028|0058|3|EQ High Frequency
+09|0052|0076|-|EQ High Gain
+10|0001|0127|-|Dry/Wet
+#36 Thru
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_1_lfo_frequency="
+000|0.00 Hz
+001|0.04 Hz
+002|0.08 Hz
+003|0.13 Hz
+004|0.17 Hz
+005|0.21 Hz
+006|0.25 Hz
+007|0.29 Hz
+008|0.34 Hz
+009|0.38 Hz
+010|0.42 Hz
+011|0.46 Hz
+012|0.51 Hz
+013|0.55 Hz
+014|0.59 Hz
+015|0.63 Hz
+016|0.67 Hz
+017|0.72 Hz
+018|0.76 Hz
+019|0.80 Hz
+020|0.84 Hz
+021|0.88 Hz
+022|0.93 Hz
+023|0.97 Hz
+024|1.01 Hz
+025|1.05 Hz
+026|1.09 Hz
+027|1.14 Hz
+028|1.18 Hz
+029|1.22 Hz
+030|1.26 Hz
+031|1.30 Hz
+032|1.35 Hz
+033|1.39 Hz
+034|1.43 Hz
+035|1.47 Hz
+036|1.51 Hz
+037|1.56 Hz
+038|1.60 Hz
+039|1.64 Hz
+040|1.68 Hz
+041|1.72 Hz
+042|1.77 Hz
+043|1.81 Hz
+044|1.85 Hz
+045|1.89 Hz
+046|1.94 Hz
+047|1.98 Hz
+048|2.02 Hz
+049|2.06 Hz
+050|2.10 Hz
+051|2.15 Hz
+052|2.19 Hz
+053|2.23 Hz
+054|2.27 Hz
+055|2.31 Hz
+056|2.36 Hz
+057|2.40 Hz
+058|2.44 Hz
+059|2.48 Hz
+060|2.52 Hz
+061|2.57 Hz
+062|2.61 Hz
+063|2.65 Hz
+064|2.69 Hz
+065|2.78 Hz
+066|2.86 Hz
+067|2.94 Hz
+068|3.03 Hz
+069|3.11 Hz
+070|3.20 Hz
+071|3.28 Hz
+072|3.37 Hz
+073|3.45 Hz
+074|3.53 Hz
+075|3.62 Hz
+076|3.70 Hz
+077|3.87 Hz
+078|4.04 Hz
+079|4.21 Hz
+080|4.37 Hz
+081|4.54 Hz
+082|4.71 Hz
+083|4.88 Hz
+084|5.05 Hz
+085|5.22 Hz
+086|5.38 Hz
+087|5.55 Hz
+088|5.72 Hz
+089|6.06 Hz
+090|6.39 Hz
+091|6.73 Hz
+092|7.07 Hz
+093|7.40 Hz
+094|7.74 Hz
+095|8.08 Hz
+096|8.41 Hz
+097|8.75 Hz
+098|9.08 Hz
+099|9.42 Hz
+100|9.76 Hz
+101|10.10 Hz
+102|10.80 Hz
+103|11.40 Hz
+104|12.10 Hz
+105|12.80 Hz
+106|13.50 Hz
+107|14.10 Hz
+108|14.80 Hz
+109|15.50 Hz
+110|16.20 Hz
+111|16.80 Hz
+112|17.50 Hz
+113|18.20 Hz
+114|19.50 Hz
+115|20.90 Hz
+116|22.20 Hz
+117|23.60 Hz
+118|24.90 Hz
+119|26.20 Hz
+120|27.60 Hz
+121|28.90 Hz
+122|30.30 Hz
+123|31.60 Hz
+124|33.00 Hz
+125|34.30 Hz
+126|37.00 Hz
+127|39.70 Hz
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_2_delay_offset="
+000|0.0 ms
+001|0.1 ms
+002|0.2 ms
+003|0.3 ms
+004|0.4 ms
+005|0.5 ms
+006|0.6 ms
+007|0.7 ms
+008|0.8 ms
+009|0.9 ms
+010|1.0 ms
+011|1.1 ms
+012|1.2 ms
+013|1.3 ms
+014|1.4 ms
+015|1.5 ms
+016|1.6 ms
+017|1.7 ms
+018|1.8 ms
+019|1.9 ms
+020|2.0 ms
+021|2.1 ms
+022|2.2 ms
+023|2.3 ms
+024|2.4 ms
+025|2.5 ms
+026|2.6 ms
+027|2.7 ms
+028|2.8 ms
+029|2.9 ms
+030|3.0 ms
+031|3.1 ms
+032|3.2 ms
+033|3.3 ms
+034|3.4 ms
+035|3.5 ms
+036|3.6 ms
+037|3.7 ms
+038|3.8 ms
+039|3.9 ms
+040|4.0 ms
+041|4.1 ms
+042|4.2 ms
+043|4.3 ms
+044|4.4 ms
+045|4.5 ms
+046|4.6 ms
+047|4.7 ms
+048|4.8 ms
+049|4.9 ms
+050|5.0 ms
+051|5.1 ms
+052|5.2 ms
+053|5.3 ms
+054|5.4 ms
+055|5.5 ms
+056|5.6 ms
+057|5.7 ms
+058|5.8 ms
+059|5.9 ms
+060|6.0 ms
+061|6.1 ms
+062|6.2 ms
+063|6.3 ms
+064|6.4 ms
+065|6.5 ms
+066|6.6 ms
+067|6.7 ms
+068|6.8 ms
+069|6.9 ms
+070|7.0 ms
+071|7.1 ms
+072|7.2 ms
+073|7.3 ms
+074|7.4 ms
+075|7.5 ms
+076|7.6 ms
+077|7.7 ms
+078|7.8 ms
+079|7.9 ms
+080|8.0 ms
+081|8.1 ms
+082|8.2 ms
+083|8.3 ms
+084|8.4 ms
+085|8.5 ms
+086|8.6 ms
+087|8.7 ms
+088|8.8 ms
+089|8.9 ms
+090|9.0 ms
+091|9.1 ms
+092|8.2 ms
+093|9.3 ms
+094|9.4 ms
+095|9.5 ms
+096|9.6 ms
+097|9.7 ms
+098|9.8 ms
+099|9.9 ms
+100|10.0 ms
+101|11.1 ms
+102|12.2 ms
+103|13.3 ms
+104|14.4 ms
+105|15.5 ms
+106|17.1 ms
+107|18.6 ms
+108|20.2 ms
+109|21.8 ms
+110|23.3 ms
+111|24.9 ms
+112|26.5 ms
+113|28.0 ms
+114|29.6 ms
+115|31.2 ms
+116|32.8 ms
+117|34.3 ms
+118|35.9 ms
+119|37.5 ms
+120|39.0 ms
+121|40.6 ms
+122|42.2 ms
+123|43.7 ms
+124|45.3 ms
+125|46.9 ms
+126|48.4 ms
+127|50.0 ms
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_3_eq_frequency="
+000|20
+001|22
+002|25
+003|28
+004|32
+005|36
+006|40
+007|45
+008|50
+009|56
+010|63
+011|70
+012|80
+013|90
+014|100
+015|110
+016|125
+017|140
+018|160
+019|180
+020|200
+021|225
+022|250
+023|280
+024|315
+025|355
+026|400
+027|450
+028|500
+029|560
+030|630
+031|700
+032|800
+033|900
+034|1.0k
+035|1.1k
+036|1.2k
+037|1.4k
+038|1.6k
+039|1.8k
+040|2.0k
+041|2.2k
+042|2.5k
+043|2.8k
+044|3.2k
+045|3.6k
+046|4.0k
+047|4.5k
+048|5.0k
+049|5.6k
+050|6.3k
+051|7.0k
+052|8.0k
+053|9.0k
+054|10.0k
+055|11.0k
+056|12.0k
+057|14.0k
+058|16.0k
+059|18.0k
+060|20.0k
+";
+ 
+//-----------------------------------------------------------------------------
+
+effect_value_names_4_reverb_time="
+000|0.3 s
+001|0.4 s
+002|0.5 s
+003|0.6 s
+004|0.7 s
+005|0.8 s
+006|0.9 s
+007|1.0 s
+008|1.1 s
+009|1.2 s
+010|1.3 s
+011|1.4 s
+012|1.5 s
+013|1.6 s
+014|1.7 s
+015|1.8 s
+016|1.9 s
+017|2.0 s
+018|2.1 s
+019|2.2 s
+020|2.3 s
+021|2.4 s
+022|2.5 s
+023|2.6 s
+024|2.7 s
+025|2.8 s
+026|2.9 s
+027|3.0 s
+028|3.1 s
+029|3.2 s
+030|3.3 s
+031|3.4 s
+032|3.5 s
+033|3.6 s
+034|3.7 s
+035|3.8 s
+036|3.9 s
+037|4.0 s
+038|4.1 s
+039|4.2 s
+040|4.3 s
+041|4.4 s
+042|4.5 s
+043|4.6 s
+044|4.7 s
+045|4.8 s
+046|4.9 s
+047|5.0 s
+048|5.5 s
+049|6.0 s
+050|6.5 s
+051|7.0 s
+052|7.5 s
+053|8.0 s
+054|8.5 s
+055|9.0 s
+056|9.5 s
+057|10.0 s
+058|11.0 s
+059|12.0 s
+060|13.0 s
+061|14.0 s
+062|15.0 s
+063|16.0 s
+064|17.0 s
+065|18.0 s
+066|19.0 s
+067|20.0 s
+068|25.0 s
+069|30.0 s
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_5_delay_time="
+000|0.1 ms
+001|1.7 ms
+002|3.2 ms
+003|4.8 ms
+004|6.4 ms
+005|8.0 ms
+006|9.5 ms
+007|11.1 ms
+008|12.7 ms
+009|14.3 ms
+010|15.8 ms
+011|17.4 ms
+012|19.0 ms
+013|20.6 ms
+014|22.1 ms
+015|23.7 ms
+016|25.3 ms
+017|26.9 ms
+018|28.4 ms
+019|30.0 ms
+020|31.6 ms
+021|33.2 ms
+022|34.7 ms
+023|36.3 ms
+024|37.9 ms
+025|39.5 ms
+026|41.0 ms
+027|42.6 ms
+028|44.2 ms
+029|45.7 ms
+030|47.3 ms
+031|48.9 ms
+032|50.5 ms
+033|52.0 ms
+034|53.6 ms
+035|55.2 ms
+036|56.8 ms
+037|58.3 ms
+038|59.9 ms
+039|61.5 ms
+040|63.1 ms
+041|64.6 ms
+042|66.2 ms
+043|67.8 ms
+044|69.4 ms
+045|70.9 ms
+046|72.5 ms
+047|74.1 ms
+048|75.7 ms
+049|77.2 ms
+050|78.8 ms
+051|80.4 ms
+052|81.9 ms
+053|83.5 ms
+054|85.1 ms
+055|86.7 ms
+056|88.2 ms
+057|89.8 ms
+058|91.4 ms
+059|93.0 ms
+060|94.5 ms
+061|96.1 ms
+062|97.7 ms
+063|99.3 ms
+064|100.8 ms
+065|102.4 ms
+066|104.0 ms
+067|105.6 ms
+068|107.1 ms
+069|108.7 ms
+070|110.3 ms
+071|111.9 ms
+072|113.4 ms
+073|115.0 ms
+074|116.6 ms
+075|118.2 ms
+076|119.7 ms
+077|121.3 ms
+078|122.9 ms
+079|124.4 ms
+080|126.0 ms
+081|127.6 ms
+082|129.2 ms
+083|130.7 ms
+084|132.3 ms
+085|133.9 ms
+086|135.5 ms
+087|137.0 ms
+088|138.6 ms
+089|140.2 ms
+090|141.8 ms
+091|143.3 ms
+092|144.9 ms
+093|146.5 ms
+094|148.1 ms
+095|149.6 ms
+096|151.2 ms
+097|152.8 ms
+098|154.4 ms
+099|155.9 ms
+100|157.5 ms
+101|159.1 ms
+102|160.6 ms
+103|162.2 ms
+104|163.8 ms
+105|165.4 ms
+106|166.9 ms
+107|168.5 ms
+108|170.1 ms
+109|171.7 ms
+110|173.2 ms
+111|174.8 ms
+112|176.4 ms
+113|178.0 ms
+114|179.5 ms
+115|181.1 ms
+116|182.7 ms
+117|184.3 ms
+118|185.8 ms
+119|187.4 ms
+120|189.0 ms
+121|190.6 ms
+122|192.1 ms
+123|193.7 ms
+124|195.3 ms
+125|196.9 ms
+126|198.4 ms
+127|200.0 ms
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_6_room_size="
+000|0.1 m
+001|0.3 m
+002|0.4 m
+003|0.6 m
+004|0.7 m
+005|0.9 m
+006|1.0 m
+007|1.2 m
+008|1.4 m
+009|1.5 m
+010|1.7 m
+011|1.8 m
+012|2.0 m
+013|2.1 m
+014|2.3 m
+015|2.5 m
+016|2.6 m
+017|2.8 m
+018|2.9 m
+019|3.1 m
+020|3.2 m
+021|3.4 m
+022|3.5 m
+023|3.7 m
+024|3.9 m
+025|4.0 m
+026|4.2 m
+027|4.3 m
+028|4.5 m
+029|4.6 m
+030|4.8 m
+031|5.0 m
+032|5.1 m
+033|5.3 m
+034|5.4 m
+035|5.6 m
+036|5.7 m
+037|5.9 m
+038|6.1 m
+039|6.2 m
+040|6.4 m
+041|6.5 m
+042|6.7 m
+043|6.8 m
+044|7.0 m
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_7_stereo="
+000|L
+001|R
+002|L&R
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_8_ref_type="
+000|S-H
+001|L-H
+002|Rdm
+003|Rvs
+004|Pit
+005|Spr
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_9_pan_direction="
+000|L<->R
+001|L->R
+002|L<-R
+003|Lturn
+004|Rturn
+005|L/R
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_10_mono_stereo="
+000|Mono
+001|Stereo
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_11_amp_type="
+000|Off
+001|Stack
+002|Combo
+003|Tube
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents="";
+slider_value_table="";
+
+
+
+function set_color(color)
+(
+	gfx_r=((color>>16)&0xff)/255;
+	gfx_g=((color>>8 )&0xff)/255;
+	gfx_b=( color     &0xff)/255;
+);
+
+
+
+function sysex_add_queue(address,value,length) (
+
+	sysex_queue[sysex_queue_ptr+0]=address;
+	sysex_queue[sysex_queue_ptr+1]=value;
+	sysex_queue[sysex_queue_ptr+2]=length;
+	
+	sysex_queue_ptr+=3;
+	
+);
+
+
+
+function xgsend_sysex(address,value,len)
+(
+	address >=0 ? (
+	
+		sysex_buf[0x00]=0x43;               //Yamaha ID
+		sysex_buf[0x01]=0x10;               //device number
+		sysex_buf[0x02]=0x4c;               //XG model ID
+		sysex_buf[0x03]=(address>>16)&0x7f; //address high
+		sysex_buf[0x04]=(address>>8 )&0x7f; //address mid
+		sysex_buf[0x05]= address     &0x7f; //address low
+		
+		len==1 ? (
+		
+			sysex_buf[0x06]=value&0x7f;    //value lsb            
+			
+			midisend_buf(sysex_delay,sysex_buf,0x07);
+			
+		);
+		
+		len==2 ? (
+		
+			sysex_buf[0x06]=(value>>8)&0x7f;    //value msb
+			sysex_buf[0x07]= value    &0x7f;    //value lsb    
+			
+			midisend_buf(sysex_delay,sysex_buf,0x08);
+		);   
+		
+		sysex_delay+=1;
+	);  
+);
+
+
+
+function hex_number(char) (
+
+	hex_result=0;
+	
+	char>=0x30 && char<=0x39 ? hex_result=char-0x30;
+	char>=0x41 && char<=0x46 ? hex_result=char-0x41+10;
+	char>=0x61 && char<=0x66 ? hex_result=char-0x61+10;
+	
+	hex_result;
+);
+
+
+
+function parse_number_dec(string,offset,length) (
+
+	dec_value=0;
+	
+	loop(length,
+	
+		dec_value*=10;
+		dec_value+=(str_getchar(string,offset)-48);
+		offset+=1;
+		
+	);
+	
+	dec_value;
+);
+
+
+
+function parse_number_hex(string,offset,length) (
+
+	hex_value=0;
+	
+	loop(length,
+	
+		hex_value=hex_value<<4;
+		hex_value+=hex_number(str_getchar(string,offset));
+		offset+=1;
+		
+	);
+	
+	hex_value;
+);
+
+
+
+function parse_to_line_end(string,offset) (
+
+	length=strlen(string);
+	
+	while(str_getchar(string,offset)>=32&&offset<length) ( offset+=1; );
+	
+	offset;
+);
+
+
+
+function parse_to_next_line(string,offset) (
+
+	length=strlen(string);
+	
+	while(str_getchar(string,offset)<32&&offset<length) ( offset+=1; );
+	
+	offset;
+);
+
+
+
+function gui_slider_float_to_value(slider_value_float,slider_min,slider_max) (
+
+	slider_value=floor(slider_min+(slider_max-slider_min)*slider_value_float);
+	
+	slider_value < slider_min ? slider_value=slider_min;
+	slider_value > slider_max ? slider_value=slider_max;
+	
+	slider_value;
+);
+
+
+
+function gui_slider_value_to_float(slider_value,slider_min,slider_max) (
+
+	slider_value_float=(slider_value-slider_min)/(slider_max-slider_min);
+	
+	slider_value_float<0 ? slider_value_float=0;
+	slider_value_float>1 ? slider_value_float=1;
+	
+	slider_value_float;
+);
+
+
+
+function gui_slider(slider_value_float,slider_min,slider_max,slider_caption,slider_def)
+(         
+	set_color(color_bg_cursor);
+	
+	gfx_rect(gui_slider_x,gui_slider_y,gui_slider_width*slider_value_float,gui_slider_height);
+	
+	set_color(color_bg_dark);
+	
+	gfx_rect(gui_slider_x+gui_slider_width*slider_value_float,gui_slider_y,gui_slider_width*(1-slider_value_float),gui_slider_height);
+	
+	mouse_x>=gui_slider_x && mouse_x<=gui_slider_x+gui_slider_width && mouse_y>=gui_slider_y-5 && mouse_y<=gui_slider_y+gui_slider_height+5 ? (
+	
+		mouse_wheel!=0 ? (
+				
+					!(mouse_cap & CAP_SHIFT) ? (
+						slider_value_float+=(mouse_wheel/1200.0);
+					) : (
+						slider_value_float+=(mouse_wheel/12000.0);
+					);
+					
+					gui_slider_change|=1;
+				);
+		
+		mouse_cap & CAP_LMB ? (
+			    
+				    slider_value_float=(mouse_x-gui_slider_x)/gui_slider_width;
+			    
+				    gui_slider_change|=1;
+				    
+			    );
+		
+		mouse_cap & CAP_RMB ? (
+			    
+				    slider_value_float=slider_def;
+			    
+				    gui_slider_change|=1;
+				    
+			    );
+		
+		slider_value_float < 0 ? slider_value_float=0;
+		slider_value_float > 1 ? slider_value_float=1;
+	);
+	
+	gui_slider_out=gui_slider_float_to_value(slider_value_float,slider_min,slider_max);
+	  
+	set_color(color_list_normal);
+	
+	gfx_measurestr(slider_caption,w,h);
+	gfx_x=gui_slider_x-w-8;
+	gfx_y=gui_slider_y-4;
+	
+	gfx_drawstr(slider_caption);
+	   
+	gfx_x=gui_slider_x+gui_slider_width+5;
+
+	table_len=strlen(slider_value_table);
+	
+	table_len>0 ? (
+	
+		strcpy(slider_value,"not found");
+	    
+		table_ptr=1;
+
+		while(table_ptr<table_len) (
+
+			table_value=parse_number_dec(slider_value_table,table_ptr,3);
+
+			table_ptr+=4;
+			table_ptr_old=table_ptr;
+			
+			table_ptr=parse_to_line_end(slider_value_table,table_ptr)+1;
+			
+			table_value==gui_slider_out ? (
+				
+				strcpy_substr(slider_value,slider_value_table,table_ptr_old,table_ptr-table_ptr_old);
+				
+				table_ptr=table_len;
+
+			);
+		);
+		
+		gfx_drawstr(slider_value);
+		
+	) : (
+	
+		gfx_drawnumber(gui_slider_out,0);
+	);
+
+	gui_slider_y+=list_item_height;
+	
+	slider_value_float;
+);
+
+
+//mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
+
+function gui_menu_item(item_x,item_y,item_caption,item_selected,mode)
+(
+	gfx_x=item_x;
+	gfx_y=item_y;
+ 
+	gfx_measurestr(item_caption,w,h);
+	 
+	item_selected ? (
+	
+		set_color(color_bg_dark);
+		
+		gfx_rect(gfx_x-8,gfx_y-4,w+16,h+8);
+		
+	);
+	
+	item_selected=0;
+	
+	mouse_x>=item_x-8 && mouse_x<item_x+w+8 && mouse_y>=item_y-4 && mouse_y<item_y+h+4 ? (
+	
+		set_color(color_list_hover);
+
+		mode==0 ? (
+			gui_mouse_lmb>0 ? item_selected|=1;
+			gui_mouse_rmb>0 ? item_selected|=2;
+		);
+				
+		mode==1 ? (
+			gui_mouse_lmb==1 ? item_selected|=1;
+			gui_mouse_rmb==1 ? item_selected|=2;
+		);
+		
+		mode==2? ( item_selected=4; );
+		
+	) : (
+	
+		set_color(color_list_normal);
+	
+	);
+	
+	gfx_drawstr(item_caption);
+	
+	item_selected;
+);      
+
+
+
+function gui_category(list_category,cursor_category,offset_category,highlight_category) (
+
+	list_x=0;
+	list_y=menu_height+20;
+	
+	category_list_count=0;
+	category_display_count=0;
+
+	list_string_ptr=1;
+	
+	list_category_length=strlen(list_category);
+	
+	while(list_string_ptr<list_category_length) (
+	
+		list_string_old_ptr=list_string_ptr;
+
+		list_string_ptr=parse_to_line_end(list_category,list_string_ptr);
+
+		strcpy_substr(list_item_text,list_category,list_string_old_ptr+3,list_string_ptr-list_string_old_ptr-3);
+	
+		list_string_ptr+=1;
+			
+		category_list_count>=offset_category ? (
+		   
+			category_display_count<category_list_height ? (
+			
+				list_hover=0;
+					
+				gfx_x=list_x+16;
+				gfx_y=list_y+3;
+							
+				category_list_count==cursor_category ? (
+				
+					list_hover=1;
+					
+					gfx_x-=4;
+					
+					set_color(color_bg_light);
+		
+					gfx_rect(list_x,list_y,category_list_width,list_item_height);
+					
+				);
+					
+				category_list_count==highlight_category ? (
+				
+					set_color(color_bg_cursor);
+												
+					gfx_rect(0,list_y,8,list_item_height);
+					
+				);
+						
+				mouse_x>=list_x && mouse_x<(list_x+list_item_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
+				
+					gui_mouse_lmb==1 ? cursor_category=category_list_count;
+					
+					list_hover=1;
+									
+				);
+				
+				list_hover ? set_color(color_list_hover) : set_color(color_list_normal);                              
+							
+				gfx_drawstr(list_item_text);
+				
+				category_display_count+=1;
+			
+			);
+			
+			list_y+=list_item_height;
+			
+		);          
+		
+		category_list_count+=1;
+	);
+	
+	category_list_length=category_list_count;
+	
+	mouse_y>=menu_height && mouse_x<category_list_width ? (
+	
+		mouse_wheel!=0 ? (
+		
+			mouse_wheel<0 ? cursor_category+=1 : cursor_category-=1;
+			
+			cursor_category<0 ? cursor_category=0;
+			cursor_category>=category_list_count-1 ? cursor_category=category_list_count-1;
+		);
+	);
+	
+	cursor_category;
+		
+);
+
+
+
+
+function gui_category_adjust_view(list_offset,list_cursor,list_length) (
+	
+	item_x=16;
+	item_y=menu_height+20-list_item_height;
+	
+	list_offset>0 ? (
+	
+		gui_menu_item(item_x,item_y,"...",0,0) ? list_offset-=1;
+	);
+	
+	item_y=menu_height+20+category_list_height*list_item_height;
+
+	category_list_height<list_length && (list_offset+category_list_height)<list_length && item_y>=(menu_height+20) ? (
+	
+		gui_menu_item(item_x,item_y,"...",0,0) ? list_offset+=1;
+	);
+	
+	list_offset<0 ? list_offset=0;
+	list_offset>(list_length-category_list_height) ? list_offset=list_length-category_list_height;
+	
+	list_offset;
+);
+
+
+
+function gui_slider_list(list,cursor,effect_type,force_update) (
+
+	entry=-1;
+	entry_ptr=-1;
+	list_ptr=1;
+	
+	list_length=strlen(list);
+
+	while(list_ptr<list_length) (
+	
+		id=str_getchar(list,list_ptr);
+		
+		id==0x23 ? (    //seek for #
+		
+			entry=parse_number_dec(list,list_ptr+1,2);
+			
+		);
+		
+		list_ptr=parse_to_line_end(list,list_ptr);
+		list_ptr=parse_to_next_line(list,list_ptr);
+   
+		entry==cursor ? (
+			
+			entry_ptr=list_ptr;
+			
+			list_ptr=list_length;
+			
+		);                
+	);
+
+	entry_ptr>=0 ? (
+	
+		list_ptr=entry_ptr;
+		
+		while(list_ptr<list_length) (
+		
+			sysex_param =parse_number_dec(list,list_ptr+0,2);
+			
+			save_offset =effect_type*40*16+entry*16+sysex_param;
+		
+			slider_min  =parse_number_dec(list,list_ptr+3,4);
+			slider_max  =parse_number_dec(list,list_ptr+8,4);
+			slider_table=str_getchar(list,list_ptr+13);
+
+			slider_value_table="";
+		
+			slider_table==0x31 ? slider_value_table=effect_value_names_1_lfo_frequency;
+			slider_table==0x32 ? slider_value_table=effect_value_names_2_delay_offset;
+			slider_table==0x33 ? slider_value_table=effect_value_names_3_eq_frequency;
+			slider_table==0x34 ? slider_value_table=effect_value_names_4_reverb_time;
+			slider_table==0x35 ? slider_value_table=effect_value_names_5_delay_time;
+			slider_table==0x36 ? slider_value_table=effect_value_names_6_room_size;
+			slider_table==0x37 ? slider_value_table=effect_value_names_7_stereo;
+			slider_table==0x38 ? slider_value_table=effect_value_names_8_ref_type;
+			slider_table==0x39 ? slider_value_table=effect_value_names_9_pan_direction;
+			slider_table==0x41 ? slider_value_table=effect_value_names_10_mono_stereo;
+			slider_table==0x42 ? slider_value_table=effect_value_names_11_amp_type;
+			
+			list_ptr+=15;
+
+			list_ptr_old=list_ptr;
+			
+			list_ptr=parse_to_line_end(list,list_ptr);
+			
+			strcpy_substr(slider_caption,list,list_ptr_old,list_ptr-list_ptr_old);
+			
+			list_ptr=parse_to_next_line(list,list_ptr);
+			
+			gui_slider_change|=force_update;
+			
+			save_vars[save_offset]=gui_slider(save_vars[save_offset],slider_min,slider_max,slider_caption,DEF_PARAM);
+	
+			gui_slider_change ? (
+			
+				sysex_size=1;
+				
+				effect_type==0 ? (     //reverb
+				
+					sysex_param==1 ? sysex_addr=0x020102;
+					sysex_param==2 ? sysex_addr=0x020103;
+					sysex_param==3 ? sysex_addr=0x020104;
+					sysex_param==4 ? sysex_addr=0x020105;
+					sysex_param==5 ? sysex_addr=0x020106;
+					sysex_param==6 ? sysex_addr=0x020107;
+					sysex_param==7 ? sysex_addr=0x020108;
+					sysex_param==8 ? sysex_addr=0x020109;
+					sysex_param==9 ? sysex_addr=0x02010a;
+					sysex_param==10 ? sysex_addr=0x02010b;
+					sysex_param==11 ? sysex_addr=0x020110;
+					sysex_param==12 ? sysex_addr=0x020111;
+					sysex_param==13 ? sysex_addr=0x020112;
+					sysex_param==14 ? sysex_addr=0x020113;
+					sysex_param==15 ? sysex_addr=0x020114;
+					sysex_param==16 ? sysex_addr=0x020115;
+					
+				);
+			
+				effect_type==1 ? (     //chorus
+				
+					sysex_param==1 ? sysex_addr=0x020122;
+					sysex_param==2 ? sysex_addr=0x020123;
+					sysex_param==3 ? sysex_addr=0x020124;
+					sysex_param==4 ? sysex_addr=0x020125;
+					sysex_param==5 ? sysex_addr=0x020126;
+					sysex_param==6 ? sysex_addr=0x020127;
+					sysex_param==7 ? sysex_addr=0x020128;
+					sysex_param==8 ? sysex_addr=0x020129;
+					sysex_param==9 ? sysex_addr=0x02012a;
+					sysex_param==10 ? sysex_addr=0x02012b;
+					sysex_param==11 ? sysex_addr=0x020130;
+					sysex_param==12 ? sysex_addr=0x020131;
+					sysex_param==13 ? sysex_addr=0x020132;
+					sysex_param==14 ? sysex_addr=0x020133;
+					sysex_param==15 ? sysex_addr=0x020134;
+					sysex_param==16 ? sysex_addr=0x020135;
+				
+				);
+				
+				effect_type==2 ? (     //variation
+				
+					sysex_param>=1 && sysex_param<=10 ? sysex_size=2;
+					
+					sysex_param==1 ? sysex_addr=0x020142;
+					sysex_param==2 ? sysex_addr=0x020144;
+					sysex_param==3 ? sysex_addr=0x020146;
+					sysex_param==4 ? sysex_addr=0x020148;
+					sysex_param==5 ? sysex_addr=0x02014a;
+					sysex_param==6 ? sysex_addr=0x02014c;
+					sysex_param==7 ? sysex_addr=0x02014e;
+					sysex_param==8 ? sysex_addr=0x020150;
+					sysex_param==9 ? sysex_addr=0x020152;
+					sysex_param==10 ? sysex_addr=0x020154;
+					sysex_param==11 ? sysex_addr=0x020170;
+					sysex_param==12 ? sysex_addr=0x020171;
+					sysex_param==13 ? sysex_addr=0x020172;
+					sysex_param==14 ? sysex_addr=0x020173;
+					sysex_param==15 ? sysex_addr=0x020174;
+					sysex_param==16 ? sysex_addr=0x020175;
+				
+				);
+				
+				sysex_add_queue(sysex_addr,gui_slider_out,sysex_size);
+				
+				force_update==0 ? gui_slider_change=0;
+				
+			);                    
+			  
+			str_getchar(list,list_ptr)==0x23 ? list_ptr=list_length;            
+		);
+	);
+);
+
+
+
+
+function gui_pages() (
+//--voice catalog---------------------------------------------------------------
+	
+	gui_page==0 ? (
+	
+	//render category list
+		  
+		category_list_voice_cursor=gui_category(list_voice_category,category_list_voice_cursor,category_list_voice_offset,instrument_category);
+		
+		category_list_voice_offset=gui_category_adjust_view(category_list_voice_offset,category_list_voice_cursor,category_list_length);
+	
+	//render voice list
+	
+		list_contents="";
+		
+		category_list_voice_cursor==0 ? list_contents=list_contents_piano;
+		category_list_voice_cursor==1 ? list_contents=list_contents_chromatic_percussion;
+		category_list_voice_cursor==2 ? list_contents=list_contents_organ;
+		category_list_voice_cursor==3 ? list_contents=list_contents_guitar;
+		category_list_voice_cursor==4 ? list_contents=list_contents_bass;
+		category_list_voice_cursor==5 ? list_contents=list_contents_strings;
+		category_list_voice_cursor==6 ? list_contents=list_contents_ensemble;
+		category_list_voice_cursor==7 ? list_contents=list_contents_brass;
+		category_list_voice_cursor==8 ? list_contents=list_contents_reed;
+		category_list_voice_cursor==9 ? list_contents=list_contents_pipe;
+		category_list_voice_cursor==10 ? list_contents=list_contents_ethnic;
+		category_list_voice_cursor==11 ? list_contents=list_contents_synth_lead;
+		category_list_voice_cursor==12 ? list_contents=list_contents_synth_pad;
+		category_list_voice_cursor==13 ? list_contents=list_contents_synth_effects;
+		category_list_voice_cursor==14 ? list_contents=list_contents_sound_effects;
+		category_list_voice_cursor==15 ? list_contents=list_contents_voice_effects;
+		category_list_voice_cursor==16 ? list_contents=list_contents_percussive;
+		category_list_voice_cursor==17 ? list_contents=list_contents_drum_kits;
+				
+		list_x=category_list_width+10-list_item_width;
+		list_y=gfx_h;
+		
+		instrument_change=-1;              
+
+		list_string_ptr=1;
+		instrument_list_count=0;          
+		list_contents_length=strlen(list_contents);
+		
+		while(list_string_ptr<list_contents_length) (
+		
+			(list_y+list_item_height)>=gfx_h ? (
+			
+				list_y=menu_height+10;
+				list_x+=list_item_width;
+				
+			);
+			
+			list_string_old_ptr=list_string_ptr;
+	
+			list_string_ptr=parse_to_line_end(list_contents,list_string_ptr);
+			
+			strcpy_substr(list_item_text,list_contents,list_string_old_ptr+12,list_string_ptr-list_string_old_ptr-12);
+
+			list_string_ptr+=1;
+				
+			list_hover=0;
+				
+			instrument_list_count==instrument_voice && category_list_voice_cursor==instrument_category ? (
+			
+				list_hover=1;
+				
+				set_color(color_bg_cursor);
+
+				gfx_rect(list_x,list_y,list_item_width,list_item_height);
+				
+			);
+			
+			mouse_x>=list_x && mouse_x<(list_x+list_item_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
+			
+				gui_mouse_lmb ? instrument_change=instrument_list_count;                    
+				
+				list_hover=1;
+								
+			);
+			
+		
+			list_hover ? set_color(color_list_hover) : set_color(color_list_normal);
+								    
+			gfx_x=list_x+8;
+			gfx_y=list_y+3;
+			
+			gfx_printf("%2.2i:",instrument_list_count+1);
+			gfx_drawstr(list_item_text);
+			
+			instrument_list_count+=1;
+			
+			list_y+=list_item_height;               
+		);
+		
+		mouse_y>=menu_height && mouse_x>=category_list_width ? (
+		
+			mouse_wheel!=0 ? (
+			
+				instrument_change=instrument_voice;
+				
+				mouse_wheel<0 ? instrument_change+=1 : instrument_change-=1;
+				
+				instrument_change<0 ? instrument_change=0;
+				instrument_change>=instrument_list_count-1 ? instrument_change=instrument_list_count-1;
+			);
+			
+		);
+		
+		instrument_change>=0 ? (
+		
+			list_string_ptr=1;
+			instrument_list_count=0;          
+   
+			while(list_string_ptr<list_contents_length) (
+							
+				list_string_old_ptr=list_string_ptr;
+		
+				list_string_ptr=parse_to_line_end(list_contents,list_string_ptr);
+				
+				strcpy_substr(list_item_text,list_contents,list_string_old_ptr+12,list_string_ptr-list_string_old_ptr-12);
+	
+				list_string_ptr+=1;
+  
+				instrument_list_count==instrument_change ? (
+				
+					instrument_voice=instrument_list_count;
+					instrument_category=category_list_voice_cursor;
+					instrument_update=1;
+					
+					mode=str_getchar(list_contents,list_string_old_ptr+0);
+					
+					mode==0x58 ? midi_synth_mode=midi_synth_mode_xg;     //X
+					mode==0x54 ? midi_synth_mode=midi_synth_mode_tg300;  //T
+					
+					midi_program=parse_number_dec(list_contents,list_string_old_ptr+1,3)-1;
+					
+					msb=parse_number_dec(list_contents,list_string_old_ptr+5,3);
+					lsb=parse_number_dec(list_contents,list_string_old_ptr+9,3);                                        
+					
+					midi_bank=msb*256+lsb;                    
+				);
+				
+				instrument_list_count+=1;               
+			);
+		 
+		);
+	);
+
+//--effect 1 editor--------------------------------------------------------------
+
+	gui_page==1 || category_list_reverb_cursor_prev<0 ? (
+	
+		category_list_reverb_cursor=gui_category(list_reverb_category,category_list_reverb_cursor,category_list_reverb_offset,category_list_reverb_cursor);
+				
+		category_list_reverb_offset=gui_category_adjust_view(category_list_reverb_offset,category_list_reverb_cursor,category_list_length);
+				  
+		category_list_reverb_cursor!=category_list_reverb_cursor_prev ? (
+			
+			category_list_reverb_cursor==0 ? value=0x0000;
+			category_list_reverb_cursor==1 ? value=0x0100;
+			category_list_reverb_cursor==2 ? value=0x0101;
+			category_list_reverb_cursor==3 ? value=0x0200;
+			category_list_reverb_cursor==4 ? value=0x0201;
+			category_list_reverb_cursor==5 ? value=0x0202;
+			category_list_reverb_cursor==6 ? value=0x0300;
+			category_list_reverb_cursor==7 ? value=0x0301;
+			category_list_reverb_cursor==8 ? value=0x0400;
+			
+			sysex_add_queue(0x020100,value,2);
+			force_update=1;
+			
+		) : (
+			force_update=0;
+		);
+		
+		category_list_reverb_cursor>0 ? (
+		
+			gui_slider_change=force_update;
+			
+			gui_slider_x=category_list_width+150;
+			gui_slider_y=menu_height+20;          
+			
+			slider_value_table="";
+			
+			gui_slider_reverb_send[midi_channel]=gui_slider(gui_slider_reverb_send[midi_channel],0,127,"Send",DEF_SEND);
+			
+			effect_reverb_send[midi_channel]=gui_slider_out;
+			
+			gui_slider_y+=20;
+
+			gui_slider_reverb_return=gui_slider(gui_slider_reverb_return,0,127,"Return",DEF_SEND);
+			
+			gui_slider_change ? sysex_add_queue(0x02010c,gui_slider_out,1);
+						
+			gui_slider_reverb_pan=gui_slider(gui_slider_reverb_pan,0,127,"Pan",DEF_PAN);
+			
+			gui_slider_change ? sysex_add_queue(0x02010d,gui_slider_out,1);
+			
+			gui_slider_y+=20;
+			
+			gui_slider_list(reverb_params_list,category_list_reverb_cursor-1,0,force_update);
+		);
+		
+		category_list_reverb_cursor_prev=category_list_reverb_cursor;
+  
+	);
+	
+//--effect 2 editor--------------------------------------------------------------
+
+	gui_page==2 || category_list_chorus_cursor<0 ? (
+	
+		category_list_chorus_cursor=gui_category(list_chorus_category,category_list_chorus_cursor,category_list_chorus_offset,category_list_chorus_cursor);
+				   
+		category_list_chorus_offset=gui_category_adjust_view(category_list_chorus_offset,category_list_chorus_cursor,category_list_length);
+			   
+		category_list_chorus_cursor!=category_list_chorus_cursor_prev ? (
+		 
+			category_list_chorus_cursor==0 ? value=0x0000;
+			category_list_chorus_cursor==1 ? value=0x4100;
+			category_list_chorus_cursor==2 ? value=0x4101;
+			category_list_chorus_cursor==3 ? value=0x4102;
+			category_list_chorus_cursor==4 ? value=0x4200;
+			category_list_chorus_cursor==5 ? value=0x4201;
+			category_list_chorus_cursor==6 ? value=0x4202;
+			category_list_chorus_cursor==7 ? value=0x4300;
+			category_list_chorus_cursor==8 ? value=0x4301;  
+			
+			sysex_add_queue(0x020120,value,2);
+			force_update=1;
+			 
+		) : (
+			force_update=0;
+		);
+		 
+		category_list_chorus_cursor>0 ? (
+		
+			gui_slider_change=force_update;
+			
+			gui_slider_x=category_list_width+150;
+			gui_slider_y=menu_height+20;          
+			
+			slider_value_table="";
+			
+			gui_slider_chorus_send[midi_channel]=gui_slider(gui_slider_chorus_send[midi_channel],0,127,"Send",DEF_SEND);
+			
+			effect_chorus_send[midi_channel]=gui_slider_out;
+
+			gui_slider_y+=20;
+			
+			gui_slider_chorus_send_reverb=gui_slider(gui_slider_chorus_send_reverb,0,127,"Send to Reverb",DEF_SEND);
+			
+			gui_slider_change ? sysex_add_queue(0x02012e,gui_slider_out,1);
+						
+			gui_slider_chorus_return=gui_slider(gui_slider_chorus_return,0,127,"Return",DEF_SEND);
+			
+			gui_slider_change ? sysex_add_queue(0x02012c,gui_slider_out,1);
+			
+			gui_slider_chorus_pan=gui_slider(gui_slider_chorus_pan,0,127,"Pan",DEF_PAN);
+			
+			gui_slider_change ? sysex_add_queue(0x02012d,gui_slider_out,1);
+			
+			gui_slider_y+=20;
+	 
+			gui_slider_list(chorus_params_list,category_list_chorus_cursor-1,1,force_update);     
+		);
+
+		category_list_chorus_cursor_prev=category_list_chorus_cursor;
+		
+	);
+
+//--effect 3 editor--------------------------------------------------------------
+
+	gui_page==3 || category_list_variation_cursor_prev<0 ? (
+	
+		category_list_variation_cursor=gui_category(list_variation_category,category_list_variation_cursor,category_list_variation_offset,category_list_variation_cursor);
+				 
+		category_list_variation_offset=gui_category_adjust_view(category_list_variation_offset,category_list_variation_cursor,category_list_length);                
+				
+		category_list_variation_cursor!=category_list_variation_cursor_prev ? (
+		
+			category_list_variation_cursor==0 ? value=0x0000;
+			category_list_variation_cursor==1 ? value=0x0100;
+			category_list_variation_cursor==2 ? value=0x0101;
+			category_list_variation_cursor==3 ? value=0x0200;
+			category_list_variation_cursor==4 ? value=0x0201;
+			category_list_variation_cursor==5 ? value=0x0202;
+			category_list_variation_cursor==6 ? value=0x0300;
+			category_list_variation_cursor==7 ? value=0x0301;
+			category_list_variation_cursor==8 ? value=0x0400;
+			category_list_variation_cursor==9 ? value=0x0500;
+			category_list_variation_cursor==10 ? value=0x0600;
+			category_list_variation_cursor==11 ? value=0x0700;
+			category_list_variation_cursor==12 ? value=0x0800;
+			category_list_variation_cursor==13 ? value=0x0900;
+			category_list_variation_cursor==14 ? value=0x0901;
+			category_list_variation_cursor==15 ? value=0x0a00;
+			category_list_variation_cursor==16 ? value=0x0b00;
+			category_list_variation_cursor==17 ? value=0x4100;
+			category_list_variation_cursor==18 ? value=0x4101;
+			category_list_variation_cursor==19 ? value=0x4102;
+			category_list_variation_cursor==20 ? value=0x4200;
+			category_list_variation_cursor==21 ? value=0x4201;
+			category_list_variation_cursor==22 ? value=0x4202;
+			category_list_variation_cursor==23 ? value=0x4300;
+			category_list_variation_cursor==24 ? value=0x4301;
+			category_list_variation_cursor==25 ? value=0x4400;
+			category_list_variation_cursor==26 ? value=0x4500;
+			category_list_variation_cursor==27 ? value=0x4600;
+			category_list_variation_cursor==28 ? value=0x4700;
+			category_list_variation_cursor==29 ? value=0x4800;
+			category_list_variation_cursor==30 ? value=0x4808;
+			category_list_variation_cursor==31 ? value=0x4900;
+			category_list_variation_cursor==32 ? value=0x4a00;
+			category_list_variation_cursor==33 ? value=0x4b00;
+			category_list_variation_cursor==34 ? value=0x4c00;
+			category_list_variation_cursor==35 ? value=0x4d00;
+			category_list_variation_cursor==36 ? value=0x4e00;
+			category_list_variation_cursor==37 ? value=0x4000;
+			
+			sysex_add_queue(0x020140,value,2);          
+			force_update=1;
+			
+		) : (
+			force_update=0;
+		);
+		
+		category_list_variation_cursor>0 ? (
+		
+			gui_slider_change=force_update;
+			
+			gui_slider_x=category_list_width+150;
+			gui_slider_y=menu_height+20;          
+			
+			slider_value_table="";
+			
+			gui_slider_variation_send[midi_channel]=gui_slider(gui_slider_variation_send[midi_channel],0,127,"Send",DEF_SEND);
+			
+			effect_variation_send[midi_channel]=gui_slider_out;
+			
+			gui_slider_y+=20;
+			
+			gui_slider_variation_send_reverb=gui_slider(gui_slider_variation_send_reverb,0,127,"Send To Reverb",DEF_SEND);
+			
+			gui_slider_change ? sysex_add_queue(0x020158,gui_slider_out,1);
+
+			gui_slider_variation_send_chorus=gui_slider(gui_slider_variation_send_chorus,0,127,"Send To Chorus",DEF_SEND);
+			
+			gui_slider_change ? sysex_add_queue(0x020159,gui_slider_out,1);
+						
+			gui_slider_variation_return=gui_slider(gui_slider_variation_return,0,127,"Return",DEF_SEND);
+			
+			gui_slider_change ? sysex_add_queue(0x020156,gui_slider_out,1);
+			
+			gui_slider_variation_pan =gui_slider(gui_slider_variation_pan ,0,127,"Pan",DEF_PAN);
+			
+			gui_slider_change ? sysex_add_queue(0x020157,gui_slider_out,1);
+			
+			gui_slider_y+=20;
+	 
+			gui_slider_list(variation_params_list,category_list_variation_cursor-1,2,force_update);     
+		);
+		
+		category_list_variation_cursor_prev=category_list_variation_cursor;
+		
+	);
+);
+
+@block
+
+	while ( midirecv(ts,msg1,msg23) ? midisend(ts,msg1,msg23); );
+	
+	midi_first_time ? (
+	
+		midi_first_time=0;
+		
+		sysex_add_queue(0x02015a,1,1);     //set variation connection to system                   
+		
+		gui_pages();
+	);
+					
+	instrument_update ? (
+ 
+		instrument_update=0;
+		
+		midi_synth_mode!=midi_synth_mode_prev ? (
+		
+			midi_synth_mode_prev=midi_synth_mode;
+			
+			midi_synth_mode==midi_synth_mode_xg ? (
+			
+				buf=100000;
+
+				buf[0x00]=0x43;
+				buf[0x01]=0x10;
+				buf[0x02]=0x4c;
+				buf[0x03]=0x00;
+				buf[0x04]=0x00;
+				buf[0x05]=0x7e;
+				buf[0x06]=0x00;
+
+				midisend_buf(0,buf,0x07);
+				
+			);
+ 
+			midi_synth_mode==midi_synth_mode_tg300 ? (
+			
+				buf=100000;
+				
+				buf[0x00]=0x43;
+				buf[0x01]=0x71;
+				buf[0x02]=0x7e;
+				buf[0x03]=0x09;
+				buf[0x04]=0x01;
+  
+				midisend_buf(0,buf,0x05);
+				
+			);               
+		);
+
+		midisend(0,0xb0+midi_channel,0x00+ (midi_bank&0x7f00));      //bank change MSB
+		midisend(0,0xb0+midi_channel,0x20+((midi_bank&0x007f)<<8));  //bank change LSB
+		midisend(0,0xc0+midi_channel,midi_program);                  //program change
+	);
+
+	effect_reverb_send[midi_channel]!=effect_reverb_send_prev[midi_channel] ? (
+	
+		effect_reverb_send_prev[midi_channel]=effect_reverb_send[midi_channel];
+		
+		midisend(0,0xb0+midi_channel,0x5b+((effect_reverb_send[midi_channel]&0x7f)<<8));
+	);
+	
+	effect_chorus_send[midi_channel]!=effect_chorus_send_prev[midi_channel] ? (
+	
+		effect_chorus_send_prev[midi_channel]=effect_chorus_send[midi_channel];
+		
+		midisend(0,0xb0+midi_channel,0x5d+((effect_chorus_send[midi_channel]&0x7f)<<8));
+	);
+	
+	effect_variation_send[midi_channel]!=effect_variation_send_prev[midi_channel] ? (
+	
+		effect_variation_send_prev[midi_channel]=effect_variation_send[midi_channel];
+		
+		midisend(0,0xb0+midi_channel,0x5e+((effect_variation_send[midi_channel]&0x7f)<<8));
+	);
+	
+	sysex_delay=0;
+	sysex_queue_len=sysex_queue_ptr;
+	sysex_queue_ptr=0;
+	
+	while(sysex_queue_ptr<sysex_queue_len) (
+	
+		xgsend_sysex(sysex_queue[sysex_queue_ptr+0],sysex_queue[sysex_queue_ptr+1],sysex_queue[sysex_queue_ptr+2]);
+		
+		sysex_queue_ptr+=3;
+	
+	);
+	
+	sysex_queue_ptr=0;
+
+
+
+
+@gfx 600 440
+	
+	gfx_setfont(1,"Arial",16);
+	gfx_getchar();    
+	
+	category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
+	
+	category_list_height<1 ? category_list_height=1;
+	 
+	!gui_mouse_lmb ? (
+			mouse_cap & CAP_LMB ? (
+				gui_mouse_lmb=1;
+			)
+	
+		) : (
+			!(mouse_cap & CAP_LMB) ? gui_mouse_lmb=0;
+		);
+	
+	!gui_mouse_rmb ? (
+			mouse_cap & CAP_RMB ? (
+				gui_mouse_rmb=1;
+			)
+	
+		) : (
+			!(mouse_cap & CAP_RMB) ? gui_mouse_rmb=0;
+		);
+
+//--main menu-------------------------------------------------------------------
+
+	set_color(color_bg_darkest);
+
+	gfx_rect(0,0,gfx_w,menu_height-10);
+	
+	set_color(color_bg_dark);
+	
+	gfx_rect(0,menu_height-10,gfx_w,10);
+	
+	set_color(color_bg_dark);
+
+	gfx_rect(0,menu_height,category_list_width,gfx_h-menu_height);
+	
+	set_color(color_bg_light);
+
+	gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
+	
+	gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
+	gui_menu_item(120,10,"FX1:Reverb"   ,gui_page==1?1:0,1) ? gui_page=1;
+	gui_menu_item(210,10,"FX2:Chorus"   ,gui_page==2?1:0,1) ? gui_page=2;
+	gui_menu_item(300,10,"FX3:Variation",gui_page==3?1:0,1) ? gui_page=3;
+	
+	sprintf(caption,"MIDI Channel:%i",midi_channel+1);
+	
+	gui_menu_item(gfx_w-110,10,caption,0,1)&1 ? ( midi_channel+=1; );
+   
+	gui_menu_item(gfx_w-110,10,caption,0,1)&2 ? ( midi_channel-=1; );
+	
+	gui_menu_item(gfx_w-110,10,caption,0,2) ? (
+			
+			mouse_wheel<0 ? ( midi_channel-=1; );
+			mouse_wheel>0 ? ( midi_channel+=1; );       
+		);
+		
+	midi_channel>15 ? midi_channel=0;
+	midi_channel<0 ? midi_channel=15;
+	
+	gui_pages();  
+	
+//-------------------------------------------------------------------------------
+
+	gui_mouse_lmb ? gui_mouse_lmb=2;
+	gui_mouse_rmb ? gui_mouse_rmb=2;
+	
+	mouse_wheel=0;

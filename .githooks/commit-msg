@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Git hook that enforces the conventional commits specification to commit messages.
+# https://medium.com/yasser-dev/automate-and-enforce-conventional-commits-for-net-based-projects-a322be7a1eb7
+# https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit-message-header
+# https://www.conventionalcommits.org/en/v1.0.0/#summary
+
+
+TYPES="build|ci|docs|feat|fix|perf|refactor|test|wip"
+MAX_CHARS=50
+
+if ! head -1 "$1" | grep -qE "^($TYPES)(\(.+?\))?: .{1,}$"; then
+    echo "Aborting commit. Your commit message is invalid." >&2
+    echo >&2
+    echo "The commit message should be structured as follows:" >&2
+    echo "<type>(<optional scope>): <description>" >&2
+    echo >&2
+    echo "Where <type> is [$TYPES]" >&2
+    echo >&2
+    echo "More details at https://www.conventionalcommits.org/en/v1.0.0/#summary" >&2
+    exit 1
+fi
+
+if ! head -1 "$1" | grep -qE "^.{1,$MAX_CHARS}$"; then
+    echo "Aborting commit. Your commit message is longer than $MAX_CHARS chars." >&2
+    exit 1
+fi
