@@ -87,10 +87,6 @@ CAP_CTRL=0x04;
 CAP_ALT=0x10;
 CAP_SHIFT=0X08;
 
-DEF_SEND=.5;
-DEF_PAN=.5;
-DEF_PARAM=.2;
-
 ext_noinit=1;
 gfx_clear=-1;
 gfx_a=1;
@@ -119,23 +115,23 @@ gui_slider_variation_send=402000;
 save_vars_ptr=0;
 
 loop(16,
-	gui_slider_reverb_send[save_vars_ptr]=DEF_SEND;
-	gui_slider_chorus_send[save_vars_ptr]=DEF_SEND;
-	gui_slider_variation_send[save_vars_ptr]=DEF_SEND;
+	gui_slider_reverb_send[save_vars_ptr]=-1;
+	gui_slider_chorus_send[save_vars_ptr]=-1;
+	gui_slider_variation_send[save_vars_ptr]=-1;
 	save_vars_ptr+=1;
 );
 
-gui_slider_chorus_send_reverb=0;
-gui_slider_variation_send_reverb=0;
-gui_slider_variation_send_chorus=0;
+gui_slider_chorus_send_reverb=-1;
+gui_slider_variation_send_reverb=-1;
+gui_slider_variation_send_chorus=-1;
 
-gui_slider_reverb_return=DEF_SEND;
-gui_slider_chorus_return=DEF_SEND;
-gui_slider_variation_return=DEF_SEND;
+gui_slider_reverb_return=-1;
+gui_slider_chorus_return=-1;
+gui_slider_variation_return=-1;
 
-gui_slider_reverb_pan=DEF_PAN;
-gui_slider_chorus_pan=DEF_PAN;
-gui_slider_variation_pan=DEF_PAN;
+gui_slider_reverb_pan=-1;
+gui_slider_chorus_pan=-1;
+gui_slider_variation_pan=-1;
 	
 midi_synth_mode_xg=0;
 midi_synth_mode_tg300=1;
@@ -206,7 +202,7 @@ save_vars=150000;
 save_vars_ptr=0;
 
 loop(40*16*3,
-	save_vars[save_vars_ptr]=DEF_PARAM;
+	save_vars[save_vars_ptr]=-1;
 	save_vars_ptr+=1;
 );
 
@@ -2273,6 +2269,10 @@ function gui_slider_value_to_float(slider_value,slider_min,slider_max) (
 
 function gui_slider(slider_value_float,slider_min,slider_max,slider_caption,slider_def)
 (         
+	slider_value_float < 0 ? (
+		slider_value_float=gui_slider_value_to_float(slider_def,slider_min,slider_max);     //fallback to default value
+	);
+
 	set_color(color_bg_cursor);
 	
 	gfx_rect(gui_slider_x,gui_slider_y,gui_slider_width*slider_value_float,gui_slider_height);
@@ -2304,7 +2304,7 @@ function gui_slider(slider_value_float,slider_min,slider_max,slider_caption,slid
 		
 		mouse_cap & CAP_RMB ? (
 			    
-				    slider_value_float=slider_def;
+				    slider_value_float=gui_slider_value_to_float(slider_def,slider_min,slider_max);
 			    
 				    gui_slider_change|=1;
 				    
@@ -2602,7 +2602,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 			
 			gui_slider_change|=force_update;
 			
-			save_vars[save_offset]=gui_slider(save_vars[save_offset],slider_min,slider_max,slider_caption,DEF_PARAM);
+			save_vars[save_offset]=gui_slider(save_vars[save_offset],slider_min,slider_max,slider_caption,0);
 	
 			gui_slider_change ? (
 			
@@ -2871,17 +2871,17 @@ function gui_pages() (
 			
 			slider_value_table="";
 			
-			gui_slider_reverb_send[midi_channel]=gui_slider(gui_slider_reverb_send[midi_channel],0,127,"Send",DEF_SEND);
+			gui_slider_reverb_send[midi_channel]=gui_slider(gui_slider_reverb_send[midi_channel],0,127,"Send",40);
 			
 			effect_reverb_send[midi_channel]=gui_slider_out;
 			
 			gui_slider_y+=20;
 
-			gui_slider_reverb_return=gui_slider(gui_slider_reverb_return,0,127,"Return",DEF_SEND);
+			gui_slider_reverb_return=gui_slider(gui_slider_reverb_return,0,127,"Return",64);
 			
 			gui_slider_change ? sysex_add_queue(0x02010c,gui_slider_out,1);
 						
-			gui_slider_reverb_pan=gui_slider(gui_slider_reverb_pan,0,127,"Pan",DEF_PAN);
+			gui_slider_reverb_pan=gui_slider(gui_slider_reverb_pan,0,127,"Pan",64);
 			
 			gui_slider_change ? sysex_add_queue(0x02010d,gui_slider_out,1);
 			
@@ -2930,21 +2930,21 @@ function gui_pages() (
 			
 			slider_value_table="";
 			
-			gui_slider_chorus_send[midi_channel]=gui_slider(gui_slider_chorus_send[midi_channel],0,127,"Send",DEF_SEND);
+			gui_slider_chorus_send[midi_channel]=gui_slider(gui_slider_chorus_send[midi_channel],0,127,"Send",0);
 			
 			effect_chorus_send[midi_channel]=gui_slider_out;
 
 			gui_slider_y+=20;
 			
-			gui_slider_chorus_send_reverb=gui_slider(gui_slider_chorus_send_reverb,0,127,"Send to Reverb",DEF_SEND);
+			gui_slider_chorus_send_reverb=gui_slider(gui_slider_chorus_send_reverb,0,127,"Send to Reverb",0);
 			
 			gui_slider_change ? sysex_add_queue(0x02012e,gui_slider_out,1);
 						
-			gui_slider_chorus_return=gui_slider(gui_slider_chorus_return,0,127,"Return",DEF_SEND);
+			gui_slider_chorus_return=gui_slider(gui_slider_chorus_return,0,127,"Return",64);
 			
 			gui_slider_change ? sysex_add_queue(0x02012c,gui_slider_out,1);
 			
-			gui_slider_chorus_pan=gui_slider(gui_slider_chorus_pan,0,127,"Pan",DEF_PAN);
+			gui_slider_chorus_pan=gui_slider(gui_slider_chorus_pan,0,127,"Pan",64);
 			
 			gui_slider_change ? sysex_add_queue(0x02012d,gui_slider_out,1);
 			
@@ -3022,25 +3022,25 @@ function gui_pages() (
 			
 			slider_value_table="";
 			
-			gui_slider_variation_send[midi_channel]=gui_slider(gui_slider_variation_send[midi_channel],0,127,"Send",DEF_SEND);
+			gui_slider_variation_send[midi_channel]=gui_slider(gui_slider_variation_send[midi_channel],0,127,"Send",0);
 			
 			effect_variation_send[midi_channel]=gui_slider_out;
 			
 			gui_slider_y+=20;
 			
-			gui_slider_variation_send_reverb=gui_slider(gui_slider_variation_send_reverb,0,127,"Send To Reverb",DEF_SEND);
+			gui_slider_variation_send_reverb=gui_slider(gui_slider_variation_send_reverb,0,127,"Send To Reverb",0);
 			
 			gui_slider_change ? sysex_add_queue(0x020158,gui_slider_out,1);
 
-			gui_slider_variation_send_chorus=gui_slider(gui_slider_variation_send_chorus,0,127,"Send To Chorus",DEF_SEND);
+			gui_slider_variation_send_chorus=gui_slider(gui_slider_variation_send_chorus,0,127,"Send To Chorus",0);
 			
 			gui_slider_change ? sysex_add_queue(0x020159,gui_slider_out,1);
 						
-			gui_slider_variation_return=gui_slider(gui_slider_variation_return,0,127,"Return",DEF_SEND);
+			gui_slider_variation_return=gui_slider(gui_slider_variation_return,0,127,"Return",64);
 			
 			gui_slider_change ? sysex_add_queue(0x020156,gui_slider_out,1);
 			
-			gui_slider_variation_pan =gui_slider(gui_slider_variation_pan ,0,127,"Pan",DEF_PAN);
+			gui_slider_variation_pan =gui_slider(gui_slider_variation_pan ,0,127,"Pan",64);
 			
 			gui_slider_change ? sysex_add_queue(0x020157,gui_slider_out,1);
 			
