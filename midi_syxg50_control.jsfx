@@ -884,583 +884,583 @@ X057:120:000 GM2 SFX
 //-----------------------------------------------------------------------------
 
 //#entry number
-//param number (translated to sysex address in code), min, max, display table, name
+//param number (translated to sysex address in code), min, max, default, display table, name
 //all numbers dec
 
 reverb_params_list="
 #00 Hall 1
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #01 Hall 2
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #02 Room 1
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #03 Room 2
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #04 Room 3
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #05 Stage 1
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #06 Stage 2
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #07 Plate
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 ";
 
 //-----------------------------------------------------------------------------
 
 chorus_params_list="
 #00 Chorus 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #01 Chorus 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #02 Chorus 3
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #03 Celeste 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #04 Celeste 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #05 Celeste 3
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #06 Flanger 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0063|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-14|0004|0124|-|LFO Phase Difference
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0063|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+14|0004|0124|0000|-|LFO Phase Difference
 #07 Flanger 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0063|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-14|0004|0124|-|LFO Phase Difference
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0063|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+14|0004|0124|0000|-|LFO Phase Difference
 ";
 
 //-----------------------------------------------------------------------------
 
 variation_params_list="
 #00 Hall 1
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #01 Hall 2
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #02 Room 1
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #03 Room 2
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #04 Room 3
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #05 Stage 1
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #06 Stage 2
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #07 Plate
-01|0000|0069|4|Reverb Time
-02|0000|0010|-|Diffusion
-03|0000|0063|5|Initial Delay
-04|0000|0052|3|HPF Cutoff
-05|0034|0060|3|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0063|5|Rev Delay
-12|0000|0003|-|Density
-13|0001|0127|-|Er/Rev Balance
-15|0001|0127|-|Feedback Level
+01|0000|0069|0000|4|Reverb Time
+02|0000|0010|0000|-|Diffusion
+03|0000|0063|0000|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0000|3|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0000|-|Density
+13|0001|0127|0000|-|Er/Rev Balance
+15|0001|0127|0000|-|Feedback Level
 #08 Delay L,C,R
-01|0001|7150|-|Lch Delay
-02|0001|7150|-|Rch Delay
-03|0001|7150|-|Cch Delay
-04|0001|7150|-|Feedback Delay
-05|0001|0127|-|Feedback Level
-06|0000|0127|-|Cch Level
-07|0001|0010|-|High Damp
-10|0001|0127|-|Dry/Wet
-13|0008|0040|3|EQ Low Frequency
-14|0052|0076|-|EQ Low Gain
-15|0028|0058|3|EQ High Frequency
-16|0052|0076|-|EQ High Gain
+01|0001|7150|0000|-|Lch Delay
+02|0001|7150|0000|-|Rch Delay
+03|0001|7150|0000|-|Cch Delay
+04|0001|7150|0000|-|Feedback Delay
+05|0001|0127|0000|-|Feedback Level
+06|0000|0127|0000|-|Cch Level
+07|0001|0010|0000|-|High Damp
+10|0001|0127|0000|-|Dry/Wet
+13|0008|0040|0000|3|EQ Low Frequency
+14|0052|0076|0000|-|EQ Low Gain
+15|0028|0058|0000|3|EQ High Frequency
+16|0052|0076|0000|-|EQ High Gain
 #09 Delay L,R
-01|0001|7150|-|Lch Delay
-02|0001|7150|-|Rch Delay
-03|0001|7150|-|Feedback Delay 1
-04|0001|7150|-|Feedback Delay 2
-05|0001|0127|-|Feedback Level
-06|0001|0010|-|High Damp
-10|0001|0127|-|Dry/Wet
-13|0008|0040|3|EQ Low Frequency
-14|0052|0076|-|EQ Low Gain
-15|0028|0058|3|EQ High Frequency
-16|0052|0076|-|EQ High Gain
+01|0001|7150|0000|-|Lch Delay
+02|0001|7150|0000|-|Rch Delay
+03|0001|7150|0000|-|Feedback Delay 1
+04|0001|7150|0000|-|Feedback Delay 2
+05|0001|0127|0000|-|Feedback Level
+06|0001|0010|0000|-|High Damp
+10|0001|0127|0000|-|Dry/Wet
+13|0008|0040|0000|3|EQ Low Frequency
+14|0052|0076|0000|-|EQ Low Gain
+15|0028|0058|0000|3|EQ High Frequency
+16|0052|0076|0000|-|EQ High Gain
 #10 Echo
-01|0001|3550|-|Lch Delay 1
-02|0001|0127|-|Lch Feedback Level
-03|0001|3550|-|Rch Delay 1
-04|0001|0127|-|Rch Feedback Level
-05|0001|0010|-|High Damp
-06|0001|3550|-|Lch Delay 2
-07|0001|3550|-|Rch Delay 2
-08|0000|0127|-|Delay 2 Level
-10|0001|0127|-|Dry/Wet
-13|0008|0040|3|EQ Low Frequency
-14|0052|0076|-|EQ Low Gain
-15|0028|0058|3|EQ High Frequency
-16|0052|0076|-|EQ High Gain
+01|0001|3550|0000|-|Lch Delay 1
+02|0001|0127|0000|-|Lch Feedback Level
+03|0001|3550|0000|-|Rch Delay 1
+04|0001|0127|0000|-|Rch Feedback Level
+05|0001|0010|0000|-|High Damp
+06|0001|3550|0000|-|Lch Delay 2
+07|0001|3550|0000|-|Rch Delay 2
+08|0000|0127|0000|-|Delay 2 Level
+10|0001|0127|0000|-|Dry/Wet
+13|0008|0040|0000|3|EQ Low Frequency
+14|0052|0076|0000|-|EQ Low Gain
+15|0028|0058|0000|3|EQ High Frequency
+16|0052|0076|0000|-|EQ High Gain
 #11 Cross Delay
-01|0001|3550|-|L->R Delay
-02|0001|3550|-|R->L Delay
-03|0001|0127|-|Feedback Level
-04|0000|0002|7|Input
-05|0001|0010|-|High Damp
-10|0001|0127|-|Dry/Wet
-13|0008|0040|3|EQ Low Frequency
-14|0052|0076|-|EQ Low Gain
-15|0028|0058|3|EQ High Frequency
-16|0052|0076|-|EQ High Gain
+01|0001|3550|0000|-|L->R Delay
+02|0001|3550|0000|-|R->L Delay
+03|0001|0127|0000|-|Feedback Level
+04|0000|0002|0000|7|Input
+05|0001|0010|0000|-|High Damp
+10|0001|0127|0000|-|Dry/Wet
+13|0008|0040|0000|3|EQ Low Frequency
+14|0052|0076|0000|-|EQ Low Gain
+15|0028|0058|0000|3|EQ High Frequency
+16|0052|0076|0000|-|EQ High Gain
 #12 Early Ref 1
-01|0000|0005|8|Type
-02|0000|0044|6|Room Size
-03|0000|0010|-|Diffusion
-04|0000|0063|5|Initial Delay
-05|0001|0127|-|Feedback Level
-06|0000|0052|-|HPF Cutoff
-07|0034|0060|-|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0010|-|Liveness
-12|0000|0003|-|Density
-13|0001|0010|-|High Damp
+01|0000|0005|0000|8|Type
+02|0000|0044|0000|6|Room Size
+03|0000|0010|0000|-|Diffusion
+04|0000|0063|0000|5|Initial Delay
+05|0001|0127|0000|-|Feedback Level
+06|0000|0052|0000|-|HPF Cutoff
+07|0034|0060|0000|-|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0010|0000|-|Liveness
+12|0000|0003|0000|-|Density
+13|0001|0010|0000|-|High Damp
 #13 Early Ref 2
-01|0000|0005|8|Type
-02|0000|0044|6|Room Size
-03|0000|0010|-|Diffusion
-04|0000|0063|5|Initial Delay
-05|0001|0127|-|Feedback Level
-06|0000|0052|-|HPF Cutoff
-07|0034|0060|-|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0010|-|Liveness
-12|0000|0003|-|Density
-13|0001|0010|-|High Damp
+01|0000|0005|0000|8|Type
+02|0000|0044|0000|6|Room Size
+03|0000|0010|0000|-|Diffusion
+04|0000|0063|0000|5|Initial Delay
+05|0001|0127|0000|-|Feedback Level
+06|0000|0052|0000|-|HPF Cutoff
+07|0034|0060|0000|-|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0010|0000|-|Liveness
+12|0000|0003|0000|-|Density
+13|0001|0010|0000|-|High Damp
 #14 Gate Reverb
-01|0000|0001|-|TypeA/TypeB
-02|0000|0044|6|Room Size
-03|0000|0010|-|Diffusion
-04|0000|0063|5|Initial Delay
-05|0001|0127|-|Feedback Level
-06|0000|0052|-|HPF Cutoff
-07|0034|0060|-|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0010|-|Liveness
-12|0000|0003|-|Density
-13|0001|0010|-|High Damp
+01|0000|0001|0000|-|TypeA/TypeB
+02|0000|0044|0000|6|Room Size
+03|0000|0010|0000|-|Diffusion
+04|0000|0063|0000|5|Initial Delay
+05|0001|0127|0000|-|Feedback Level
+06|0000|0052|0000|-|HPF Cutoff
+07|0034|0060|0000|-|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0010|0000|-|Liveness
+12|0000|0003|0000|-|Density
+13|0001|0010|0000|-|High Damp
 #15 Reverse Gate
-01|0000|0001|-|TypeA/TypeB
-02|0000|0044|6|Room Size
-03|0000|0010|-|Diffusion
-04|0000|0063|5|Initial Delay
-05|0001|0127|-|Feedback Level
-06|0000|0052|-|HPF Cutoff
-07|0034|0060|-|LPF Cutoff
-10|0001|0127|-|Dry/Wet
-11|0000|0010|-|Liveness
-12|0000|0003|-|Density
-13|0001|0010|-|High Damp
+01|0000|0001|0000|-|TypeA/TypeB
+02|0000|0044|0000|6|Room Size
+03|0000|0010|0000|-|Diffusion
+04|0000|0063|0000|5|Initial Delay
+05|0001|0127|0000|-|Feedback Level
+06|0000|0052|0000|-|HPF Cutoff
+07|0034|0060|0000|-|LPF Cutoff
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0010|0000|-|Liveness
+12|0000|0003|0000|-|Density
+13|0001|0010|0000|-|High Damp
 #16 Chorus 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #17 Chorus 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #18 Chorus 3
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #19 Celeste 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #20 Celeste 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #21 Celeste 3
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+15|0000|0001|0000|A|Input
 #22 Flanger 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0063|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-14|0004|0124|-|LFO Phase Difference
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0063|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+14|0004|0124|0000|-|LFO Phase Difference
 #23 Flanger 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0001|0127|-|Feedback Level
-04|0000|0063|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-14|0004|0124|-|LFO Phase Difference
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0001|0127|0000|-|Feedback Level
+04|0000|0063|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+14|0004|0124|0000|-|LFO Phase Difference
 #24 Symphonic
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-03|0000|0127|2|Delay Offset
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+03|0000|0127|0000|2|Delay Offset
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
 #25 Rotary Speaker
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO PM Depth
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO PM Depth
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
 #26 Tremolo
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|AM Depth
-03|0000|0127|-|PM Depth
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-14|0004|0124|-|LFO Phase Difference
-15|0000|0001|A|Input
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|AM Depth
+03|0000|0127|0000|-|PM Depth
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+14|0004|0124|0000|-|LFO Phase Difference
+15|0000|0001|0000|A|Input
 #27 Auto Pan
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|L/R Depth
-03|0000|0127|-|F/R Depth
-04|0000|0005|9|PAN Direction
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|L/R Depth
+03|0000|0127|0000|-|F/R Depth
+04|0000|0005|0000|9|PAN Direction
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
 #28 Phaser 1
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO Depth
-03|0000|0127|-|Phase Shift Offset
-04|0001|0127|-|Feedback Level
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-11|0006|0010|-|Stage
-12|0000|0001|A|Diffusion
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO Depth
+03|0000|0127|0000|-|Phase Shift Offset
+04|0001|0127|0000|-|Feedback Level
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+11|0006|0010|0000|-|Stage
+12|0000|0001|0000|A|Diffusion
 #29 Phaser 2
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO Depth
-03|0000|0127|-|Phase Shift Offset
-04|0001|0127|-|Feedback Level
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
-11|0003|0005|-|Stage
-12|0000|0001|A|Diffusion
-13|0004|0124|-|LFO Phase Difference
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO Depth
+03|0000|0127|0000|-|Phase Shift Offset
+04|0001|0127|0000|-|Feedback Level
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
+11|0003|0005|0000|-|Stage
+12|0000|0001|0000|A|Diffusion
+13|0004|0124|0000|-|LFO Phase Difference
 #30 Distortion
-01|0000|0127|-|Drive
-02|0008|0040|3|EQ Low Frequency
-03|0052|0076|-|EQ Low Gain
-04|0034|0060|3|LPF Cutoff
-05|0000|0127|-|Output Level
-07|0028|0054|3|EQ Mid Frequency
-08|0052|0076|-|EQ Mid Gain
-09|0010|0120|-|EQ Mid Width
-10|0001|0127|-|Dry/Wet
-11|0000|0127|-|Clip Curve
+01|0000|0127|0000|-|Drive
+02|0008|0040|0000|3|EQ Low Frequency
+03|0052|0076|0000|-|EQ Low Gain
+04|0034|0060|0000|3|LPF Cutoff
+05|0000|0127|0000|-|Output Level
+07|0028|0054|0000|3|EQ Mid Frequency
+08|0052|0076|0000|-|EQ Mid Gain
+09|0010|0120|0000|-|EQ Mid Width
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0127|0000|-|Clip Curve
 #31 Overdrive
-01|0000|0127|-|Drive
-02|0008|0040|3|EQ Low Frequency
-03|0052|0076|-|EQ Low Gain
-04|0034|0060|3|LPF Cutoff
-05|0000|0127|-|Output Level
-07|0028|0054|3|EQ Mid Frequency
-08|0052|0076|-|EQ Mid Gain
-09|0010|0120|-|EQ Mid Width
-10|0001|0127|-|Dry/Wet
-11|0000|0127|-|Clip Curve
+01|0000|0127|0000|-|Drive
+02|0008|0040|0000|3|EQ Low Frequency
+03|0052|0076|0000|-|EQ Low Gain
+04|0034|0060|0000|3|LPF Cutoff
+05|0000|0127|0000|-|Output Level
+07|0028|0054|0000|3|EQ Mid Frequency
+08|0052|0076|0000|-|EQ Mid Gain
+09|0010|0120|0000|-|EQ Mid Width
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0127|0000|-|Clip Curve
 #32 Guitar Amp Simulator
-01|0000|0127|-|Drive
-02|0000|0003|B|AMP Type
-03|0034|0060|3|LPF Cutoff
-04|0000|0127|-|Output Level
-10|0001|0127|-|Dry/Wet
-11|0000|0127|-|Clip Curve
+01|0000|0127|0000|-|Drive
+02|0000|0003|0000|B|AMP Type
+03|0034|0060|0000|3|LPF Cutoff
+04|0000|0127|0000|-|Output Level
+10|0001|0127|0000|-|Dry/Wet
+11|0000|0127|0000|-|Clip Curve
 #33 3-Band EQ
-01|0052|0076|-|EQ Low Gain
-02|0028|0054|3|EQ Mid Frequency
-03|0052|0076|-|EQ Mid Gain
-04|0010|0120|-|EQ Mid Width
-05|0052|0076|-|EQ High Gain
-06|0008|0040|3|EQ Low Frequency
-07|0028|0058|3|EQ High Frequency
+01|0052|0076|0000|-|EQ Low Gain
+02|0028|0054|0000|3|EQ Mid Frequency
+03|0052|0076|0000|-|EQ Mid Gain
+04|0010|0120|0000|-|EQ Mid Width
+05|0052|0076|0000|-|EQ High Gain
+06|0008|0040|0000|3|EQ Low Frequency
+07|0028|0058|0000|3|EQ High Frequency
 #34 2-Band EQ
-01|0008|0040|3|EQ Low Frequency
-02|0052|0076|-|EQ Low Gain
-03|0028|0058|3|EQ High Frequency
-04|0052|0076|-|EQ High Gain
+01|0008|0040|0000|3|EQ Low Frequency
+02|0052|0076|0000|-|EQ Low Gain
+03|0028|0058|0000|3|EQ High Frequency
+04|0052|0076|0000|-|EQ High Gain
 #35 Auto Wah
-01|0000|0127|1|LFO Frequency
-02|0000|0127|-|LFO Depth
-03|0000|0127|-|Cutoff Frequency Offset
-04|0010|0120|-|Resonance
-06|0008|0040|3|EQ Low Frequency
-07|0052|0076|-|EQ Low Gain
-08|0028|0058|3|EQ High Frequency
-09|0052|0076|-|EQ High Gain
-10|0001|0127|-|Dry/Wet
+01|0000|0127|0000|1|LFO Frequency
+02|0000|0127|0000|-|LFO Depth
+03|0000|0127|0000|-|Cutoff Frequency Offset
+04|0010|0120|0000|-|Resonance
+06|0008|0040|0000|3|EQ Low Frequency
+07|0052|0076|0000|-|EQ Low Gain
+08|0028|0058|0000|3|EQ High Frequency
+09|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0000|-|Dry/Wet
 #36 Thru
 ";
 
@@ -2555,7 +2555,8 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 		
 			slider_min  =parse_number_dec(list,list_ptr+3,4);
 			slider_max  =parse_number_dec(list,list_ptr+8,4);
-			slider_table=str_getchar(list,list_ptr+13);
+			slider_def  =parse_number_dec(list,list_ptr+13,4);
+			slider_table=str_getchar(list,list_ptr+18);
 
 			slider_value_table="";
 		
@@ -2571,7 +2572,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 			slider_table==0x41 ? slider_value_table=effect_value_names_10_mono_stereo;
 			slider_table==0x42 ? slider_value_table=effect_value_names_11_amp_type;
 			
-			list_ptr+=15;
+			list_ptr+=20;
 
 			list_ptr_old=list_ptr;
 			
@@ -2583,7 +2584,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 			
 			gui_slider_change|=force_update;
 			
-			effect_params[param_offset]=gui_slider(effect_params[param_offset],slider_min,slider_max,slider_caption,0);
+			effect_params[param_offset]=gui_slider(effect_params[param_offset],slider_min,slider_max,slider_caption,slider_def);
 	
 			gui_slider_change ? (
 			
