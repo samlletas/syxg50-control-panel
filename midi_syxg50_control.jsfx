@@ -48,13 +48,13 @@ file_var(0,category_list_reverb_cursor);
 file_var(0,category_list_chorus_cursor);
 file_var(0,category_list_variation_cursor);
 
-save_vars_ptr=0;
+var_offset=0;
 
 loop(16,
-	file_var(0,effect_reverb_send[save_vars_ptr]);
-	file_var(0,effect_chorus_send[save_vars_ptr]);
-	file_var(0,effect_variation_send[save_vars_ptr]);
-	save_vars_ptr+=1;
+	file_var(0,effect_reverb_send[var_offset]);
+	file_var(0,effect_chorus_send[var_offset]);
+	file_var(0,effect_variation_send[var_offset]);
+	var_offset+=1;
 );
 
 file_var(0,effect_chorus_send_reverb);
@@ -69,11 +69,11 @@ file_var(0,effect_reverb_pan);
 file_var(0,effect_chorus_pan);
 file_var(0,effect_variation_pan);
 
-save_vars_ptr=0;
+var_offset=0;
 
 loop(40*16*3,
-	file_var(0,save_vars[save_vars_ptr]);
-	save_vars_ptr+=1;
+	file_var(0,effect_params[var_offset]);
+	var_offset+=1;
 );
  
 
@@ -157,15 +157,15 @@ effect_chorus_send=302000;
 effect_chorus_send_prev=303000;
 effect_variation_send=304000;
 effect_variation_send_prev=305000;
-save_vars_ptr=0;
+var_offset=0;
 
 loop(16,
-	effect_reverb_send[save_vars_ptr]=-1;
-	effect_reverb_send_prev[save_vars_ptr]=-1;
-	effect_chorus_send[save_vars_ptr]=-1;
-	effect_chorus_send_prev[save_vars_ptr]=-1;
-	effect_variation_send[save_vars_ptr]=-1;
-	effect_variation_send_prev[save_vars_ptr]=-1;
+	effect_reverb_send[var_offset]=-1;
+	effect_reverb_send_prev[var_offset]=-1;
+	effect_chorus_send[var_offset]=-1;
+	effect_chorus_send_prev[var_offset]=-1;
+	effect_variation_send[var_offset]=-1;
+	effect_variation_send_prev[var_offset]=-1;
 );
 
 effect_chorus_send_reverb=-1;
@@ -185,12 +185,12 @@ sysex_queue=100100;
 sysex_queue_ptr=0;
 sysex_delay=0;
 
-save_vars=150000;
-save_vars_ptr=0;
+effect_params=150000;
+var_offset=0;
 
 loop(40*16*3,
-	save_vars[save_vars_ptr]=-1;
-	save_vars_ptr+=1;
+	effect_params[var_offset]=-1;
+	var_offset+=1;
 );
 
  
@@ -2488,7 +2488,6 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 
 
 
-
 function gui_category_adjust_view(list_offset,list_cursor,list_length) (
 	
 	item_x=16;
@@ -2552,7 +2551,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 		
 			sysex_param =parse_number_dec(list,list_ptr+0,2);
 			
-			save_offset =effect_type*40*16+entry*16+sysex_param;
+			param_offset=effect_type*40*16+entry*16+sysex_param;
 		
 			slider_min  =parse_number_dec(list,list_ptr+3,4);
 			slider_max  =parse_number_dec(list,list_ptr+8,4);
@@ -2584,7 +2583,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 			
 			gui_slider_change|=force_update;
 			
-			save_vars[save_offset]=gui_slider(save_vars[save_offset],slider_min,slider_max,slider_caption,0);
+			effect_params[param_offset]=gui_slider(effect_params[param_offset],slider_min,slider_max,slider_caption,0);
 	
 			gui_slider_change ? (
 			
@@ -2655,7 +2654,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 				
 				);
 				
-				sysex_add_queue(sysex_addr,save_vars[save_offset],sysex_size);
+				sysex_add_queue(sysex_addr,effect_params[param_offset],sysex_size);
 				
 				force_update==0 ? gui_slider_change=0;
 				
@@ -2665,7 +2664,6 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 		);
 	);
 );
-
 
 
 
@@ -3030,6 +3028,8 @@ function gui_pages() (
 	);
 );
 
+
+
 @block
 
 	while ( midirecv(ts,msg1,msg23) ? midisend(ts,msg1,msg23); );
@@ -3121,7 +3121,6 @@ function gui_pages() (
 	);
 	
 	sysex_queue_ptr=0;
-
 
 
 
