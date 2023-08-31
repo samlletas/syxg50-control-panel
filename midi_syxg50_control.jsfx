@@ -3124,7 +3124,7 @@ function gui_pages() (
 
 
 
-@gfx 600 440
+@gfx 600 500
 	
 	gfx_setfont(1,"Arial",16);
 	gfx_getchar();    
