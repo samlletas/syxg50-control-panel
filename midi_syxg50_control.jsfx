@@ -1163,55 +1163,55 @@ variation_params_list="
 13|0001|0127|0000|-|Er/Rev Balance
 15|0001|0127|0000|-|Feedback Level
 #08 Delay L,C,R
-01|0001|7150|0000|-|Lch Delay
-02|0001|7150|0000|-|Rch Delay
-03|0001|7150|0000|-|Cch Delay
-04|0001|7150|0000|-|Feedback Delay
-05|0001|0127|0000|-|Feedback Level
-06|0000|0127|0000|-|Cch Level
-07|0001|0010|0000|-|High Damp
-10|0001|0127|0000|-|Dry/Wet
-13|0008|0040|0000|3|EQ Low Frequency
-14|0052|0076|0000|-|EQ Low Gain
-15|0028|0058|0000|3|EQ High Frequency
-16|0052|0076|0000|-|EQ High Gain
+01|0001|7150|3333|-|Lch Delay
+02|0001|7150|1667|-|Rch Delay
+03|0001|7150|5000|-|Cch Delay
+04|0001|7150|5000|-|Feedback Delay
+05|0001|0127|0074|-|Feedback Level
+06|0000|0127|0100|-|Cch Level
+07|0001|0010|0010|-|High Damp
+10|0001|0127|0032|-|Dry/Wet
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|-|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|-|EQ High Gain
 #09 Delay L,R
-01|0001|7150|0000|-|Lch Delay
-02|0001|7150|0000|-|Rch Delay
-03|0001|7150|0000|-|Feedback Delay 1
-04|0001|7150|0000|-|Feedback Delay 2
-05|0001|0127|0000|-|Feedback Level
-06|0001|0010|0000|-|High Damp
-10|0001|0127|0000|-|Dry/Wet
-13|0008|0040|0000|3|EQ Low Frequency
-14|0052|0076|0000|-|EQ Low Gain
-15|0028|0058|0000|3|EQ High Frequency
-16|0052|0076|0000|-|EQ High Gain
+01|0001|7150|2500|-|Lch Delay
+02|0001|7150|3750|-|Rch Delay
+03|0001|7150|3752|-|Feedback Delay 1
+04|0001|7150|3750|-|Feedback Delay 2
+05|0001|0127|0087|-|Feedback Level
+06|0001|0010|0010|-|High Damp
+10|0001|0127|0032|-|Dry/Wet
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|-|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|-|EQ High Gain
 #10 Echo
-01|0001|3550|0000|-|Lch Delay 1
-02|0001|0127|0000|-|Lch Feedback Level
-03|0001|3550|0000|-|Rch Delay 1
-04|0001|0127|0000|-|Rch Feedback Level
-05|0001|0010|0000|-|High Damp
-06|0001|3550|0000|-|Lch Delay 2
-07|0001|3550|0000|-|Rch Delay 2
+01|0001|3550|1700|-|Lch Delay 1
+02|0001|0127|0080|-|Lch Feedback Level
+03|0001|3550|1780|-|Rch Delay 1
+04|0001|0127|0080|-|Rch Feedback Level
+05|0001|0010|0010|-|High Damp
+06|0001|3550|1700|-|Lch Delay 2
+07|0001|3550|1780|-|Rch Delay 2
 08|0000|0127|0000|-|Delay 2 Level
-10|0001|0127|0000|-|Dry/Wet
-13|0008|0040|0000|3|EQ Low Frequency
-14|0052|0076|0000|-|EQ Low Gain
-15|0028|0058|0000|3|EQ High Frequency
-16|0052|0076|0000|-|EQ High Gain
+10|0001|0127|0040|-|Dry/Wet
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|-|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|-|EQ High Gain
 #11 Cross Delay
-01|0001|3550|0000|-|L->R Delay
-02|0001|3550|0000|-|R->L Delay
-03|0001|0127|0000|-|Feedback Level
-04|0000|0002|0000|7|Input
-05|0001|0010|0000|-|High Damp
-10|0001|0127|0000|-|Dry/Wet
-13|0008|0040|0000|3|EQ Low Frequency
-14|0052|0076|0000|-|EQ Low Gain
-15|0028|0058|0000|3|EQ High Frequency
-16|0052|0076|0000|-|EQ High Gain
+01|0001|3550|1700|-|L->R Delay
+02|0001|3550|1750|-|R->L Delay
+03|0001|0127|0111|-|Feedback Level
+04|0000|0002|0001|7|Input
+05|0001|0010|0010|-|High Damp
+10|0001|0127|0032|-|Dry/Wet
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|-|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|-|EQ High Gain
 #12 Early Ref 1
 01|0000|0005|0000|8|Type
 02|0000|0044|0000|6|Room Size
@@ -2999,7 +2999,7 @@ function gui_pages() (
 			
 			slider_value_table="";
 			
-			effect_variation_send[midi_channel]=gui_slider(effect_variation_send[midi_channel],0,127,"Send",0);
+			effect_variation_send[midi_channel]=gui_slider(effect_variation_send[midi_channel],0,127,"Send",40);
 			
 			gui_slider_y+=20;
 			
@@ -3015,7 +3015,7 @@ function gui_pages() (
 			
 			gui_slider_change ? sysex_add_queue(0x020156,effect_variation_return,1);
 			
-			effect_variation_pan=gui_slider(effect_variation_pan,0,127,"Pan",64);
+			effect_variation_pan=gui_slider(effect_variation_pan,1,127,"Pan",64);
 			
 			gui_slider_change ? sysex_add_queue(0x020157,effect_variation_pan,1);
 			
