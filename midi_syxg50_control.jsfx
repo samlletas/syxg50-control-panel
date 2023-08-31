@@ -2231,7 +2231,7 @@ function parse_to_next_line(string,offset) (
 
 function gui_slider_float_to_value(slider_value_float,slider_min,slider_max) (
 
-	slider_value=floor(slider_min+(slider_max-slider_min)*slider_value_float);
+	slider_value=floor((slider_min+(slider_max-slider_min)*slider_value_float)+0.5);
 	
 	slider_value < slider_min ? slider_value=slider_min;
 	slider_value > slider_max ? slider_value=slider_max;
@@ -2271,7 +2271,12 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 	
 		mouse_wheel!=0 ? (
 
-					slider_value+=sign(mouse_wheel);
+					!(mouse_cap & CAP_SHIFT) ? (
+						step_size=floor(((slider_max-slider_min)/8)+0.5);
+						slider_value+=sign(mouse_wheel)*max(step_size, 1);
+					) : (
+						slider_value+=sign(mouse_wheel);
+					);
 					
 					gui_slider_change|=1;
 				);
