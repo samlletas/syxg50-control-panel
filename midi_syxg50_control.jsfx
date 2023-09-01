@@ -167,20 +167,14 @@ mouse_prev_x=-1;
 mouse_prev_y=-1;
 
 effect_reverb_send=300000;
-effect_reverb_send_prev=301000;
-effect_chorus_send=302000;
-effect_chorus_send_prev=303000;
-effect_variation_send=304000;
-effect_variation_send_prev=305000;
+effect_chorus_send=301000;
+effect_variation_send=302000;
 var_offset=0;
 
 loop(16,
 	effect_reverb_send[var_offset]=-1;
-	effect_reverb_send_prev[var_offset]=-1;
 	effect_chorus_send[var_offset]=-1;
-	effect_chorus_send_prev[var_offset]=-1;
 	effect_variation_send[var_offset]=-1;
-	effect_variation_send_prev[var_offset]=-1;
 	var_offset+=1;
 );
 
@@ -2144,6 +2138,14 @@ function sysex_add_queue(address,value,length) (
 
 
 
+function sysex_add_queue_multipart(address_part,address_parameter,value,length) (
+
+	sysex_add_queue((0x08<<16)|(address_part<<8)|(address_parameter<<0),value,length);
+	
+);
+
+
+
 function xgsend_sysex(address,value,len)
 (
 	address >=0 ? (
@@ -2829,6 +2831,10 @@ function gui_pages() (
 					lsb=parse_number_dec(list_contents,list_string_old_ptr+9,3);                                        
 					
 					midi_bank[midi_channel]=msb*256+lsb;                    
+
+					sysex_add_queue_multipart(midi_channel,0x01,(midi_bank[midi_channel]>>8)&0x7f,1);  //bank change MSB
+					sysex_add_queue_multipart(midi_channel,0x02,(midi_bank[midi_channel]>>0)&0x7f,1);  //bank change LSB
+					sysex_add_queue_multipart(midi_channel,0x03,midi_program[midi_channel],1);         //program change
 				);
 				
 				instrument_list_count+=1;               
@@ -2874,6 +2880,8 @@ function gui_pages() (
 			slider_value_table="";
 			
 			effect_reverb_send[midi_channel]=gui_slider(effect_reverb_send[midi_channel],0,127,"Send",40);
+
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x13,effect_reverb_send[midi_channel],1);
 			
 			gui_slider_y+=20;
 
@@ -2931,6 +2939,8 @@ function gui_pages() (
 			slider_value_table="";
 			
 			effect_chorus_send[midi_channel]=gui_slider(effect_chorus_send[midi_channel],0,127,"Send",40);
+
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x12,effect_chorus_send[midi_channel],1);
 
 			gui_slider_y+=20;
 			
@@ -3021,6 +3031,8 @@ function gui_pages() (
 			slider_value_table="";
 			
 			effect_variation_send[midi_channel]=gui_slider(effect_variation_send[midi_channel],0,127,"Send",40);
+
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x14,effect_variation_send[midi_channel],1);
 			
 			gui_slider_y+=20;
 			
@@ -3103,31 +3115,6 @@ function gui_pages() (
 				
 			);               
 		);
-
-		midisend(0,0xb0+midi_channel,0x00+ (midi_bank[midi_channel]&0x7f00));      //bank change MSB
-		midisend(0,0xb0+midi_channel,0x20+((midi_bank[midi_channel]&0x007f)<<8));  //bank change LSB
-		midisend(0,0xc0+midi_channel,midi_program[midi_channel]);                  //program change
-	);
-
-	effect_reverb_send[midi_channel]!=effect_reverb_send_prev[midi_channel] ? (
-	
-		effect_reverb_send_prev[midi_channel]=effect_reverb_send[midi_channel];
-		
-		midisend(0,0xb0+midi_channel,0x5b+((effect_reverb_send[midi_channel]&0x7f)<<8));
-	);
-	
-	effect_chorus_send[midi_channel]!=effect_chorus_send_prev[midi_channel] ? (
-	
-		effect_chorus_send_prev[midi_channel]=effect_chorus_send[midi_channel];
-		
-		midisend(0,0xb0+midi_channel,0x5d+((effect_chorus_send[midi_channel]&0x7f)<<8));
-	);
-	
-	effect_variation_send[midi_channel]!=effect_variation_send_prev[midi_channel] ? (
-	
-		effect_variation_send_prev[midi_channel]=effect_variation_send[midi_channel];
-		
-		midisend(0,0xb0+midi_channel,0x5e+((effect_variation_send[midi_channel]&0x7f)<<8));
 	);
 	
 	sysex_delay=0;
