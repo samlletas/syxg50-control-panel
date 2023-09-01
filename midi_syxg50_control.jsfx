@@ -3073,6 +3073,22 @@ function gui_pages() (
 		sysex_add_queue(0x02015a,1,1);     //set variation connection to system                   
 		
 		gui_pages();
+
+		channel=0;
+
+		loop(16,
+			// restore voice
+			sysex_add_queue_multipart(channel,0x01,(midi_bank[channel]>>8)&0x7f,1);  //bank change MSB
+			sysex_add_queue_multipart(channel,0x02,(midi_bank[channel]>>0)&0x7f,1);  //bank change LSB
+			sysex_add_queue_multipart(channel,0x03,midi_program[channel],1);         //program change
+
+			// restore effect sends
+			sysex_add_queue_multipart(channel,0x13,effect_reverb_send[channel],1);
+			sysex_add_queue_multipart(channel,0x12,effect_chorus_send[channel],1);
+			sysex_add_queue_multipart(channel,0x14,effect_variation_send[channel],1);
+			
+			channel+=1;
+		);
 	);
 		
 	midi_synth_mode!=midi_synth_mode_prev ? (
