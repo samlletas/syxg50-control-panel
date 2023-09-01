@@ -1423,6 +1423,7 @@ variation_params_list="
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
 11|0003|0011|0005|-|Stage
+12|0000|0001|0001|A|Diffusion
 13|0004|0124|0004|-|LFO Phase Difference
 #30 Distortion
 01|0000|0127|0040|-|Drive
