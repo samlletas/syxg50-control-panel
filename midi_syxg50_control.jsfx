@@ -37,11 +37,16 @@ out_pin:none
 file_var(0,gui_page);
 
 file_var(0,midi_channel);
-file_var(0,midi_program);
-file_var(0,midi_bank);
 
-file_var(0,instrument_voice);
-file_var(0,instrument_category);
+var_offset=0;
+
+loop(16,
+	file_var(0,midi_program[var_offset]);
+	file_var(0,midi_bank[var_offset]);
+	file_var(0,instrument_voice[var_offset]);
+	file_var(0,instrument_category[var_offset]);
+	var_offset+=1;
+);
 
 file_var(0,category_list_voice_cursor);
 file_var(0,category_list_reverb_cursor);
@@ -115,14 +120,24 @@ midi_synth_mode=midi_synth_mode_xg;
 midi_synth_mode_prev=-1;                //send sysex only if changed
 
 midi_channel=0;
-midi_program=0;
-midi_bank=0;
+midi_program=400000;
+midi_bank=401000;
 
 midi_first_time=1;
 
-instrument_voice=0;
-instrument_category=0;
+instrument_voice=402000;
+instrument_category=403000;
 instrument_update=1;
+
+var_offset=0;
+
+loop(16,
+	midi_program[var_offset]=0;
+	midi_bank[var_offset]=0;
+	instrument_voice[var_offset]=0;
+	instrument_category[var_offset]=0;
+	var_offset+=1;
+);
 
 category_list_voice_cursor=0;
 category_list_voice_offset=0;
@@ -2680,7 +2695,7 @@ function gui_pages() (
 	
 	//render category list
 		  
-		category_list_voice_cursor=gui_category(list_voice_category,category_list_voice_cursor,category_list_voice_offset,instrument_category);
+		category_list_voice_cursor=gui_category(list_voice_category,category_list_voice_cursor,category_list_voice_offset,instrument_category[midi_channel]);
 		
 		category_list_voice_offset=gui_category_adjust_view(category_list_voice_offset,category_list_voice_cursor,category_list_length);
 	
@@ -2735,7 +2750,7 @@ function gui_pages() (
 				
 			list_hover=0;
 				
-			instrument_list_count==instrument_voice && category_list_voice_cursor==instrument_category ? (
+			instrument_list_count==instrument_voice[midi_channel] && category_list_voice_cursor==instrument_category[midi_channel] ? (
 			
 				list_hover=1;
 				
@@ -2771,7 +2786,7 @@ function gui_pages() (
 		
 			mouse_wheel!=0 ? (
 			
-				instrument_change=instrument_voice;
+				instrument_change=instrument_voice[midi_channel];
 				
 				mouse_wheel<0 ? instrument_change+=1 : instrument_change-=1;
 				
@@ -2798,8 +2813,8 @@ function gui_pages() (
   
 				instrument_list_count==instrument_change ? (
 				
-					instrument_voice=instrument_list_count;
-					instrument_category=category_list_voice_cursor;
+					instrument_voice[midi_channel]=instrument_list_count;
+					instrument_category[midi_channel]=category_list_voice_cursor;
 					instrument_update=1;
 					
 					mode=str_getchar(list_contents,list_string_old_ptr+0);
@@ -2807,12 +2822,12 @@ function gui_pages() (
 					mode==0x58 ? midi_synth_mode=midi_synth_mode_xg;     //X
 					mode==0x54 ? midi_synth_mode=midi_synth_mode_tg300;  //T
 					
-					midi_program=parse_number_dec(list_contents,list_string_old_ptr+1,3)-1;
+					midi_program[midi_channel]=parse_number_dec(list_contents,list_string_old_ptr+1,3)-1;
 					
 					msb=parse_number_dec(list_contents,list_string_old_ptr+5,3);
 					lsb=parse_number_dec(list_contents,list_string_old_ptr+9,3);                                        
 					
-					midi_bank=msb*256+lsb;                    
+					midi_bank[midi_channel]=msb*256+lsb;                    
 				);
 				
 				instrument_list_count+=1;               
@@ -3088,9 +3103,9 @@ function gui_pages() (
 			);               
 		);
 
-		midisend(0,0xb0+midi_channel,0x00+ (midi_bank&0x7f00));      //bank change MSB
-		midisend(0,0xb0+midi_channel,0x20+((midi_bank&0x007f)<<8));  //bank change LSB
-		midisend(0,0xc0+midi_channel,midi_program);                  //program change
+		midisend(0,0xb0+midi_channel,0x00+ (midi_bank[midi_channel]&0x7f00));      //bank change MSB
+		midisend(0,0xb0+midi_channel,0x20+((midi_bank[midi_channel]&0x007f)<<8));  //bank change LSB
+		midisend(0,0xc0+midi_channel,midi_program[midi_channel]);                  //program change
 	);
 
 	effect_reverb_send[midi_channel]!=effect_reverb_send_prev[midi_channel] ? (
