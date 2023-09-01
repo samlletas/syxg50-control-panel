@@ -166,6 +166,7 @@ loop(16,
 	effect_chorus_send_prev[var_offset]=-1;
 	effect_variation_send[var_offset]=-1;
 	effect_variation_send_prev[var_offset]=-1;
+	var_offset+=1;
 );
 
 effect_chorus_send_reverb=-1;
