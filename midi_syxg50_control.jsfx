@@ -912,7 +912,7 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0004|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0050|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #01 Hall 2
@@ -923,7 +923,7 @@ reverb_params_list="
 05|0034|0060|0046|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0013|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0074|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #02 Room 1
@@ -934,7 +934,7 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0005|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #03 Room 2
@@ -945,7 +945,7 @@ reverb_params_list="
 05|0034|0060|0038|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0004|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0050|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #04 Room 3
@@ -956,7 +956,7 @@ reverb_params_list="
 05|0034|0060|0036|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0004|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0060|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #05 Stage 1
@@ -967,7 +967,7 @@ reverb_params_list="
 05|0034|0060|0054|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #06 Stage 2
@@ -978,7 +978,7 @@ reverb_params_list="
 05|0034|0060|0051|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0002|5|Rev Delay
-12|0000|0004|0002|-|Density
+12|0000|0003|0002|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #07 Plate
@@ -989,7 +989,7 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0002|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 ";
@@ -1067,7 +1067,7 @@ chorus_params_list="
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO PM Depth
 03|0001|0127|0104|-|Feedback Level
-04|0000|0127|0002|2|Delay Offset
+04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|-|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
@@ -1078,7 +1078,7 @@ chorus_params_list="
 01|0000|0127|0032|1|LFO Frequency
 02|0000|0127|0017|-|LFO PM Depth
 03|0001|0127|0026|-|Feedback Level
-04|0000|0127|0002|2|Delay Offset
+04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|-|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
@@ -1098,7 +1098,7 @@ variation_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0004|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0050|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #01 Hall 2
@@ -1109,7 +1109,7 @@ variation_params_list="
 05|0034|0060|0046|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0013|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0074|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #02 Room 1
@@ -1120,7 +1120,7 @@ variation_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0005|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #03 Room 2
@@ -1131,7 +1131,7 @@ variation_params_list="
 05|0034|0060|0038|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0004|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0050|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #04 Room 3
@@ -1142,7 +1142,7 @@ variation_params_list="
 05|0034|0060|0036|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0004|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0060|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #05 Stage 1
@@ -1153,7 +1153,7 @@ variation_params_list="
 05|0034|0060|0054|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0000|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #06 Stage 2
@@ -1164,7 +1164,7 @@ variation_params_list="
 05|0034|0060|0051|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0002|5|Rev Delay
-12|0000|0004|0002|-|Density
+12|0000|0003|0002|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #07 Plate
@@ -1175,7 +1175,7 @@ variation_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0002|5|Rev Delay
-12|0000|0004|0003|-|Density
+12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
 #08 Delay L,C,R
@@ -1346,7 +1346,7 @@ variation_params_list="
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO PM Depth
 03|0001|0127|0104|-|Feedback Level
-04|0000|0127|0002|2|Delay Offset
+04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|-|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
@@ -1357,7 +1357,7 @@ variation_params_list="
 01|0000|0127|0032|1|LFO Frequency
 02|0000|0127|0017|-|LFO PM Depth
 03|0001|0127|0026|-|Feedback Level
-04|0000|0127|0002|2|Delay Offset
+04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|-|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
@@ -1410,7 +1410,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-11|0004|0022|0006|-|Stage
+11|0006|0010|0006|-|Stage
 12|0000|0001|0001|A|Diffusion
 #29 Phaser 2
 01|0000|0127|0008|1|LFO Frequency
@@ -1422,7 +1422,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-11|0003|0011|0005|-|Stage
+11|0003|0005|0005|-|Stage
 12|0000|0001|0001|A|Diffusion
 13|0004|0124|0004|-|LFO Phase Difference
 #30 Distortion
