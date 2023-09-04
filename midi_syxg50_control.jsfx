@@ -120,15 +120,15 @@ midi_synth_mode=midi_synth_mode_xg;
 midi_synth_mode_prev=-1;                //send sysex only if changed
 
 midi_channel=0;
-midi_program=400000;
-midi_bank=401000;
+midi_program=200000;
+midi_bank=200100;
 
-instrument_voice=402000;
-instrument_category=403000;
+instrument_voice=200200;
+instrument_category=200300;
 
-effect_reverb_send=300000;
-effect_chorus_send=301000;
-effect_variation_send=302000;
+effect_reverb_send=200400;
+effect_chorus_send=200500;
+effect_variation_send=200600;
 
 var_offset=0;
 
@@ -190,7 +190,7 @@ sysex_queue=100100;
 sysex_queue_ptr=0;
 sysex_delay=0;
 
-effect_params=150000;
+effect_params=250000;
 
 var_offset=0;
 
