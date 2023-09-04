@@ -120,6 +120,8 @@ midi_synth_mode=midi_synth_mode_xg;
 midi_synth_mode_prev=-1;                //send sysex only if changed
 
 midi_channel=0;
+midi_channel_prev=-1;
+
 midi_program=200000;
 midi_bank=200100;
 
@@ -3206,6 +3208,11 @@ function gui_pages() (
 		
 	midi_channel>15 ? midi_channel=0;
 	midi_channel<0 ? midi_channel=15;
+
+	midi_channel!=midi_channel_prev ? (
+		category_list_voice_cursor=instrument_category[midi_channel];
+		midi_channel_prev=midi_channel;
+	);
 	
 	gui_pages();  
 	
