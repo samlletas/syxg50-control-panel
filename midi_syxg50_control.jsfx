@@ -2844,7 +2844,7 @@ function gui_pages() (
 
 //--effect 1 editor--------------------------------------------------------------
 
-	gui_page==1 || category_list_reverb_cursor_prev<0 ? (
+	gui_page==2 || category_list_reverb_cursor_prev<0 ? (
 	
 		category_list_reverb_cursor=gui_category(list_reverb_category,category_list_reverb_cursor,category_list_reverb_offset,category_list_reverb_cursor);
 				
@@ -2903,7 +2903,7 @@ function gui_pages() (
 	
 //--effect 2 editor--------------------------------------------------------------
 
-	gui_page==2 || category_list_chorus_cursor_prev<0 ? (
+	gui_page==3 || category_list_chorus_cursor_prev<0 ? (
 	
 		category_list_chorus_cursor=gui_category(list_chorus_category,category_list_chorus_cursor,category_list_chorus_offset,category_list_chorus_cursor);
 				   
@@ -2966,7 +2966,7 @@ function gui_pages() (
 
 //--effect 3 editor--------------------------------------------------------------
 
-	gui_page==3 || category_list_variation_cursor_prev<0 ? (
+	gui_page==4 || category_list_variation_cursor_prev<0 ? (
 	
 		category_list_variation_cursor=gui_category(list_variation_category,category_list_variation_cursor,category_list_variation_offset,category_list_variation_cursor);
 				 
@@ -3190,9 +3190,10 @@ function gui_pages() (
 	gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
 	
 	gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
-	gui_menu_item(120,10,"FX1:Reverb"   ,gui_page==1?1:0,1) ? gui_page=1;
-	gui_menu_item(210,10,"FX2:Chorus"   ,gui_page==2?1:0,1) ? gui_page=2;
-	gui_menu_item(300,10,"FX3:Variation",gui_page==3?1:0,1) ? gui_page=3;
+	gui_menu_item(120,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
+	gui_menu_item(210,10,"FX1:Reverb"   ,gui_page==2?1:0,1) ? gui_page=2;
+	gui_menu_item(300,10,"FX2:Chorus"   ,gui_page==3?1:0,1) ? gui_page=3;
+	gui_menu_item(390,10,"FX3:Variation",gui_page==4?1:0,1) ? gui_page=4;
 	
 	sprintf(caption,"MIDI Channel:%i",midi_channel+1);
 	
