@@ -80,6 +80,16 @@ loop(40*16*3,
 	var_offset+=1;
 );
  
+var_offset=0;
+
+loop(16,
+
+	file_var(0,voice_rcv_channel[var_offset]);
+	file_var(0,voice_mode[var_offset]);
+
+	var_offset+=1;
+);
+ 
 
 
 @init
@@ -207,6 +217,18 @@ loop(40*16*3,
 	var_offset+=1;
 );
 
+voice_rcv_channel=400000;
+voice_mode=400100;
+ 
+var_offset=0;
+
+loop(16,
+
+	voice_rcv_channel[var_offset]=var_offset;
+	voice_mode[var_offset]=-1;
+
+	var_offset+=1;
+);
  
 
 //-----------------------------------------------------------------------------
@@ -2122,6 +2144,34 @@ effect_value_names_11_amp_type="
 
 //-----------------------------------------------------------------------------
 
+effect_value_names_12_channel="
+000|1
+001|2
+002|3
+003|4
+004|5
+005|6
+006|7
+007|8
+008|9
+009|10
+010|11
+011|12
+012|13
+013|14
+014|15
+015|16
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_13_mono_poly="
+000|Mono
+001|Poly
+";
+
+//-----------------------------------------------------------------------------
+
 list_contents="";
 slider_value_table="";
 
@@ -2869,7 +2919,15 @@ function gui_pages() (
 
 		category_list_editor_cursor==0 ? (
 
-			slider_value_table="";
+			slider_value_table=effect_value_names_12_channel;
+			voice_rcv_channel[midi_channel]=gui_slider(voice_rcv_channel[midi_channel],0,15,"Rcv Channel",midi_channel);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x04,voice_rcv_channel[midi_channel],1);
+
+			slider_value_table=effect_value_names_13_mono_poly;
+			voice_mode[midi_channel]=gui_slider(voice_mode[midi_channel],0,1,"Mode",1);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x05,voice_mode[midi_channel],1);
+			
+			gui_slider_y+=20;
 
 		);
 		
@@ -3112,12 +3170,16 @@ function gui_pages() (
 
 		loop(16,
 
-			// restore voice
+			//restore voice
 			sysex_add_queue_multipart(channel,0x01,(midi_bank[channel]>>8)&0x7f,1);  //bank change MSB
 			sysex_add_queue_multipart(channel,0x02,(midi_bank[channel]>>0)&0x7f,1);  //bank change LSB
 			sysex_add_queue_multipart(channel,0x03,midi_program[channel],1);         //program change
 
-			// restore effect sends
+			//restore voice params
+			sysex_add_queue_multipart(channel,0x04,voice_rcv_channel[channel],1);
+			sysex_add_queue_multipart(channel,0x05,voice_mode[channel],1);
+
+			//restore effect sends
 			sysex_add_queue_multipart(channel,0x13,effect_reverb_send[channel],1);
 			sysex_add_queue_multipart(channel,0x12,effect_chorus_send[channel],1);
 			sysex_add_queue_multipart(channel,0x14,effect_variation_send[channel],1);
