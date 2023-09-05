@@ -156,9 +156,9 @@ loop(16,
 	instrument_voice[var_offset]=0;
 	instrument_category[var_offset]=0;
 
-	effect_reverb_send[var_offset]=-1;
-	effect_chorus_send[var_offset]=-1;
-	effect_variation_send[var_offset]=-1;
+	effect_reverb_send[var_offset]=40;
+	effect_chorus_send[var_offset]=40;
+	effect_variation_send[var_offset]=40;
 
 	var_offset+=1;
 );
@@ -233,11 +233,11 @@ var_offset=0;
 loop(16,
 
 	voice_rcv_channel[var_offset]=var_offset;
-	voice_mode[var_offset]=-1;
-	voice_transpose[var_offset]=-1;
-	voice_detune[var_offset]=-1;
-	voice_volume[var_offset]=-1;
-	voice_pan[var_offset]=-1;
+	voice_mode[var_offset]=1;
+	voice_transpose[var_offset]=64;
+	voice_detune[var_offset]=2048;
+	voice_volume[var_offset]=100;
+	voice_pan[var_offset]=64;
 
 	var_offset+=1;
 );
