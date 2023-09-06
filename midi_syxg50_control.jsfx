@@ -97,6 +97,9 @@ loop(16,
 	file_var(0,voice_eg_release[var_offset]);
 	file_var(0,voice_portamento_switch[var_offset]);
 	file_var(0,voice_portamento_time[var_offset]);
+	file_var(0,voice_vibrato_rate[var_offset]);
+	file_var(0,voice_vibrato_depth[var_offset]);
+	file_var(0,voice_vibrato_delay[var_offset]);
 
 	var_offset+=1;
 );
@@ -241,6 +244,9 @@ voice_eg_decay=400900;
 voice_eg_release=401000;
 voice_portamento_switch=401100;
 voice_portamento_time=401200;
+voice_vibrato_rate=401300;
+voice_vibrato_depth=401400;
+voice_vibrato_delay=401500;
  
 var_offset=0;
 
@@ -259,6 +265,9 @@ loop(16,
 	voice_eg_release[var_offset]=64;
 	voice_portamento_switch[var_offset]=0;
 	voice_portamento_time[var_offset]=0;
+	voice_vibrato_rate[var_offset]=64;
+	voice_vibrato_depth[var_offset]=64;
+	voice_vibrato_delay[var_offset]=64;
 
 	var_offset+=1;
 );
@@ -3064,6 +3073,15 @@ function gui_pages() (
 			slider_value_table="";
 			voice_portamento_time[midi_channel]=gui_slider(voice_portamento_time[midi_channel],0,127,"Portamento Time",0);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x68,voice_portamento_time[midi_channel],1);
+
+			voice_vibrato_rate[midi_channel]=gui_slider(voice_vibrato_rate[midi_channel],0,127,"Vibrato Rate",64);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x15,voice_vibrato_rate[midi_channel],1);
+
+			voice_vibrato_depth[midi_channel]=gui_slider(voice_vibrato_depth[midi_channel],0,127,"Vibrato Depth",64);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x16,voice_vibrato_depth[midi_channel],1);
+
+			voice_vibrato_delay[midi_channel]=gui_slider(voice_vibrato_delay[midi_channel],0,127,"Vibrato Delay",64);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x17,voice_vibrato_delay[midi_channel],1);
 		);
 		
 	);
@@ -3324,6 +3342,9 @@ function gui_pages() (
 			sysex_add_queue_multipart(channel,0x1c,voice_eg_release[channel],1);
 			sysex_add_queue_multipart(channel,0x67,voice_portamento_switch[channel],1);
 			sysex_add_queue_multipart(channel,0x68,voice_portamento_time[channel],1);
+			sysex_add_queue_multipart(channel,0x15,voice_vibrato_rate[channel],1);
+			sysex_add_queue_multipart(channel,0x16,voice_vibrato_depth[channel],1);
+			sysex_add_queue_multipart(channel,0x17,voice_vibrato_delay[channel],1);
 
 			//restore effect sends
 			sysex_add_queue_multipart(channel,0x13,effect_reverb_send[channel],1);
