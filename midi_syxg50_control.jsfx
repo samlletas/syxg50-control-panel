@@ -102,6 +102,7 @@ loop(16,
 	file_var(0,voice_vibrato_delay[var_offset]);
 	file_var(0,voice_bend_pitch_control[var_offset]);
 	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
+	file_var(0,voice_dry_level[var_offset]);
 
 	var_offset+=1;
 );
@@ -251,6 +252,7 @@ voice_vibrato_depth=401400;
 voice_vibrato_delay=401500;
 voice_bend_pitch_control=401600;
 voice_mw_lfo_pmod_depth=401700;
+voice_dry_level=401800;
  
 var_offset=0;
 
@@ -274,6 +276,7 @@ loop(16,
 	voice_vibrato_delay[var_offset]=64;
 	voice_bend_pitch_control[var_offset]=66;
 	voice_mw_lfo_pmod_depth[var_offset]=10;
+	voice_dry_level[var_offset]=127;
 
 	var_offset+=1;
 );
@@ -3108,6 +3111,8 @@ function gui_pages() (
 		category_list_editor_cursor==2 ? (
 
 			slider_value_table="";
+			voice_dry_level[midi_channel]=gui_slider(voice_dry_level[midi_channel],0,127,"Dry Level",127);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x11,voice_dry_level[midi_channel],1);
 		);
 	);
 
@@ -3372,6 +3377,7 @@ function gui_pages() (
 			sysex_add_queue_multipart(channel,0x17,voice_vibrato_delay[channel],1);
 			sysex_add_queue_multipart(channel,0x23,voice_bend_pitch_control[channel],1);
 			sysex_add_queue_multipart(channel,0x20,voice_mw_lfo_pmod_depth[channel],1);
+			sysex_add_queue_multipart(channel,0x11,voice_dry_level[channel],1);
 
 			//restore effect sends
 			sysex_add_queue_multipart(channel,0x13,effect_reverb_send[channel],1);
