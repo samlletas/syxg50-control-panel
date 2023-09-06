@@ -95,6 +95,8 @@ loop(16,
 	file_var(0,voice_eg_attack[var_offset]);
 	file_var(0,voice_eg_decay[var_offset]);
 	file_var(0,voice_eg_release[var_offset]);
+	file_var(0,voice_portamento_switch[var_offset]);
+	file_var(0,voice_portamento_time[var_offset]);
 
 	var_offset+=1;
 );
@@ -237,6 +239,8 @@ voice_filter_resonance=400700;
 voice_eg_attack=400800;
 voice_eg_decay=400900;
 voice_eg_release=401000;
+voice_portamento_switch=401100;
+voice_portamento_time=401200;
  
 var_offset=0;
 
@@ -253,6 +257,8 @@ loop(16,
 	voice_eg_attack[var_offset]=64;
 	voice_eg_decay[var_offset]=64;
 	voice_eg_release[var_offset]=64;
+	voice_portamento_switch[var_offset]=0;
+	voice_portamento_time[var_offset]=0;
 
 	var_offset+=1;
 );
@@ -2253,6 +2259,13 @@ effect_value_names_14_semitones="
 
 //-----------------------------------------------------------------------------
 
+effect_value_names_15_off_on="
+000|Off
+001|On
+";
+
+//-----------------------------------------------------------------------------
+
 list_contents="";
 slider_value_table="";
 
@@ -3041,6 +3054,16 @@ function gui_pages() (
 
 			voice_eg_release[midi_channel]=gui_slider(voice_eg_release[midi_channel],0,127,"EG Release",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x1c,voice_eg_release[midi_channel],1);
+
+			gui_slider_y+=20;
+
+			slider_value_table=effect_value_names_15_off_on;
+			voice_portamento_switch[midi_channel]=gui_slider(voice_portamento_switch[midi_channel],0,1,"Portamento Switch",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x67,voice_portamento_switch[midi_channel],1);
+
+			slider_value_table="";
+			voice_portamento_time[midi_channel]=gui_slider(voice_portamento_time[midi_channel],0,127,"Portamento Time",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x68,voice_portamento_time[midi_channel],1);
 		);
 		
 	);
@@ -3299,6 +3322,8 @@ function gui_pages() (
 			sysex_add_queue_multipart(channel,0x1a,voice_eg_attack[channel],1);
 			sysex_add_queue_multipart(channel,0x1b,voice_eg_decay[channel],1);
 			sysex_add_queue_multipart(channel,0x1c,voice_eg_release[channel],1);
+			sysex_add_queue_multipart(channel,0x67,voice_portamento_switch[channel],1);
+			sysex_add_queue_multipart(channel,0x68,voice_portamento_time[channel],1);
 
 			//restore effect sends
 			sysex_add_queue_multipart(channel,0x13,effect_reverb_send[channel],1);
