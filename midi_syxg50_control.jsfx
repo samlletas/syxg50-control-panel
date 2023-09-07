@@ -2,6 +2,11 @@
 //https://www.patreon.com/shiru8bit shiru@mail.ru
 //released under the CC0 terms
 
+//v2.0 07.09.23 - Default values for every parameter (obtained from the XG specifications manual);
+//                New editor tab to edit common voice parameters;
+//                Instruments are now saved per channel;
+//                When changing MIDI channel the instrument category switches accordingly;
+//                Serialize parameter values instead of slider positions to avoid float precision loss
 //v1.1 13.02.20 - MIDI channel can be changed with RMB and mouse wheel;
 //                Shift+mouse wheel to precise adjustments of the sliders;
 //                Reverb/Chorus/Variation sends are per-channel settings now;
@@ -11,13 +16,12 @@
 //v0.0 31.05.17 - Work started
 
 //Special thanks to phonymacaroni, EvilDragon
+//Changes in v2.0 release implemented by samlletas
 
 //Known bugs and issues:
 
 //- When Variation tab is visible and effect Flanger 1 or below is selected,
 //  Reaper freezes on Close project. Does not freeze on exiting the program.
-
-//- Defaults for Reverb/Chorus/Variation effect values are unknown, set to .2.
 
 
 
