@@ -14,8 +14,8 @@ The following features were added:
 
 > 💡 This modified version is **NOT** compatible with Shiru's original version due to serialization changes, if you need to open old projects then you should keep both versions installed.
 
-## Download
-TODO.
+## Download & Install
+Download the JSFX file from the [Releases](https://github.com/samlletas/syxg50-control-panel/releases) page and copy it to your Reaper effects folder.
 
 ## Development & Contributing
 
