@@ -17,6 +17,13 @@ The following features were added:
 ## Download & Install
 Download the JSFX file from the [Releases](https://github.com/samlletas/syxg50-control-panel/releases) page and copy it to your Reaper effects folder.
 
+## Usage
+
+In order to enable variation effects the Control Panel sends the `variation connection` sysex message, however this happens once during instantiation so [variation effects won't work unless the FX Chain is created in the following order](https://www.kvraudio.com/forum/viewtopic.php?p=7350751#p7350751):
+
+1. Add the S-YXG50 plugin into the FX Chain.
+1. Drag the Control Panel from the FX Browser and drop it **ABOVE** the S-YXG50 plugin.
+
 ## Development & Contributing
 
 If a new parameter needs to be serialized please add it after the previous ones to avoid breaking compatibility.
