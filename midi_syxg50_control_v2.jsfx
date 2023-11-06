@@ -138,7 +138,7 @@ gui_mouse_lmb=0;
 gui_mouse_rmb=0;
 
 gui_slider_width=256;
-gui_slider_height=10;
+gui_slider_height=12;
 gui_slider_x=0;
 gui_slider_y=0;
 gui_slider_change=0;
@@ -199,13 +199,13 @@ category_list_variation_offset=0;
 category_list_variation_cursor_prev=-1;
 
 category_list_height=0;
-category_list_width=150;
+category_list_width=180;
 category_list_length=0;
 
-list_item_height=22;
+list_item_height=26;
 list_item_width=150;
 
-menu_height=40;
+menu_height=44;
 
 mouse_prev_x=-1;
 mouse_prev_y=-1;
@@ -1553,7 +1553,7 @@ variation_params_list="
 #35 Auto Wah
 01|0000|0127|0070|1|LFO Frequency
 02|0000|0127|0056|-|LFO Depth
-03|0000|0127|0039|-|Cutoff Frequency Offset
+03|0000|0127|0039|-|Cutoff Freq Offset
 04|0010|0120|0025|-|Resonance
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0066|-|EQ Low Gain
@@ -2505,7 +2505,7 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 	
 	gfx_measurestr(slider_caption,w,h);
 	gfx_x=gui_slider_x-w-8;
-	gfx_y=gui_slider_y-4;
+	gfx_y=gui_slider_y-6;
 	
 	gfx_drawstr(slider_caption);
 	   
@@ -3032,7 +3032,7 @@ function gui_pages() (
 		
 		gui_slider_change=0;
 		
-		gui_slider_x=category_list_width+150;
+		gui_slider_x=category_list_width+170;
 		gui_slider_y=menu_height+20;          
 
 	//common parameters
@@ -3153,7 +3153,7 @@ function gui_pages() (
 		
 			gui_slider_change=force_update;
 			
-			gui_slider_x=category_list_width+150;
+			gui_slider_x=category_list_width+170;
 			gui_slider_y=menu_height+20;          
 			
 			slider_value_table="";
@@ -3212,7 +3212,7 @@ function gui_pages() (
 		
 			gui_slider_change=force_update;
 			
-			gui_slider_x=category_list_width+150;
+			gui_slider_x=category_list_width+170;
 			gui_slider_y=menu_height+20;          
 			
 			slider_value_table="";
@@ -3304,7 +3304,7 @@ function gui_pages() (
 		
 			gui_slider_change=force_update;
 			
-			gui_slider_x=category_list_width+150;
+			gui_slider_x=category_list_width+170;
 			gui_slider_y=menu_height+20;          
 			
 			slider_value_table="";
@@ -3445,9 +3445,9 @@ function gui_pages() (
 
 
 
-@gfx 600 500
+@gfx 685 585
 	
-	gfx_setfont(1,"Arial",16);
+	gfx_setfont(1,"Segoe UI",22);
 	gfx_getchar();    
 	
 	category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
@@ -3491,18 +3491,18 @@ function gui_pages() (
 	gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
 	
 	gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
-	gui_menu_item(120,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
-	gui_menu_item(210,10,"FX1:Reverb"   ,gui_page==2?1:0,1) ? gui_page=2;
-	gui_menu_item(300,10,"FX2:Chorus"   ,gui_page==3?1:0,1) ? gui_page=3;
-	gui_menu_item(390,10,"FX3:Variation",gui_page==4?1:0,1) ? gui_page=4;
+	gui_menu_item(137,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
+	gui_menu_item(242,10,"FX:Reverb"    ,gui_page==2?1:0,1) ? gui_page=2;
+	gui_menu_item(332,10,"FX:Chorus"    ,gui_page==3?1:0,1) ? gui_page=3;
+	gui_menu_item(423,10,"FX:Variation" ,gui_page==4?1:0,1) ? gui_page=4;
 	
-	sprintf(caption,"MIDI Channel:%i",midi_channel+1);
+	sprintf(caption,"Channel:%i",midi_channel+1);
 	
-	gui_menu_item(gfx_w-110,10,caption,0,1)&1 ? ( midi_channel+=1; );
+	gui_menu_item(gfx_w-87,10,caption,0,1)&1 ? ( midi_channel+=1; );
    
-	gui_menu_item(gfx_w-110,10,caption,0,1)&2 ? ( midi_channel-=1; );
+	gui_menu_item(gfx_w-87,10,caption,0,1)&2 ? ( midi_channel-=1; );
 	
-	gui_menu_item(gfx_w-110,10,caption,0,2) ? (
+	gui_menu_item(gfx_w-87,10,caption,0,2) ? (
 			
 			mouse_wheel<0 ? ( midi_channel-=1; );
 			mouse_wheel>0 ? ( midi_channel+=1; );       
