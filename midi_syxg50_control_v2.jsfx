@@ -126,12 +126,15 @@ ext_noinit=1;
 gfx_clear=-1;
 gfx_a=1;
 
-color_bg_darkest =0x001020;
-color_bg_dark    =0x204060;
-color_bg_light   =0x5070a0;
-color_bg_cursor  =0x8090ff;
-color_list_normal=0xd0f0f0;
-color_list_hover =0xf0f8f8;
+color_bg_darkest=0x151921;
+color_bg_dark   =0x1F2430;
+color_bg_light  =0x293040;
+color_bg_cursor =0xFFCC66;
+color_bg_voice  =0x4C463A;
+color_bg_slider =0x1C212B;
+color_fg_slider =0xFFD173;
+color_fg_list   =0xCCCAC2;
+color_fg_menu   =0x707A8C;
 
 gui_page=0;
 gui_mouse_lmb=0;
@@ -2458,11 +2461,11 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 
 	slider_value_width=floor((gui_slider_width*slider_value_float)+0.5);
 
-	set_color(color_bg_cursor);
+	set_color(color_fg_slider);
 	
 	gfx_rect(gui_slider_x,gui_slider_y,slider_value_width,gui_slider_height);
 	
-	set_color(color_bg_dark);
+	set_color(color_bg_slider);
 	
 	gfx_rect(gui_slider_x+slider_value_width,gui_slider_y,gui_slider_width-slider_value_width,gui_slider_height);
 	
@@ -2501,7 +2504,7 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 		slider_value > slider_max ? slider_value=slider_max;
 	);
 	  
-	set_color(color_list_normal);
+	set_color(color_fg_list);
 	
 	gfx_measurestr(slider_caption,w,h);
 	gfx_x=gui_slider_x-w-8;
@@ -2564,14 +2567,20 @@ function gui_menu_item(item_x,item_y,item_caption,item_selected,mode)
 		set_color(color_bg_dark);
 		
 		gfx_rect(gfx_x-8,gfx_y-4,w+16,h+8);
+
+		set_color(color_bg_cursor);
 		
+	) : (
+	
+		set_color(color_fg_menu);
+	
 	);
 	
 	item_selected=0;
 	
 	mouse_x>=item_x-8 && mouse_x<item_x+w+8 && mouse_y>=item_y-4 && mouse_y<item_y+h+4 ? (
 	
-		set_color(color_list_hover);
+		set_color(color_bg_cursor);
 
 		mode==0 ? (
 			gui_mouse_lmb>0 ? item_selected|=1;
@@ -2585,10 +2594,6 @@ function gui_menu_item(item_x,item_y,item_caption,item_selected,mode)
 		
 		mode==2? ( item_selected=4; );
 		
-	) : (
-	
-		set_color(color_list_normal);
-	
 	);
 	
 	gfx_drawstr(item_caption);
@@ -2657,7 +2662,7 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 									
 				);
 				
-				list_hover ? set_color(color_list_hover) : set_color(color_list_normal);                              
+				list_hover ? set_color(color_bg_cursor) : set_color(color_fg_menu);                              
 							
 				gfx_drawstr(list_item_text);
 				
@@ -2937,7 +2942,7 @@ function gui_pages() (
 			
 				list_hover=1;
 				
-				set_color(color_bg_cursor);
+				set_color(color_bg_voice);
 
 				gfx_rect(list_x,list_y,list_item_width,list_item_height);
 				
@@ -2952,7 +2957,7 @@ function gui_pages() (
 			);
 			
 		
-			list_hover ? set_color(color_list_hover) : set_color(color_list_normal);
+			list_hover ? set_color(color_bg_cursor) : set_color(color_fg_list);
 								    
 			gfx_x=list_x+8;
 			gfx_y=list_y+3;
