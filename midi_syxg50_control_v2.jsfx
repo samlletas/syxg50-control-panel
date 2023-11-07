@@ -3322,11 +3322,11 @@ function gui_pages() (
 			
 			gui_slider_y+=20;
 			
-			effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Send To Reverb",0);
+			effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Send to Reverb",0);
 			
 			gui_slider_change ? sysex_add_queue(0x020158,effect_variation_send_reverb,1);
 
-			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Send To Chorus",0);
+			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Send to Chorus",0);
 			
 			gui_slider_change ? sysex_add_queue(0x020159,effect_variation_send_chorus,1);
 						
