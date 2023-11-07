@@ -127,14 +127,14 @@ gfx_clear=-1;
 gfx_a=1;
 
 color_bg_darkest=0x151921;
+color_bg_darker =0x1C212B;
 color_bg_dark   =0x1F2430;
 color_bg_light  =0x293040;
 color_bg_cursor =0xFFCC66;
+color_bg_changed=0x5CCFE6;
 color_bg_voice  =0x4C463A;
-color_bg_slider =0x1C212B;
-color_fg_slider =0xFFD173;
-color_fg_list   =0xCCCAC2;
 color_fg_menu   =0x707A8C;
+color_fg_list   =0xCCCAC2;
 
 gui_page=0;
 gui_mouse_lmb=0;
@@ -2461,11 +2461,12 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 
 	slider_value_width=floor((gui_slider_width*slider_value_float)+0.5);
 
-	set_color(color_fg_slider);
+	slider_value == slider_def ? set_color(color_bg_cursor);
+	slider_value != slider_def ? set_color(color_bg_changed);
 	
 	gfx_rect(gui_slider_x,gui_slider_y,slider_value_width,gui_slider_height);
 	
-	set_color(color_bg_slider);
+	set_color(color_bg_darker);
 	
 	gfx_rect(gui_slider_x+slider_value_width,gui_slider_y,gui_slider_width-slider_value_width,gui_slider_height);
 	
@@ -2504,7 +2505,8 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 		slider_value > slider_max ? slider_value=slider_max;
 	);
 	  
-	set_color(color_fg_list);
+	slider_value == slider_def ? set_color(color_fg_list);
+	slider_value != slider_def ? set_color(color_bg_changed);
 	
 	gfx_measurestr(slider_caption,w,h);
 	gfx_x=gui_slider_x-w-8;
