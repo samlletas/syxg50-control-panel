@@ -332,6 +332,9 @@ list_reverb_category="
 06:Stage 1
 07:Stage 2
 08:Plate
+09:White Room
+10:Tunnel
+11:Basement
 ";
 
 //-----------------------------------------------------------------------------
@@ -1075,6 +1078,51 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 10|0001|0127|0040|-|Dry/Wet
 11|0000|0063|0002|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|-|Er/Rev Balance
+15|0001|0127|0064|-|Feedback Level
+#08 White Room
+01|0000|0069|0009|4|Reverb Time
+02|0000|0010|0005|-|Diffusion
+03|0000|0063|0011|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0046|3|LPF Cutoff
+06|0000|0037|0030|-|Width
+07|0000|0073|0050|-|Height
+08|0000|0104|0070|-|Depth
+09|0000|0030|0007|-|Wall Vary
+10|0001|0127|0040|-|Dry/Wet
+11|0000|0063|0034|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|-|Er/Rev Balance
+15|0001|0127|0064|-|Feedback Level
+#09 Tunnel
+01|0000|0069|0048|4|Reverb Time
+02|0000|0010|0006|-|Diffusion
+03|0000|0063|0019|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0044|3|LPF Cutoff
+06|0000|0037|0033|-|Width
+07|0000|0073|0052|-|Height
+08|0000|0104|0070|-|Depth
+09|0000|0030|0016|-|Wall Vary
+10|0001|0127|0040|-|Dry/Wet
+11|0000|0063|0020|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|-|Er/Rev Balance
+15|0001|0127|0064|-|Feedback Level
+#10 Basement
+01|0000|0069|0003|4|Reverb Time
+02|0000|0010|0006|-|Diffusion
+03|0000|0063|0003|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0034|3|LPF Cutoff
+06|0000|0037|0026|-|Width
+07|0000|0073|0029|-|Height
+08|0000|0104|0059|-|Depth
+09|0000|0030|0015|-|Wall Vary
+10|0001|0127|0040|-|Dry/Wet
+11|0000|0063|0032|5|Rev Delay
 12|0000|0003|0003|-|Density
 13|0001|0127|0064|-|Er/Rev Balance
 15|0001|0127|0064|-|Feedback Level
@@ -3148,6 +3196,9 @@ function gui_pages() (
 			category_list_reverb_cursor==6 ? value=0x0300;
 			category_list_reverb_cursor==7 ? value=0x0301;
 			category_list_reverb_cursor==8 ? value=0x0400;
+			category_list_reverb_cursor==9 ? value=0x1000;
+			category_list_reverb_cursor==10 ? value=0x1100;
+			category_list_reverb_cursor==11 ? value=0x1300;
 			
 			sysex_add_queue(0x020100,value,2);
 			force_update=1;
