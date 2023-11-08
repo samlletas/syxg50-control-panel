@@ -1141,7 +1141,7 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #01 Chorus 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0063|-|LFO PM Depth
@@ -1152,7 +1152,7 @@ chorus_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0058|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #02 Chorus 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0044|-|LFO PM Depth
@@ -1163,7 +1163,7 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0066|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #03 Celeste 1
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0032|-|LFO PM Depth
@@ -1174,7 +1174,7 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0127|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #04 Celeste 2
 01|0000|0127|0028|1|LFO Frequency
 02|0000|0127|0018|-|LFO PM Depth
@@ -1185,7 +1185,7 @@ chorus_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0060|-|EQ High Gain
 10|0001|0127|0084|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #05 Celeste 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0063|-|LFO PM Depth
@@ -1196,7 +1196,7 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0068|-|EQ High Gain
 10|0001|0127|0127|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #06 Flanger 1
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO PM Depth
@@ -1355,7 +1355,7 @@ variation_params_list="
 01|0001|3550|1700|-|L->R Delay
 02|0001|3550|1750|-|R->L Delay
 03|0001|0127|0111|-|Feedback Level
-04|0000|0002|0001|7|Input
+04|0000|0002|0001|9|Input
 05|0001|0010|0010|-|High Damp
 10|0001|0127|0032|-|Dry/Wet
 13|0008|0040|0028|3|EQ Low Frequency
@@ -1363,7 +1363,7 @@ variation_params_list="
 15|0028|0058|0046|3|EQ High Frequency
 16|0052|0076|0064|-|EQ High Gain
 #12 Early Ref 1
-01|0000|0005|0000|8|Type
+01|0000|0005|0000|A|Type
 02|0000|0044|0019|6|Room Size
 03|0000|0010|0005|-|Diffusion
 04|0000|0063|0016|5|Initial Delay
@@ -1375,7 +1375,7 @@ variation_params_list="
 12|0000|0003|0000|-|Density
 13|0001|0010|0010|-|High Damp
 #13 Early Ref 2
-01|0000|0005|0002|8|Type
+01|0000|0005|0002|A|Type
 02|0000|0044|0007|6|Room Size
 03|0000|0010|0010|-|Diffusion
 04|0000|0063|0016|5|Initial Delay
@@ -1420,7 +1420,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #17 Chorus 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0063|-|LFO PM Depth
@@ -1431,7 +1431,7 @@ variation_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0058|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #18 Chorus 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0044|-|LFO PM Depth
@@ -1442,7 +1442,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0066|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #19 Celeste 1
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0032|-|LFO PM Depth
@@ -1453,7 +1453,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0127|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #20 Celeste 2
 01|0000|0127|0028|1|LFO Frequency
 02|0000|0127|0018|-|LFO PM Depth
@@ -1464,7 +1464,7 @@ variation_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0060|-|EQ High Gain
 10|0001|0127|0084|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #21 Celeste 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0063|-|LFO PM Depth
@@ -1475,7 +1475,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0068|-|EQ High Gain
 10|0001|0127|0127|-|Dry/Wet
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #22 Flanger 1
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO PM Depth
@@ -1524,12 +1524,12 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|-|EQ High Gain
 14|0004|0124|0064|-|LFO Phase Difference
-15|0000|0001|0000|A|Input
+15|0000|0001|0000|C|Input
 #27 Auto Pan
 01|0000|0127|0076|1|LFO Frequency
 02|0000|0127|0080|-|L/R Depth
 03|0000|0127|0032|-|F/R Depth
-04|0000|0005|0005|9|PAN Direction
+04|0000|0005|0005|B|PAN Direction
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|-|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
@@ -1545,7 +1545,7 @@ variation_params_list="
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
 11|0006|0010|0006|-|Stage
-12|0000|0001|0001|A|Diffusion
+12|0000|0001|0001|C|Diffusion
 #29 Phaser 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0111|-|LFO Depth
@@ -1557,7 +1557,7 @@ variation_params_list="
 09|0052|0076|0064|-|EQ High Gain
 10|0001|0127|0064|-|Dry/Wet
 11|0003|0005|0005|-|Stage
-12|0000|0001|0001|A|Diffusion
+12|0000|0001|0001|C|Diffusion
 13|0004|0124|0004|-|LFO Phase Difference
 #30 Distortion
 01|0000|0127|0040|-|Drive
@@ -1583,7 +1583,7 @@ variation_params_list="
 11|0000|0127|0104|-|Clip Curve
 #32 Guitar Amp Simulator
 01|0000|0127|0039|-|Drive
-02|0000|0003|0001|B|AMP Type
+02|0000|0003|0001|D|AMP Type
 03|0034|0060|0048|3|LPF Cutoff
 04|0000|0127|0055|-|Output Level
 10|0001|0127|0127|-|Dry/Wet
@@ -2206,7 +2206,17 @@ effect_value_names_6_room_size="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_7_stereo="
+effect_value_names_7_delay_time="
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_8_reverb_wdh="
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_9_stereo="
 000|L
 001|R
 002|L&R
@@ -2214,7 +2224,7 @@ effect_value_names_7_stereo="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_8_ref_type="
+effect_value_names_10_ref_type="
 000|S-H
 001|L-H
 002|Rdm
@@ -2225,7 +2235,7 @@ effect_value_names_8_ref_type="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_9_pan_direction="
+effect_value_names_11_pan_direction="
 000|L<->R
 001|L->R
 002|L<-R
@@ -2236,14 +2246,14 @@ effect_value_names_9_pan_direction="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_10_mono_stereo="
+effect_value_names_12_mono_stereo="
 000|Mono
 001|Stereo
 ";
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_11_amp_type="
+effect_value_names_13_amp_type="
 000|Off
 001|Stack
 002|Combo
@@ -2252,7 +2262,7 @@ effect_value_names_11_amp_type="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_12_channel="
+effect_value_names_channel="
 000|1
 001|2
 002|3
@@ -2273,14 +2283,14 @@ effect_value_names_12_channel="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_13_mono_poly="
+effect_value_names_mono_poly="
 000|Mono
 001|Poly
 ";
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_14_semitones="
+effect_value_names_semitones="
 040|-24
 041|-23
 042|-22
@@ -2334,7 +2344,7 @@ effect_value_names_14_semitones="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_15_off_on="
+effect_value_names_off_on="
 000|Off
 001|On
 ";
@@ -2824,11 +2834,13 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 			slider_table==0x34 ? slider_value_table=effect_value_names_4_reverb_time;
 			slider_table==0x35 ? slider_value_table=effect_value_names_5_delay_time;
 			slider_table==0x36 ? slider_value_table=effect_value_names_6_room_size;
-			slider_table==0x37 ? slider_value_table=effect_value_names_7_stereo;
-			slider_table==0x38 ? slider_value_table=effect_value_names_8_ref_type;
-			slider_table==0x39 ? slider_value_table=effect_value_names_9_pan_direction;
-			slider_table==0x41 ? slider_value_table=effect_value_names_10_mono_stereo;
-			slider_table==0x42 ? slider_value_table=effect_value_names_11_amp_type;
+			slider_table==0x37 ? slider_value_table=effect_value_names_7_delay_time;
+			slider_table==0x38 ? slider_value_table=effect_value_names_8_reverb_wdh;
+			slider_table==0x39 ? slider_value_table=effect_value_names_9_stereo;
+			slider_table==0x41 ? slider_value_table=effect_value_names_10_ref_type;
+			slider_table==0x42 ? slider_value_table=effect_value_names_11_pan_direction;
+			slider_table==0x43 ? slider_value_table=effect_value_names_12_mono_stereo;
+			slider_table==0x44 ? slider_value_table=effect_value_names_13_amp_type;
 			
 			list_ptr+=20;
 
@@ -3094,11 +3106,11 @@ function gui_pages() (
 
 		category_list_editor_cursor==0 ? (
 
-			slider_value_table=effect_value_names_12_channel;
+			slider_value_table=effect_value_names_channel;
 			voice_rcv_channel[midi_channel]=gui_slider(voice_rcv_channel[midi_channel],0,15,"Rcv Channel",midi_channel);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x04,voice_rcv_channel[midi_channel],1);
 
-			slider_value_table=effect_value_names_13_mono_poly;
+			slider_value_table=effect_value_names_mono_poly;
 			voice_mode[midi_channel]=gui_slider(voice_mode[midi_channel],0,1,"Mode",1);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x05,voice_mode[midi_channel],1);
 
@@ -3111,7 +3123,7 @@ function gui_pages() (
 			voice_pan[midi_channel]=gui_slider(voice_pan[midi_channel],1,127,"Pan",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x0e,voice_pan[midi_channel],1);
 
-			slider_value_table=effect_value_names_14_semitones;
+			slider_value_table=effect_value_names_semitones;
 			voice_transpose[midi_channel]=gui_slider(voice_transpose[midi_channel],40,88,"Transpose",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x08,voice_transpose[midi_channel],1);
 
@@ -3138,7 +3150,7 @@ function gui_pages() (
 
 			gui_slider_y+=20;
 
-			slider_value_table=effect_value_names_15_off_on;
+			slider_value_table=effect_value_names_off_on;
 			voice_portamento_switch[midi_channel]=gui_slider(voice_portamento_switch[midi_channel],0,1,"Portamento Switch",0);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x67,voice_portamento_switch[midi_channel],1);
 
@@ -3159,7 +3171,7 @@ function gui_pages() (
 	//control parameters
 		category_list_editor_cursor==1 ? (
 
-			slider_value_table=effect_value_names_14_semitones;
+			slider_value_table=effect_value_names_semitones;
 			voice_bend_pitch_control[midi_channel]=gui_slider(voice_bend_pitch_control[midi_channel],40,88,"Pitch Bend Range",66);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x23,voice_bend_pitch_control[midi_channel],1);
 
