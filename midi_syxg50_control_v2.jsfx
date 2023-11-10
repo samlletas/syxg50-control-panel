@@ -344,11 +344,14 @@ list_chorus_category="
 01:Chorus 1
 02:Chorus 2
 03:Chorus 3
-04:Celeste 1
-05:Celeste 2
-06:Celeste 3
-07:Flanger 1
-08:Flanger 2
+04:Chorus 4
+05:Celeste 1
+06:Celeste 2
+07:Celeste 3
+08:Celeste 4
+09:Flanger 1
+10:Flanger 2
+11:Flanger 3
 ";
 
 //-----------------------------------------------------------------------------
@@ -1150,7 +1153,17 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0066|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#03 Celeste 1
+#03 Chorus 4
+01|0000|0127|0009|1|LFO Frequency
+02|0000|0127|0032|-|LFO Depth
+03|0001|0127|0069|I|Feedback Level
+04|0000|0127|0104|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#04 Celeste 1
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0032|-|LFO Depth
 03|0001|0127|0064|I|Feedback Level
@@ -1160,7 +1173,7 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#04 Celeste 2
+#05 Celeste 2
 01|0000|0127|0028|1|LFO Frequency
 02|0000|0127|0018|-|LFO Depth
 03|0001|0127|0090|I|Feedback Level
@@ -1170,7 +1183,7 @@ chorus_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0060|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#05 Celeste 3
+#06 Celeste 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
 03|0001|0127|0044|I|Feedback Level
@@ -1180,7 +1193,17 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0068|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#06 Flanger 1
+#07 Celeste 4
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0029|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0051|3|EQ High Frequency
+09|0052|0076|0066|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#08 Flanger 1
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO Depth
 03|0001|0127|0104|I|Feedback Level
@@ -1190,7 +1213,7 @@ chorus_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
 14|0004|0124|0004|G|LFO Phase Difference
-#07 Flanger 2
+#09 Flanger 2
 01|0000|0127|0032|1|LFO Frequency
 02|0000|0127|0017|-|LFO Depth
 03|0001|0127|0026|I|Feedback Level
@@ -1199,6 +1222,16 @@ chorus_params_list="
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0060|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#10 Flanger 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0109|-|LFO Depth
+03|0001|0127|0109|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
 14|0004|0124|0004|G|LFO Phase Difference
 ";
 
@@ -3964,11 +3997,14 @@ function gui_pages() (
 			category_list_chorus_cursor==1 ? value=0x4100;
 			category_list_chorus_cursor==2 ? value=0x4101;
 			category_list_chorus_cursor==3 ? value=0x4102;
-			category_list_chorus_cursor==4 ? value=0x4200;
-			category_list_chorus_cursor==5 ? value=0x4201;
-			category_list_chorus_cursor==6 ? value=0x4202;
-			category_list_chorus_cursor==7 ? value=0x4300;
-			category_list_chorus_cursor==8 ? value=0x4301;  
+			category_list_chorus_cursor==4 ? value=0x4108;
+			category_list_chorus_cursor==5 ? value=0x4200;
+			category_list_chorus_cursor==6 ? value=0x4201;
+			category_list_chorus_cursor==7 ? value=0x4202;
+			category_list_chorus_cursor==8 ? value=0x4208;
+			category_list_chorus_cursor==9 ? value=0x4300;
+			category_list_chorus_cursor==10 ? value=0x4301;  
+			category_list_chorus_cursor==11 ? value=0x4308;
 			
 			sysex_add_queue(0x020120,value,2);
 			force_update=1;
