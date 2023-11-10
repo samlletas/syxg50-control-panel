@@ -1001,8 +1001,8 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0050|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #01 Hall 2
 01|0000|0069|0025|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1011,8 +1011,8 @@ reverb_params_list="
 05|0034|0060|0046|3|LPF Cutoff
 11|0000|0063|0013|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0074|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0074|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #02 Room 1
 01|0000|0069|0005|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1021,8 +1021,8 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 11|0000|0063|0005|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #03 Room 2
 01|0000|0069|0012|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1031,8 +1031,8 @@ reverb_params_list="
 05|0034|0060|0038|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0050|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #04 Room 3
 01|0000|0069|0009|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1041,8 +1041,8 @@ reverb_params_list="
 05|0034|0060|0036|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0060|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0060|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #05 Stage 1
 01|0000|0069|0019|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1051,8 +1051,8 @@ reverb_params_list="
 05|0034|0060|0054|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #06 Stage 2
 01|0000|0069|0011|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1061,8 +1061,8 @@ reverb_params_list="
 05|0034|0060|0051|3|LPF Cutoff
 11|0000|0063|0002|5|Rev Delay
 12|0000|0003|0002|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #07 Plate
 01|0000|0069|0025|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1071,8 +1071,8 @@ reverb_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 11|0000|0063|0002|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #08 White Room
 01|0000|0069|0009|4|Reverb Time
 02|0000|0010|0005|-|Diffusion
@@ -1085,8 +1085,8 @@ reverb_params_list="
 09|0000|0030|0007|-|Wall Vary
 11|0000|0063|0034|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #09 Tunnel
 01|0000|0069|0048|4|Reverb Time
 02|0000|0010|0006|-|Diffusion
@@ -1099,8 +1099,8 @@ reverb_params_list="
 09|0000|0030|0016|-|Wall Vary
 11|0000|0063|0020|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #10 Basement
 01|0000|0069|0003|4|Reverb Time
 02|0000|0010|0006|-|Diffusion
@@ -1113,8 +1113,8 @@ reverb_params_list="
 09|0000|0030|0015|-|Wall Vary
 11|0000|0063|0032|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 ";
 
 //-----------------------------------------------------------------------------
@@ -1123,7 +1123,7 @@ chorus_params_list="
 #00 Chorus 1
 01|0000|0127|0006|1|LFO Frequency
 02|0000|0127|0054|-|LFO Depth
-03|0001|0127|0077|J|Feedback Level
+03|0001|0127|0077|I|Feedback Level
 04|0000|0127|0106|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1133,7 +1133,7 @@ chorus_params_list="
 #01 Chorus 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
-03|0001|0127|0064|J|Feedback Level
+03|0001|0127|0064|I|Feedback Level
 04|0000|0127|0030|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0062|E|EQ Low Gain
@@ -1143,7 +1143,7 @@ chorus_params_list="
 #02 Chorus 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0044|-|LFO Depth
-03|0001|0127|0064|J|Feedback Level
+03|0001|0127|0064|I|Feedback Level
 04|0000|0127|0110|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1153,7 +1153,7 @@ chorus_params_list="
 #03 Celeste 1
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0032|-|LFO Depth
-03|0001|0127|0064|J|Feedback Level
+03|0001|0127|0064|I|Feedback Level
 04|0000|0127|0000|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1163,7 +1163,7 @@ chorus_params_list="
 #04 Celeste 2
 01|0000|0127|0028|1|LFO Frequency
 02|0000|0127|0018|-|LFO Depth
-03|0001|0127|0090|J|Feedback Level
+03|0001|0127|0090|I|Feedback Level
 04|0000|0127|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0062|E|EQ Low Gain
@@ -1173,7 +1173,7 @@ chorus_params_list="
 #05 Celeste 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
-03|0001|0127|0044|J|Feedback Level
+03|0001|0127|0044|I|Feedback Level
 04|0000|0127|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1183,23 +1183,23 @@ chorus_params_list="
 #06 Flanger 1
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO Depth
-03|0001|0127|0104|J|Feedback Level
+03|0001|0127|0104|I|Feedback Level
 04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
-14|0004|0124|0004|H|LFO Phase Difference
+14|0004|0124|0004|G|LFO Phase Difference
 #07 Flanger 2
 01|0000|0127|0032|1|LFO Frequency
 02|0000|0127|0017|-|LFO Depth
-03|0001|0127|0026|J|Feedback Level
+03|0001|0127|0026|I|Feedback Level
 04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0060|E|EQ High Gain
-14|0004|0124|0004|H|LFO Phase Difference
+14|0004|0124|0004|G|LFO Phase Difference
 ";
 
 //-----------------------------------------------------------------------------
@@ -1213,8 +1213,8 @@ variation_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0050|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #01 Hall 2
 01|0000|0069|0025|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1223,8 +1223,8 @@ variation_params_list="
 05|0034|0060|0046|3|LPF Cutoff
 11|0000|0063|0013|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0074|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0074|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #02 Room 1
 01|0000|0069|0005|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1233,8 +1233,8 @@ variation_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 11|0000|0063|0005|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #03 Room 2
 01|0000|0069|0012|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1243,8 +1243,8 @@ variation_params_list="
 05|0034|0060|0038|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0050|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #04 Room 3
 01|0000|0069|0009|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1253,8 +1253,8 @@ variation_params_list="
 05|0034|0060|0036|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0060|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0060|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #05 Stage 1
 01|0000|0069|0019|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1263,8 +1263,8 @@ variation_params_list="
 05|0034|0060|0054|3|LPF Cutoff
 11|0000|0063|0000|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #06 Stage 2
 01|0000|0069|0011|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1273,8 +1273,8 @@ variation_params_list="
 05|0034|0060|0051|3|LPF Cutoff
 11|0000|0063|0002|5|Rev Delay
 12|0000|0003|0002|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #07 Plate
 01|0000|0069|0025|4|Reverb Time
 02|0000|0010|0010|-|Diffusion
@@ -1283,14 +1283,14 @@ variation_params_list="
 05|0034|0060|0049|3|LPF Cutoff
 11|0000|0063|0002|5|Rev Delay
 12|0000|0003|0003|-|Density
-13|0001|0127|0064|G|Er/Rev Balance
-15|0001|0127|0064|J|Feedback Level
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
 #08 Delay L,C,R
 01|0001|7150|3333|-|Lch Delay
 02|0001|7150|1667|-|Rch Delay
 03|0001|7150|5000|-|Cch Delay
 04|0001|7150|5000|-|Feedback Delay
-05|0001|0127|0074|J|Feedback Level
+05|0001|0127|0074|I|Feedback Level
 06|0000|0127|0100|-|Cch Level
 07|0001|0010|0010|-|High Damp
 13|0008|0040|0028|3|EQ Low Frequency
@@ -1302,7 +1302,7 @@ variation_params_list="
 02|0001|7150|3750|-|Rch Delay
 03|0001|7150|3752|-|Feedback Delay 1
 04|0001|7150|3750|-|Feedback Delay 2
-05|0001|0127|0087|J|Feedback Level
+05|0001|0127|0087|I|Feedback Level
 06|0001|0010|0010|-|High Damp
 13|0008|0040|0028|3|EQ Low Frequency
 14|0052|0076|0064|E|EQ Low Gain
@@ -1310,9 +1310,9 @@ variation_params_list="
 16|0052|0076|0064|E|EQ High Gain
 #10 Echo
 01|0001|3550|1700|-|Lch Delay 1
-02|0001|0127|0080|J|Lch Feedback Level
+02|0001|0127|0080|I|Lch Feedback Level
 03|0001|3550|1780|-|Rch Delay 1
-04|0001|0127|0080|J|Rch Feedback Level
+04|0001|0127|0080|I|Rch Feedback Level
 05|0001|0010|0010|-|High Damp
 06|0001|3550|1700|-|Lch Delay 2
 07|0001|3550|1780|-|Rch Delay 2
@@ -1324,7 +1324,7 @@ variation_params_list="
 #11 Cross Delay
 01|0001|3550|1700|-|L->R Delay
 02|0001|3550|1750|-|R->L Delay
-03|0001|0127|0111|J|Feedback Level
+03|0001|0127|0111|I|Feedback Level
 04|0000|0002|0001|9|Input Select
 05|0001|0010|0010|-|High Damp
 13|0008|0040|0028|3|EQ Low Frequency
@@ -1336,7 +1336,7 @@ variation_params_list="
 02|0000|0044|0019|6|Room Size
 03|0000|0010|0005|-|Diffusion
 04|0000|0063|0016|5|Initial Delay
-05|0001|0127|0064|J|Feedback Level
+05|0001|0127|0064|I|Feedback Level
 06|0000|0052|0000|3|HPF Cutoff
 07|0034|0060|0046|3|LPF Cutoff
 11|0000|0010|0005|-|Liveness
@@ -1347,29 +1347,29 @@ variation_params_list="
 02|0000|0044|0007|6|Room Size
 03|0000|0010|0010|-|Diffusion
 04|0000|0063|0016|5|Initial Delay
-05|0001|0127|0064|J|Feedback Level
+05|0001|0127|0064|I|Feedback Level
 06|0000|0052|0003|3|HPF Cutoff
 07|0034|0060|0046|3|LPF Cutoff
 11|0000|0010|0005|-|Liveness
 12|0000|0003|0002|-|Density
 13|0001|0010|0010|-|High Damp
 #14 Gate Reverb
-01|0000|0001|0000|I|Type
+01|0000|0001|0000|H|Type
 02|0000|0044|0015|6|Room Size
 03|0000|0010|0006|-|Diffusion
 04|0000|0063|0002|5|Initial Delay
-05|0001|0127|0064|J|Feedback Level
+05|0001|0127|0064|I|Feedback Level
 06|0000|0052|0000|3|HPF Cutoff
 07|0034|0060|0044|3|LPF Cutoff
 11|0000|0010|0004|-|Liveness
 12|0000|0003|0003|-|Density
 13|0001|0010|0010|-|High Damp
 #15 Reverse Gate
-01|0000|0001|0001|I|Type
+01|0000|0001|0001|H|Type
 02|0000|0044|0019|6|Room Size
 03|0000|0010|0008|-|Diffusion
 04|0000|0063|0003|5|Initial Delay
-05|0001|0127|0064|J|Feedback Level
+05|0001|0127|0064|I|Feedback Level
 06|0000|0052|0000|3|HPF Cutoff
 07|0034|0060|0047|3|LPF Cutoff
 11|0000|0010|0006|-|Liveness
@@ -1378,7 +1378,7 @@ variation_params_list="
 #16 Chorus 1
 01|0000|0127|0006|1|LFO Frequency
 02|0000|0127|0054|-|LFO Depth
-03|0001|0127|0077|J|Feedback Level
+03|0001|0127|0077|I|Feedback Level
 04|0000|0127|0106|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1388,7 +1388,7 @@ variation_params_list="
 #17 Chorus 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
-03|0001|0127|0064|J|Feedback Level
+03|0001|0127|0064|I|Feedback Level
 04|0000|0127|0030|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0062|E|EQ Low Gain
@@ -1398,7 +1398,7 @@ variation_params_list="
 #18 Chorus 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0044|-|LFO Depth
-03|0001|0127|0064|J|Feedback Level
+03|0001|0127|0064|I|Feedback Level
 04|0000|0127|0110|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1408,7 +1408,7 @@ variation_params_list="
 #19 Celeste 1
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0032|-|LFO Depth
-03|0001|0127|0064|J|Feedback Level
+03|0001|0127|0064|I|Feedback Level
 04|0000|0127|0000|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1418,7 +1418,7 @@ variation_params_list="
 #20 Celeste 2
 01|0000|0127|0028|1|LFO Frequency
 02|0000|0127|0018|-|LFO Depth
-03|0001|0127|0090|J|Feedback Level
+03|0001|0127|0090|I|Feedback Level
 04|0000|0127|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0062|E|EQ Low Gain
@@ -1428,7 +1428,7 @@ variation_params_list="
 #21 Celeste 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
-03|0001|0127|0044|J|Feedback Level
+03|0001|0127|0044|I|Feedback Level
 04|0000|0127|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
@@ -1438,23 +1438,23 @@ variation_params_list="
 #22 Flanger 1
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO Depth
-03|0001|0127|0104|J|Feedback Level
+03|0001|0127|0104|I|Feedback Level
 04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
-14|0004|0124|0004|H|LFO Phase Difference
+14|0004|0124|0004|G|LFO Phase Difference
 #23 Flanger 2
 01|0000|0127|0032|1|LFO Frequency
 02|0000|0127|0017|-|LFO Depth
-03|0001|0127|0026|J|Feedback Level
+03|0001|0127|0026|I|Feedback Level
 04|0000|0063|0002|2|Delay Offset
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0060|E|EQ High Gain
-14|0004|0124|0004|H|LFO Phase Difference
+14|0004|0124|0004|G|LFO Phase Difference
 #24 Symphonic
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0025|-|LFO Depth
@@ -1478,7 +1478,7 @@ variation_params_list="
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
-14|0004|0124|0064|H|LFO Phase Difference
+14|0004|0124|0064|G|LFO Phase Difference
 15|0000|0001|0000|C|Input Mode
 #27 Auto Pan
 01|0000|0127|0076|1|LFO Frequency
@@ -1493,7 +1493,7 @@ variation_params_list="
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0111|-|LFO Depth
 03|0000|0127|0074|-|Phase Shift Offset
-04|0001|0127|0104|J|Feedback Level
+04|0001|0127|0104|I|Feedback Level
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
@@ -1504,14 +1504,14 @@ variation_params_list="
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0111|-|LFO Depth
 03|0000|0127|0074|-|Phase Shift Offset
-04|0001|0127|0108|J|Feedback Level
+04|0001|0127|0108|I|Feedback Level
 06|0008|0040|0028|3|EQ Low Frequency
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
 11|0003|0005|0005|-|Stage
 12|0000|0001|0001|C|Diffusion
-13|0004|0124|0004|H|LFO Phase Difference
+13|0004|0124|0004|G|LFO Phase Difference
 #30 Distortion
 01|0000|0127|0040|-|Drive
 02|0008|0040|0020|3|EQ Low Frequency
@@ -2442,6 +2442,8 @@ effect_value_names_13_amp_type="
 003|Tube
 ";
 
+//-----------------------------------------------------------------------------
+
 effect_value_names_14_eq_gain="
 052|-12dB
 053|-11dB
@@ -2470,137 +2472,9 @@ effect_value_names_14_eq_gain="
 076|+12dB
 ";
 
-effect_value_names_15_dry_wet="
-001|D63>W
-002|D62>W
-003|D61>W
-004|D60>W
-005|D59>W
-006|D58>W
-007|D57>W
-008|D56>W
-009|D55>W
-010|D54>W
-011|D53>W
-012|D52>W
-013|D51>W
-014|D50>W
-015|D49>W
-016|D48>W
-017|D47>W
-018|D46>W
-019|D45>W
-020|D44>W
-021|D43>W
-022|D42>W
-023|D41>W
-024|D40>W
-025|D39>W
-026|D38>W
-027|D37>W
-028|D36>W
-029|D35>W
-030|D34>W
-031|D33>W
-032|D32>W
-033|D31>W
-034|D30>W
-035|D29>W
-036|D28>W
-037|D27>W
-038|D26>W
-039|D25>W
-040|D24>W
-041|D23>W
-042|D22>W
-043|D21>W
-044|D20>W
-045|D19>W
-046|D18>W
-047|D17>W
-048|D16>W
-049|D15>W
-050|D14>W
-051|D13>W
-052|D12>W
-053|D11>W
-054|D10>W
-055|D9>W
-056|D8>W
-057|D7>W
-058|D6>W
-059|D5>W
-060|D4>W
-061|D3>W
-062|D2>W
-063|D1>W
-064|D=W
-065|D<W1
-066|D<W2
-067|D<W3
-068|D<W4
-069|D<W5
-070|D<W6
-071|D<W7
-072|D<W8
-073|D<W9
-074|D<W10
-075|D<W11
-076|D<W12
-077|D<W13
-078|D<W14
-079|D<W15
-080|D<W16
-081|D<W17
-082|D<W18
-083|D<W19
-084|D<W20
-085|D<W21
-086|D<W22
-087|D<W23
-088|D<W24
-089|D<W25
-090|D<W26
-091|D<W27
-092|D<W28
-093|D<W29
-094|D<W30
-095|D<W31
-096|D<W32
-097|D<W33
-098|D<W34
-099|D<W35
-100|D<W36
-101|D<W37
-102|D<W38
-103|D<W39
-104|D<W40
-105|D<W41
-106|D<W42
-107|D<W43
-108|D<W44
-109|D<W45
-110|D<W46
-111|D<W47
-112|D<W48
-113|D<W49
-114|D<W50
-115|D<W51
-116|D<W52
-117|D<W53
-118|D<W54
-119|D<W55
-120|D<W56
-121|D<W57
-122|D<W58
-123|D<W59
-124|D<W60
-125|D<W61
-126|D<W62
-127|D<W63
-";
+//-----------------------------------------------------------------------------
 
-effect_value_names_16_er_rev="
+effect_value_names_15_er_rev="
 001|E63>R
 002|E62>R
 003|E61>R
@@ -2730,7 +2604,9 @@ effect_value_names_16_er_rev="
 127|E<R63
 ";
 
-effect_value_names_17_lfo_phase_diff="
+//-----------------------------------------------------------------------------
+
+effect_value_names_16_lfo_phase_diff="
 004|-180deg
 005|-177deg
 006|-174deg
@@ -2856,12 +2732,14 @@ effect_value_names_17_lfo_phase_diff="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_18_gate_type="
+effect_value_names_17_gate_type="
 000|A
 001|B
 ";
 
-effect_value_names_19_generic="
+//-----------------------------------------------------------------------------
+
+effect_value_names_18_generic="
 000|-64
 001|-63
 002|-62
@@ -2991,6 +2869,8 @@ effect_value_names_19_generic="
 126|+62
 127|+63
 ";
+
+//-----------------------------------------------------------------------------
 
 effect_value_names_pan="
 000|Random
@@ -3651,11 +3531,10 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 			slider_table==0x43 ? slider_value_table=effect_value_names_12_mono_stereo;
 			slider_table==0x44 ? slider_value_table=effect_value_names_13_amp_type;
 			slider_table==0x45 ? slider_value_table=effect_value_names_14_eq_gain;
-			slider_table==0x46 ? slider_value_table=effect_value_names_15_dry_wet;
-			slider_table==0x47 ? slider_value_table=effect_value_names_16_er_rev;
-			slider_table==0x48 ? slider_value_table=effect_value_names_17_lfo_phase_diff;
-			slider_table==0x49 ? slider_value_table=effect_value_names_18_gate_type;
-			slider_table==0x4A ? slider_value_table=effect_value_names_19_generic;
+			slider_table==0x46 ? slider_value_table=effect_value_names_15_er_rev;
+			slider_table==0x47 ? slider_value_table=effect_value_names_16_lfo_phase_diff;
+			slider_table==0x48 ? slider_value_table=effect_value_names_17_gate_type;
+			slider_table==0x49 ? slider_value_table=effect_value_names_18_generic;
 			
 			list_ptr+=20;
 
@@ -3939,7 +3818,7 @@ function gui_pages() (
 			voice_pan[midi_channel]=gui_slider(voice_pan[midi_channel],0,127,"Pan",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x0e,voice_pan[midi_channel],1);
 
-			slider_value_table=effect_value_names_19_generic;
+			slider_value_table=effect_value_names_18_generic;
 			voice_transpose[midi_channel]=gui_slider(voice_transpose[midi_channel],40,88,"Transpose",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x08,voice_transpose[midi_channel],1);
 
@@ -3949,7 +3828,7 @@ function gui_pages() (
 
 			gui_slider_y+=20;
 
-			slider_value_table=effect_value_names_19_generic;
+			slider_value_table=effect_value_names_18_generic;
 			voice_filter_cutoff[midi_channel]=gui_slider(voice_filter_cutoff[midi_channel],0,127,"Filter Cutoff",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x18,voice_filter_cutoff[midi_channel],1);
 
@@ -3975,7 +3854,7 @@ function gui_pages() (
 			voice_portamento_time[midi_channel]=gui_slider(voice_portamento_time[midi_channel],0,127,"Portamento Time",0);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x68,voice_portamento_time[midi_channel],1);
 
-			slider_value_table=effect_value_names_19_generic;
+			slider_value_table=effect_value_names_18_generic;
 			voice_vibrato_rate[midi_channel]=gui_slider(voice_vibrato_rate[midi_channel],0,127,"Vibrato Rate",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x15,voice_vibrato_rate[midi_channel],1);
 
@@ -3989,7 +3868,7 @@ function gui_pages() (
 	//control parameters
 		category_list_editor_cursor==1 ? (
 
-			slider_value_table=effect_value_names_19_generic;
+			slider_value_table=effect_value_names_18_generic;
 			voice_bend_pitch_control[midi_channel]=gui_slider(voice_bend_pitch_control[midi_channel],40,88,"Pitch Bend Range",66);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x23,voice_bend_pitch_control[midi_channel],1);
 
