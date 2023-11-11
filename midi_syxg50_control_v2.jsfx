@@ -77,7 +77,7 @@ file_var(0,effect_variation_pan);
 
 var_offset=0;
 
-loop(40*16*3,
+loop(42*16*3,
 
 	file_var(0,effect_params[var_offset]);
 
@@ -234,32 +234,32 @@ effect_params=250000;
 
 var_offset=0;
 
-loop(40*16*3,
+loop(42*16*3,
 
 	effect_params[var_offset]=-1;
 
 	var_offset+=1;
 );
 
-voice_rcv_channel=400000;
-voice_mode=400100;
-voice_volume=400200;
-voice_pan=400300;
-voice_transpose=400400;
-voice_detune=400500;
-voice_filter_cutoff=400600;
-voice_filter_resonance=400700;
-voice_eg_attack=400800;
-voice_eg_decay=400900;
-voice_eg_release=401000;
-voice_portamento_switch=401100;
-voice_portamento_time=401200;
-voice_vibrato_rate=401300;
-voice_vibrato_depth=401400;
-voice_vibrato_delay=401500;
-voice_bend_pitch_control=401600;
-voice_mw_lfo_pmod_depth=401700;
-voice_dry_level=401800;
+voice_rcv_channel=300000;
+voice_mode=300100;
+voice_volume=300200;
+voice_pan=300300;
+voice_transpose=300400;
+voice_detune=300500;
+voice_filter_cutoff=300600;
+voice_filter_resonance=300700;
+voice_eg_attack=300800;
+voice_eg_decay=300900;
+voice_eg_release=301000;
+voice_portamento_switch=301100;
+voice_portamento_time=301200;
+voice_vibrato_rate=301300;
+voice_vibrato_depth=301400;
+voice_vibrato_delay=301500;
+voice_bend_pitch_control=301600;
+voice_mw_lfo_pmod_depth=301700;
+voice_dry_level=301800;
  
 var_offset=0;
 
@@ -3541,7 +3541,7 @@ function gui_slider_list(list,cursor,effect_type,force_update) (
 		
 			sysex_param =parse_number_dec(list,list_ptr+0,2);
 			
-			param_offset=effect_type*40*16+entry*16+sysex_param;
+			param_offset=effect_type*42*16+entry*16+sysex_param;
 		
 			slider_min  =parse_number_dec(list,list_ptr+3,4);
 			slider_max  =parse_number_dec(list,list_ptr+8,4);
