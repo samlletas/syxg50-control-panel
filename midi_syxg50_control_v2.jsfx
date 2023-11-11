@@ -374,26 +374,32 @@ list_variation_category="
 14:Early Ref 2
 15:Gate Reverb
 16:Reverse Gate
-17:Chorus 1
-18:Chorus 2
-19:Chorus 3
-20:Celeste 1
-21:Celeste 2
-22:Celeste 3
-23:Flanger 1
-24:Flanger 2
-25:Symphonic
-26:Rotary Speaker
-27:Tremolo
-28:Auto Pan
-29:Phaser 1
-30:Phaser 2
-31:Distortion
-32:Overdrive
-33:Amp Simulator
-34:3-Band EQ (Mono)
-35:2-Band EQ (Stereo)
-36:Auto Wah
+17:Karaoke 1
+18:Karaoke 2
+19:Karaoke 3
+20:Chorus 1
+21:Chorus 2
+22:Chorus 3
+23:Chorus 4
+24:Celeste 1
+25:Celeste 2
+26:Celeste 3
+27:Celeste 4
+28:Flanger 1
+29:Flanger 2
+30:Flanger 3
+31:Symphonic
+32:Rotary Speaker
+33:Tremolo
+34:Auto Pan
+35:Phaser 1
+36:Phaser 2
+37:Distortion
+38:Overdrive
+39:Amp Simulator
+40:3-Band EQ (Mono)
+41:2-Band EQ (Stereo)
+42:Auto Wah
 ";
 
 //-----------------------------------------------------------------------------
@@ -1407,7 +1413,22 @@ variation_params_list="
 11|0000|0010|0006|-|Liveness
 12|0000|0003|0003|-|Density
 13|0001|0010|0010|-|High Damp
-#16 Chorus 1
+#16 Karaoke 1
+01|0000|0127|0063|7|Delay Time
+02|0001|0127|0097|I|Feedback Level
+03|0000|0052|0000|3|HPF Cutoff
+04|0034|0060|0048|3|LPF Cutoff
+#17 Karaoke 2
+01|0000|0127|0055|7|Delay Time
+02|0001|0127|0105|I|Feedback Level
+03|0000|0052|0000|3|HPF Cutoff
+04|0034|0060|0050|3|LPF Cutoff
+#18 Karaoke 3
+01|0000|0127|0043|7|Delay Time
+02|0001|0127|0110|I|Feedback Level
+03|0000|0052|0014|3|HPF Cutoff
+04|0034|0060|0053|3|LPF Cutoff
+#19 Chorus 1
 01|0000|0127|0006|1|LFO Frequency
 02|0000|0127|0054|-|LFO Depth
 03|0001|0127|0077|I|Feedback Level
@@ -1417,7 +1438,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#17 Chorus 2
+#20 Chorus 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
 03|0001|0127|0064|I|Feedback Level
@@ -1427,7 +1448,7 @@ variation_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0058|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#18 Chorus 3
+#21 Chorus 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0044|-|LFO Depth
 03|0001|0127|0064|I|Feedback Level
@@ -1437,7 +1458,17 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0066|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#19 Celeste 1
+#22 Chorus 4
+01|0000|0127|0009|1|LFO Frequency
+02|0000|0127|0032|-|LFO Depth
+03|0001|0127|0069|I|Feedback Level
+04|0000|0127|0104|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#23 Celeste 1
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0032|-|LFO Depth
 03|0001|0127|0064|I|Feedback Level
@@ -1447,7 +1478,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#20 Celeste 2
+#24 Celeste 2
 01|0000|0127|0028|1|LFO Frequency
 02|0000|0127|0018|-|LFO Depth
 03|0001|0127|0090|I|Feedback Level
@@ -1457,7 +1488,7 @@ variation_params_list="
 08|0028|0058|0042|3|EQ High Frequency
 09|0052|0076|0060|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#21 Celeste 3
+#25 Celeste 3
 01|0000|0127|0004|1|LFO Frequency
 02|0000|0127|0063|-|LFO Depth
 03|0001|0127|0044|I|Feedback Level
@@ -1467,7 +1498,17 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0068|E|EQ High Gain
 15|0000|0001|0000|C|Input Mode
-#22 Flanger 1
+#26 Celeste 4
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0029|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0051|3|EQ High Frequency
+09|0052|0076|0066|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#27 Flanger 1
 01|0000|0127|0014|1|LFO Frequency
 02|0000|0127|0014|-|LFO Depth
 03|0001|0127|0104|I|Feedback Level
@@ -1477,7 +1518,7 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
 14|0004|0124|0004|G|LFO Phase Difference
-#23 Flanger 2
+#28 Flanger 2
 01|0000|0127|0032|1|LFO Frequency
 02|0000|0127|0017|-|LFO Depth
 03|0001|0127|0026|I|Feedback Level
@@ -1487,7 +1528,17 @@ variation_params_list="
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0060|E|EQ High Gain
 14|0004|0124|0004|G|LFO Phase Difference
-#24 Symphonic
+#29 Flanger 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0109|-|LFO Depth
+03|0001|0127|0109|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#30 Symphonic
 01|0000|0127|0012|1|LFO Frequency
 02|0000|0127|0025|-|LFO Depth
 03|0000|0127|0016|2|Delay Offset
@@ -1495,14 +1546,14 @@ variation_params_list="
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
-#25 Rotary Speaker
+#31 Rotary Speaker
 01|0000|0127|0081|1|LFO Frequency
 02|0000|0127|0035|-|LFO Depth
 06|0008|0040|0024|3|EQ Low Frequency
 07|0052|0076|0060|E|EQ Low Gain
 08|0028|0058|0045|3|EQ High Frequency
 09|0052|0076|0054|E|EQ High Gain
-#26 Tremolo
+#32 Tremolo
 01|0000|0127|0083|1|LFO Frequency
 02|0000|0127|0056|-|AM Depth
 03|0000|0127|0000|-|PM Depth
@@ -1512,7 +1563,7 @@ variation_params_list="
 09|0052|0076|0064|E|EQ High Gain
 14|0004|0124|0064|G|LFO Phase Difference
 15|0000|0001|0000|C|Input Mode
-#27 Auto Pan
+#33 Auto Pan
 01|0000|0127|0076|1|LFO Frequency
 02|0000|0127|0080|-|L/R Depth
 03|0000|0127|0032|-|F/R Depth
@@ -1521,7 +1572,7 @@ variation_params_list="
 07|0052|0076|0064|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
-#28 Phaser 1
+#34 Phaser 1
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0111|-|LFO Depth
 03|0000|0127|0074|-|Phase Shift Offset
@@ -1532,7 +1583,7 @@ variation_params_list="
 09|0052|0076|0064|E|EQ High Gain
 11|0006|0010|0006|-|Stage
 12|0000|0001|0001|C|Diffusion
-#29 Phaser 2
+#35 Phaser 2
 01|0000|0127|0008|1|LFO Frequency
 02|0000|0127|0111|-|LFO Depth
 03|0000|0127|0074|-|Phase Shift Offset
@@ -1544,7 +1595,7 @@ variation_params_list="
 11|0003|0005|0005|-|Stage
 12|0000|0001|0001|C|Diffusion
 13|0004|0124|0004|G|LFO Phase Difference
-#30 Distortion
+#36 Distortion
 01|0000|0127|0040|-|Drive
 02|0008|0040|0020|3|EQ Low Frequency
 03|0052|0076|0072|E|EQ Low Gain
@@ -1554,7 +1605,7 @@ variation_params_list="
 08|0052|0076|0074|E|EQ Mid Gain
 09|0010|0120|0010|-|EQ Mid Width
 11|0000|0127|0120|-|Clip Curve
-#31 Overdrive
+#37 Overdrive
 01|0000|0127|0029|-|Drive
 02|0008|0040|0024|3|EQ Low Frequency
 03|0052|0076|0068|E|EQ Low Gain
@@ -1564,13 +1615,13 @@ variation_params_list="
 08|0052|0076|0072|E|EQ Mid Gain
 09|0010|0120|0010|-|EQ Mid Width
 11|0000|0127|0104|-|Clip Curve
-#32 Guitar Amp Simulator
+#38 Guitar Amp Simulator
 01|0000|0127|0039|-|Drive
 02|0000|0003|0001|D|AMP Type
 03|0034|0060|0048|3|LPF Cutoff
 04|0000|0127|0055|-|Output Level
 11|0000|0127|0112|-|Clip Curve
-#33 3-Band EQ
+#39 3-Band EQ
 01|0052|0076|0070|E|EQ Low Gain
 02|0028|0054|0034|3|EQ Mid Frequency
 03|0052|0076|0060|E|EQ Mid Gain
@@ -1578,12 +1629,12 @@ variation_params_list="
 05|0052|0076|0070|E|EQ High Gain
 06|0008|0040|0028|3|EQ Low Frequency
 07|0028|0058|0046|3|EQ High Frequency
-#34 2-Band EQ
+#40 2-Band EQ
 01|0008|0040|0028|3|EQ Low Frequency
 02|0052|0076|0070|E|EQ Low Gain
 03|0028|0058|0046|3|EQ High Frequency
 04|0052|0076|0070|E|EQ High Gain
-#35 Auto Wah
+#41 Auto Wah
 01|0000|0127|0070|1|LFO Frequency
 02|0000|0127|0056|-|LFO Depth
 03|0000|0127|0039|-|Cutoff Freq Offset
@@ -4076,26 +4127,32 @@ function gui_pages() (
 			category_list_variation_cursor==14 ? value=0x0901;
 			category_list_variation_cursor==15 ? value=0x0a00;
 			category_list_variation_cursor==16 ? value=0x0b00;
-			category_list_variation_cursor==17 ? value=0x4100;
-			category_list_variation_cursor==18 ? value=0x4101;
-			category_list_variation_cursor==19 ? value=0x4102;
-			category_list_variation_cursor==20 ? value=0x4200;
-			category_list_variation_cursor==21 ? value=0x4201;
-			category_list_variation_cursor==22 ? value=0x4202;
-			category_list_variation_cursor==23 ? value=0x4300;
-			category_list_variation_cursor==24 ? value=0x4301;
-			category_list_variation_cursor==25 ? value=0x4400;
-			category_list_variation_cursor==26 ? value=0x4500;
-			category_list_variation_cursor==27 ? value=0x4600;
-			category_list_variation_cursor==28 ? value=0x4700;
-			category_list_variation_cursor==29 ? value=0x4800;
-			category_list_variation_cursor==30 ? value=0x4808;
-			category_list_variation_cursor==31 ? value=0x4900;
-			category_list_variation_cursor==32 ? value=0x4a00;
-			category_list_variation_cursor==33 ? value=0x4b00;
-			category_list_variation_cursor==34 ? value=0x4c00;
-			category_list_variation_cursor==35 ? value=0x4d00;
-			category_list_variation_cursor==36 ? value=0x4e00;
+			category_list_variation_cursor==17 ? value=0x1400;
+			category_list_variation_cursor==18 ? value=0x1401;
+			category_list_variation_cursor==19 ? value=0x1402;
+			category_list_variation_cursor==20 ? value=0x4100;
+			category_list_variation_cursor==21 ? value=0x4101;
+			category_list_variation_cursor==22 ? value=0x4102;
+			category_list_variation_cursor==23 ? value=0x4108;
+			category_list_variation_cursor==24 ? value=0x4200;
+			category_list_variation_cursor==25 ? value=0x4201;
+			category_list_variation_cursor==26 ? value=0x4202;
+			category_list_variation_cursor==27 ? value=0x4208;
+			category_list_variation_cursor==28 ? value=0x4300;
+			category_list_variation_cursor==29 ? value=0x4301;
+			category_list_variation_cursor==30 ? value=0x4308;
+			category_list_variation_cursor==31 ? value=0x4400;
+			category_list_variation_cursor==32 ? value=0x4500;
+			category_list_variation_cursor==33 ? value=0x4600;
+			category_list_variation_cursor==34 ? value=0x4700;
+			category_list_variation_cursor==35 ? value=0x4800;
+			category_list_variation_cursor==36 ? value=0x4808;
+			category_list_variation_cursor==37 ? value=0x4900;
+			category_list_variation_cursor==38 ? value=0x4a00;
+			category_list_variation_cursor==39 ? value=0x4b00;
+			category_list_variation_cursor==40 ? value=0x4c00;
+			category_list_variation_cursor==41 ? value=0x4d00;
+			category_list_variation_cursor==42 ? value=0x4e00;
 			
 			sysex_add_queue(0x020140,value,2);          
 			force_update=1;
