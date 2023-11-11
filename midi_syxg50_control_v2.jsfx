@@ -394,7 +394,6 @@ list_variation_category="
 34:3-Band EQ (Mono)
 35:2-Band EQ (Stereo)
 36:Auto Wah
-37:Thru
 ";
 
 //-----------------------------------------------------------------------------
@@ -1593,7 +1592,6 @@ variation_params_list="
 07|0052|0076|0066|E|EQ Low Gain
 08|0028|0058|0046|3|EQ High Frequency
 09|0052|0076|0064|E|EQ High Gain
-#36 Thru
 ";
 
 //-----------------------------------------------------------------------------
@@ -4098,7 +4096,6 @@ function gui_pages() (
 			category_list_variation_cursor==34 ? value=0x4c00;
 			category_list_variation_cursor==35 ? value=0x4d00;
 			category_list_variation_cursor==36 ? value=0x4e00;
-			category_list_variation_cursor==37 ? value=0x4000;
 			
 			sysex_add_queue(0x020140,value,2);          
 			force_update=1;
