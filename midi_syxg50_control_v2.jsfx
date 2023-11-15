@@ -2,6 +2,13 @@
 //https://www.patreon.com/shiru8bit shiru@mail.ru
 //released under the CC0 terms
 
+//v2.1 15.11.23 - New UI colors and font;
+//                Highlight user-changed parameters;
+//                Improve mouse scroll wheel behaviour on sliders;
+//                Add missing reverb, chorus and variation effects;
+//                Add missing effect data value tables;
+//                Remove "Dry/Wet" parameter since it has no effect when variation connection = system;
+//                Remove "Thru" effect
 //v2.0 07.09.23 - Default values for every parameter (obtained from the XG specifications manual);
 //                New editor tab to edit common voice parameters;
 //                Instruments are now saved per channel;
@@ -16,7 +23,7 @@
 //v0.0 31.05.17 - Work started
 
 //Special thanks to phonymacaroni, EvilDragon
-//Changes in v2.0 release implemented by samlletas
+//Changes in v2 release implemented by samlletas
 
 //Known bugs and issues:
 
