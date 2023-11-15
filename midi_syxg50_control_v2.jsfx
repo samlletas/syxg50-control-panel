@@ -3303,8 +3303,8 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 	
 		mouse_wheel!=0 ? (
 
-					!(mouse_cap & CAP_SHIFT) ? (
-						step_size=floor(((slider_max-slider_min)/8)+0.5);
+					(slider_max-slider_min>127) ? (
+						step_size=floor(((slider_max-slider_min)/64)+0.5);
 						slider_value+=sign(mouse_wheel)*max(step_size, 1);
 					) : (
 						slider_value+=sign(mouse_wheel);
