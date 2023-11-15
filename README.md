@@ -24,6 +24,20 @@ In order to enable variation effects the Control Panel sends the `variation conn
 1. Add the S-YXG50 plugin into the FX Chain.
 1. Drag the Control Panel from the FX Browser and drop it **ABOVE** the S-YXG50 plugin.
 
+### Mouse Controls
+
+`Sliders`
+
+- Left click to change value.
+- Right click to reset to default value.
+- Scroll wheel to change value by small increments/decrements.
+
+`Channel`
+
+- Left click to select next channel.
+- Right click to select previous channel.
+- Scroll wheel to select next/previous channel.
+
 ## Development & Contributing
 
 If a new parameter needs to be serialized please add it after the previous ones to avoid breaking compatibility.
