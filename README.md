@@ -9,7 +9,11 @@ The following features were added:
 - Default values for every parameter (obtained from the [XG Specifications manual](http://www.jososoft.dk/yamaha/pdf/XGspec2-00e.pdf)).
 - A new editor tab that allows the user to edit common voice parameters (filter, envelope, vibrato, portamento, etc).
 - Instruments are now saved per channel (parameters from the editor tab are saved per channel as well).
-- When changing MIDI channel the instrument category switches accordingly.
+- Adds the few missing reverb, chorus and variation effects.
+- UI improvements:
+     - New UI colors and bigger font for increased readability.
+     - Highlight user-changed parameters.
+     - When changing channel the instrument category switches accordingly.
 - Serialize parameter values instead of slider positions to avoid inconsistencies due to float precision loss.
 
 > 💡 This modified version is **NOT** compatible with Shiru's original version due to serialization changes, if you need to open old projects then you should keep both versions installed.
