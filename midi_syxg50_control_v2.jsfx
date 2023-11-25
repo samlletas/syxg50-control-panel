@@ -2,6 +2,7 @@
 //https://www.patreon.com/shiru8bit shiru@mail.ru
 //released under the CC0 terms
 
+//v2.2 27.11.23 - Change UI colors to neutral tones
 //v2.1 15.11.23 - New UI colors and font;
 //                Highlight user-changed parameters;
 //                Improve mouse scroll wheel behaviour on sliders;
@@ -133,15 +134,15 @@ ext_noinit=1;
 gfx_clear=-1;
 gfx_a=1;
 
-color_bg_darkest=0x151921;
-color_bg_darker =0x1C212B;
-color_bg_dark   =0x1F2430;
-color_bg_light  =0x293040;
+color_bg_darkest=0x1A1A1A;
+color_bg_darker =0x212121;
+color_bg_dark   =0x262626;
+color_bg_light  =0x333333;
 color_bg_cursor =0xFFCC66;
 color_bg_changed=0x5CCFE6;
-color_bg_voice  =0x4C463A;
-color_fg_menu   =0x707A8C;
-color_fg_list   =0xCCCAC2;
+color_bg_voice  =0x514631;
+color_fg_menu   =0x555555;
+color_fg_list   =0xD4D4D4;
 
 gui_page=0;
 gui_mouse_lmb=0;
