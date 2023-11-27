@@ -1,7 +1,7 @@
 # Yamaha S-YXG50 Control Panel
 A [Reaper](https://www.reaper.fm/) JSFX midi effect that allows to control the Yamaha S-YXG50 synth, this effect is a modified version of [Shiru's control panel](https://www.kvraudio.com/forum/viewtopic.php?t=486318).
 
-![Screenshot](https://github.com/samlletas/syxg50-control-panel/assets/7089504/aa2eb9a3-c4a2-42ce-ba76-2adfe4173dd5)
+![Screenshot](https://github.com/samlletas/syxg50-control-panel/assets/7089504/37988d9c-2f44-4c5a-8670-59b271415121)
 
 ## Description
 The following features were added:
