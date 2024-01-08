@@ -44,83 +44,6 @@ out_pin:none
 
 
 
-@serialize
-
-file_var(0,gui_page);
-file_var(0,midi_channel);
-
-var_offset=0;
-
-loop(16,
-
-	file_var(0,midi_program[var_offset]);
-	file_var(0,midi_bank[var_offset]);
-	file_var(0,instrument_voice[var_offset]);
-	file_var(0,instrument_category[var_offset]);
-
-	file_var(0,effect_reverb_send[var_offset]);
-	file_var(0,effect_chorus_send[var_offset]);
-	file_var(0,effect_variation_send[var_offset]);
-
-	var_offset+=1;
-);
-
-file_var(0,category_list_voice_cursor);
-file_var(0,category_list_editor_cursor);
-file_var(0,category_list_reverb_cursor);
-file_var(0,category_list_chorus_cursor);
-file_var(0,category_list_variation_cursor);
-
-file_var(0,effect_chorus_send_reverb);
-file_var(0,effect_variation_send_reverb);
-file_var(0,effect_variation_send_chorus);
-
-file_var(0,effect_reverb_return);
-file_var(0,effect_chorus_return);
-file_var(0,effect_variation_return);
-
-file_var(0,effect_reverb_pan);
-file_var(0,effect_chorus_pan);
-file_var(0,effect_variation_pan);
-
-var_offset=0;
-
-loop(42*16*3,
-
-	file_var(0,effect_params[var_offset]);
-
-	var_offset+=1;
-);
- 
-var_offset=0;
-
-loop(16,
-
-	file_var(0,voice_rcv_channel[var_offset]);
-	file_var(0,voice_mode[var_offset]);
-	file_var(0,voice_volume[var_offset]);
-	file_var(0,voice_pan[var_offset]);
-	file_var(0,voice_transpose[var_offset]);
-	file_var(0,voice_detune[var_offset]);
-	file_var(0,voice_filter_cutoff[var_offset]);
-	file_var(0,voice_filter_resonance[var_offset]);
-	file_var(0,voice_eg_attack[var_offset]);
-	file_var(0,voice_eg_decay[var_offset]);
-	file_var(0,voice_eg_release[var_offset]);
-	file_var(0,voice_portamento_switch[var_offset]);
-	file_var(0,voice_portamento_time[var_offset]);
-	file_var(0,voice_vibrato_rate[var_offset]);
-	file_var(0,voice_vibrato_depth[var_offset]);
-	file_var(0,voice_vibrato_delay[var_offset]);
-	file_var(0,voice_bend_pitch_control[var_offset]);
-	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
-	file_var(0,voice_dry_level[var_offset]);
-
-	var_offset+=1;
-);
- 
-
-
 @init
 
 CAP_LMB=0x01;
@@ -4210,6 +4133,83 @@ function gui_pages() (
 		category_list_variation_cursor_prev=category_list_variation_cursor;
 		
 	);
+);
+
+
+
+@serialize
+
+file_var(0,gui_page);
+file_var(0,midi_channel);
+
+var_offset=0;
+
+loop(16,
+
+	file_var(0,midi_program[var_offset]);
+	file_var(0,midi_bank[var_offset]);
+	file_var(0,instrument_voice[var_offset]);
+	file_var(0,instrument_category[var_offset]);
+
+	file_var(0,effect_reverb_send[var_offset]);
+	file_var(0,effect_chorus_send[var_offset]);
+	file_var(0,effect_variation_send[var_offset]);
+
+	var_offset+=1;
+);
+
+file_var(0,category_list_voice_cursor);
+file_var(0,category_list_editor_cursor);
+file_var(0,category_list_reverb_cursor);
+file_var(0,category_list_chorus_cursor);
+file_var(0,category_list_variation_cursor);
+
+file_var(0,effect_chorus_send_reverb);
+file_var(0,effect_variation_send_reverb);
+file_var(0,effect_variation_send_chorus);
+
+file_var(0,effect_reverb_return);
+file_var(0,effect_chorus_return);
+file_var(0,effect_variation_return);
+
+file_var(0,effect_reverb_pan);
+file_var(0,effect_chorus_pan);
+file_var(0,effect_variation_pan);
+
+var_offset=0;
+
+loop(42*16*3,
+
+	file_var(0,effect_params[var_offset]);
+
+	var_offset+=1;
+);
+ 
+var_offset=0;
+
+loop(16,
+
+	file_var(0,voice_rcv_channel[var_offset]);
+	file_var(0,voice_mode[var_offset]);
+	file_var(0,voice_volume[var_offset]);
+	file_var(0,voice_pan[var_offset]);
+	file_var(0,voice_transpose[var_offset]);
+	file_var(0,voice_detune[var_offset]);
+	file_var(0,voice_filter_cutoff[var_offset]);
+	file_var(0,voice_filter_resonance[var_offset]);
+	file_var(0,voice_eg_attack[var_offset]);
+	file_var(0,voice_eg_decay[var_offset]);
+	file_var(0,voice_eg_release[var_offset]);
+	file_var(0,voice_portamento_switch[var_offset]);
+	file_var(0,voice_portamento_time[var_offset]);
+	file_var(0,voice_vibrato_rate[var_offset]);
+	file_var(0,voice_vibrato_depth[var_offset]);
+	file_var(0,voice_vibrato_delay[var_offset]);
+	file_var(0,voice_bend_pitch_control[var_offset]);
+	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
+	file_var(0,voice_dry_level[var_offset]);
+
+	var_offset+=1;
 );
 
 
