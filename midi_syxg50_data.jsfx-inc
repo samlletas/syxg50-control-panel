@@ -1,0 +1,2834 @@
+@init
+
+//-----------------------------------------------------------------------------
+
+list_voice_category="
+00:Piano
+01:Chromatic Percussion
+02:Organ
+03:Guitar
+04:Bass
+05:Strings
+06:Ensemble
+07:Brass
+08:Reed
+09:Pipe
+10:Ethnic
+11:Synth Lead
+12:Synth Pad
+13:Synth Effects
+14:Sound Effects
+15:Voice Effects
+16:Percussive
+17:Drum kits
+";
+
+//-----------------------------------------------------------------------------
+
+list_editor_category="
+00:Common
+01:Control
+02:Misc
+";
+
+//-----------------------------------------------------------------------------
+
+list_reverb_category="
+00:No Effect
+01:Hall 1
+02:Hall 2
+03:Room 1
+04:Room 2
+05:Room 3
+06:Stage 1
+07:Stage 2
+08:Plate
+09:White Room
+10:Tunnel
+11:Basement
+";
+
+//-----------------------------------------------------------------------------
+
+list_chorus_category="
+00:No Effect
+01:Chorus 1
+02:Chorus 2
+03:Chorus 3
+04:Chorus 4
+05:Celeste 1
+06:Celeste 2
+07:Celeste 3
+08:Celeste 4
+09:Flanger 1
+10:Flanger 2
+11:Flanger 3
+";
+
+//-----------------------------------------------------------------------------
+
+list_variation_category="
+00:No Effect
+01:Hall 1
+02:Hall 2
+03:Room 1
+04:Room 2
+05:Room 3
+06:Stage 1
+07:Stage 2
+08:Plate
+09:Delay L,C,R
+10:Delay L,R
+11:Echo
+12:Cross Delay
+13:Early Ref 1
+14:Early Ref 2
+15:Gate Reverb
+16:Reverse Gate
+17:Karaoke 1
+18:Karaoke 2
+19:Karaoke 3
+20:Chorus 1
+21:Chorus 2
+22:Chorus 3
+23:Chorus 4
+24:Celeste 1
+25:Celeste 2
+26:Celeste 3
+27:Celeste 4
+28:Flanger 1
+29:Flanger 2
+30:Flanger 3
+31:Symphonic
+32:Rotary Speaker
+33:Tremolo
+34:Auto Pan
+35:Phaser 1
+36:Phaser 2
+37:Distortion
+38:Overdrive
+39:Amp Simulator
+40:3-Band EQ (Mono)
+41:2-Band EQ (Stereo)
+42:Auto Wah
+";
+
+//-----------------------------------------------------------------------------
+//X (XG) or T (TG300), program:bank msb:bank lsb, patch name
+//numbers are decimal
+
+list_contents_piano="
+X001:000:000 GrandPno
+X001:000:001 GrndPnoK
+X001:000:018 MelloGrP
+X001:000:040 PianoStr
+X001:000:041 Dream
+X002:000:000 BritePno
+X002:000:001 BritPnoK
+X003:000:000 E.Grand
+X003:000:001 ElGrPnoK
+X003:000:032 Det.CP80
+X003:000:040 ElGrPno1
+X003:000:041 ElGrPno2
+X004:000:000 HnkyTonk
+X004:000:001 HnkyTnkK
+X005:000:000 E.Piano1
+X005:000:001 El.Pno1K
+X005:000:018 MelloEP1
+X005:000:032 Chor.EP1
+X005:000:040 HardEl.P
+X005:000:045 VX El.P1
+X005:000:064 60sEl.P
+X006:000:000 E.Piano2
+X006:000:001 El.Pno2K
+X006:000:032 Chor.EP2
+X006:000:033 DX Hard
+X006:000:034 DXLegend
+X006:000:040 DX Phase
+X006:000:041 DX+Analg
+X006:000:042 DXKotoEP
+X006:000:045 VX El.P2
+X007:000:000 Harpsi.
+X007:000:001 Harpsi.K
+X007:000:025 Harpsi.2
+X007:000:035 Harpsi.3
+X008:000:000 Clavi.
+X008:000:001 Clavi. K
+X008:000:027 ClaviWah
+X008:000:064 PulseClv
+X008:000:065 PierceCl
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_chromatic_percussion="
+X009:000:000 Celesta
+X010:000:000 Glocken
+X011:000:000 MusicBox
+X011:000:064 Orgel
+X012:000:000 Vibes
+X012:000:001 VibesK
+X012:000:045 HardVibe
+X013:000:000 Marimba
+X013:000:001 MarimbaK
+X013:000:064 SineMrmb
+X013:000:097 Balafon2
+X013:000:098 Log Drum
+X014:000:000 Xylophon
+X015:000:000 TubulBel
+X015:000:096 ChrchBel
+X015:000:097 Carillon
+X016:000:000 Dulcimer
+X016:000:035 Dulcimr2
+X016:000:096 Cimbalom
+X016:000:097 Santur
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_organ="
+X017:000:000 DrawOrgn
+X017:000:032 DetDrwOr
+X017:000:033 60sDrOr1
+X017:000:034 60sDrOr2
+X017:000:035 70sDrOr1
+X017:000:036 DrawOrg2
+X017:000:037 60sDrOr3
+X017:000:038 EvenBar
+X017:000:040 16+2^2/3
+X017:000:064 Organ Ba
+X017:000:065 70sDrOr2
+X017:000:066 CheezOrg
+X017:000:067 DrawOrg3
+X018:000:000 PercOrgn
+X018:000:024 70sPcOr1
+X018:000:032 DetPrcOr
+X018:000:033 LiteOrg
+X018:000:037 PercOrg2
+X019:000:000 RockOrgn
+X019:000:064 RotaryOr
+X019:000:065 SloRotar
+X019:000:066 FstRotar
+X020:000:000 ChrchOrg
+X020:000:032 ChurOrg3
+X020:000:035 ChurOrg2
+X020:000:040 NotreDam
+X020:000:064 OrgFlute
+X020:000:065 TrmOrgFl
+X021:000:000 ReedOrgn
+X021:000:040 Puff Org
+X022:000:000 Acordion
+X022:000:032 AccordIt
+X023:000:000 Harmnica
+X023:000:032 Harmo 2
+X024:000:000 TangoAcd
+X024:000:064 TngoAcd2
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_guitar="
+X025:000:000 NylonGtr
+X025:000:016 NylonGt2
+X025:000:025 NylonGt3
+X025:000:043 VelGtHrm
+X025:000:096 Ukulele
+X026:000:000 SteelGtr
+X026:000:016 SteelGt2
+X026:000:035 12StrGtr
+X026:000:040 Nyln&Stl
+X026:000:041 Stl&Body
+X026:000:096 Mandolin
+X027:000:000 Jazz Gtr
+X027:000:018 MelloGtr
+X027:000:032 JazzAmp
+X028:000:000 CleanGtr
+X028:000:032 ChorusGt
+X029:000:000 Mute.Gtr
+X029:000:040 FunkGtr1
+X029:000:041 MuteStlG
+X029:000:043 FunkGtr2
+X029:000:045 Jazz Man
+X030:000:000 Ovrdrive
+X030:000:043 Gt.Pinch
+X031:000:000 Dist.Gtr
+X031:000:040 FeedbkGt
+X031:000:041 FeedbGt2
+X032:000:000 GtrHarmo
+X032:000:065 GtFeedbk
+X032:000:066 GtrHrmo2
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_bass="
+X033:000:000 Aco.Bass
+X033:000:040 JazzRthm
+X033:000:045 VXUprght
+X034:000:000 FngrBass
+X034:000:018 FingrDrk
+X034:000:027 FlangeBa
+X034:000:040 Ba&DstEG
+X034:000:043 FngrSlap
+X034:000:045 FngBass2
+X034:000:065 ModAlem
+X035:000:000 PickBass
+X035:000:028 MutePkBa
+X036:000:000 Fretless
+X036:000:032 Fretles2
+X036:000:033 Fretles3
+X036:000:034 Fretles4
+X036:000:096 SynFretl
+X036:000:097 Smooth
+X037:000:000 SlapBas1
+X037:000:027 ResoSlap
+X037:000:032 PunchThm
+X038:000:000 SlapBas2
+X038:000:043 VeloSlap
+X039:000:000 SynBass1
+X039:000:018 SynBa1Dk
+X039:000:020 FastResB
+X039:000:024 AcidBass
+X039:000:035 Clv Bass
+X039:000:040 TeknoBa
+X039:000:064 Oscar
+X039:000:065 SqrBass
+X039:000:066 RubberBa
+X039:000:096 Hammer
+X040:000:000 SynBass2
+X040:000:006 MelloSB1
+X040:000:012 Seq Bass
+X040:000:018 ClkSynBa
+X040:000:019 SynBa2Dk
+X040:000:032 SmthBa 2
+X040:000:040 ModulrBa
+X040:000:041 DX Bass
+X040:000:064 X WireBa
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_strings="
+X041:000:000 Violin
+X041:000:008 SlowVln
+X042:000:000 Viola
+X043:000:000 Cello
+X044:000:000 Contrabs
+X045:000:000 Trem.Str
+X045:000:008 SlowTrStr
+X045:000:040 Susp Str
+X046:000:000 Pizz.Str
+X047:000:000 Harp
+X047:000:040 YangChin
+X048:000:000 Timpani
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_ensemble="
+X049:000:000 Strings1
+X049:000:003 S.Strngs
+X049:000:008 SlowStr
+X049:000:024 ArcoStr
+X049:000:035 60sStrng
+X049:000:040 Orchestr
+X049:000:041 Orchstr2
+X049:000:042 TremOrch
+X049:000:045 VeloStr
+X050:000:000 Strings2
+X050:000:003 S.SlwStr
+X050:000:008 LegatoSt
+X050:000:040 Warm Str
+X050:000:041 Kingdom
+X050:000:064 70s Str
+X050:000:065 Str Ens3
+X051:000:000 Syn.Str1
+X051:000:027 ResoStr
+X051:000:064 Syn Str4
+X051:000:065 SS Str
+X052:000:000 Syn.Str2
+X053:000:000 ChoirAah
+X053:000:003 S.Choir
+X053:000:016 Ch.Aahs2
+X053:000:032 MelChoir
+X053:000:040 ChoirStr
+X054:000:000 VoiceOoh
+X055:000:000 SynVoice
+X055:000:040 SynVox2
+X055:000:041 Choral
+X055:000:064 AnaVoice
+X056:000:000 Orch.Hit
+X056:000:035 OrchHit2
+X056:000:064 Impact
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_brass="
+X057:000:000 Trumpet
+X057:000:016 Trumpet2
+X057:000:017 BriteTrp
+X057:000:032 WarmTrp
+X058:000:000 Trombone
+X058:000:018 Trmbone2
+X059:000:000 Tuba
+X059:000:016 Tuba 2
+X060:000:000 Mute.Trp
+X061:000:000 Fr.Horn
+X061:000:006 FrHrSolo
+X061:000:032 FrHorn2
+X061:000:037 HornOrch
+X062:000:000 BrasSect
+X062:000:035 Tp&TbSec
+X062:000:040 BrssSec2
+X062:000:041 HiBrass
+X062:000:042 MelloBrs
+X063:000:000 SynBras1
+X063:000:012 QuackBr
+X063:000:020 RezSynBr
+X063:000:024 PolyBrss
+X063:000:027 SynBras3
+X063:000:032 JumpBrss
+X063:000:045 AnaVelBr
+X063:000:064 AnaBrss1
+X064:000:000 SynBras2
+X064:000:018 Soft Brs
+X064:000:040 SynBras4
+X064:000:041 ChorBrss
+X064:000:045 VelBras2
+X064:000:064 AnaBras2
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_reed="
+X065:000:000 SprnoSax
+X066:000:000 Alto Sax
+X066:000:040 Sax Sect
+X066:000:043 HyprAlto
+X067:000:000 TenorSax
+X067:000:040 BrthTnSx
+X067:000:041 SoftTenr
+X067:000:064 TnrSax 2
+X068:000:000 Bari.Sax
+X069:000:000 Oboe
+X070:000:000 Eng.Horn
+X071:000:000 Bassoon
+X072:000:000 Clarinet
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_pipe="
+X073:000:000 Piccolo
+X074:000:000 Flute
+X075:000:000 Recorder
+X076:000:000 PanFlute
+X077:000:000 Bottle
+X078:000:000 Shakhchi
+X079:000:000 Whistle
+X080:000:000 Ocarina
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_synth_lead="
+X081:000:000 SquareLd
+X081:000:006 Square 2
+X081:000:008 LMSquare
+X081:000:018 Hollow
+X081:000:019 Shmoog
+X081:000:064 Mellow
+X081:000:065 SoloSine
+X081:000:066 SineLead
+X082:000:000 Saw.Lead
+X082:000:006 Saw 2
+X082:000:008 ThickSaw
+X082:000:018 DynaSaw
+X082:000:019 DigiSaw
+X082:000:020 Big Lead
+X082:000:024 HeavySyn
+X082:000:025 WaspySyn
+X082:000:040 PulseSaw
+X082:000:041 Dr. Lead
+X082:000:045 VeloLead
+X082:000:096 Seq Ana
+X083:000:000 CaliopLd
+X083:000:065 Pure Pad
+X084:000:000 Chiff Ld
+X084:000:064 Rubby
+X085:000:000 CharanLd
+X085:000:064 DistLead
+X085:000:065 WireLead
+X086:000:000 Voice Ld
+X086:000:024 SynthAah
+X086:000:064 VoxLead
+X087:000:000 Fifth Ld
+X087:000:035 Big Five
+X088:000:000 Bass &Ld
+X088:000:016 Big&Low
+X088:000:064 Fat&Prky
+X088:000:065 SoftWurl
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_synth_pad="
+X089:000:000 NewAgePd
+X089:000:064 Fantasy2
+X090:000:000 Warm Pad
+X090:000:016 ThickPad
+X090:000:017 Soft Pad
+X090:000:018 SinePad
+X090:000:064 Horn Pad
+X090:000:065 RotarStr
+X091:000:000 PolySyPd
+X091:000:064 PolyPd80
+X091:000:065 ClickPad
+X091:000:066 Ana Pad
+X091:000:067 SquarPad
+X092:000:000 ChoirPad
+X092:000:064 Heaven2
+X092:000:066 Itopia
+X092:000:067 CC Pad
+X093:000:000 BowedPad
+X093:000:064 Glacier
+X093:000:065 GlassPad
+X094:000:000 MetalPad
+X094:000:064 Tine Pad
+X094:000:065 Pan Pad
+X095:000:000 Halo Pad
+X096:000:000 SweepPad
+X096:000:020 Shwimmer
+X096:000:027 Converge
+X096:000:064 PolarPad
+X096:000:066 Celstial
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_synth_effects="
+X097:000:000 Rain
+X097:000:045 ClaviPad
+X097:000:064 HrmoRain
+X097:000:065 AfrcnWnd
+X097:000:066 Caribean
+X098:000:000 SoundTrk
+X098:000:027 Prologue
+X098:000:064 Ancestrl
+X099:000:000 Crystal
+X099:000:012 SynDrCmp
+X099:000:014 Popcorn
+X099:000:018 TinyBell
+X099:000:035 RndGlock
+X099:000:040 GlockChi
+X099:000:041 ClearBel
+X099:000:042 ChorBell
+X099:000:064 SynMalet
+X099:000:065 SftCryst
+X099:000:066 LoudGlok
+X099:000:067 XmasBell
+X099:000:068 VibeBell
+X099:000:069 DigiBell
+X099:000:070 AirBells
+X099:000:071 BellHarp
+X099:000:072 Gamelmba
+X100:000:000 Atmosphr
+X100:000:018 WarmAtms
+X100:000:019 HollwRls
+X100:000:040 NylonEP
+X100:000:064 NylnHarp
+X100:000:065 Harp Vox
+X100:000:066 AtmosPad
+X100:000:067 Planet
+X101:000:000 Bright
+X101:000:064 FantaBel
+X101:000:096 Smokey
+X102:000:000 Goblins
+X102:000:064 GobSyn
+X102:000:065 50sSciFi
+X102:000:066 Ring Pad
+X102:000:067 Ritual
+X102:000:068 ToHeaven
+X102:000:070 Night
+X102:000:071 Glisten
+X102:000:096 BelChoir
+X103:000:000 Echoes
+X103:000:008 EchoPad2
+X103:000:014 Echo Pan
+X103:000:064 EchoBell
+X103:000:065 Big Pan
+X103:000:066 SynPiano
+X103:000:067 Creation
+X103:000:068 Stardust
+X103:000:069 Reso Pan
+X104:000:000 Sci-Fi
+X104:000:064 Starz
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_ethnic="
+X105:000:000 Sitar
+X105:000:032 DetSitar
+X105:000:035 Sitar 2
+X105:000:096 Tambra
+X105:000:097 Tamboura
+X106:000:000 Banjo
+X106:000:028 MuteBnjo
+X106:000:096 Rabab
+X106:000:097 Gopichnt
+X106:000:098 Oud
+X107:000:000 Shamisen
+X108:000:000 Koto
+X108:000:096 T. Koto
+X108:000:097 Kanoon
+X109:000:000 Kalimba
+X110:000:000 Bagpipe
+X111:000:000 Fiddle
+X112:000:000 Shanai
+X112:000:064 Shanai2
+X112:000:096 Pungi
+X112:000:097 Hichriki
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_percussive="
+X113:000:000 TnklBell
+X113:000:096 Bonang
+X113:000:097 Gender
+X113:000:098 Gamelan
+X113:000:099 S.Gamlan
+X113:000:100 Rama Cym
+X113:000:101 AsianBel
+X114:000:000 Agogo
+X115:000:000 SteelDrm
+X115:000:097 GlasPerc
+X115:000:098 ThaiBell
+X116:000:000 WoodBlok
+X116:000:096 Castanet
+X117:000:000 TaikoDrm
+X117:000:096 Gr.Cassa
+X118:000:000 MelodTom
+X118:000:064 Mel Tom2
+X118:000:065 Real Tom
+X118:000:066 Rock Tom
+X119:000:000 Syn.Drum
+X119:000:064 Ana Tom
+X119:000:065 ElecPerc
+X120:000:000 RevCymbl
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_sound_effects="
+X121:000:000 FretNoiz
+X122:000:000 BrthNoiz
+X123:000:000 Seashore
+X124:000:000 Tweet
+X125:000:000 Telphone
+X126:000:000 Helicptr
+X127:000:000 Applause
+X128:000:000 Gunshot
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_voice_effects="
+X001:064:000 CuttngNz
+X002:064:000 CttngNz2
+X004:064:000 Str Slap
+X017:064:000 Fl.KClik
+X033:064:000 Rain
+X034:064:000 Thunder
+X035:064:000 Wind
+X036:064:000 Stream
+X037:064:000 Bubble
+X038:064:000 Feed
+X049:064:000 Dog
+X050:064:000 Horse
+X051:064:000 Bird 2
+X055:064:000 Ghost
+X056:064:000 Maou
+X065:064:000 Tel.Dial
+X066:064:000 DoorSqek
+X067:064:000 Door Slam
+X068:064:000 Scratch
+X069:064:000 Scratch 2
+X070:064:000 WindChm
+X071:064:000 Telphon2
+X081:064:000 CarEngin
+X082:064:000 Car Stop
+X083:064:000 Car Pass
+X084:064:000 CarCrash
+X085:064:000 Siren
+X086:064:000 Train
+X087:064:000 Jetplane
+X088:064:000 Starship
+X089:064:000 Burst
+X090:064:000 Coaster 
+X091:064:000 SbMarine
+X097:064:000 Laughing
+X098:064:000 Scream
+X099:064:000 Punch
+X100:064:000 Heart
+X101:064:000 FootStep
+X113:064:000 MchinGun
+X114:064:000 LaserGun
+X115:064:000 Xplosion
+X116:064:000 FireWork
+";
+
+//-----------------------------------------------------------------------------
+
+list_contents_drum_kits="
+X001:127:000 XG Standard
+X002:127:000 XG Standard 2
+X009:127:000 XG Room
+X017:127:000 XG Rock
+X025:127:000 XG Electro
+X026:127:000 XG Analog
+X033:127:000 XG Jazz
+X041:127:000 XG Brush
+X049:127:000 XG Classic
+X001:126:000 XG SFX 1
+X002:126:000 XG SFX 2
+X001:120:000 GM2 Standard
+X009:120:000 GM2 Room
+X017:120:000 GM2 Power 
+X025:120:000 GM2 Electric
+X026:120:000 GM2 Analog
+X033:120:000 GM2 Jazz
+X041:120:000 GM2 Brush
+X049:120:000 GM2 Orchestra
+X057:120:000 GM2 SFX
+";
+
+//-----------------------------------------------------------------------------
+
+//#entry number
+//param number (translated to sysex address in code), min, max, default, display table, name
+//all numbers dec
+
+reverb_params_list="
+#00 Hall 1
+01|0000|0069|0018|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0008|5|Initial Delay
+04|0000|0052|0013|3|HPF Cutoff
+05|0034|0060|0049|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#01 Hall 2
+01|0000|0069|0025|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0028|5|Initial Delay
+04|0000|0052|0006|3|HPF Cutoff
+05|0034|0060|0046|3|LPF Cutoff
+11|0000|0063|0013|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0074|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#02 Room 1
+01|0000|0069|0005|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0016|5|Initial Delay
+04|0000|0052|0004|3|HPF Cutoff
+05|0034|0060|0049|3|LPF Cutoff
+11|0000|0063|0005|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#03 Room 2
+01|0000|0069|0012|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0005|5|Initial Delay
+04|0000|0052|0004|3|HPF Cutoff
+05|0034|0060|0038|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#04 Room 3
+01|0000|0069|0009|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0047|5|Initial Delay
+04|0000|0052|0005|3|HPF Cutoff
+05|0034|0060|0036|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0060|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#05 Stage 1
+01|0000|0069|0019|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0016|5|Initial Delay
+04|0000|0052|0007|3|HPF Cutoff
+05|0034|0060|0054|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#06 Stage 2
+01|0000|0069|0011|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0016|5|Initial Delay
+04|0000|0052|0007|3|HPF Cutoff
+05|0034|0060|0051|3|LPF Cutoff
+11|0000|0063|0002|5|Rev Delay
+12|0000|0003|0002|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#07 Plate
+01|0000|0069|0025|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0006|5|Initial Delay
+04|0000|0052|0008|3|HPF Cutoff
+05|0034|0060|0049|3|LPF Cutoff
+11|0000|0063|0002|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#08 White Room
+01|0000|0069|0009|4|Reverb Time
+02|0000|0010|0005|-|Diffusion
+03|0000|0063|0011|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0046|3|LPF Cutoff
+06|0000|0037|0030|8|Width
+07|0000|0073|0050|8|Height
+08|0000|0104|0070|8|Depth
+09|0000|0030|0007|-|Wall Vary
+11|0000|0063|0034|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#09 Tunnel
+01|0000|0069|0048|4|Reverb Time
+02|0000|0010|0006|-|Diffusion
+03|0000|0063|0019|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0044|3|LPF Cutoff
+06|0000|0037|0033|8|Width
+07|0000|0073|0052|8|Height
+08|0000|0104|0070|8|Depth
+09|0000|0030|0016|-|Wall Vary
+11|0000|0063|0020|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#10 Basement
+01|0000|0069|0003|4|Reverb Time
+02|0000|0010|0006|-|Diffusion
+03|0000|0063|0003|5|Initial Delay
+04|0000|0052|0000|3|HPF Cutoff
+05|0034|0060|0034|3|LPF Cutoff
+06|0000|0037|0026|8|Width
+07|0000|0073|0029|8|Height
+08|0000|0104|0059|8|Depth
+09|0000|0030|0015|-|Wall Vary
+11|0000|0063|0032|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+";
+
+//-----------------------------------------------------------------------------
+
+chorus_params_list="
+#00 Chorus 1
+01|0000|0127|0006|1|LFO Frequency
+02|0000|0127|0054|-|LFO Depth
+03|0001|0127|0077|I|Feedback Level
+04|0000|0127|0106|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#01 Chorus 2
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0063|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0030|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0062|E|EQ Low Gain
+08|0028|0058|0042|3|EQ High Frequency
+09|0052|0076|0058|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#02 Chorus 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0044|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0110|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0066|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#03 Chorus 4
+01|0000|0127|0009|1|LFO Frequency
+02|0000|0127|0032|-|LFO Depth
+03|0001|0127|0069|I|Feedback Level
+04|0000|0127|0104|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#04 Celeste 1
+01|0000|0127|0012|1|LFO Frequency
+02|0000|0127|0032|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#05 Celeste 2
+01|0000|0127|0028|1|LFO Frequency
+02|0000|0127|0018|-|LFO Depth
+03|0001|0127|0090|I|Feedback Level
+04|0000|0127|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0062|E|EQ Low Gain
+08|0028|0058|0042|3|EQ High Frequency
+09|0052|0076|0060|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#06 Celeste 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0063|-|LFO Depth
+03|0001|0127|0044|I|Feedback Level
+04|0000|0127|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0068|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#07 Celeste 4
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0029|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0051|3|EQ High Frequency
+09|0052|0076|0066|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#08 Flanger 1
+01|0000|0127|0014|1|LFO Frequency
+02|0000|0127|0014|-|LFO Depth
+03|0001|0127|0104|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#09 Flanger 2
+01|0000|0127|0032|1|LFO Frequency
+02|0000|0127|0017|-|LFO Depth
+03|0001|0127|0026|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0060|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#10 Flanger 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0109|-|LFO Depth
+03|0001|0127|0109|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+";
+
+//-----------------------------------------------------------------------------
+
+variation_params_list="
+#00 Hall 1
+01|0000|0069|0018|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0008|5|Initial Delay
+04|0000|0052|0013|3|HPF Cutoff
+05|0034|0060|0049|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#01 Hall 2
+01|0000|0069|0025|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0028|5|Initial Delay
+04|0000|0052|0006|3|HPF Cutoff
+05|0034|0060|0046|3|LPF Cutoff
+11|0000|0063|0013|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0074|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#02 Room 1
+01|0000|0069|0005|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0016|5|Initial Delay
+04|0000|0052|0004|3|HPF Cutoff
+05|0034|0060|0049|3|LPF Cutoff
+11|0000|0063|0005|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#03 Room 2
+01|0000|0069|0012|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0005|5|Initial Delay
+04|0000|0052|0004|3|HPF Cutoff
+05|0034|0060|0038|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0050|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#04 Room 3
+01|0000|0069|0009|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0047|5|Initial Delay
+04|0000|0052|0005|3|HPF Cutoff
+05|0034|0060|0036|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0060|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#05 Stage 1
+01|0000|0069|0019|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0016|5|Initial Delay
+04|0000|0052|0007|3|HPF Cutoff
+05|0034|0060|0054|3|LPF Cutoff
+11|0000|0063|0000|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#06 Stage 2
+01|0000|0069|0011|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0016|5|Initial Delay
+04|0000|0052|0007|3|HPF Cutoff
+05|0034|0060|0051|3|LPF Cutoff
+11|0000|0063|0002|5|Rev Delay
+12|0000|0003|0002|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#07 Plate
+01|0000|0069|0025|4|Reverb Time
+02|0000|0010|0010|-|Diffusion
+03|0000|0063|0006|5|Initial Delay
+04|0000|0052|0008|3|HPF Cutoff
+05|0034|0060|0049|3|LPF Cutoff
+11|0000|0063|0002|5|Rev Delay
+12|0000|0003|0003|-|Density
+13|0001|0127|0064|F|Er/Rev Balance
+15|0001|0127|0064|I|Feedback Level
+#08 Delay L,C,R
+01|0001|7150|3333|-|Lch Delay
+02|0001|7150|1667|-|Rch Delay
+03|0001|7150|5000|-|Cch Delay
+04|0001|7150|5000|-|Feedback Delay
+05|0001|0127|0074|I|Feedback Level
+06|0000|0127|0100|-|Cch Level
+07|0001|0010|0010|-|High Damp
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|E|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|E|EQ High Gain
+#09 Delay L,R
+01|0001|7150|2500|-|Lch Delay
+02|0001|7150|3750|-|Rch Delay
+03|0001|7150|3752|-|Feedback Delay 1
+04|0001|7150|3750|-|Feedback Delay 2
+05|0001|0127|0087|I|Feedback Level
+06|0001|0010|0010|-|High Damp
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|E|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|E|EQ High Gain
+#10 Echo
+01|0001|3550|1700|-|Lch Delay 1
+02|0001|0127|0080|I|Lch Feedback Level
+03|0001|3550|1780|-|Rch Delay 1
+04|0001|0127|0080|I|Rch Feedback Level
+05|0001|0010|0010|-|High Damp
+06|0001|3550|1700|-|Lch Delay 2
+07|0001|3550|1780|-|Rch Delay 2
+08|0000|0127|0000|-|Delay 2 Level
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|E|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|E|EQ High Gain
+#11 Cross Delay
+01|0001|3550|1700|-|L->R Delay
+02|0001|3550|1750|-|R->L Delay
+03|0001|0127|0111|I|Feedback Level
+04|0000|0002|0001|9|Input Select
+05|0001|0010|0010|-|High Damp
+13|0008|0040|0028|3|EQ Low Frequency
+14|0052|0076|0064|E|EQ Low Gain
+15|0028|0058|0046|3|EQ High Frequency
+16|0052|0076|0064|E|EQ High Gain
+#12 Early Ref 1
+01|0000|0005|0000|A|Type
+02|0000|0044|0019|6|Room Size
+03|0000|0010|0005|-|Diffusion
+04|0000|0063|0016|5|Initial Delay
+05|0001|0127|0064|I|Feedback Level
+06|0000|0052|0000|3|HPF Cutoff
+07|0034|0060|0046|3|LPF Cutoff
+11|0000|0010|0005|-|Liveness
+12|0000|0003|0000|-|Density
+13|0001|0010|0010|-|High Damp
+#13 Early Ref 2
+01|0000|0005|0002|A|Type
+02|0000|0044|0007|6|Room Size
+03|0000|0010|0010|-|Diffusion
+04|0000|0063|0016|5|Initial Delay
+05|0001|0127|0064|I|Feedback Level
+06|0000|0052|0003|3|HPF Cutoff
+07|0034|0060|0046|3|LPF Cutoff
+11|0000|0010|0005|-|Liveness
+12|0000|0003|0002|-|Density
+13|0001|0010|0010|-|High Damp
+#14 Gate Reverb
+01|0000|0001|0000|H|Type
+02|0000|0044|0015|6|Room Size
+03|0000|0010|0006|-|Diffusion
+04|0000|0063|0002|5|Initial Delay
+05|0001|0127|0064|I|Feedback Level
+06|0000|0052|0000|3|HPF Cutoff
+07|0034|0060|0044|3|LPF Cutoff
+11|0000|0010|0004|-|Liveness
+12|0000|0003|0003|-|Density
+13|0001|0010|0010|-|High Damp
+#15 Reverse Gate
+01|0000|0001|0001|H|Type
+02|0000|0044|0019|6|Room Size
+03|0000|0010|0008|-|Diffusion
+04|0000|0063|0003|5|Initial Delay
+05|0001|0127|0064|I|Feedback Level
+06|0000|0052|0000|3|HPF Cutoff
+07|0034|0060|0047|3|LPF Cutoff
+11|0000|0010|0006|-|Liveness
+12|0000|0003|0003|-|Density
+13|0001|0010|0010|-|High Damp
+#16 Karaoke 1
+01|0000|0127|0063|7|Delay Time
+02|0001|0127|0097|I|Feedback Level
+03|0000|0052|0000|3|HPF Cutoff
+04|0034|0060|0048|3|LPF Cutoff
+#17 Karaoke 2
+01|0000|0127|0055|7|Delay Time
+02|0001|0127|0105|I|Feedback Level
+03|0000|0052|0000|3|HPF Cutoff
+04|0034|0060|0050|3|LPF Cutoff
+#18 Karaoke 3
+01|0000|0127|0043|7|Delay Time
+02|0001|0127|0110|I|Feedback Level
+03|0000|0052|0014|3|HPF Cutoff
+04|0034|0060|0053|3|LPF Cutoff
+#19 Chorus 1
+01|0000|0127|0006|1|LFO Frequency
+02|0000|0127|0054|-|LFO Depth
+03|0001|0127|0077|I|Feedback Level
+04|0000|0127|0106|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#20 Chorus 2
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0063|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0030|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0062|E|EQ Low Gain
+08|0028|0058|0042|3|EQ High Frequency
+09|0052|0076|0058|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#21 Chorus 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0044|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0110|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0066|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#22 Chorus 4
+01|0000|0127|0009|1|LFO Frequency
+02|0000|0127|0032|-|LFO Depth
+03|0001|0127|0069|I|Feedback Level
+04|0000|0127|0104|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#23 Celeste 1
+01|0000|0127|0012|1|LFO Frequency
+02|0000|0127|0032|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#24 Celeste 2
+01|0000|0127|0028|1|LFO Frequency
+02|0000|0127|0018|-|LFO Depth
+03|0001|0127|0090|I|Feedback Level
+04|0000|0127|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0062|E|EQ Low Gain
+08|0028|0058|0042|3|EQ High Frequency
+09|0052|0076|0060|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#25 Celeste 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0063|-|LFO Depth
+03|0001|0127|0044|I|Feedback Level
+04|0000|0127|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0068|E|EQ High Gain
+15|0000|0001|0000|C|Input Mode
+#26 Celeste 4
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0029|-|LFO Depth
+03|0001|0127|0064|I|Feedback Level
+04|0000|0127|0000|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0051|3|EQ High Frequency
+09|0052|0076|0066|E|EQ High Gain
+15|0000|0001|0001|C|Input Mode
+#27 Flanger 1
+01|0000|0127|0014|1|LFO Frequency
+02|0000|0127|0014|-|LFO Depth
+03|0001|0127|0104|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#28 Flanger 2
+01|0000|0127|0032|1|LFO Frequency
+02|0000|0127|0017|-|LFO Depth
+03|0001|0127|0026|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0060|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#29 Flanger 3
+01|0000|0127|0004|1|LFO Frequency
+02|0000|0127|0109|-|LFO Depth
+03|0001|0127|0109|I|Feedback Level
+04|0000|0063|0002|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+14|0004|0124|0004|G|LFO Phase Difference
+#30 Symphonic
+01|0000|0127|0012|1|LFO Frequency
+02|0000|0127|0025|-|LFO Depth
+03|0000|0127|0016|2|Delay Offset
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+#31 Rotary Speaker
+01|0000|0127|0081|1|LFO Frequency
+02|0000|0127|0035|-|LFO Depth
+06|0008|0040|0024|3|EQ Low Frequency
+07|0052|0076|0060|E|EQ Low Gain
+08|0028|0058|0045|3|EQ High Frequency
+09|0052|0076|0054|E|EQ High Gain
+#32 Tremolo
+01|0000|0127|0083|1|LFO Frequency
+02|0000|0127|0056|-|AM Depth
+03|0000|0127|0000|-|PM Depth
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+14|0004|0124|0064|G|LFO Phase Difference
+15|0000|0001|0000|C|Input Mode
+#33 Auto Pan
+01|0000|0127|0076|1|LFO Frequency
+02|0000|0127|0080|-|L/R Depth
+03|0000|0127|0032|-|F/R Depth
+04|0000|0005|0005|B|PAN Direction
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+#34 Phaser 1
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0111|-|LFO Depth
+03|0000|0127|0074|-|Phase Shift Offset
+04|0001|0127|0104|I|Feedback Level
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+11|0006|0010|0006|-|Stage
+12|0000|0001|0001|C|Diffusion
+#35 Phaser 2
+01|0000|0127|0008|1|LFO Frequency
+02|0000|0127|0111|-|LFO Depth
+03|0000|0127|0074|-|Phase Shift Offset
+04|0001|0127|0108|I|Feedback Level
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0064|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+11|0003|0005|0005|-|Stage
+12|0000|0001|0001|C|Diffusion
+13|0004|0124|0004|G|LFO Phase Difference
+#36 Distortion
+01|0000|0127|0040|-|Drive
+02|0008|0040|0020|3|EQ Low Frequency
+03|0052|0076|0072|E|EQ Low Gain
+04|0034|0060|0053|3|LPF Cutoff
+05|0000|0127|0048|-|Output Level
+07|0028|0054|0043|3|EQ Mid Frequency
+08|0052|0076|0074|E|EQ Mid Gain
+09|0010|0120|0010|-|EQ Mid Width
+11|0000|0127|0120|-|Clip Curve
+#37 Overdrive
+01|0000|0127|0029|-|Drive
+02|0008|0040|0024|3|EQ Low Frequency
+03|0052|0076|0068|E|EQ Low Gain
+04|0034|0060|0045|3|LPF Cutoff
+05|0000|0127|0055|-|Output Level
+07|0028|0054|0041|3|EQ Mid Frequency
+08|0052|0076|0072|E|EQ Mid Gain
+09|0010|0120|0010|-|EQ Mid Width
+11|0000|0127|0104|-|Clip Curve
+#38 Guitar Amp Simulator
+01|0000|0127|0039|-|Drive
+02|0000|0003|0001|D|AMP Type
+03|0034|0060|0048|3|LPF Cutoff
+04|0000|0127|0055|-|Output Level
+11|0000|0127|0112|-|Clip Curve
+#39 3-Band EQ
+01|0052|0076|0070|E|EQ Low Gain
+02|0028|0054|0034|3|EQ Mid Frequency
+03|0052|0076|0060|E|EQ Mid Gain
+04|0010|0120|0010|-|EQ Mid Width
+05|0052|0076|0070|E|EQ High Gain
+06|0008|0040|0028|3|EQ Low Frequency
+07|0028|0058|0046|3|EQ High Frequency
+#40 2-Band EQ
+01|0008|0040|0028|3|EQ Low Frequency
+02|0052|0076|0070|E|EQ Low Gain
+03|0028|0058|0046|3|EQ High Frequency
+04|0052|0076|0070|E|EQ High Gain
+#41 Auto Wah
+01|0000|0127|0070|1|LFO Frequency
+02|0000|0127|0056|-|LFO Depth
+03|0000|0127|0039|-|Cutoff Freq Offset
+04|0010|0120|0025|-|Resonance
+06|0008|0040|0028|3|EQ Low Frequency
+07|0052|0076|0066|E|EQ Low Gain
+08|0028|0058|0046|3|EQ High Frequency
+09|0052|0076|0064|E|EQ High Gain
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_1_lfo_frequency="
+000|0.00Hz
+001|0.04Hz
+002|0.08Hz
+003|0.13Hz
+004|0.17Hz
+005|0.21Hz
+006|0.25Hz
+007|0.29Hz
+008|0.34Hz
+009|0.38Hz
+010|0.42Hz
+011|0.46Hz
+012|0.51Hz
+013|0.55Hz
+014|0.59Hz
+015|0.63Hz
+016|0.67Hz
+017|0.72Hz
+018|0.76Hz
+019|0.80Hz
+020|0.84Hz
+021|0.88Hz
+022|0.93Hz
+023|0.97Hz
+024|1.01Hz
+025|1.05Hz
+026|1.09Hz
+027|1.14Hz
+028|1.18Hz
+029|1.22Hz
+030|1.26Hz
+031|1.30Hz
+032|1.35Hz
+033|1.39Hz
+034|1.43Hz
+035|1.47Hz
+036|1.51Hz
+037|1.56Hz
+038|1.60Hz
+039|1.64Hz
+040|1.68Hz
+041|1.72Hz
+042|1.77Hz
+043|1.81Hz
+044|1.85Hz
+045|1.89Hz
+046|1.94Hz
+047|1.98Hz
+048|2.02Hz
+049|2.06Hz
+050|2.10Hz
+051|2.15Hz
+052|2.19Hz
+053|2.23Hz
+054|2.27Hz
+055|2.31Hz
+056|2.36Hz
+057|2.40Hz
+058|2.44Hz
+059|2.48Hz
+060|2.52Hz
+061|2.57Hz
+062|2.61Hz
+063|2.65Hz
+064|2.69Hz
+065|2.78Hz
+066|2.86Hz
+067|2.94Hz
+068|3.03Hz
+069|3.11Hz
+070|3.20Hz
+071|3.28Hz
+072|3.37Hz
+073|3.45Hz
+074|3.53Hz
+075|3.62Hz
+076|3.70Hz
+077|3.87Hz
+078|4.04Hz
+079|4.21Hz
+080|4.37Hz
+081|4.54Hz
+082|4.71Hz
+083|4.88Hz
+084|5.05Hz
+085|5.22Hz
+086|5.38Hz
+087|5.55Hz
+088|5.72Hz
+089|6.06Hz
+090|6.39Hz
+091|6.73Hz
+092|7.07Hz
+093|7.40Hz
+094|7.74Hz
+095|8.08Hz
+096|8.41Hz
+097|8.75Hz
+098|9.08Hz
+099|9.42Hz
+100|9.76Hz
+101|10.10Hz
+102|10.80Hz
+103|11.40Hz
+104|12.10Hz
+105|12.80Hz
+106|13.50Hz
+107|14.10Hz
+108|14.80Hz
+109|15.50Hz
+110|16.20Hz
+111|16.80Hz
+112|17.50Hz
+113|18.20Hz
+114|19.50Hz
+115|20.90Hz
+116|22.20Hz
+117|23.60Hz
+118|24.90Hz
+119|26.20Hz
+120|27.60Hz
+121|28.90Hz
+122|30.30Hz
+123|31.60Hz
+124|33.00Hz
+125|34.30Hz
+126|37.00Hz
+127|39.70Hz
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_2_delay_offset="
+000|0.0ms
+001|0.1ms
+002|0.2ms
+003|0.3ms
+004|0.4ms
+005|0.5ms
+006|0.6ms
+007|0.7ms
+008|0.8ms
+009|0.9ms
+010|1.0ms
+011|1.1ms
+012|1.2ms
+013|1.3ms
+014|1.4ms
+015|1.5ms
+016|1.6ms
+017|1.7ms
+018|1.8ms
+019|1.9ms
+020|2.0ms
+021|2.1ms
+022|2.2ms
+023|2.3ms
+024|2.4ms
+025|2.5ms
+026|2.6ms
+027|2.7ms
+028|2.8ms
+029|2.9ms
+030|3.0ms
+031|3.1ms
+032|3.2ms
+033|3.3ms
+034|3.4ms
+035|3.5ms
+036|3.6ms
+037|3.7ms
+038|3.8ms
+039|3.9ms
+040|4.0ms
+041|4.1ms
+042|4.2ms
+043|4.3ms
+044|4.4ms
+045|4.5ms
+046|4.6ms
+047|4.7ms
+048|4.8ms
+049|4.9ms
+050|5.0ms
+051|5.1ms
+052|5.2ms
+053|5.3ms
+054|5.4ms
+055|5.5ms
+056|5.6ms
+057|5.7ms
+058|5.8ms
+059|5.9ms
+060|6.0ms
+061|6.1ms
+062|6.2ms
+063|6.3ms
+064|6.4ms
+065|6.5ms
+066|6.6ms
+067|6.7ms
+068|6.8ms
+069|6.9ms
+070|7.0ms
+071|7.1ms
+072|7.2ms
+073|7.3ms
+074|7.4ms
+075|7.5ms
+076|7.6ms
+077|7.7ms
+078|7.8ms
+079|7.9ms
+080|8.0ms
+081|8.1ms
+082|8.2ms
+083|8.3ms
+084|8.4ms
+085|8.5ms
+086|8.6ms
+087|8.7ms
+088|8.8ms
+089|8.9ms
+090|9.0ms
+091|9.1ms
+092|8.2ms
+093|9.3ms
+094|9.4ms
+095|9.5ms
+096|9.6ms
+097|9.7ms
+098|9.8ms
+099|9.9ms
+100|10.0ms
+101|11.1ms
+102|12.2ms
+103|13.3ms
+104|14.4ms
+105|15.5ms
+106|17.1ms
+107|18.6ms
+108|20.2ms
+109|21.8ms
+110|23.3ms
+111|24.9ms
+112|26.5ms
+113|28.0ms
+114|29.6ms
+115|31.2ms
+116|32.8ms
+117|34.3ms
+118|35.9ms
+119|37.5ms
+120|39.0ms
+121|40.6ms
+122|42.2ms
+123|43.7ms
+124|45.3ms
+125|46.9ms
+126|48.4ms
+127|50.0ms
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_3_eq_frequency="
+000|20Hz
+001|22Hz
+002|25Hz
+003|28Hz
+004|32Hz
+005|36Hz
+006|40Hz
+007|45Hz
+008|50Hz
+009|56Hz
+010|63Hz
+011|70Hz
+012|80Hz
+013|90Hz
+014|100Hz
+015|110Hz
+016|125Hz
+017|140Hz
+018|160Hz
+019|180Hz
+020|200Hz
+021|225Hz
+022|250Hz
+023|280Hz
+024|315Hz
+025|355Hz
+026|400Hz
+027|450Hz
+028|500Hz
+029|560Hz
+030|630Hz
+031|700Hz
+032|800Hz
+033|900Hz
+034|1.0kHz
+035|1.1kHz
+036|1.2kHz
+037|1.4kHz
+038|1.6kHz
+039|1.8kHz
+040|2.0kHz
+041|2.2kHz
+042|2.5kHz
+043|2.8kHz
+044|3.2kHz
+045|3.6kHz
+046|4.0kHz
+047|4.5kHz
+048|5.0kHz
+049|5.6kHz
+050|6.3kHz
+051|7.0kHz
+052|8.0kHz
+053|9.0kHz
+054|10.0kHz
+055|11.0kHz
+056|12.0kHz
+057|14.0kHz
+058|16.0kHz
+059|18.0kHz
+060|20.0kHz
+";
+ 
+//-----------------------------------------------------------------------------
+
+effect_value_names_4_reverb_time="
+000|0.3s
+001|0.4s
+002|0.5s
+003|0.6s
+004|0.7s
+005|0.8s
+006|0.9s
+007|1.0s
+008|1.1s
+009|1.2s
+010|1.3s
+011|1.4s
+012|1.5s
+013|1.6s
+014|1.7s
+015|1.8s
+016|1.9s
+017|2.0s
+018|2.1s
+019|2.2s
+020|2.3s
+021|2.4s
+022|2.5s
+023|2.6s
+024|2.7s
+025|2.8s
+026|2.9s
+027|3.0s
+028|3.1s
+029|3.2s
+030|3.3s
+031|3.4s
+032|3.5s
+033|3.6s
+034|3.7s
+035|3.8s
+036|3.9s
+037|4.0s
+038|4.1s
+039|4.2s
+040|4.3s
+041|4.4s
+042|4.5s
+043|4.6s
+044|4.7s
+045|4.8s
+046|4.9s
+047|5.0s
+048|5.5s
+049|6.0s
+050|6.5s
+051|7.0s
+052|7.5s
+053|8.0s
+054|8.5s
+055|9.0s
+056|9.5s
+057|10.0s
+058|11.0s
+059|12.0s
+060|13.0s
+061|14.0s
+062|15.0s
+063|16.0s
+064|17.0s
+065|18.0s
+066|19.0s
+067|20.0s
+068|25.0s
+069|30.0s
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_5_delay_time="
+000|0.1ms
+001|1.7ms
+002|3.2ms
+003|4.8ms
+004|6.4ms
+005|8.0ms
+006|9.5ms
+007|11.1ms
+008|12.7ms
+009|14.3ms
+010|15.8ms
+011|17.4ms
+012|19.0ms
+013|20.6ms
+014|22.1ms
+015|23.7ms
+016|25.3ms
+017|26.9ms
+018|28.4ms
+019|30.0ms
+020|31.6ms
+021|33.2ms
+022|34.7ms
+023|36.3ms
+024|37.9ms
+025|39.5ms
+026|41.0ms
+027|42.6ms
+028|44.2ms
+029|45.7ms
+030|47.3ms
+031|48.9ms
+032|50.5ms
+033|52.0ms
+034|53.6ms
+035|55.2ms
+036|56.8ms
+037|58.3ms
+038|59.9ms
+039|61.5ms
+040|63.1ms
+041|64.6ms
+042|66.2ms
+043|67.8ms
+044|69.4ms
+045|70.9ms
+046|72.5ms
+047|74.1ms
+048|75.7ms
+049|77.2ms
+050|78.8ms
+051|80.4ms
+052|81.9ms
+053|83.5ms
+054|85.1ms
+055|86.7ms
+056|88.2ms
+057|89.8ms
+058|91.4ms
+059|93.0ms
+060|94.5ms
+061|96.1ms
+062|97.7ms
+063|99.3ms
+064|100.8ms
+065|102.4ms
+066|104.0ms
+067|105.6ms
+068|107.1ms
+069|108.7ms
+070|110.3ms
+071|111.9ms
+072|113.4ms
+073|115.0ms
+074|116.6ms
+075|118.2ms
+076|119.7ms
+077|121.3ms
+078|122.9ms
+079|124.4ms
+080|126.0ms
+081|127.6ms
+082|129.2ms
+083|130.7ms
+084|132.3ms
+085|133.9ms
+086|135.5ms
+087|137.0ms
+088|138.6ms
+089|140.2ms
+090|141.8ms
+091|143.3ms
+092|144.9ms
+093|146.5ms
+094|148.1ms
+095|149.6ms
+096|151.2ms
+097|152.8ms
+098|154.4ms
+099|155.9ms
+100|157.5ms
+101|159.1ms
+102|160.6ms
+103|162.2ms
+104|163.8ms
+105|165.4ms
+106|166.9ms
+107|168.5ms
+108|170.1ms
+109|171.7ms
+110|173.2ms
+111|174.8ms
+112|176.4ms
+113|178.0ms
+114|179.5ms
+115|181.1ms
+116|182.7ms
+117|184.3ms
+118|185.8ms
+119|187.4ms
+120|189.0ms
+121|190.6ms
+122|192.1ms
+123|193.7ms
+124|195.3ms
+125|196.9ms
+126|198.4ms
+127|200.0ms
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_6_room_size="
+000|0.1m
+001|0.3m
+002|0.4m
+003|0.6m
+004|0.7m
+005|0.9m
+006|1.0m
+007|1.2m
+008|1.4m
+009|1.5m
+010|1.7m
+011|1.8m
+012|2.0m
+013|2.1m
+014|2.3m
+015|2.5m
+016|2.6m
+017|2.8m
+018|2.9m
+019|3.1m
+020|3.2m
+021|3.4m
+022|3.5m
+023|3.7m
+024|3.9m
+025|4.0m
+026|4.2m
+027|4.3m
+028|4.5m
+029|4.6m
+030|4.8m
+031|5.0m
+032|5.1m
+033|5.3m
+034|5.4m
+035|5.6m
+036|5.7m
+037|5.9m
+038|6.1m
+039|6.2m
+040|6.4m
+041|6.5m
+042|6.7m
+043|6.8m
+044|7.0m
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_7_delay_time="
+000|0.1ms
+001|3.2ms
+002|6.4ms
+003|9.5ms
+004|12.7ms
+005|15.8ms
+006|19.0ms
+007|22.1ms
+008|25.3ms
+009|28.4ms
+010|31.6ms
+011|34.7ms
+012|37.9ms
+013|41.0ms
+014|44.2ms
+015|47.3ms
+016|50.5ms
+017|53.6ms
+018|56.8ms
+019|59.9ms
+020|63.1ms
+021|66.2ms
+022|69.4ms
+023|72.5ms
+024|75.7ms
+025|78.8ms
+026|82.0ms
+027|85.1ms
+028|88.3ms
+029|91.4ms
+030|94.6ms
+031|97.7ms
+032|100.9ms
+033|104.0ms
+034|107.2ms
+035|110.3ms
+036|113.5ms
+037|116.6ms
+038|119.8ms
+039|122.9ms
+040|126.1ms
+041|129.2ms
+042|132.4ms
+043|135.5ms
+044|138.6ms
+045|141.8ms
+046|144.9ms
+047|148.1ms
+048|151.2ms
+049|154.4ms
+050|157.5ms
+051|160.7ms
+052|163.8ms
+053|167.0ms
+054|170.1ms
+055|173.3ms
+056|176.4ms
+057|179.6ms
+058|182.7ms
+059|185.9ms
+060|189.0ms
+061|192.2ms
+062|195.3ms
+063|198.5ms
+064|201.6ms
+065|204.8ms
+066|207.9ms
+067|211.1ms
+068|214.2ms
+069|217.4ms
+070|220.5ms
+071|223.7ms
+072|226.8ms
+073|230.0ms
+074|233.1ms
+075|236.3ms
+076|239.4ms
+077|242.6ms
+078|245.7ms
+079|248.9ms
+080|252.0ms
+081|255.2ms
+082|258.3ms
+083|261.5ms
+084|264.6ms
+085|267.7ms
+086|270.9ms
+087|274.0ms
+088|277.2ms
+089|280.3ms
+090|283.5ms
+091|286.6ms
+092|289.8ms
+093|292.9ms
+094|296.1ms
+095|299.2ms
+096|302.4ms
+097|305.5ms
+098|308.7ms
+099|311.8ms
+100|315.0ms
+101|318.1ms
+102|321.3ms
+103|324.4ms
+104|327.6ms
+105|330.7ms
+106|333.9ms
+107|337.0ms
+108|340.2ms
+109|343.3ms
+110|346.5ms
+111|349.6ms
+112|352.8ms
+113|355.9ms
+114|359.1ms
+115|362.2ms
+116|365.4ms
+117|368.5ms
+118|371.7ms
+119|374.8ms
+120|378.0ms
+121|381.1ms
+122|384.3ms
+123|387.4ms
+124|390.6ms
+125|393.7ms
+126|396.9ms
+127|400.0ms
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_8_reverb_wdh="
+000|0.5m
+001|0.8m
+002|1.0m
+003|1.3m
+004|1.5m
+005|1.8m
+006|2.0m
+007|2.3m
+008|2.6m
+009|2.8m
+010|3.1m
+011|3.3m
+012|3.6m
+013|3.9m
+014|4.1m
+015|4.4m
+016|4.6m
+017|4.9m
+018|5.2m
+019|5.4m
+020|5.7m
+021|5.9m
+022|6.2m
+023|6.5m
+024|6.7m
+025|7.0m
+026|7.2m
+027|7.5m
+028|7.8m
+029|8.0m
+030|8.3m
+031|8.6m
+032|8.8m
+033|9.1m
+034|9.4m
+035|9.6m
+036|9.9m
+037|10.2m
+038|10.4m
+039|10.7m
+040|11.0m
+041|11.2m
+042|11.5m
+043|11.8m
+044|12.1m
+045|12.3m
+046|12.6m
+047|12.9m
+048|13.1m
+049|13.4m
+050|13.7m
+051|14.0m
+052|14.2m
+053|14.5m
+054|14.8m
+055|15.1m
+056|15.4m
+057|15.6m
+058|15.9m
+059|16.2m
+060|16.5m
+061|16.8m
+062|17.1m
+063|17.3m
+064|17.6m
+065|17.9m
+066|18.2m
+067|18.5m
+068|18.8m
+069|19.1m
+070|19.4m
+071|19.7m
+072|20.0m
+073|20.2m
+074|20.5m
+075|20.8m
+076|21.1m
+077|21.4m
+078|21.7m
+079|22.0m
+080|22.4m
+081|22.7m
+082|23.0m
+083|23.3m
+084|23.6m
+085|23.9m
+086|24.2m
+087|24.5m
+088|24.9m
+089|25.2m
+090|25.5m
+091|25.8m
+092|26.1m
+093|26.5m
+094|26.8m
+095|27.1m
+096|27.5m
+097|27.8m
+098|28.1m
+099|28.5m
+100|28.8m
+101|29.2m
+102|29.5m
+103|29.9m
+104|30.2m
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_9_stereo="
+000|L
+001|R
+002|L&R
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_10_ref_type="
+000|S-H
+001|L-H
+002|Rdm
+003|Rvs
+004|Pit
+005|Spr
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_11_pan_direction="
+000|L<->R
+001|L->R
+002|L<-R
+003|Lturn
+004|Rturn
+005|L/R
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_12_mono_stereo="
+000|Mono
+001|Stereo
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_13_amp_type="
+000|Off
+001|Stack
+002|Combo
+003|Tube
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_14_eq_gain="
+052|-12dB
+053|-11dB
+054|-10dB
+055|-9dB
+056|-8dB
+057|-7dB
+058|-6dB
+059|-5dB
+060|-4dB
+061|-3dB
+062|-2dB
+063|-1dB
+064|0dB
+065|+1dB
+066|+2dB
+067|+3dB
+068|+4dB
+069|+5dB
+070|+6dB
+071|+7dB
+072|+8dB
+073|+9dB
+074|+10dB
+075|+11dB
+076|+12dB
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_15_er_rev="
+001|E63>R
+002|E62>R
+003|E61>R
+004|E60>R
+005|E59>R
+006|E58>R
+007|E57>R
+008|E56>R
+009|E55>R
+010|E54>R
+011|E53>R
+012|E52>R
+013|E51>R
+014|E50>R
+015|E49>R
+016|E48>R
+017|E47>R
+018|E46>R
+019|E45>R
+020|E44>R
+021|E43>R
+022|E42>R
+023|E41>R
+024|E40>R
+025|E39>R
+026|E38>R
+027|E37>R
+028|E36>R
+029|E35>R
+030|E34>R
+031|E33>R
+032|E32>R
+033|E31>R
+034|E30>R
+035|E29>R
+036|E28>R
+037|E27>R
+038|E26>R
+039|E25>R
+040|E24>R
+041|E23>R
+042|E22>R
+043|E21>R
+044|E20>R
+045|E19>R
+046|E18>R
+047|E17>R
+048|E16>R
+049|E15>R
+050|E14>R
+051|E13>R
+052|E12>R
+053|E11>R
+054|E10>R
+055|E9>R
+056|E8>R
+057|E7>R
+058|E6>R
+059|E5>R
+060|E4>R
+061|E3>R
+062|E2>R
+063|E1>R
+064|E=R
+065|E<R1
+066|E<R2
+067|E<R3
+068|E<R4
+069|E<R5
+070|E<R6
+071|E<R7
+072|E<R8
+073|E<R9
+074|E<R10
+075|E<R11
+076|E<R12
+077|E<R13
+078|E<R14
+079|E<R15
+080|E<R16
+081|E<R17
+082|E<R18
+083|E<R19
+084|E<R20
+085|E<R21
+086|E<R22
+087|E<R23
+088|E<R24
+089|E<R25
+090|E<R26
+091|E<R27
+092|E<R28
+093|E<R29
+094|E<R30
+095|E<R31
+096|E<R32
+097|E<R33
+098|E<R34
+099|E<R35
+100|E<R36
+101|E<R37
+102|E<R38
+103|E<R39
+104|E<R40
+105|E<R41
+106|E<R42
+107|E<R43
+108|E<R44
+109|E<R45
+110|E<R46
+111|E<R47
+112|E<R48
+113|E<R49
+114|E<R50
+115|E<R51
+116|E<R52
+117|E<R53
+118|E<R54
+119|E<R55
+120|E<R56
+121|E<R57
+122|E<R58
+123|E<R59
+124|E<R60
+125|E<R61
+126|E<R62
+127|E<R63
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_16_lfo_phase_diff="
+004|-180deg
+005|-177deg
+006|-174deg
+007|-171deg
+008|-168deg
+009|-165deg
+010|-162deg
+011|-159deg
+012|-156deg
+013|-153deg
+014|-150deg
+015|-147deg
+016|-144deg
+017|-141deg
+018|-138deg
+019|-135deg
+020|-132deg
+021|-129deg
+022|-126deg
+023|-123deg
+024|-120deg
+025|-117deg
+026|-114deg
+027|-111deg
+028|-108deg
+029|-105deg
+030|-102deg
+031|-99deg
+032|-96deg
+033|-93deg
+034|-90deg
+035|-87deg
+036|-84deg
+037|-81deg
+038|-78deg
+039|-75deg
+040|-72deg
+041|-69deg
+042|-66deg
+043|-63deg
+044|-60deg
+045|-57deg
+046|-54deg
+047|-51deg
+048|-48deg
+049|-45deg
+050|-42deg
+051|-39deg
+052|-36deg
+053|-33deg
+054|-30deg
+055|-27deg
+056|-24deg
+057|-21deg
+058|-18deg
+059|-15deg
+060|-12deg
+061|-9deg
+062|-6deg
+063|-3deg
+064|0deg
+065|+3deg
+066|+6deg
+067|+9deg
+068|+12deg
+069|+15deg
+070|+18deg
+071|+21deg
+072|+24deg
+073|+27deg
+074|+30deg
+075|+33deg
+076|+36deg
+077|+39deg
+078|+42deg
+079|+45deg
+080|+48deg
+081|+51deg
+082|+54deg
+083|+57deg
+084|+60deg
+085|+63deg
+086|+66deg
+087|+69deg
+088|+72deg
+089|+75deg
+090|+78deg
+091|+81deg
+092|+84deg
+093|+87deg
+094|+90deg
+095|+93deg
+096|+96deg
+097|+99deg
+098|+102deg
+099|+105deg
+100|+108deg
+101|+111deg
+102|+114deg
+103|+117deg
+104|+120deg
+105|+123deg
+106|+126deg
+107|+129deg
+108|+132deg
+109|+135deg
+110|+138deg
+111|+141deg
+112|+144deg
+113|+147deg
+114|+150deg
+115|+153deg
+116|+156deg
+117|+159deg
+118|+162deg
+119|+165deg
+120|+168deg
+121|+171deg
+122|+174deg
+123|+177deg
+124|+180deg
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_17_gate_type="
+000|A
+001|B
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_18_generic="
+000|-64
+001|-63
+002|-62
+003|-61
+004|-60
+005|-59
+006|-58
+007|-57
+008|-56
+009|-55
+010|-54
+011|-53
+012|-52
+013|-51
+014|-50
+015|-49
+016|-48
+017|-47
+018|-46
+019|-45
+020|-44
+021|-43
+022|-42
+023|-41
+024|-40
+025|-39
+026|-38
+027|-37
+028|-36
+029|-35
+030|-34
+031|-33
+032|-32
+033|-31
+034|-30
+035|-29
+036|-28
+037|-27
+038|-26
+039|-25
+040|-24
+041|-23
+042|-22
+043|-21
+044|-20
+045|-19
+046|-18
+047|-17
+048|-16
+049|-15
+050|-14
+051|-13
+052|-12
+053|-11
+054|-10
+055|-9
+056|-8
+057|-7
+058|-6
+059|-5
+060|-4
+061|-3
+062|-2
+063|-1
+064|0
+065|+1
+066|+2
+067|+3
+068|+4
+069|+5
+070|+6
+071|+7
+072|+8
+073|+9
+074|+10
+075|+11
+076|+12
+077|+13
+078|+14
+079|+15
+080|+16
+081|+17
+082|+18
+083|+19
+084|+20
+085|+21
+086|+22
+087|+23
+088|+24
+089|+25
+090|+26
+091|+27
+092|+28
+093|+29
+094|+30
+095|+31
+096|+32
+097|+33
+098|+34
+099|+35
+100|+36
+101|+37
+102|+38
+103|+39
+104|+40
+105|+41
+106|+42
+107|+43
+108|+44
+109|+45
+110|+46
+111|+47
+112|+48
+113|+49
+114|+50
+115|+51
+116|+52
+117|+53
+118|+54
+119|+55
+120|+56
+121|+57
+122|+58
+123|+59
+124|+60
+125|+61
+126|+62
+127|+63
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_pan="
+000|Random
+001|L63
+002|L62
+003|L61
+004|L60
+005|L59
+006|L58
+007|L57
+008|L56
+009|L55
+010|L54
+011|L53
+012|L52
+013|L51
+014|L50
+015|L49
+016|L48
+017|L47
+018|L46
+019|L45
+020|L44
+021|L43
+022|L42
+023|L41
+024|L40
+025|L39
+026|L38
+027|L37
+028|L36
+029|L35
+030|L34
+031|L33
+032|L32
+033|L31
+034|L30
+035|L29
+036|L28
+037|L27
+038|L26
+039|L25
+040|L24
+041|L23
+042|L22
+043|L21
+044|L20
+045|L19
+046|L18
+047|L17
+048|L16
+049|L15
+050|L14
+051|L13
+052|L12
+053|L11
+054|L10
+055|L9
+056|L8
+057|L7
+058|L6
+059|L5
+060|L4
+061|L3
+062|L2
+063|L1
+064|Center
+065|R1
+066|R2
+067|R3
+068|R4
+069|R5
+070|R6
+071|R7
+072|R8
+073|R9
+074|R10
+075|R11
+076|R12
+077|R13
+078|R14
+079|R15
+080|R16
+081|R17
+082|R18
+083|R19
+084|R20
+085|R21
+086|R22
+087|R23
+088|R24
+089|R25
+090|R26
+091|R27
+092|R28
+093|R29
+094|R30
+095|R31
+096|R32
+097|R33
+098|R34
+099|R35
+100|R36
+101|R37
+102|R38
+103|R39
+104|R40
+105|R41
+106|R42
+107|R43
+108|R44
+109|R45
+110|R46
+111|R47
+112|R48
+113|R49
+114|R50
+115|R51
+116|R52
+117|R53
+118|R54
+119|R55
+120|R56
+121|R57
+122|R58
+123|R59
+124|R60
+125|R61
+126|R62
+127|R63
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_channel="
+000|1
+001|2
+002|3
+003|4
+004|5
+005|6
+006|7
+007|8
+008|9
+009|10
+010|11
+011|12
+012|13
+013|14
+014|15
+015|16
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_mono_poly="
+000|Mono
+001|Poly
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_off_on="
+000|Off
+001|On
+";
+
+//-----------------------------------------------------------------------------
