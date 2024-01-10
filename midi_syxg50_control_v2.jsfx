@@ -362,14 +362,14 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 			gui_slider_change|=1;
 		);
 		
-		mouse_cap&CAP_LMB ? (
+		mouse_cap&CAP_LMB && !(mouse_cap&CAP_CTRL) ? (
 			    
 			slider_value_float=(mouse_x-gui_slider_x)/gui_slider_width;
 			slider_value=gui_slider_float_to_value(slider_value_float,slider_min,slider_max);
 			gui_slider_change|=1;
 		);
 		
-		mouse_cap&CAP_RMB ? (
+		mouse_cap&CAP_RMB || (mouse_cap&CAP_LMB && mouse_cap&CAP_CTRL) ? (
 			    
 			slider_value=slider_def;
 			gui_slider_change|=1;
