@@ -58,6 +58,8 @@ color_fg_menu   =0x555555;
 color_fg_list   =0xD4D4D4;
 
 gui_page=0;
+gui_page_prev=-1;
+
 gui_mouse_lmb=0;
 gui_mouse_rmb=0;
 
@@ -546,6 +548,13 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 
 function gui_category_adjust_view(list_offset,list_cursor,list_length)
 (	
+	gui_page!=gui_page_prev ? (
+
+		//makes sure the selected item is visible on page enter
+		list_offset=min(list_offset, list_cursor);
+		list_offset=max(list_offset, list_cursor-category_list_height+1);
+	);
+
 	item_x=16;
 	item_y=menu_height+20-list_item_height;
 	
@@ -1243,6 +1252,7 @@ file_avail(0)>=0 ? (
 	category_list_reverb_cursor_prev=-1;
 	category_list_chorus_cursor_prev=-1;
 	category_list_variation_cursor_prev=-1;
+	gui_page_prev=-1;
 );
 
 
@@ -1402,6 +1412,7 @@ midi_channel!=midi_channel_prev ? (
 );
 
 gui_pages();  
+gui_page_prev=gui_page;
 
 //-------------------------------------------------------------------------------
 
