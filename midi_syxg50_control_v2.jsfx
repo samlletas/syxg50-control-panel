@@ -1235,6 +1235,16 @@ loop(16,
 	var_offset+=1;
 );
 
+//force update after data was loaded
+file_avail(0)>=0 ? (
+
+	midi_first_time=1;
+	midi_channel_prev=-1;
+	category_list_reverb_cursor_prev=-1;
+	category_list_chorus_cursor_prev=-1;
+	category_list_variation_cursor_prev=-1;
+);
+
 
 @block
 
