@@ -19,7 +19,7 @@ The following features were added:
 > 💡 This modified version is **NOT** compatible with Shiru's original version due to serialization changes, if you need to open old projects then you should keep both versions installed.
 
 ## Download & Install
-Download the JSFX file from the [Releases](https://github.com/samlletas/syxg50-control-panel/releases) page and copy it to your Reaper effects folder.
+Download the zip file from the [Releases](https://github.com/samlletas/syxg50-control-panel/releases) page, extract it and copy its contents to your Reaper effects folder.
 
 ## Usage
 
@@ -33,7 +33,7 @@ In order to enable variation effects the Control Panel sends the `variation conn
 `Sliders`
 
 - Left click to change value.
-- Right click to reset to default value.
+- Right click or Ctrl+Left click to reset to default value.
 - Scroll wheel to change value by small increments/decrements.
 
 `Channel`
@@ -41,6 +41,19 @@ In order to enable variation effects the Control Panel sends the `variation conn
 - Left click to select next channel.
 - Right click to select previous channel.
 - Scroll wheel to select next/previous channel.
+
+## FAQ
+
+### Why are variation effects not working?
+
+The FX Chain needs to be setup in a specific way, please see the [Usage](#usage) section for more details.
+
+### Why does the S-YXG50 synth occasionally produces stuck midi notes and/or misses midi notes?
+
+This seems to be an issue when bridging 32-bit plugins within the 64-bit version of Reaper. Since the S-YXG50 synth is a 32-bit plugin it is recommended to either:
+
+- Use the 32-bit version of Reaper.
+- Use an alternative bridging solution like [jBridge](https://jstuff.wordpress.com/jbridge/) (make sure to use version 1.77beta or newer).
 
 ## Development & Contributing
 
