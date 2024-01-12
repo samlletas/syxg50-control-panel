@@ -2,6 +2,10 @@
 //https://www.patreon.com/shiru8bit shiru@mail.ru
 //released under the CC0 terms
 
+//v2.3 11.01.24 - Ctrl+left click to reset sliders to default;
+//                Make the selected menu item visible on page enter;
+//                Force update after data was loaded (useful for presets);
+//                Codebase cleanup
 //v2.2 27.11.23 - Change UI colors to neutral tones
 //v2.1 15.11.23 - New UI colors and font;
 //                Highlight user-changed parameters;
