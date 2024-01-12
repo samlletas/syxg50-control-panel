@@ -667,7 +667,7 @@ X086:064:000 Train
 X087:064:000 Jetplane
 X088:064:000 Starship
 X089:064:000 Burst
-X090:064:000 Coaster 
+X090:064:000 Coaster
 X091:064:000 SbMarine
 X097:064:000 Laughing
 X098:064:000 Scream
@@ -696,7 +696,7 @@ X001:126:000 XG SFX 1
 X002:126:000 XG SFX 2
 X001:120:000 GM2 Standard
 X009:120:000 GM2 Room
-X017:120:000 GM2 Power 
+X017:120:000 GM2 Power
 X025:120:000 GM2 Electric
 X026:120:000 GM2 Analog
 X033:120:000 GM2 Jazz
@@ -1687,7 +1687,7 @@ effect_value_names_3_eq_frequency="
 059|18.0kHz
 060|20.0kHz
 ";
- 
+
 //-----------------------------------------------------------------------------
 
 effect_value_names_4_reverb_time="
