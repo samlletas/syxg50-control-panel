@@ -1358,7 +1358,7 @@ sysex_queue_ptr=0;
 @gfx 685 585
 
 gfx_setfont(1,"Segoe UI",22);
-gfx_getchar();
+key=gfx_getchar();
 
 category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
 category_list_height<1 ? category_list_height=1;
@@ -1408,6 +1408,18 @@ gui_menu_item(gfx_w-87,10,caption,0,2) ? (
 
 midi_channel>15 ? midi_channel=0;
 midi_channel<0 ? midi_channel=15;
+
+//change midi channel with number keys
+key==49 ? midi_channel=0;
+key==50 ? midi_channel=1;
+key==51 ? midi_channel=2;
+key==52 ? midi_channel=3;
+key==53 ? midi_channel=4;
+key==54 ? midi_channel=5;
+key==55 ? midi_channel=6;
+key==56 ? midi_channel=7;
+key==57 ? midi_channel=8;
+key==48 ? midi_channel=9;
 
 midi_channel!=midi_channel_prev ? (
 

@@ -41,6 +41,7 @@ In order to enable variation effects the Control Panel sends the `variation conn
 - Left click to select next channel.
 - Right click to select previous channel.
 - Scroll wheel to select next/previous channel.
+- Number keys to change channel (from 1 to 10).
 
 ## FAQ
 
