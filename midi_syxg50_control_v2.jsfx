@@ -2,6 +2,7 @@
 //https://www.patreon.com/shiru8bit shiru@mail.ru
 //released under the CC0 terms
 
+//v2.4 12.01.24 - Change midi channel with number keys
 //v2.3 11.01.24 - Ctrl+left click to reset sliders to default;
 //                Make the selected menu item visible on page enter;
 //                Force update after data was loaded (useful for presets);
