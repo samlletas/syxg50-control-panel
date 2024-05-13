@@ -1175,6 +1175,17 @@ function gui_pages()
 );
 
 
+function resend_midi()
+(
+	midi_first_time=1;
+	midi_channel_prev=-1;
+	category_list_reverb_cursor_prev=-1;
+	category_list_chorus_cursor_prev=-1;
+	category_list_variation_cursor_prev=-1;
+	gui_page_prev=-1;
+);
+
+
 @serialize
 
 file_var(0,gui_page);
@@ -1252,12 +1263,7 @@ loop(16,
 //force update after data was loaded
 file_avail(0)>=0 ? (
 
-	midi_first_time=1;
-	midi_channel_prev=-1;
-	category_list_reverb_cursor_prev=-1;
-	category_list_chorus_cursor_prev=-1;
-	category_list_variation_cursor_prev=-1;
-	gui_page_prev=-1;
+	resend_midi();
 );
 
 
@@ -1389,6 +1395,11 @@ gfx_rect(0,menu_height,category_list_width,gfx_h-menu_height);
 
 set_color(color_bg_light);
 gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
+
+gui_menu_item(gfx_w-140,10,"XG",0,1) ? (
+
+	resend_midi();
+);
 
 gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
 gui_menu_item(137,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
