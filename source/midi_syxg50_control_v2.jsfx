@@ -213,14 +213,12 @@ loop(16,
 list_contents="";
 slider_value_table="";
 
-
 function set_color(color)
 (
 	gfx_r=((color>>16)&0xff)/255;
 	gfx_g=((color>>8 )&0xff)/255;
 	gfx_b=( color     &0xff)/255;
 );
-
 
 function sysex_add_queue(address,value,length)
 (
@@ -231,12 +229,10 @@ function sysex_add_queue(address,value,length)
 	sysex_queue_ptr+=3;
 );
 
-
 function sysex_add_queue_multipart(address_part,address_parameter,value,length)
 (
 	sysex_add_queue((0x08<<16)|(address_part<<8)|(address_parameter<<0),value,length);
 );
-
 
 function xgsend_sysex(address,value,len)
 (
@@ -268,19 +264,6 @@ function xgsend_sysex(address,value,len)
 	);
 );
 
-
-function hex_number(char)
-(
-	hex_result=0;
-
-	char>=0x30 && char<=0x39 ? hex_result=char-0x30;
-	char>=0x41 && char<=0x46 ? hex_result=char-0x41+10;
-	char>=0x61 && char<=0x66 ? hex_result=char-0x61+10;
-
-	hex_result;
-);
-
-
 function parse_number_dec(string,offset,length)
 (
 	dec_value=0;
@@ -295,22 +278,6 @@ function parse_number_dec(string,offset,length)
 	dec_value;
 );
 
-
-function parse_number_hex(string,offset,length)
-(
-	hex_value=0;
-
-	loop(length,
-
-		hex_value=hex_value<<4;
-		hex_value+=hex_number(str_getchar(string,offset));
-		offset+=1;
-	);
-
-	hex_value;
-);
-
-
 function parse_to_line_end(string,offset)
 (
 	length=strlen(string);
@@ -319,7 +286,6 @@ function parse_to_line_end(string,offset)
 	offset;
 );
 
-
 function parse_to_next_line(string,offset)
 (
 	length=strlen(string);
@@ -327,7 +293,6 @@ function parse_to_next_line(string,offset)
 
 	offset;
 );
-
 
 function gui_slider_float_to_value(slider_value_float,slider_min,slider_max)
 (
@@ -338,7 +303,6 @@ function gui_slider_float_to_value(slider_value_float,slider_min,slider_max)
 	slider_value;
 );
 
-
 function gui_slider_value_to_float(slider_value,slider_min,slider_max)
 (
 	slider_value_float=(slider_value-slider_min)/(slider_max-slider_min);
@@ -347,7 +311,6 @@ function gui_slider_value_to_float(slider_value,slider_min,slider_max)
 
 	slider_value_float;
 );
-
 
 function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def)
 (
@@ -431,7 +394,6 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 	slider_value;
 );
 
-
 //mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
 function gui_menu_item(item_x,item_y,item_caption,item_selected,mode)
 (
@@ -477,7 +439,6 @@ function gui_menu_item(item_x,item_y,item_caption,item_selected,mode)
 
 	item_selected;
 );
-
 
 function gui_category(list_category,cursor_category,offset_category,highlight_category)
 (
@@ -553,7 +514,6 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 	cursor_category;
 );
 
-
 function gui_category_adjust_view(list_offset,list_cursor,list_length)
 (
 	gui_page!=gui_page_prev ? (
@@ -583,7 +543,6 @@ function gui_category_adjust_view(list_offset,list_cursor,list_length)
 
 	list_offset;
 );
-
 
 function gui_slider_list(list,cursor,effect_type,force_update)
 (
@@ -729,7 +688,6 @@ function gui_slider_list(list,cursor,effect_type,force_update)
 		);
 	);
 );
-
 
 function gui_pages()
 (
@@ -1176,7 +1134,6 @@ function gui_pages()
 		category_list_variation_cursor_prev=category_list_variation_cursor;
 	);
 );
-
 
 function resend_midi()
 (
