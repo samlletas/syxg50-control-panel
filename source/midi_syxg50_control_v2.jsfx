@@ -37,9 +37,12 @@ in_pin:none
 out_pin:none
 
 import midi_syxg50_data.jsfx-inc
+import midi_syxg50_mutex.jsfx-inc
 
 
 @init
+
+spinlock.lock();
 
 CAP_LMB=0x01;
 CAP_RMB=0x02;
@@ -1185,8 +1188,12 @@ function resend_midi()
 	gui_page_prev=-1;
 );
 
+spinlock.unlock();
+
 
 @serialize
+
+spinlock.lock();
 
 file_var(0,gui_page);
 file_var(0,midi_channel);
@@ -1266,10 +1273,14 @@ file_avail(0)>=0 ? (
 	resend_midi();
 );
 
+spinlock.unlock();
+
 
 @block
 
 while ( midirecv(ts,msg1,msg23) ? midisend(ts,msg1,msg23); );
+
+spinlock.lock();
 
 midi_first_time ? (
 
@@ -1361,28 +1372,14 @@ while(sysex_queue_ptr<sysex_queue_len) (
 
 sysex_queue_ptr=0;
 
+spinlock.unlock();
+
 
 @gfx 685 585
 
+//--main window----------------------------------------------------------------
+
 gfx_setfont(1,"Segoe UI",22);
-key=gfx_getchar();
-
-category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
-category_list_height<1 ? category_list_height=1;
-
-!gui_mouse_lmb ? (
-		mouse_cap&CAP_LMB ? gui_mouse_lmb=1;
-	) : (
-		!(mouse_cap&CAP_LMB) ? gui_mouse_lmb=0;
-	);
-
-!gui_mouse_rmb ? (
-		mouse_cap&CAP_RMB ? gui_mouse_rmb=1;
-	) : (
-		!(mouse_cap&CAP_RMB) ? gui_mouse_rmb=0;
-	);
-
-//--main menu-------------------------------------------------------------------
 
 set_color(color_bg_darkest);
 gfx_rect(0,0,gfx_w,menu_height-10);
@@ -1396,10 +1393,23 @@ gfx_rect(0,menu_height,category_list_width,gfx_h-menu_height);
 set_color(color_bg_light);
 gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
 
-gui_menu_item(gfx_w-140,10,"XG",0,1) ? (
+//--setup----------------------------------------------------------------------
 
-	resend_midi();
-);
+spinlock.lock();
+
+!gui_mouse_lmb ? (
+		mouse_cap&CAP_LMB ? gui_mouse_lmb=1;
+	) : (
+		!(mouse_cap&CAP_LMB) ? gui_mouse_lmb=0;
+	);
+
+!gui_mouse_rmb ? (
+		mouse_cap&CAP_RMB ? gui_mouse_rmb=1;
+	) : (
+		!(mouse_cap&CAP_RMB) ? gui_mouse_rmb=0;
+	);
+
+//--main menu------------------------------------------------------------------
 
 gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
 gui_menu_item(137,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
@@ -1422,6 +1432,7 @@ midi_channel>15 ? midi_channel=0;
 midi_channel<0 ? midi_channel=15;
 
 //change midi channel with number keys
+key=gfx_getchar();
 key==49 ? midi_channel=0;
 key==50 ? midi_channel=1;
 key==51 ? midi_channel=2;
@@ -1439,11 +1450,22 @@ midi_channel!=midi_channel_prev ? (
 	midi_channel_prev=midi_channel;
 );
 
-gui_pages();
-gui_page_prev=gui_page;
+//--current page---------------------------------------------------------------
 
-//-------------------------------------------------------------------------------
+category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
+category_list_height<1 ? category_list_height=1;
+
+gui_menu_item(gfx_w-140,10,"XG",0,1) ? (
+	resend_midi();
+) : (
+	gui_pages();
+	gui_page_prev=gui_page;
+);
+
+//--cleanup--------------------------------------------------------------------
 
 gui_mouse_lmb ? gui_mouse_lmb=2;
 gui_mouse_rmb ? gui_mouse_rmb=2;
 mouse_wheel=0;
+
+spinlock.unlock();

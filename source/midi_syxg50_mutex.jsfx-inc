@@ -1,0 +1,25 @@
+//Spinlock type mutex by Justin
+//https://forum.cockos.com/showpost.php?p=1185730&postcount=23
+
+@init
+
+function getthreadid() local(thisid) instance(counter)
+(
+  thisid ? thisid : (thisid = atomic_add(counter,1));
+);
+
+function lock()
+( 
+  this.ownid == getthreadid() ? (
+    this.l += 1;
+  ) : (
+    while ( atomic_setifequal(this.l,0,1) );
+    this.ownid = getthreadid();
+  );
+);
+
+function unlock() 
+( 
+  this.l <= 1 ? this.ownid = -1;
+  this.l -= 1;
+);
