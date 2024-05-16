@@ -1332,7 +1332,7 @@ sysex_queue_ptr=0;
 spinlock.unlock();
 
 
-@gfx 685 585
+@gfx 690 590
 
 //--main window----------------------------------------------------------------
 
@@ -1412,7 +1412,7 @@ midi_channel!=midi_channel_prev ? (
 category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
 category_list_height<1 ? category_list_height=1;
 
-gui_menu_item(gfx_w-140,10,"XG",0,1) ? (
+gui_menu_item(gfx_w-125,10,"XG",0,1) ? (
 	resend_midi();
 ) : (
 	gui_pages();
