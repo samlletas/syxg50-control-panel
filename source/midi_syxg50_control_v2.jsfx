@@ -1349,6 +1349,8 @@ gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_he
 
 spinlock.lock();
 
+key=gfx_getchar();
+
 !gui_mouse_lmb ? (
 		mouse_cap&CAP_LMB ? gui_mouse_lmb=1;
 	) : (
@@ -1383,8 +1385,7 @@ gui_menu_item(gfx_w-87,10,caption,0,2) ? (
 midi_channel>15 ? midi_channel=0;
 midi_channel<0 ? midi_channel=15;
 
-//change midi channel with number keys
-key=gfx_getchar();
+//change midi channel with number keys (1-10)
 key==49 ? midi_channel=0;
 key==50 ? midi_channel=1;
 key==51 ? midi_channel=2;
@@ -1395,6 +1396,14 @@ key==55 ? midi_channel=6;
 key==56 ? midi_channel=7;
 key==57 ? midi_channel=8;
 key==48 ? midi_channel=9;
+
+//change midi channel with qwerty keys (11-16)
+key==81 || key==113 ? midi_channel=10;
+key==87 || key==119 ? midi_channel=11;
+key==69 || key==101 ? midi_channel=12;
+key==82 || key==114 ? midi_channel=13;
+key==84 || key==116 ? midi_channel=14;
+key==89 || key==121 ? midi_channel=15;
 
 midi_channel!=midi_channel_prev ? (
 
