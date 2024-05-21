@@ -891,6 +891,15 @@ function gui_pages()
 			gui_slider_y+=25;
 
 			slider_value_table="";
+			effect_reverb_send[midi_channel]=gui_slider(effect_reverb_send[midi_channel],0,127,"Send to Reverb",40);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x13,effect_reverb_send[midi_channel],1);
+
+			effect_chorus_send[midi_channel]=gui_slider(effect_chorus_send[midi_channel],0,127,"Send to Chorus",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x12,effect_chorus_send[midi_channel],1);
+
+			effect_variation_send[midi_channel]=gui_slider(effect_variation_send[midi_channel],0,127,"Send to Variation",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x14,effect_variation_send[midi_channel],1);
+
 			voice_dry_level[midi_channel]=gui_slider(voice_dry_level[midi_channel],0,127,"Dry",127);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x11,voice_dry_level[midi_channel],1);
 		);
@@ -957,11 +966,6 @@ function gui_pages()
 			gui_slider_y=menu_height+20;
 
 			slider_value_table="";
-			effect_reverb_send[midi_channel]=gui_slider(effect_reverb_send[midi_channel],0,127,"Send",40);
-			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x13,effect_reverb_send[midi_channel],1);
-
-			gui_slider_y+=25;
-
 			effect_reverb_return=gui_slider(effect_reverb_return,0,127,"Return",64);
 			gui_slider_change ? sysex_add_queue(0x02010c,effect_reverb_return,1);
 
@@ -1014,11 +1018,6 @@ function gui_pages()
 			gui_slider_y=menu_height+20;
 
 			slider_value_table="";
-			effect_chorus_send[midi_channel]=gui_slider(effect_chorus_send[midi_channel],0,127,"Send",0);
-			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x12,effect_chorus_send[midi_channel],1);
-
-			gui_slider_y+=25;
-
 			effect_chorus_return=gui_slider(effect_chorus_return,0,127,"Return",64);
 			gui_slider_change ? sysex_add_queue(0x02012c,effect_chorus_return,1);
 
@@ -1106,11 +1105,6 @@ function gui_pages()
 			gui_slider_y=menu_height+20;
 
 			slider_value_table="";
-			effect_variation_send[midi_channel]=gui_slider(effect_variation_send[midi_channel],0,127,"Send",0);
-			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x14,effect_variation_send[midi_channel],1);
-
-			gui_slider_y+=25;
-
 			effect_variation_return=gui_slider(effect_variation_return,0,127,"Return",64);
 			gui_slider_change ? sysex_add_queue(0x020156,effect_variation_return,1);
 
