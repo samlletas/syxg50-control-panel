@@ -516,7 +516,7 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 
 function gui_category_adjust_view(list_offset,list_cursor,list_length)
 (
-	gui_page!=gui_page_prev ? (
+	gui_page!=gui_page_prev && category_list_height>0 ? (
 
 		//makes sure the selected item is visible on page enter
 		list_offset=min(list_offset, list_cursor);
