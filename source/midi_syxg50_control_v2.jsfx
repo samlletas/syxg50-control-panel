@@ -845,7 +845,7 @@ function gui_pages()
 			voice_mode[midi_channel]=gui_slider(voice_mode[midi_channel],0,1,"Mode",1);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x05,voice_mode[midi_channel],1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			slider_value_table="";
 			voice_dry_level[midi_channel]=gui_slider(voice_dry_level[midi_channel],0,127,"Dry",127);
@@ -866,7 +866,7 @@ function gui_pages()
 			voice_detune[midi_channel]=gui_slider(voice_detune[midi_channel],0,4096,"Detune",2048);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x09,voice_detune[midi_channel],2);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			slider_value_table=effect_value_names_18_generic;
 			voice_filter_cutoff[midi_channel]=gui_slider(voice_filter_cutoff[midi_channel],0,127,"Filter Cutoff",64);
@@ -884,7 +884,7 @@ function gui_pages()
 			voice_eg_release[midi_channel]=gui_slider(voice_eg_release[midi_channel],0,127,"EG Release",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x1c,voice_eg_release[midi_channel],1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			slider_value_table=effect_value_names_off_on;
 			voice_portamento_switch[midi_channel]=gui_slider(voice_portamento_switch[midi_channel],0,1,"Portamento Switch",0);
@@ -958,7 +958,7 @@ function gui_pages()
 			effect_reverb_send[midi_channel]=gui_slider(effect_reverb_send[midi_channel],0,127,"Send",40);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x13,effect_reverb_send[midi_channel],1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			effect_reverb_return=gui_slider(effect_reverb_return,0,127,"Return",64);
 			gui_slider_change ? sysex_add_queue(0x02010c,effect_reverb_return,1);
@@ -967,7 +967,7 @@ function gui_pages()
 			effect_reverb_pan=gui_slider(effect_reverb_pan,1,127,"Pan",64);
 			gui_slider_change ? sysex_add_queue(0x02010d,effect_reverb_pan,1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			gui_slider_list(reverb_params_list,category_list_reverb_cursor-1,0,force_update);
 		);
@@ -1015,7 +1015,7 @@ function gui_pages()
 			effect_chorus_send[midi_channel]=gui_slider(effect_chorus_send[midi_channel],0,127,"Send",0);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x12,effect_chorus_send[midi_channel],1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			effect_chorus_return=gui_slider(effect_chorus_return,0,127,"Return",64);
 			gui_slider_change ? sysex_add_queue(0x02012c,effect_chorus_return,1);
@@ -1028,7 +1028,7 @@ function gui_pages()
 			effect_chorus_send_reverb=gui_slider(effect_chorus_send_reverb,0,127,"Send to Reverb",0);
 			gui_slider_change ? sysex_add_queue(0x02012e,effect_chorus_send_reverb,1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			gui_slider_list(chorus_params_list,category_list_chorus_cursor-1,1,force_update);
 		);
@@ -1107,7 +1107,7 @@ function gui_pages()
 			effect_variation_send[midi_channel]=gui_slider(effect_variation_send[midi_channel],0,127,"Send",0);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x14,effect_variation_send[midi_channel],1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			effect_variation_return=gui_slider(effect_variation_return,0,127,"Return",64);
 			gui_slider_change ? sysex_add_queue(0x020156,effect_variation_return,1);
@@ -1123,7 +1123,7 @@ function gui_pages()
 			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Send to Chorus",0);
 			gui_slider_change ? sysex_add_queue(0x020159,effect_variation_send_chorus,1);
 
-			gui_slider_y+=20;
+			gui_slider_y+=25;
 
 			gui_slider_list(variation_params_list,category_list_variation_cursor-1,2,force_update);
 		);
