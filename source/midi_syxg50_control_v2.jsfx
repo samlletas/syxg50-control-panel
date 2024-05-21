@@ -845,11 +845,15 @@ function gui_pages()
 			voice_mode[midi_channel]=gui_slider(voice_mode[midi_channel],0,1,"Mode",1);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x05,voice_mode[midi_channel],1);
 
-			gui_slider_y+=25;
+			slider_value_table=effect_value_names_off_on;
+			voice_portamento_switch[midi_channel]=gui_slider(voice_portamento_switch[midi_channel],0,1,"Portamento Switch",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x67,voice_portamento_switch[midi_channel],1);
 
 			slider_value_table="";
-			voice_dry_level[midi_channel]=gui_slider(voice_dry_level[midi_channel],0,127,"Dry",127);
-			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x11,voice_dry_level[midi_channel],1);
+			voice_portamento_time[midi_channel]=gui_slider(voice_portamento_time[midi_channel],0,127,"Portamento Time",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x68,voice_portamento_time[midi_channel],1);
+
+			gui_slider_y+=25;
 
 			voice_volume[midi_channel]=gui_slider(voice_volume[midi_channel],0,127,"Volume",100);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x0b,voice_volume[midi_channel],1);
@@ -886,13 +890,9 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
-			slider_value_table=effect_value_names_off_on;
-			voice_portamento_switch[midi_channel]=gui_slider(voice_portamento_switch[midi_channel],0,1,"Portamento Switch",0);
-			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x67,voice_portamento_switch[midi_channel],1);
-
 			slider_value_table="";
-			voice_portamento_time[midi_channel]=gui_slider(voice_portamento_time[midi_channel],0,127,"Portamento Time",0);
-			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x68,voice_portamento_time[midi_channel],1);
+			voice_dry_level[midi_channel]=gui_slider(voice_dry_level[midi_channel],0,127,"Dry",127);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x11,voice_dry_level[midi_channel],1);
 		);
 
 		//modulation parameters
