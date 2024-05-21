@@ -893,6 +893,10 @@ function gui_pages()
 			slider_value_table="";
 			voice_portamento_time[midi_channel]=gui_slider(voice_portamento_time[midi_channel],0,127,"Portamento Time",0);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x68,voice_portamento_time[midi_channel],1);
+		);
+
+		//modulation parameters
+		category_list_editor_cursor==1 ? (
 
 			slider_value_table=effect_value_names_18_generic;
 			voice_vibrato_rate[midi_channel]=gui_slider(voice_vibrato_rate[midi_channel],0,127,"Vibrato Rate",64);
@@ -903,10 +907,8 @@ function gui_pages()
 
 			voice_vibrato_delay[midi_channel]=gui_slider(voice_vibrato_delay[midi_channel],0,127,"Vibrato Delay",64);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x17,voice_vibrato_delay[midi_channel],1);
-		);
 
-		//modulation parameters
-		category_list_editor_cursor==1 ? (
+			gui_slider_y+=25;
 
 			slider_value_table=effect_value_names_18_generic;
 			voice_bend_pitch_control[midi_channel]=gui_slider(voice_bend_pitch_control[midi_channel],40,88,"Pitch Bend Range",66);
