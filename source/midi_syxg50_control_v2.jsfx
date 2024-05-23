@@ -579,10 +579,10 @@ function gui_slider_list(list,cursor,effect_type,force_update)
 			sysex_param =parse_number_dec(list,list_ptr+0,2);
 			param_offset=effect_type*42*16+entry*16+sysex_param;
 
-			slider_min  =parse_number_dec(list,list_ptr+3,4);
-			slider_max  =parse_number_dec(list,list_ptr+8,4);
-			slider_def  =parse_number_dec(list,list_ptr+13,4);
-			slider_table=str_getchar(list,list_ptr+18);
+			slider_min  =parse_number_dec(list,list_ptr+3,5);
+			slider_max  =parse_number_dec(list,list_ptr+9,5);
+			slider_def  =parse_number_dec(list,list_ptr+15,5);
+			slider_table=str_getchar(list,list_ptr+21);
 
 			slider_value_table="";
 
@@ -605,7 +605,7 @@ function gui_slider_list(list,cursor,effect_type,force_update)
 			slider_table==0x48 ? slider_value_table=effect_value_names_17_gate_type;
 			slider_table==0x49 ? slider_value_table=effect_value_names_18_generic;
 
-			list_ptr+=20;
+			list_ptr+=23;
 			list_ptr_old=list_ptr;
 			list_ptr=parse_to_line_end(list,list_ptr);
 			strcpy_substr(slider_caption,list,list_ptr_old,list_ptr-list_ptr_old);
