@@ -180,8 +180,13 @@ voice_vibrato_rate=301300;
 voice_vibrato_depth=301400;
 voice_vibrato_delay=301500;
 voice_bend_pitch_control=301600;
-voice_mw_lfo_pmod_depth=301700;
-voice_dry_level=301800;
+voice_bend_filter_control=301700;
+voice_bend_amplitude_control=301800;
+voice_bend_lfo_pmod_depth=301900;
+voice_bend_lfo_fmod_depth=302000;
+voice_bend_lfo_amod_depth=302100;
+voice_mw_lfo_pmod_depth=302200;
+voice_dry_level=302300;
 
 var_offset=0;
 
@@ -204,6 +209,11 @@ loop(16,
 	voice_vibrato_depth[var_offset]=64;
 	voice_vibrato_delay[var_offset]=64;
 	voice_bend_pitch_control[var_offset]=66;
+	voice_bend_filter_control[var_offset]=64;
+	voice_bend_amplitude_control[var_offset]=64;
+	voice_bend_lfo_pmod_depth[var_offset]=0;
+	voice_bend_lfo_fmod_depth[var_offset]=0;
+	voice_bend_lfo_amod_depth[var_offset]=0;
 	voice_mw_lfo_pmod_depth[var_offset]=10;
 	voice_dry_level[var_offset]=127;
 
@@ -920,8 +930,26 @@ function gui_pages()
 			gui_slider_y+=25;
 
 			slider_value_table=effect_value_names_18_generic;
-			voice_bend_pitch_control[midi_channel]=gui_slider(voice_bend_pitch_control[midi_channel],40,88,"Pitch Bend Range",66);
+			voice_bend_pitch_control[midi_channel]=gui_slider(voice_bend_pitch_control[midi_channel],40,88,"Bend Pitch Control",66);
 			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x23,voice_bend_pitch_control[midi_channel],1);
+
+			voice_bend_filter_control[midi_channel]=gui_slider(voice_bend_filter_control[midi_channel],0,127,"Bend Filter Control",64);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x24,voice_bend_filter_control[midi_channel],1);
+
+			voice_bend_amplitude_control[midi_channel]=gui_slider(voice_bend_amplitude_control[midi_channel],0,127,"Bend Amp Control",64);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x25,voice_bend_amplitude_control[midi_channel],1);
+
+			slider_value_table="";
+			voice_bend_lfo_pmod_depth[midi_channel]=gui_slider(voice_bend_lfo_pmod_depth[midi_channel],0,127,"Bend LFO Pitch Depth",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x26,voice_bend_lfo_pmod_depth[midi_channel],1);
+
+			voice_bend_lfo_fmod_depth[midi_channel]=gui_slider(voice_bend_lfo_fmod_depth[midi_channel],0,127,"Bend LFO Filter Depth",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x27,voice_bend_lfo_fmod_depth[midi_channel],1);
+
+			voice_bend_lfo_amod_depth[midi_channel]=gui_slider(voice_bend_lfo_amod_depth[midi_channel],0,127,"Bend LFO Amp Depth",0);
+			gui_slider_change ? sysex_add_queue_multipart(midi_channel,0x28,voice_bend_lfo_amod_depth[midi_channel],1);
+
+			gui_slider_y+=25;
 
 			slider_value_table="";
 			voice_mw_lfo_pmod_depth[midi_channel]=gui_slider(voice_mw_lfo_pmod_depth[midi_channel],0,127,"MW Vibrato Depth",10);
@@ -1213,6 +1241,11 @@ loop(16,
 	file_var(0,voice_bend_pitch_control[var_offset]);
 	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
 	file_var(0,voice_dry_level[var_offset]);
+	file_var(0,voice_bend_filter_control[var_offset]);
+	file_var(0,voice_bend_amplitude_control[var_offset]);
+	file_var(0,voice_bend_lfo_pmod_depth[var_offset]);
+	file_var(0,voice_bend_lfo_fmod_depth[var_offset]);
+	file_var(0,voice_bend_lfo_amod_depth[var_offset]);
 
 	var_offset+=1;
 );
@@ -1265,6 +1298,11 @@ midi_first_time ? (
 		sysex_add_queue_multipart(channel,0x16,voice_vibrato_depth[channel],1);
 		sysex_add_queue_multipart(channel,0x17,voice_vibrato_delay[channel],1);
 		sysex_add_queue_multipart(channel,0x23,voice_bend_pitch_control[channel],1);
+		sysex_add_queue_multipart(channel,0x24,voice_bend_filter_control[channel],1);
+		sysex_add_queue_multipart(channel,0x25,voice_bend_amplitude_control[channel],1);
+		sysex_add_queue_multipart(channel,0x26,voice_bend_lfo_pmod_depth[channel],1);
+		sysex_add_queue_multipart(channel,0x27,voice_bend_lfo_fmod_depth[channel],1);
+		sysex_add_queue_multipart(channel,0x28,voice_bend_lfo_amod_depth[channel],1);
 		sysex_add_queue_multipart(channel,0x20,voice_mw_lfo_pmod_depth[channel],1);
 		sysex_add_queue_multipart(channel,0x11,voice_dry_level[channel],1);
 
