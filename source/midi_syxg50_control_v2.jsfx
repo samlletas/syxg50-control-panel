@@ -1267,6 +1267,14 @@ loop(16,
 	file_var(0,voice_bend_pitch_control[var_offset]);
 	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
 	file_var(0,voice_dry_level[var_offset]);
+
+	var_offset+=1;
+);
+
+var_offset=0;
+
+loop(16,
+
 	file_var(0,voice_bend_filter_control[var_offset]);
 	file_var(0,voice_bend_amplitude_control[var_offset]);
 	file_var(0,voice_bend_lfo_pmod_depth[var_offset]);
