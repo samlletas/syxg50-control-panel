@@ -76,6 +76,7 @@ gui_slider_height=12;
 gui_slider_x=0;
 gui_slider_y=0;
 gui_slider_change=0;
+force_update=0;
 
 midi_first_time=1;
 midi_synth_mode_xg=0;
@@ -334,6 +335,7 @@ function gui_slider_value_to_float(slider_value,slider_min,slider_max)
 
 function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def)
 (
+	slider_value_old=slider_value;
 	slider_value<0 ? slider_value=slider_def;
 	slider_value_float=gui_slider_value_to_float(slider_value,slider_min,slider_max);
 	slider_value_width=floor((gui_slider_width*slider_value_float)+0.5);
@@ -352,25 +354,24 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 			slider_range=slider_max-slider_min;
 			slider_range>127 ? step_size=floor((slider_range/64)+0.5) : step_size=1;
 			slider_value+=sign(mouse_wheel)*max(step_size, 1);
-			gui_slider_change|=1;
 		);
 
 		mouse_cap&CAP_LMB && !(mouse_cap&CAP_CTRL) ? (
 
 			slider_value_float=(mouse_x-gui_slider_x)/gui_slider_width;
 			slider_value=gui_slider_float_to_value(slider_value_float,slider_min,slider_max);
-			gui_slider_change|=1;
 		);
 
 		mouse_cap&CAP_RMB || (mouse_cap&CAP_LMB && mouse_cap&CAP_CTRL) ? (
 
 			slider_value=slider_def;
-			gui_slider_change|=1;
 		);
 
 		slider_value<slider_min ? slider_value=slider_min;
 		slider_value>slider_max ? slider_value=slider_max;
 	);
+
+	gui_slider_change=force_update|(slider_value!=slider_value_old);
 
 	slider_value==slider_def ? set_color(color_fg_list);
 	slider_value!=slider_def ? set_color(color_bg_changed);
@@ -564,7 +565,7 @@ function gui_category_adjust_view(list_offset,list_cursor,list_length)
 	list_offset;
 );
 
-function gui_slider_list(list,cursor,effect_type,force_update)
+function gui_slider_list(list,cursor,effect_type)
 (
 	entry=-1;
 	entry_ptr=-1;
@@ -631,7 +632,6 @@ function gui_slider_list(list,cursor,effect_type,force_update)
 			strcpy_substr(slider_caption,list,list_ptr_old,list_ptr-list_ptr_old);
 			list_ptr=parse_to_next_line(list,list_ptr);
 
-			gui_slider_change|=force_update;
 			effect_params[param_offset]=gui_slider(effect_params[param_offset],slider_min,slider_max,slider_caption,slider_def);
 
 			gui_slider_change ? (
@@ -701,7 +701,6 @@ function gui_slider_list(list,cursor,effect_type,force_update)
 				);
 
 				sysex_add_queue(sysex_addr,effect_params[param_offset],sysex_size);
-				force_update==0 ? gui_slider_change=0;
 			);
 
 			str_getchar(list,list_ptr)==0x23 ? list_ptr=list_length;
@@ -803,7 +802,7 @@ function gui_pages()
 			);
 		);
 
-		instrument_change>=0 ? (
+		instrument_change>=0 && instrument_change!=instrument_voice[midi_channel] ? (
 
 			list_string_ptr=1;
 			instrument_list_count=0;
@@ -849,7 +848,7 @@ function gui_pages()
 		category_list_editor_cursor=gui_category(list_editor_category,category_list_editor_cursor,category_list_editor_offset,category_list_editor_cursor);
 		category_list_editor_offset=gui_category_adjust_view(category_list_editor_offset,category_list_editor_cursor,category_list_length);
 
-		gui_slider_change=0;
+		force_update=0;
 
 		gui_slider_x=category_list_width+170;
 		gui_slider_y=menu_height+20;
@@ -1015,7 +1014,6 @@ function gui_pages()
 
 		category_list_reverb_cursor>0 ? (
 
-			gui_slider_change=force_update;
 			gui_slider_x=category_list_width+170;
 			gui_slider_y=menu_height+20;
 
@@ -1029,7 +1027,7 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
-			gui_slider_list(reverb_params_list,category_list_reverb_cursor-1,0,force_update);
+			gui_slider_list(reverb_params_list,category_list_reverb_cursor-1,0);
 		);
 
 		category_list_reverb_cursor_prev=category_list_reverb_cursor;
@@ -1067,7 +1065,6 @@ function gui_pages()
 
 		category_list_chorus_cursor>0 ? (
 
-			gui_slider_change=force_update;
 			gui_slider_x=category_list_width+170;
 			gui_slider_y=menu_height+20;
 
@@ -1085,7 +1082,7 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
-			gui_slider_list(chorus_params_list,category_list_chorus_cursor-1,1,force_update);
+			gui_slider_list(chorus_params_list,category_list_chorus_cursor-1,1);
 		);
 
 		category_list_chorus_cursor_prev=category_list_chorus_cursor;
@@ -1154,7 +1151,6 @@ function gui_pages()
 
 		category_list_variation_cursor>0 ? (
 
-			gui_slider_change=force_update;
 			gui_slider_x=category_list_width+170;
 			gui_slider_y=menu_height+20;
 
@@ -1175,7 +1171,7 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
-			gui_slider_list(variation_params_list,category_list_variation_cursor-1,2,force_update);
+			gui_slider_list(variation_params_list,category_list_variation_cursor-1,2);
 		);
 
 		category_list_variation_cursor_prev=category_list_variation_cursor;
