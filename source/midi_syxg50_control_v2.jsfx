@@ -814,7 +814,7 @@ function gui_pages()
 			);
 		);
 
-		instrument_change>=0 && instrument_change!=instrument_voice[midi_channel] ? (
+		instrument_change>=0 && (instrument_change!=instrument_voice[midi_channel] || category_list_voice_cursor!=instrument_category[midi_channel]) ? (
 
 			list_string_ptr=1;
 			instrument_list_count=0;
