@@ -2,6 +2,17 @@
 //https://www.patreon.com/shiru8bit shiru@mail.ru
 //released under the CC0 terms
 
+//v2.5 27.05.24 - Enable default FXs as defined in the XG standard (Hall 1, Chorus 1, Delay LCR);
+//              - Adjust Reverbs/Delays defaults to match XGworks;
+//              - Rename "Channel" to "Part" as defined in the XG standard;
+//              - Change part 11-16 with QWERTY keys;
+//              - Add "XG" button to force re-send all parameters;
+//              - Add "Modulation" and "Keyboard" sections to "Voice Editor" tab;
+//              - Move FX sends to "Voice Editor" tab;
+//              - Slightly increase window size;
+//              - Fix data corruption due to concurrency;
+//              - Fix sending duplicated sysex messages;
+//              - Fix category offset when opening the first time
 //v2.4 12.01.24 - Change midi channel with number keys
 //v2.3 11.01.24 - Ctrl+left click to reset sliders to default;
 //                Make the selected menu item visible on page enter;
