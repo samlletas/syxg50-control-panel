@@ -1,46 +1,46 @@
-//Yamaha S-YXG50 VSTi external control panel by Shiru
-//https://www.patreon.com/shiru8bit shiru@mail.ru
-//released under the CC0 terms
+// Yamaha S-YXG50 VSTi external control panel by Shiru
+// https://www.patreon.com/shiru8bit shiru@mail.ru
+// released under the CC0 terms
 
-//v2.5 27.05.24 - Enable default FXs as defined in the XG standard (Hall 1, Chorus 1, Delay LCR);
-//              - Adjust Reverbs/Delays defaults to match XGworks;
-//              - Rename "Channel" to "Part" as defined in the XG standard;
-//              - Change part 11-16 with QWERTY keys;
-//              - Add "XG" button to force re-send all parameters;
-//              - Add "Modulation" and "Keyboard" sections to "Voice Editor" tab;
-//              - Move FX sends to "Voice Editor" tab;
-//              - Slightly increase window size;
-//              - Fix data corruption due to concurrency;
-//              - Fix sending duplicated sysex messages;
-//              - Fix category offset when opening the first time
-//v2.4 12.01.24 - Change midi channel with number keys
-//v2.3 11.01.24 - Ctrl+left click to reset sliders to default;
-//                Make the selected menu item visible on page enter;
-//                Force update after data was loaded (useful for presets);
-//                Codebase cleanup
-//v2.2 27.11.23 - Change UI colors to neutral tones
-//v2.1 15.11.23 - New UI colors and font;
-//                Highlight user-changed parameters;
-//                Improve mouse scroll wheel behaviour on sliders;
-//                Add missing reverb, chorus and variation effects;
-//                Add missing effect data value tables;
-//                Remove "Dry/Wet" parameter since it has no effect when variation connection = system;
-//                Remove "Thru" effect
-//v2.0 07.09.23 - Default values for every parameter (obtained from the XG specifications manual);
-//                New editor tab to edit common voice parameters;
-//                Instruments are now saved per channel;
-//                When changing MIDI channel the instrument category switches accordingly;
-//                Serialize parameter values instead of slider positions to avoid float precision loss
-//v1.1 13.02.20 - MIDI channel can be changed with RMB and mouse wheel;
-//                Shift+mouse wheel to precise adjustments of the sliders;
-//                Reverb/Chorus/Variation sends are per-channel settings now;
-//                RMB on a parameter to reset to a default value;
-//                Reverb/Chorus/Variation settings properly restored after loading
-//v1.0 12.06.17 - Initial release worthy version, with instument list and all effect parameters
-//v0.0 31.05.17 - Work started
+// v2.5 27.05.24 - Enable default FXs as defined in the XG standard (Hall 1, Chorus 1, Delay LCR);
+//               - Adjust Reverbs/Delays defaults to match XGworks;
+//               - Rename "Channel" to "Part" as defined in the XG standard;
+//               - Change part 11-16 with QWERTY keys;
+//               - Add "XG" button to force re-send all parameters;
+//               - Add "Modulation" and "Keyboard" sections to "Voice Editor" tab;
+//               - Move FX sends to "Voice Editor" tab;
+//               - Slightly increase window size;
+//               - Fix data corruption due to concurrency;
+//               - Fix sending duplicated sysex messages;
+//               - Fix category offset when opening the first time
+// v2.4 12.01.24 - Change midi channel with number keys
+// v2.3 11.01.24 - Ctrl+left click to reset sliders to default;
+//                 Make the selected menu item visible on page enter;
+//                 Force update after data was loaded (useful for presets);
+//                 Codebase cleanup
+// v2.2 27.11.23 - Change UI colors to neutral tones
+// v2.1 15.11.23 - New UI colors and font;
+//                 Highlight user-changed parameters;
+//                 Improve mouse scroll wheel behaviour on sliders;
+//                 Add missing reverb, chorus and variation effects;
+//                 Add missing effect data value tables;
+//                 Remove "Dry/Wet" parameter since it has no effect when variation connection = system;
+//                 Remove "Thru" effect
+// v2.0 07.09.23 - Default values for every parameter (obtained from the XG specifications manual);
+//                 New editor tab to edit common voice parameters;
+//                 Instruments are now saved per channel;
+//                 When changing MIDI channel the instrument category switches accordingly;
+//                 Serialize parameter values instead of slider positions to avoid float precision loss
+// v1.1 13.02.20 - MIDI channel can be changed with RMB and mouse wheel;
+//                 Shift+mouse wheel to precise adjustments of the sliders;
+//                 Reverb/Chorus/Variation sends are per-channel settings now;
+//                 RMB on a parameter to reset to a default value;
+//                 Reverb/Chorus/Variation settings properly restored after loading
+// v1.0 12.06.17 - Initial release worthy version, with instument list and all effect parameters
+// v0.0 31.05.17 - Work started
 
-//Special thanks to phonymacaroni, EvilDragon
-//Changes in v2 release implemented by samlletas
+// Special thanks to phonymacaroni, EvilDragon
+// Changes in v2 release implemented by samlletas
 
 desc:MIDI S-YXG50 Control Panel v2
 
@@ -94,7 +94,7 @@ midi_first_time=1;
 midi_synth_mode_xg=0;
 midi_synth_mode_tg300=1;
 midi_synth_mode=midi_synth_mode_xg;
-midi_synth_mode_prev=-1;                //send sysex only if changed
+midi_synth_mode_prev=-1;                // send sysex only if changed
 
 sysex_buf=100000;
 sysex_queue=100100;
@@ -211,6 +211,28 @@ voice_velocity_limit_low=303100;
 voice_velocity_limit_high=303200;
 voice_velocity_sense_depth=303300;
 voice_velocity_sense_offset=303400;
+voice_at_pitch_control=303500;
+voice_at_filter_control=303600;
+voice_at_amp_control=303700;
+voice_at_lfo_pmod_depth=303800;
+voice_at_lfo_fmod_depth=303900;
+voice_at_lfo_amod_depth=304000;
+voice_pitch_eg_init_level=304100;
+voice_pitch_eg_attack=304200;
+voice_pitch_eg_release_level=304300;
+voice_pitch_eg_release=304400;
+voice_scale_c=305000;
+voice_scale_cs=305100;
+voice_scale_d=305200;
+voice_scale_ds=305300;
+voice_scale_e=305400;
+voice_scale_f=305500;
+voice_scale_fs=305600;
+voice_scale_g=305700;
+voice_scale_gs=305800;
+voice_scale_a=305900;
+voice_scale_as=306000;
+voice_scale_b=306100;
 
 var_offset=0;
 
@@ -251,6 +273,28 @@ loop(16,
 	voice_velocity_limit_high[var_offset]=127;
 	voice_velocity_sense_depth[var_offset]=64;
 	voice_velocity_sense_offset[var_offset]=64;
+	voice_at_pitch_control[var_offset]=64;
+	voice_at_filter_control[var_offset]=64;
+	voice_at_amp_control[var_offset]=64;
+	voice_at_lfo_pmod_depth[var_offset]=0;
+	voice_at_lfo_fmod_depth[var_offset]=0;
+	voice_at_lfo_amod_depth[var_offset]=0;
+	voice_pitch_eg_init_level[var_offset]=64;
+	voice_pitch_eg_attack[var_offset]=64;
+	voice_pitch_eg_release_level[var_offset]=64;
+	voice_pitch_eg_release[var_offset]=64;
+	voice_scale_c[var_offset]=64;
+	voice_scale_cs[var_offset]=64;
+	voice_scale_d[var_offset]=64;
+	voice_scale_ds[var_offset]=64;
+	voice_scale_e[var_offset]=64;
+	voice_scale_f[var_offset]=64;
+	voice_scale_fs[var_offset]=64;
+	voice_scale_g[var_offset]=64;
+	voice_scale_gs[var_offset]=64;
+	voice_scale_a[var_offset]=64;
+	voice_scale_as[var_offset]=64;
+	voice_scale_b[var_offset]=64;
 
 	var_offset+=1;
 );
@@ -283,24 +327,24 @@ function xgsend_sysex(address,value,len)
 (
 	address>=0 ? (
 
-		sysex_buf[0x00]=0x43;               //Yamaha ID
-		sysex_buf[0x01]=0x10;               //device number
-		sysex_buf[0x02]=0x4c;               //XG model ID
-		sysex_buf[0x03]=(address>>16)&0x7f; //address high
-		sysex_buf[0x04]=(address>>8 )&0x7f; //address mid
-		sysex_buf[0x05]= address     &0x7f; //address low
+		sysex_buf[0x00]=0x43;               // Yamaha ID
+		sysex_buf[0x01]=0x10;               // device number
+		sysex_buf[0x02]=0x4c;               // XG model ID
+		sysex_buf[0x03]=(address>>16)&0x7f; // address high
+		sysex_buf[0x04]=(address>>8 )&0x7f; // address mid
+		sysex_buf[0x05]= address     &0x7f; // address low
 
 		len==1 ? (
 
-			sysex_buf[0x06]=value&0x7f;    //value lsb
+			sysex_buf[0x06]=value&0x7f;    // value lsb
 
 			midisend_buf(sysex_delay,sysex_buf,0x07);
 		);
 
 		len==2 ? (
 
-			sysex_buf[0x06]=(value>>8)&0x7f;    //value msb
-			sysex_buf[0x07]= value    &0x7f;    //value lsb
+			sysex_buf[0x06]=(value>>8)&0x7f;    // value msb
+			sysex_buf[0x07]= value    &0x7f;    // value lsb
 
 			midisend_buf(sysex_delay,sysex_buf,0x08);
 		);
@@ -463,7 +507,7 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 	slider_value;
 );
 
-//mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
+// mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
 function gui_menu_item(item_x,item_y,item_caption,item_selected,mode)
 (
 	gfx_x=item_x;
@@ -587,7 +631,7 @@ function gui_category_adjust_view(list_offset,list_cursor,list_length)
 (
 	gui_page!=gui_page_prev && category_list_height>0 ? (
 
-		//makes sure the selected item is visible on page enter
+		// makes sure the selected item is visible on page enter
 		list_offset=min(list_offset, list_cursor);
 		list_offset=max(list_offset, list_cursor-category_list_height+1);
 	);
@@ -597,14 +641,14 @@ function gui_category_adjust_view(list_offset,list_cursor,list_length)
 
 	list_offset>0 ? (
 
-		gui_menu_item(item_x,item_y,"...",0,0) ? list_offset-=1;
+		gui_menu_item(item_x,item_y,"                 ↑                 ",0,0) ? list_offset-=1;
 	);
 
 	item_y=menu_height+20+category_list_height*list_item_height;
 
 	category_list_height<list_length && (list_offset+category_list_height)<list_length && item_y>=(menu_height+20) ? (
 
-		gui_menu_item(item_x,item_y,"...",0,0) ? list_offset+=1;
+		gui_menu_item(item_x,item_y,"                 ↓                 ",0,0) ? list_offset+=1;
 	);
 
 	list_offset<0 ? list_offset=0;
@@ -624,7 +668,7 @@ function gui_slider_list(list,cursor,effect_type)
 
 		id=str_getchar(list,list_ptr);
 
-		id==0x23 ? (    //seek for #
+		id==0x23 ? (    // seek for #
 
 			entry=parse_number_dec(list,list_ptr+1,2);
 		);
@@ -674,6 +718,8 @@ function gui_slider_list(list,cursor,effect_type)
 			slider_table==0x47 ? slider_value_table=effect_value_names_16_lfo_phase_diff;
 			slider_table==0x48 ? slider_value_table=effect_value_names_17_gate_type;
 			slider_table==0x49 ? slider_value_table=effect_value_names_18_generic;
+			slider_table==0x4A ? slider_value_table=effect_value_names_19_high_damp;
+			slider_table==0x4B ? slider_value_table=effect_value_names_20_mid_width;
 
 			list_ptr+=25;
 			list_ptr_old=list_ptr;
@@ -687,7 +733,7 @@ function gui_slider_list(list,cursor,effect_type)
 
 				sysex_size=1;
 
-				effect_type==0 ? (     //reverb
+				effect_type==0 ? (     // reverb
 
 					sysex_param==1 ? sysex_addr=0x020102;
 					sysex_param==2 ? sysex_addr=0x020103;
@@ -707,7 +753,7 @@ function gui_slider_list(list,cursor,effect_type)
 					sysex_param==16 ? sysex_addr=0x020115;
 				);
 
-				effect_type==1 ? (     //chorus
+				effect_type==1 ? (     // chorus
 
 					sysex_param==1 ? sysex_addr=0x020122;
 					sysex_param==2 ? sysex_addr=0x020123;
@@ -727,7 +773,7 @@ function gui_slider_list(list,cursor,effect_type)
 					sysex_param==16 ? sysex_addr=0x020135;
 				);
 
-				effect_type==2 ? (     //variation
+				effect_type==2 ? (     // variation
 
 					sysex_param>=1 && sysex_param<=10 ? sysex_size=2;
 
@@ -759,16 +805,16 @@ function gui_slider_list(list,cursor,effect_type)
 
 function gui_pages()
 (
-	//--voice catalog---------------------------------------------------------------
+	// voice catalog---------------------------------------------------------------
 
 	gui_page==0 ? (
 
-		//render category list
+		// render category list
 
 		category_list_voice_cursor=gui_category(list_voice_category,category_list_voice_cursor,category_list_voice_offset,instrument_category[part_number]);
 		category_list_voice_offset=gui_category_adjust_view(category_list_voice_offset,category_list_voice_cursor,category_list_length);
 
-		//render voice list
+		// render voice list
 
 		list_contents="";
 
@@ -870,8 +916,8 @@ function gui_pages()
 
 					mode=str_getchar(list_contents,list_string_old_ptr+0);
 
-					mode==0x58 ? midi_synth_mode=midi_synth_mode_xg;     //X
-					mode==0x54 ? midi_synth_mode=midi_synth_mode_tg300;  //T
+					mode==0x58 ? midi_synth_mode=midi_synth_mode_xg;     // X
+					mode==0x54 ? midi_synth_mode=midi_synth_mode_tg300;  // T
 
 					midi_program[part_number]=parse_number_dec(list_contents,list_string_old_ptr+1,3)-1;
 
@@ -880,9 +926,9 @@ function gui_pages()
 
 					midi_bank[part_number]=msb*256+lsb;
 
-					sysex_add_queue_multipart(part_number,0x01,(midi_bank[part_number]>>8)&0x7f,1);  //bank change MSB
-					sysex_add_queue_multipart(part_number,0x02,(midi_bank[part_number]>>0)&0x7f,1);  //bank change LSB
-					sysex_add_queue_multipart(part_number,0x03,midi_program[part_number],1);         //program change
+					sysex_add_queue_multipart(part_number,0x01,(midi_bank[part_number]>>8)&0x7f,1);  // bank change MSB
+					sysex_add_queue_multipart(part_number,0x02,(midi_bank[part_number]>>0)&0x7f,1);  // bank change LSB
+					sysex_add_queue_multipart(part_number,0x03,midi_program[part_number],1);         // program change
 				);
 
 				instrument_list_count+=1;
@@ -890,7 +936,7 @@ function gui_pages()
 		);
 	);
 
-	//--voice editor----------------------------------------------------------------
+	// voice editor----------------------------------------------------------------
 
 	gui_page==1 ? (
 
@@ -899,22 +945,22 @@ function gui_pages()
 
 		force_update=0;
 
-		gui_slider_x=category_list_width+170;
+		gui_slider_x=category_list_width+190;
 		gui_slider_y=menu_height+20;
 
-		//common parameters
+		// common parameters
 		category_list_editor_cursor==0 ? (
 
-			slider_value_table=effect_value_names_channel;
+			slider_value_table=param_value_names_channel;
 			voice_rcv_channel[part_number]=gui_slider(voice_rcv_channel[part_number],0,15,"Receive Channel",part_number,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x04,voice_rcv_channel[part_number],1);
 
-			slider_value_table=effect_value_names_mono_poly;
+			slider_value_table=param_value_names_mono_poly;
 			voice_mode[part_number]=gui_slider(voice_mode[part_number],0,1,"Mode",1,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x05,voice_mode[part_number],1);
 
-			slider_value_table=effect_value_names_off_on;
-			voice_portamento_switch[part_number]=gui_slider(voice_portamento_switch[part_number],0,1,"Portamento Switch",0,0);
+			slider_value_table=param_value_names_off_on;
+			voice_portamento_switch[part_number]=gui_slider(voice_portamento_switch[part_number],0,1,"Portamento",0,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x67,voice_portamento_switch[part_number],1);
 
 			slider_value_table="";
@@ -926,11 +972,11 @@ function gui_pages()
 			voice_volume[part_number]=gui_slider(voice_volume[part_number],0,127,"Volume",100,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x0b,voice_volume[part_number],1);
 
-			slider_value_table=effect_value_names_pan;
+			slider_value_table=param_value_names_pan;
 			voice_pan[part_number]=gui_slider(voice_pan[part_number],0,127,"Pan",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x0e,voice_pan[part_number],1);
 
-			slider_value_table=effect_value_names_18_generic;
+			slider_value_table=param_value_names_semitones;
 			voice_transpose[part_number]=gui_slider(voice_transpose[part_number],40,88,"Transpose",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x08,voice_transpose[part_number],1);
 
@@ -947,6 +993,8 @@ function gui_pages()
 			voice_filter_resonance[part_number]=gui_slider(voice_filter_resonance[part_number],0,127,"Filter Resonance",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x19,voice_filter_resonance[part_number],1);
 
+			gui_slider_y+=25;
+
 			voice_eg_attack[part_number]=gui_slider(voice_eg_attack[part_number],0,127,"EG Attack",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1a,voice_eg_attack[part_number],1);
 
@@ -958,21 +1006,35 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
+			voice_pitch_eg_init_level[part_number]=gui_slider(voice_pitch_eg_init_level[part_number],0,127,"Pitch EG Init Level",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x69,voice_pitch_eg_init_level[part_number],1);
+
+			voice_pitch_eg_attack[part_number]=gui_slider(voice_pitch_eg_attack[part_number],0,127,"Pitch EG Attack",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x6a,voice_pitch_eg_attack[part_number],1);
+
+			voice_pitch_eg_release_level[part_number]=gui_slider(voice_pitch_eg_release_level[part_number],0,127,"Pitch EG Release Level",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x6b,voice_pitch_eg_release_level[part_number],1);
+
+			voice_pitch_eg_release[part_number]=gui_slider(voice_pitch_eg_release[part_number],0,127,"Pitch EG Release",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x6c,voice_pitch_eg_release[part_number],1);
+
+			gui_slider_y+=25;
+
 			slider_value_table="";
-			effect_reverb_send[part_number]=gui_slider(effect_reverb_send[part_number],0,127,"Send to Reverb",40,0);
+			effect_reverb_send[part_number]=gui_slider(effect_reverb_send[part_number],0,127,"Reverb Send",40,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x13,effect_reverb_send[part_number],1);
 
-			effect_chorus_send[part_number]=gui_slider(effect_chorus_send[part_number],0,127,"Send to Chorus",0,0);
+			effect_chorus_send[part_number]=gui_slider(effect_chorus_send[part_number],0,127,"Chorus Send",0,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x12,effect_chorus_send[part_number],1);
 
-			effect_variation_send[part_number]=gui_slider(effect_variation_send[part_number],0,127,"Send to Variation",0,0);
+			effect_variation_send[part_number]=gui_slider(effect_variation_send[part_number],0,127,"Variation Send",0,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x14,effect_variation_send[part_number],1);
 
 			voice_dry_level[part_number]=gui_slider(voice_dry_level[part_number],0,127,"Dry",127,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x11,voice_dry_level[part_number],1);
 		);
 
-		//modulation parameters
+		// modulation parameters
 		category_list_editor_cursor==1 ? (
 
 			slider_value_table=effect_value_names_18_generic;
@@ -987,15 +1049,15 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
-			slider_value_table=effect_value_names_18_generic;
+			slider_value_table=param_value_names_semitones;
 			voice_bend_pitch_control[part_number]=gui_slider(voice_bend_pitch_control[part_number],40,88,"PB Pitch Control",66,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x23,voice_bend_pitch_control[part_number],1);
 
-			slider_value_table=effect_value_names_filter_mod;
+			slider_value_table=param_value_names_filter_mod;
 			voice_bend_filter_control[part_number]=gui_slider(voice_bend_filter_control[part_number],0,127,"PB Filter Control",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x24,voice_bend_filter_control[part_number],1);
 
-			slider_value_table=effect_value_names_18_generic;
+			slider_value_table=param_value_names_percent;
 			voice_bend_amplitude_control[part_number]=gui_slider(voice_bend_amplitude_control[part_number],0,127,"PB Amp Control",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x25,voice_bend_amplitude_control[part_number],1);
 
@@ -1011,15 +1073,15 @@ function gui_pages()
 
 			gui_slider_y+=25;
 
-			slider_value_table=effect_value_names_18_generic;
+			slider_value_table=param_value_names_semitones;
 			voice_mw_pitch_control[part_number]=gui_slider(voice_mw_pitch_control[part_number],40,88,"MW Pitch Control",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1d,voice_mw_pitch_control[part_number],1);
 
-			slider_value_table=effect_value_names_filter_mod;
+			slider_value_table=param_value_names_filter_mod;
 			voice_mw_filter_control[part_number]=gui_slider(voice_mw_filter_control[part_number],0,127,"MW Filter Control",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1e,voice_mw_filter_control[part_number],1);
 
-			slider_value_table=effect_value_names_18_generic;
+			slider_value_table=param_value_names_percent;
 			voice_mw_amplitude_control[part_number]=gui_slider(voice_mw_amplitude_control[part_number],0,127,"MW Amp Control",64,1);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1f,voice_mw_amplitude_control[part_number],1);
 
@@ -1032,12 +1094,55 @@ function gui_pages()
 
 			voice_mw_lfo_amod_depth[part_number]=gui_slider(voice_mw_lfo_amod_depth[part_number],0,127,"MW LFO Amp Depth",0,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x22,voice_mw_lfo_amod_depth[part_number],1);
+
+			gui_slider_y+=25;
+
+			// these control both channel and poly aftertouch assignments (because why the hell not)!
+			slider_value_table=param_value_names_semitones;
+			voice_at_pitch_control[part_number]=gui_slider(voice_at_pitch_control[part_number],40,88,"AT Pitch Control",64,1);
+			gui_slider_change ? (
+				sysex_add_queue_multipart(part_number,0x4d,voice_at_pitch_control[part_number],1);
+				sysex_add_queue_multipart(part_number,0x53,voice_at_pitch_control[part_number],1);
+			);
+
+			slider_value_table=param_value_names_filter_mod;
+			voice_at_filter_control[part_number]=gui_slider(voice_at_filter_control[part_number],0,127,"AT Filter Control",64,1);
+			gui_slider_change ? (
+				sysex_add_queue_multipart(part_number,0x4e,voice_at_filter_control[part_number],1);
+				sysex_add_queue_multipart(part_number,0x54,voice_at_filter_control[part_number],1);
+			);
+
+			slider_value_table=param_value_names_percent;
+			voice_at_amp_control[part_number]=gui_slider(voice_at_amp_control[part_number],0,127,"AT Amp Control",64,1);
+			gui_slider_change ? (
+				sysex_add_queue_multipart(part_number,0x4f,voice_at_amp_control[part_number],1);
+				sysex_add_queue_multipart(part_number,0x55,voice_at_amp_control[part_number],1);
+			);
+
+			slider_value_table="";
+			voice_at_lfo_pmod_depth[part_number]=gui_slider(voice_at_lfo_pmod_depth[part_number],0,127,"AT LFO Pitch Depth",0,0);
+			gui_slider_change ? (
+				sysex_add_queue_multipart(part_number,0x50,voice_at_lfo_pmod_depth[part_number],1);
+				sysex_add_queue_multipart(part_number,0x56,voice_at_lfo_pmod_depth[part_number],1);
+			);
+
+			voice_at_lfo_fmod_depth[part_number]=gui_slider(voice_at_lfo_fmod_depth[part_number],0,127,"AT LFO Filter Depth",0,0);
+			gui_slider_change ? (
+				sysex_add_queue_multipart(part_number,0x51,voice_at_lfo_fmod_depth[part_number],1);
+				sysex_add_queue_multipart(part_number,0x57,voice_at_lfo_fmod_depth[part_number],1);
+			);
+
+			voice_at_lfo_amod_depth[part_number]=gui_slider(voice_at_lfo_amod_depth[part_number],0,127,"AT LFO Amp Depth",0,0);
+			gui_slider_change ? (
+				sysex_add_queue_multipart(part_number,0x52,voice_at_lfo_amod_depth[part_number],1);
+				sysex_add_queue_multipart(part_number,0x58,voice_at_lfo_amod_depth[part_number],1);
+			);
 		);
 
-		//keyboard parameters
+		// keyboard parameters
 		category_list_editor_cursor==2 ? (
 
-			slider_value_table=effect_value_names_notes;
+			slider_value_table=param_value_names_notes;
 			voice_note_limit_low[part_number]=gui_slider(voice_note_limit_low[part_number],0,127,"Note Limit Low",0,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x0f,voice_note_limit_low[part_number],1);
 
@@ -1061,9 +1166,51 @@ function gui_pages()
 			voice_velocity_sense_offset[part_number]=gui_slider(voice_velocity_sense_offset[part_number],0,127,"Velocity Sense Offset",64,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x0d,voice_velocity_sense_offset[part_number],1);
 		);
+
+		// tuning parameters
+		category_list_editor_cursor==3 ? (
+
+			slider_value_table=effect_value_names_18_generic;
+
+			voice_scale_c[part_number]=gui_slider(voice_scale_c[part_number],0,127,"C",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x41,voice_scale_c[part_number],1);
+
+			voice_scale_cs[part_number]=gui_slider(voice_scale_cs[part_number],0,127,"C#",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x42,voice_scale_cs[part_number],1);
+
+			voice_scale_d[part_number]=gui_slider(voice_scale_d[part_number],0,127,"D",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x43,voice_scale_d[part_number],1);
+
+			voice_scale_ds[part_number]=gui_slider(voice_scale_ds[part_number],0,127,"D#",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x44,voice_scale_ds[part_number],1);
+
+			voice_scale_e[part_number]=gui_slider(voice_scale_e[part_number],0,127,"E",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x45,voice_scale_e[part_number],1);
+
+			voice_scale_f[part_number]=gui_slider(voice_scale_f[part_number],0,127,"F",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x46,voice_scale_f[part_number],1);
+
+			voice_scale_fs[part_number]=gui_slider(voice_scale_fs[part_number],0,127,"F#",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x47,voice_scale_fs[part_number],1);
+
+			voice_scale_g[part_number]=gui_slider(voice_scale_g[part_number],0,127,"G",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x48,voice_scale_g[part_number],1);
+
+			voice_scale_gs[part_number]=gui_slider(voice_scale_gs[part_number],0,127,"G#",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x49,voice_scale_gs[part_number],1);
+
+			voice_scale_a[part_number]=gui_slider(voice_scale_a[part_number],0,127,"A",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x4a,voice_scale_a[part_number],1);
+
+			voice_scale_as[part_number]=gui_slider(voice_scale_as[part_number],0,127,"A#",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x4b,voice_scale_as[part_number],1);
+
+			voice_scale_b[part_number]=gui_slider(voice_scale_b[part_number],0,127,"B",64,1);
+			gui_slider_change ? sysex_add_queue_multipart(part_number,0x4c,voice_scale_b[part_number],1);
+		);
 	);
 
-	//--effect 1 editor--------------------------------------------------------------
+	// effect 1 editor--------------------------------------------------------------
 
 	gui_page==2 || category_list_reverb_cursor_prev<0 ? (
 
@@ -1095,14 +1242,14 @@ function gui_pages()
 
 		category_list_reverb_cursor>0 ? (
 
-			gui_slider_x=category_list_width+170;
+			gui_slider_x=category_list_width+190;
 			gui_slider_y=menu_height+20;
 
-			slider_value_table="";
-			effect_reverb_return=gui_slider(effect_reverb_return,0,127,"Return",64,0);
+			slider_value_table=param_value_names_send_return;
+			effect_reverb_return=gui_slider(effect_reverb_return,0,127,"Return",64,1);
 			gui_slider_change ? sysex_add_queue(0x02010c,effect_reverb_return,1);
 
-			slider_value_table=effect_value_names_pan;
+			slider_value_table=param_value_names_pan;
 			effect_reverb_pan=gui_slider(effect_reverb_pan,1,127,"Pan",64,1);
 			gui_slider_change ? sysex_add_queue(0x02010d,effect_reverb_pan,1);
 
@@ -1114,7 +1261,7 @@ function gui_pages()
 		category_list_reverb_cursor_prev=category_list_reverb_cursor;
 	);
 
-	//--effect 2 editor--------------------------------------------------------------
+	// effect 2 editor--------------------------------------------------------------
 
 	gui_page==3 || category_list_chorus_cursor_prev<0 ? (
 
@@ -1146,19 +1293,19 @@ function gui_pages()
 
 		category_list_chorus_cursor>0 ? (
 
-			gui_slider_x=category_list_width+170;
+			gui_slider_x=category_list_width+190;
 			gui_slider_y=menu_height+20;
 
-			slider_value_table="";
-			effect_chorus_return=gui_slider(effect_chorus_return,0,127,"Return",64,0);
+			slider_value_table=param_value_names_send_return;
+			effect_chorus_return=gui_slider(effect_chorus_return,0,127,"Return",64,1);
 			gui_slider_change ? sysex_add_queue(0x02012c,effect_chorus_return,1);
 
-			slider_value_table=effect_value_names_pan;
+			slider_value_table=param_value_names_pan;
 			effect_chorus_pan=gui_slider(effect_chorus_pan,1,127,"Pan",64,1);
 			gui_slider_change ? sysex_add_queue(0x02012d,effect_chorus_pan,1);
 
-			slider_value_table="";
-			effect_chorus_send_reverb=gui_slider(effect_chorus_send_reverb,0,127,"Send to Reverb",0,0);
+			slider_value_table=param_value_names_send_return;
+			effect_chorus_send_reverb=gui_slider(effect_chorus_send_reverb,0,127,"Reverb Send",0,1);
 			gui_slider_change ? sysex_add_queue(0x02012e,effect_chorus_send_reverb,1);
 
 			gui_slider_y+=25;
@@ -1169,7 +1316,7 @@ function gui_pages()
 		category_list_chorus_cursor_prev=category_list_chorus_cursor;
 	);
 
-	//--effect 3 editor--------------------------------------------------------------
+	// effect 3 editor--------------------------------------------------------------
 
 	gui_page==4 || category_list_variation_cursor_prev<0 ? (
 
@@ -1232,22 +1379,22 @@ function gui_pages()
 
 		category_list_variation_cursor>0 ? (
 
-			gui_slider_x=category_list_width+170;
+			gui_slider_x=category_list_width+190;
 			gui_slider_y=menu_height+20;
 
-			slider_value_table="";
-			effect_variation_return=gui_slider(effect_variation_return,0,127,"Return",64,0);
+			slider_value_table=param_value_names_send_return;
+			effect_variation_return=gui_slider(effect_variation_return,0,127,"Return",64,1);
 			gui_slider_change ? sysex_add_queue(0x020156,effect_variation_return,1);
 
-			slider_value_table=effect_value_names_pan;
+			slider_value_table=param_value_names_pan;
 			effect_variation_pan=gui_slider(effect_variation_pan,1,127,"Pan",64,1);
 			gui_slider_change ? sysex_add_queue(0x020157,effect_variation_pan,1);
 
-			slider_value_table="";
-			effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Send to Reverb",0,0);
+			slider_value_table=param_value_names_send_return;
+			effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Reverb Send",0,1);
 			gui_slider_change ? sysex_add_queue(0x020158,effect_variation_send_reverb,1);
 
-			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Send to Chorus",0,0);
+			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Chorus Send",0,1);
 			gui_slider_change ? sysex_add_queue(0x020159,effect_variation_send_chorus,1);
 
 			gui_slider_y+=25;
@@ -1336,6 +1483,10 @@ loop(16,
 	file_var(0,voice_eg_attack[var_offset]);
 	file_var(0,voice_eg_decay[var_offset]);
 	file_var(0,voice_eg_release[var_offset]);
+	file_var(0,voice_pitch_eg_init_level[var_offset]);
+	file_var(0,voice_pitch_eg_attack[var_offset]);
+	file_var(0,voice_pitch_eg_release_level[var_offset]);
+	file_var(0,voice_pitch_eg_release[var_offset]);
 	file_var(0,voice_portamento_switch[var_offset]);
 	file_var(0,voice_portamento_time[var_offset]);
 	file_var(0,voice_vibrato_rate[var_offset]);
@@ -1344,13 +1495,6 @@ loop(16,
 	file_var(0,voice_bend_pitch_control[var_offset]);
 	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
 	file_var(0,voice_dry_level[var_offset]);
-
-	var_offset+=1;
-);
-
-var_offset=0;
-
-loop(16,
 
 	file_var(0,voice_bend_filter_control[var_offset]);
 	file_var(0,voice_bend_amplitude_control[var_offset]);
@@ -1368,11 +1512,30 @@ loop(16,
 	file_var(0,voice_velocity_limit_high[var_offset]);
 	file_var(0,voice_velocity_sense_depth[var_offset]);
 	file_var(0,voice_velocity_sense_offset[var_offset]);
+	file_var(0,voice_at_pitch_control[var_offset]);
+	file_var(0,voice_at_filter_control[var_offset]);
+	file_var(0,voice_at_amp_control[var_offset]);
+	file_var(0,voice_at_lfo_pmod_depth[var_offset]);
+	file_var(0,voice_at_lfo_fmod_depth[var_offset]);
+	file_var(0,voice_at_lfo_amod_depth[var_offset]);
+
+	file_var(0,voice_scale_c[var_offset]);
+	file_var(0,voice_scale_cs[var_offset]);
+	file_var(0,voice_scale_d[var_offset]);
+	file_var(0,voice_scale_ds[var_offset]);
+	file_var(0,voice_scale_e[var_offset]);
+	file_var(0,voice_scale_f[var_offset]);
+	file_var(0,voice_scale_fs[var_offset]);
+	file_var(0,voice_scale_g[var_offset]);
+	file_var(0,voice_scale_gs[var_offset]);
+	file_var(0,voice_scale_a[var_offset]);
+	file_var(0,voice_scale_as[var_offset]);
+	file_var(0,voice_scale_b[var_offset]);
 
 	var_offset+=1;
 );
 
-//force update after data was loaded
+// force update after data was loaded
 file_avail(0)>=0 ? (
 
 	resend_midi();
@@ -1390,19 +1553,19 @@ spinlock.lock();
 midi_first_time ? (
 
 	midi_first_time=0;
-	sysex_add_queue(0x02015a,1,1);     //set variation connection to system
+	sysex_add_queue(0x02015a,1,1);     // set variation connection to system
 	gui_pages();
 
 	part=0;
 
 	loop(16,
 
-		//restore voice
-		sysex_add_queue_multipart(part,0x01,(midi_bank[part]>>8)&0x7f,1);  //bank change MSB
-		sysex_add_queue_multipart(part,0x02,(midi_bank[part]>>0)&0x7f,1);  //bank change LSB
-		sysex_add_queue_multipart(part,0x03,midi_program[part],1);         //program change
+		// restore voice
+		sysex_add_queue_multipart(part,0x01,(midi_bank[part]>>8)&0x7f,1);  // bank change MSB
+		sysex_add_queue_multipart(part,0x02,(midi_bank[part]>>0)&0x7f,1);  // bank change LSB
+		sysex_add_queue_multipart(part,0x03,midi_program[part],1);         // program change
 
-		//restore voice params
+		// restore voice params
 		sysex_add_queue_multipart(part,0x04,voice_rcv_channel[part],1);
 		sysex_add_queue_multipart(part,0x05,voice_mode[part],1);
 		sysex_add_queue_multipart(part,0x0b,voice_volume[part],1);
@@ -1414,6 +1577,10 @@ midi_first_time ? (
 		sysex_add_queue_multipart(part,0x1a,voice_eg_attack[part],1);
 		sysex_add_queue_multipart(part,0x1b,voice_eg_decay[part],1);
 		sysex_add_queue_multipart(part,0x1c,voice_eg_release[part],1);
+		sysex_add_queue_multipart(part,0x69,voice_pitch_eg_init_level[part],1);
+		sysex_add_queue_multipart(part,0x6a,voice_pitch_eg_attack[part],1);
+		sysex_add_queue_multipart(part,0x6b,voice_pitch_eg_release_level[part],1);
+		sysex_add_queue_multipart(part,0x6c,voice_pitch_eg_release[part],1);
 		sysex_add_queue_multipart(part,0x67,voice_portamento_switch[part],1);
 		sysex_add_queue_multipart(part,0x68,voice_portamento_time[part],1);
 		sysex_add_queue_multipart(part,0x15,voice_vibrato_rate[part],1);
@@ -1431,6 +1598,18 @@ midi_first_time ? (
 		sysex_add_queue_multipart(part,0x20,voice_mw_lfo_pmod_depth[part],1);
 		sysex_add_queue_multipart(part,0x21,voice_mw_lfo_fmod_depth[part],1);
 		sysex_add_queue_multipart(part,0x22,voice_mw_lfo_amod_depth[part],1);
+		sysex_add_queue_multipart(part,0x4d,voice_at_pitch_control[part],1);
+		sysex_add_queue_multipart(part,0x53,voice_at_pitch_control[part],1);
+		sysex_add_queue_multipart(part,0x4e,voice_at_filter_control[part],1);
+		sysex_add_queue_multipart(part,0x54,voice_at_filter_control[part],1);
+		sysex_add_queue_multipart(part,0x4f,voice_at_amp_control[part],1);
+		sysex_add_queue_multipart(part,0x55,voice_at_amp_control[part],1);
+		sysex_add_queue_multipart(part,0x50,voice_at_lfo_pmod_depth[part],1);
+		sysex_add_queue_multipart(part,0x56,voice_at_lfo_pmod_depth[part],1);
+		sysex_add_queue_multipart(part,0x51,voice_at_lfo_fmod_depth[part],1);
+		sysex_add_queue_multipart(part,0x57,voice_at_lfo_fmod_depth[part],1);
+		sysex_add_queue_multipart(part,0x52,voice_at_lfo_amod_depth[part],1);
+		sysex_add_queue_multipart(part,0x58,voice_at_lfo_amod_depth[part],1);
 		sysex_add_queue_multipart(part,0x11,voice_dry_level[part],1);
 		sysex_add_queue_multipart(part,0x0f,voice_note_limit_low[part],1);
 		sysex_add_queue_multipart(part,0x10,voice_note_limit_high[part],1);
@@ -1439,7 +1618,20 @@ midi_first_time ? (
 		sysex_add_queue_multipart(part,0x0c,voice_velocity_sense_depth[part],1);
 		sysex_add_queue_multipart(part,0x0d,voice_velocity_sense_offset[part],1);
 
-		//restore effect sends
+		sysex_add_queue_multipart(part,0x41,voice_scale_c[part],1);
+		sysex_add_queue_multipart(part,0x42,voice_scale_cs[part],1);
+		sysex_add_queue_multipart(part,0x43,voice_scale_d[part],1);
+		sysex_add_queue_multipart(part,0x44,voice_scale_ds[part],1);
+		sysex_add_queue_multipart(part,0x45,voice_scale_e[part],1);
+		sysex_add_queue_multipart(part,0x46,voice_scale_f[part],1);
+		sysex_add_queue_multipart(part,0x47,voice_scale_fs[part],1);
+		sysex_add_queue_multipart(part,0x48,voice_scale_g[part],1);
+		sysex_add_queue_multipart(part,0x49,voice_scale_gs[part],1);
+		sysex_add_queue_multipart(part,0x4a,voice_scale_a[part],1);
+		sysex_add_queue_multipart(part,0x4b,voice_scale_as[part],1);
+		sysex_add_queue_multipart(part,0x4c,voice_scale_b[part],1);
+
+		// restore effect sends
 		sysex_add_queue_multipart(part,0x13,effect_reverb_send[part],1);
 		sysex_add_queue_multipart(part,0x12,effect_chorus_send[part],1);
 		sysex_add_queue_multipart(part,0x14,effect_variation_send[part],1);
@@ -1496,9 +1688,9 @@ sysex_queue_ptr=0;
 spinlock.unlock();
 
 
-@gfx 690 590
+@gfx 730 750
 
-//--main window----------------------------------------------------------------
+// main window----------------------------------------------------------------
 
 gfx_setfont(1,"Segoe UI",22);
 
@@ -1514,7 +1706,7 @@ gfx_rect(0,menu_height,category_list_width,gfx_h-menu_height);
 set_color(color_bg_light);
 gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
 
-//--setup----------------------------------------------------------------------
+// setup----------------------------------------------------------------------
 
 spinlock.lock();
 
@@ -1532,7 +1724,7 @@ key=gfx_getchar();
 		!(mouse_cap&CAP_RMB) ? gui_mouse_rmb=0;
 	);
 
-//--main menu------------------------------------------------------------------
+// main menu------------------------------------------------------------------
 
 gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
 gui_menu_item(137,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
@@ -1554,7 +1746,7 @@ gui_menu_item(gfx_w-60,10,caption,0,2) ? (
 part_number>15 ? part_number=0;
 part_number<0 ? part_number=15;
 
-//change part number with number keys (1-10)
+// change part number with number keys (1-10)
 key==49 ? part_number=0;
 key==50 ? part_number=1;
 key==51 ? part_number=2;
@@ -1566,7 +1758,7 @@ key==56 ? part_number=7;
 key==57 ? part_number=8;
 key==48 ? part_number=9;
 
-//change part number with qwerty keys (11-16)
+// change part number with qwerty keys (11-16)
 key==81 || key==113 ? part_number=10;
 key==87 || key==119 ? part_number=11;
 key==69 || key==101 ? part_number=12;
@@ -1580,9 +1772,9 @@ part_number!=part_number_prev ? (
 	part_number_prev=part_number;
 );
 
-//--current page---------------------------------------------------------------
+// current page---------------------------------------------------------------
 
-category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     //how many lines of the current category list is visible
+category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     // how many lines of the current category list is visible
 category_list_height<1 ? category_list_height=1;
 
 gui_menu_item(gfx_w-100,10,"XG",0,1) ? (
@@ -1592,7 +1784,7 @@ gui_menu_item(gfx_w-100,10,"XG",0,1) ? (
 	gui_page_prev=gui_page;
 );
 
-//--cleanup--------------------------------------------------------------------
+// cleanup--------------------------------------------------------------------
 
 gui_mouse_lmb ? gui_mouse_lmb=2;
 gui_mouse_rmb ? gui_mouse_rmb=2;
