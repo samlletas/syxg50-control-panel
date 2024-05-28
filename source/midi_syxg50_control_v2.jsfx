@@ -66,14 +66,14 @@ ext_noinit=1;
 gfx_clear=-1;
 gfx_a=1;
 
-color_bg_darkest=0x1A1A1A;
-color_bg_darker =0x212121;
-color_bg_dark   =0x262626;
+color_bg_darkest=0x000000;
+color_bg_darker =0x202020;
+color_bg_dark   =0x292929;
 color_bg_light  =0x333333;
 color_bg_cursor =0xFFCC66;
 color_bg_changed=0x5CCFE6;
 color_bg_voice  =0x514631;
-color_fg_menu   =0x555555;
+color_fg_menu   =0x666666;
 color_fg_list   =0xD4D4D4;
 
 gui_page=0;
@@ -880,7 +880,7 @@ function gui_pages()
 		category_list_editor_cursor==0 ? (
 
 			slider_value_table=effect_value_names_channel;
-			voice_rcv_channel[part_number]=gui_slider(voice_rcv_channel[part_number],0,15,"Rcv Channel",part_number);
+			voice_rcv_channel[part_number]=gui_slider(voice_rcv_channel[part_number],0,15,"Receive Channel",part_number);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x04,voice_rcv_channel[part_number],1);
 
 			slider_value_table=effect_value_names_mono_poly;
@@ -962,23 +962,25 @@ function gui_pages()
 			gui_slider_y+=25;
 
 			slider_value_table=effect_value_names_18_generic;
-			voice_bend_pitch_control[part_number]=gui_slider(voice_bend_pitch_control[part_number],40,88,"Bend Pitch Control",66);
+			voice_bend_pitch_control[part_number]=gui_slider(voice_bend_pitch_control[part_number],40,88,"PB Pitch Control",66);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x23,voice_bend_pitch_control[part_number],1);
 
-			voice_bend_filter_control[part_number]=gui_slider(voice_bend_filter_control[part_number],0,127,"Bend Filter Control",64);
+			slider_value_table=effect_value_names_filter_mod;
+			voice_bend_filter_control[part_number]=gui_slider(voice_bend_filter_control[part_number],0,127,"PB Filter Control",64);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x24,voice_bend_filter_control[part_number],1);
 
-			voice_bend_amplitude_control[part_number]=gui_slider(voice_bend_amplitude_control[part_number],0,127,"Bend Amp Control",64);
+			slider_value_table=effect_value_names_18_generic;
+			voice_bend_amplitude_control[part_number]=gui_slider(voice_bend_amplitude_control[part_number],0,127,"PB Amp Control",64);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x25,voice_bend_amplitude_control[part_number],1);
 
 			slider_value_table="";
-			voice_bend_lfo_pmod_depth[part_number]=gui_slider(voice_bend_lfo_pmod_depth[part_number],0,127,"Bend LFO Pitch Depth",0);
+			voice_bend_lfo_pmod_depth[part_number]=gui_slider(voice_bend_lfo_pmod_depth[part_number],0,127,"PB LFO Pitch Depth",0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x26,voice_bend_lfo_pmod_depth[part_number],1);
 
-			voice_bend_lfo_fmod_depth[part_number]=gui_slider(voice_bend_lfo_fmod_depth[part_number],0,127,"Bend LFO Filter Depth",0);
+			voice_bend_lfo_fmod_depth[part_number]=gui_slider(voice_bend_lfo_fmod_depth[part_number],0,127,"PB LFO Filter Depth",0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x27,voice_bend_lfo_fmod_depth[part_number],1);
 
-			voice_bend_lfo_amod_depth[part_number]=gui_slider(voice_bend_lfo_amod_depth[part_number],0,127,"Bend LFO Amp Depth",0);
+			voice_bend_lfo_amod_depth[part_number]=gui_slider(voice_bend_lfo_amod_depth[part_number],0,127,"PB LFO Amp Depth",0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x28,voice_bend_lfo_amod_depth[part_number],1);
 
 			gui_slider_y+=25;
@@ -987,9 +989,11 @@ function gui_pages()
 			voice_mw_pitch_control[part_number]=gui_slider(voice_mw_pitch_control[part_number],40,88,"MW Pitch Control",64);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1d,voice_mw_pitch_control[part_number],1);
 
+			slider_value_table=effect_value_names_filter_mod;
 			voice_mw_filter_control[part_number]=gui_slider(voice_mw_filter_control[part_number],0,127,"MW Filter Control",64);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1e,voice_mw_filter_control[part_number],1);
 
+			slider_value_table=effect_value_names_18_generic;
 			voice_mw_amplitude_control[part_number]=gui_slider(voice_mw_amplitude_control[part_number],0,127,"MW Amp Control",64);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x1f,voice_mw_amplitude_control[part_number],1);
 
@@ -1506,11 +1510,11 @@ key=gfx_getchar();
 
 gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
 gui_menu_item(137,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
-gui_menu_item(242,10,"FX:Reverb"    ,gui_page==2?1:0,1) ? gui_page=2;
-gui_menu_item(332,10,"FX:Chorus"    ,gui_page==3?1:0,1) ? gui_page=3;
-gui_menu_item(423,10,"FX:Variation" ,gui_page==4?1:0,1) ? gui_page=4;
+gui_menu_item(243,10,"Reverb"       ,gui_page==2?1:0,1) ? gui_page=2;
+gui_menu_item(314,10,"Chorus"       ,gui_page==3?1:0,1) ? gui_page=3;
+gui_menu_item(386,10,"Variation"    ,gui_page==4?1:0,1) ? gui_page=4;
 
-sprintf(caption,"Part:%i",part_number+1);
+sprintf(caption,"Part: %i",part_number+1);
 
 gui_menu_item(gfx_w-60,10,caption,0,1)&1 ? part_number+=1;
 gui_menu_item(gfx_w-60,10,caption,0,1)&2 ? part_number-=1;
