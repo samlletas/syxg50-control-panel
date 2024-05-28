@@ -17,8 +17,8 @@ list_voice_category="
 11:Synth Lead
 12:Synth Pad
 13:Synth Effects
-14:Sound Effects
-15:Voice Effects
+14:Sound Effects 1
+15:Sound Effects 2
 16:Percussive
 17:Drum Kits
 ";
