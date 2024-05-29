@@ -30,6 +30,7 @@ list_editor_category="
 01:Modulation
 02:Keyboard
 03:Tuning
+04:MIDI Filters
 ";
 
 //-----------------------------------------------------------------------------
@@ -1060,9 +1061,9 @@ variation_params_list="
 16|00052|00076|00064|E|1|EQ High Gain
 #10 Echo
 01|00001|07006|03364|-|0|Left Delay 1
-02|00001|00127|00080|I|0|Lef1 Feedback Level
+02|00001|00127|00080|I|0|Left Feedback Level
 03|00001|07006|03444|-|0|Right Delay 1
-04|00001|00127|00080|I|0|Righ1 Feedback Level
+04|00001|00127|00080|I|0|Right Feedback Level
 05|00001|00010|00010|J|0|High Damp
 06|00001|07006|03364|-|0|Left Delay 2
 07|00001|07006|03444|-|0|Right Delay 2
@@ -3414,6 +3415,14 @@ param_value_names_mono_poly="
 param_value_names_off_on="
 000|Off
 001|On
+";
+
+//-----------------------------------------------------------------------------
+
+param_value_names_same_note_assign="
+000|Single
+001|Multi
+002|Instrument
 ";
 
 //-----------------------------------------------------------------------------
