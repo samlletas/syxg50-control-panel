@@ -66,14 +66,14 @@ ext_noinit=1;
 gfx_clear=-1;
 gfx_a=1;
 
-color_bg_darkest=0x000000;
+color_bg_darkest=0x161616;
 color_bg_darker =0x202020;
 color_bg_dark   =0x292929;
-color_bg_light  =0x333333;
+color_bg_light  =0x363636;
 color_bg_cursor =0xFFCC66;
 color_bg_changed=0x5CCFE6;
 color_bg_voice  =0x514631;
-color_fg_menu   =0x666666;
+color_fg_menu   =0x707070;
 color_fg_list   =0xD4D4D4;
 
 gui_page=0;
@@ -1405,7 +1405,7 @@ function gui_pages()
 			gui_slider_change ? sysex_add_queue(0x02012d,effect_chorus_pan,1);
 
 			slider_value_table=param_value_names_send_return;
-			effect_chorus_send_reverb=gui_slider(effect_chorus_send_reverb,0,127,"Reverb Send",0,1);
+			effect_chorus_send_reverb=gui_slider(effect_chorus_send_reverb,0,127,"Reverb Send",0,0);
 			gui_slider_change ? sysex_add_queue(0x02012e,effect_chorus_send_reverb,1);
 
 			gui_slider_y+=25;
@@ -1491,10 +1491,10 @@ function gui_pages()
 			gui_slider_change ? sysex_add_queue(0x020157,effect_variation_pan,1);
 
 			slider_value_table=param_value_names_send_return;
-			effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Reverb Send",0,1);
+			effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Reverb Send",0,0);
 			gui_slider_change ? sysex_add_queue(0x020158,effect_variation_send_reverb,1);
 
-			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Chorus Send",0,1);
+			effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Chorus Send",0,0);
 			gui_slider_change ? sysex_add_queue(0x020159,effect_variation_send_chorus,1);
 
 			gui_slider_y+=25;
@@ -1538,7 +1538,6 @@ loop(16,
 	file_var(0,effect_reverb_send[var_offset]);
 	file_var(0,effect_chorus_send[var_offset]);
 	file_var(0,effect_variation_send[var_offset]);
-	file_var(0,voice_dry_level[var_offset]);
 
 	var_offset+=1;
 );
@@ -1575,8 +1574,6 @@ loop(16,
 
 	file_var(0,voice_rcv_channel[var_offset]);
 	file_var(0,voice_mode[var_offset]);
-	file_var(0,voice_portamento_switch[var_offset]);
-	file_var(0,voice_portamento_time[var_offset]);
 
 	file_var(0,voice_volume[var_offset]);
 	file_var(0,voice_pan[var_offset]);
@@ -1590,32 +1587,37 @@ loop(16,
 	file_var(0,voice_eg_decay[var_offset]);
 	file_var(0,voice_eg_release[var_offset]);
 
-	file_var(0,voice_pitch_eg_init_level[var_offset]);
-	file_var(0,voice_pitch_eg_attack[var_offset]);
-	file_var(0,voice_pitch_eg_release_level[var_offset]);
-	file_var(0,voice_pitch_eg_release[var_offset]);
+	file_var(0,voice_portamento_switch[var_offset]);
+	file_var(0,voice_portamento_time[var_offset]);
 
 	file_var(0,voice_vibrato_rate[var_offset]);
 	file_var(0,voice_vibrato_depth[var_offset]);
 	file_var(0,voice_vibrato_delay[var_offset]);
+
 	file_var(0,voice_bend_pitch_control[var_offset]);
+
+	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
+
+	file_var(0,voice_dry_level[var_offset]);
+
+	var_offset+=1;
+);
+
+var_offset=0;
+
+loop(16,
 	file_var(0,voice_bend_filter_control[var_offset]);
 	file_var(0,voice_bend_amplitude_control[var_offset]);
 	file_var(0,voice_bend_lfo_pmod_depth[var_offset]);
 	file_var(0,voice_bend_lfo_fmod_depth[var_offset]);
 	file_var(0,voice_bend_lfo_amod_depth[var_offset]);
+
 	file_var(0,voice_mw_pitch_control[var_offset]);
 	file_var(0,voice_mw_filter_control[var_offset]);
 	file_var(0,voice_mw_amplitude_control[var_offset]);
 	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
 	file_var(0,voice_mw_lfo_fmod_depth[var_offset]);
 	file_var(0,voice_mw_lfo_amod_depth[var_offset]);
-	file_var(0,voice_at_pitch_control[var_offset]);
-	file_var(0,voice_at_filter_control[var_offset]);
-	file_var(0,voice_at_amp_control[var_offset]);
-	file_var(0,voice_at_lfo_pmod_depth[var_offset]);
-	file_var(0,voice_at_lfo_fmod_depth[var_offset]);
-	file_var(0,voice_at_lfo_amod_depth[var_offset]);
 
 	file_var(0,voice_note_limit_low[var_offset]);
 	file_var(0,voice_note_limit_high[var_offset]);
@@ -1623,7 +1625,26 @@ loop(16,
 	file_var(0,voice_velocity_limit_high[var_offset]);
 	file_var(0,voice_velocity_sense_depth[var_offset]);
 	file_var(0,voice_velocity_sense_offset[var_offset]);
+
+	var_offset+=1;
+);
+
+var_offset=0;
+
+loop(16,
 	file_var(0,voice_same_note_assign[var_offset]);
+
+	file_var(0,voice_pitch_eg_init_level[var_offset]);
+	file_var(0,voice_pitch_eg_attack[var_offset]);
+	file_var(0,voice_pitch_eg_release_level[var_offset]);
+	file_var(0,voice_pitch_eg_release[var_offset]);
+
+	file_var(0,voice_at_pitch_control[var_offset]);
+	file_var(0,voice_at_filter_control[var_offset]);
+	file_var(0,voice_at_amp_control[var_offset]);
+	file_var(0,voice_at_lfo_pmod_depth[var_offset]);
+	file_var(0,voice_at_lfo_fmod_depth[var_offset]);
+	file_var(0,voice_at_lfo_amod_depth[var_offset]);
 
 	file_var(0,voice_scale_c[var_offset]);
 	file_var(0,voice_scale_cs[var_offset]);
