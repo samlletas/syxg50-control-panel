@@ -1615,7 +1615,6 @@ loop(16,
 	file_var(0,voice_mw_pitch_control[var_offset]);
 	file_var(0,voice_mw_filter_control[var_offset]);
 	file_var(0,voice_mw_amplitude_control[var_offset]);
-	file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
 	file_var(0,voice_mw_lfo_fmod_depth[var_offset]);
 	file_var(0,voice_mw_lfo_amod_depth[var_offset]);
 
