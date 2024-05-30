@@ -85,6 +85,7 @@ gui_mouse_rmb=0;
 gui_slider_width=256;
 gui_slider_halfwidth=gui_slider_width*0.5;
 gui_slider_height=12;
+gui_slider_spacing=26;
 gui_slider_x=0;
 gui_slider_y=0;
 gui_slider_change=0;
@@ -151,7 +152,7 @@ category_list_height=0;
 category_list_width=180;
 category_list_length=0;
 
-list_item_height=26;
+list_item_height=27;
 list_item_width=150;
 menu_height=44;
 
@@ -539,7 +540,7 @@ function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def
 
 	);
 
-	gui_slider_y+=list_item_height;
+	gui_slider_y+=gui_slider_spacing;
 
 	slider_value;
 );
@@ -674,16 +675,16 @@ function gui_category_adjust_view(list_offset,list_cursor,list_length)
 	);
 
 	item_x=16;
-	item_y=menu_height+20-list_item_height;
+	item_y=menu_height+22-list_item_height;
 
 	list_offset>0 ? (
 
 		gui_menu_item(item_x,item_y,"                 ↑                 ",0,0) ? list_offset-=1;
 	);
 
-	item_y=menu_height+20+category_list_height*list_item_height;
+	item_y=menu_height+24+category_list_height*list_item_height;
 
-	category_list_height<list_length && (list_offset+category_list_height)<list_length && item_y>=(menu_height+20) ? (
+	category_list_height<list_length && (list_offset+category_list_height)<list_length ? (
 
 		gui_menu_item(item_x,item_y,"                 ↓                 ",0,0) ? list_offset+=1;
 	);
@@ -1897,10 +1898,10 @@ gui_menu_item(386,10,"Variation"    ,gui_page==4?1:0,1) ? gui_page=4;
 
 sprintf(caption,"Part: %i",part_number+1);
 
-gui_menu_item(gfx_w-60,10,caption,0,1)&1 ? part_number+=1;
-gui_menu_item(gfx_w-60,10,caption,0,1)&2 ? part_number-=1;
+gui_menu_item(gfx_w-64,10,caption,0,1)&1 ? part_number+=1;
+gui_menu_item(gfx_w-64,10,caption,0,1)&2 ? part_number-=1;
 
-gui_menu_item(gfx_w-60,10,caption,0,2) ? (
+gui_menu_item(gfx_w-64,10,caption,0,2) ? (
 
 	mouse_wheel<0 ? part_number-=1;
 	mouse_wheel>0 ? part_number+=1;
@@ -1937,10 +1938,10 @@ part_number!=part_number_prev ? (
 
 // current page---------------------------------------------------------------
 
-category_list_height=floor((gfx_h-menu_height-20*2)/list_item_height)-1;     // how many lines of the current category list is visible
+category_list_height=floor((gfx_h-menu_height-20)/list_item_height)-1;     // how many lines of the current category list is visible
 category_list_height<1 ? category_list_height=1;
 
-gui_menu_item(gfx_w-100,10,"XG",0,1) ? (
+gui_menu_item(gfx_w-104,10,"XG",0,1) ? (
 	resend_midi();
 ) : (
 	gui_pages();
