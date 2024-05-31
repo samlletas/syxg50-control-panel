@@ -132,9 +132,11 @@ loop(16,
 
 category_list_voice_cursor=0;
 category_list_voice_offset=0;
+category_list_voice_cursor_prev=-1;
 
 category_list_editor_cursor=0;
 category_list_editor_offset=0;
+category_list_editor_cursor_prev=-1;
 
 category_list_reverb_cursor=1;
 category_list_reverb_offset=0;
@@ -665,11 +667,11 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 	cursor_category;
 );
 
-function gui_category_adjust_view(list_offset,list_cursor,list_length)
+function gui_category_adjust_view(list_offset,list_cursor,list_cursor_prev,list_length)
 (
-	gui_page!=gui_page_prev && category_list_height>0 ? (
+	category_list_height>0 && (list_cursor!=list_cursor_prev || gui_page!=gui_page_prev) ? (
 
-		// makes sure the selected item is visible on page enter
+		// makes sure the selected item is always visible
 		list_offset=min(list_offset, list_cursor);
 		list_offset=max(list_offset, list_cursor-category_list_height+1);
 	);
@@ -850,7 +852,7 @@ function gui_pages()
 		// render category list
 
 		category_list_voice_cursor=gui_category(list_voice_category,category_list_voice_cursor,category_list_voice_offset,instrument_category[part_number]);
-		category_list_voice_offset=gui_category_adjust_view(category_list_voice_offset,category_list_voice_cursor,category_list_length);
+		category_list_voice_offset=gui_category_adjust_view(category_list_voice_offset,category_list_voice_cursor,category_list_voice_cursor_prev,category_list_length);
 
 		// render voice list
 
@@ -972,6 +974,8 @@ function gui_pages()
 				instrument_list_count+=1;
 			);
 		);
+
+		category_list_voice_cursor_prev=category_list_voice_cursor;
 	);
 
 	// voice editor----------------------------------------------------------------
@@ -979,7 +983,7 @@ function gui_pages()
 	gui_page==1 ? (
 
 		category_list_editor_cursor=gui_category(list_editor_category,category_list_editor_cursor,category_list_editor_offset,category_list_editor_cursor);
-		category_list_editor_offset=gui_category_adjust_view(category_list_editor_offset,category_list_editor_cursor,category_list_length);
+		category_list_editor_offset=gui_category_adjust_view(category_list_editor_offset,category_list_editor_cursor,category_list_editor_cursor_prev,category_list_length);
 
 		force_update=0;
 
@@ -1309,6 +1313,8 @@ function gui_pages()
 			voice_recv_nrpn[part_number]=gui_slider(voice_recv_nrpn[part_number],0,1,"NRPN",1,0);
 			gui_slider_change ? sysex_add_queue_multipart(part_number,0x37,voice_recv_nrpn[part_number],1);
 		);
+
+		category_list_editor_cursor_prev=category_list_editor_cursor;
 	);
 
 	// effect 1 editor--------------------------------------------------------------
@@ -1316,7 +1322,7 @@ function gui_pages()
 	gui_page==2 || category_list_reverb_cursor_prev<0 ? (
 
 		category_list_reverb_cursor=gui_category(list_reverb_category,category_list_reverb_cursor,category_list_reverb_offset,category_list_reverb_cursor);
-		category_list_reverb_offset=gui_category_adjust_view(category_list_reverb_offset,category_list_reverb_cursor,category_list_length);
+		category_list_reverb_offset=gui_category_adjust_view(category_list_reverb_offset,category_list_reverb_cursor,category_list_reverb_cursor_prev,category_list_length);
 
 		category_list_reverb_cursor!=category_list_reverb_cursor_prev ? (
 
@@ -1367,7 +1373,7 @@ function gui_pages()
 	gui_page==3 || category_list_chorus_cursor_prev<0 ? (
 
 		category_list_chorus_cursor=gui_category(list_chorus_category,category_list_chorus_cursor,category_list_chorus_offset,category_list_chorus_cursor);
-		category_list_chorus_offset=gui_category_adjust_view(category_list_chorus_offset,category_list_chorus_cursor,category_list_length);
+		category_list_chorus_offset=gui_category_adjust_view(category_list_chorus_offset,category_list_chorus_cursor,category_list_chorus_cursor_prev,category_list_length);
 
 		category_list_chorus_cursor!=category_list_chorus_cursor_prev ? (
 
@@ -1422,7 +1428,7 @@ function gui_pages()
 	gui_page==4 || category_list_variation_cursor_prev<0 ? (
 
 		category_list_variation_cursor=gui_category(list_variation_category,category_list_variation_cursor,category_list_variation_offset,category_list_variation_cursor);
-		category_list_variation_offset=gui_category_adjust_view(category_list_variation_offset,category_list_variation_cursor,category_list_length);
+		category_list_variation_offset=gui_category_adjust_view(category_list_variation_offset,category_list_variation_cursor,category_list_variation_cursor_prev,category_list_length);
 
 		category_list_variation_cursor!=category_list_variation_cursor_prev ? (
 
@@ -1511,6 +1517,8 @@ function resend_midi()
 (
 	midi_first_time=1;
 	part_number_prev=-1;
+	category_list_voice_cursor_prev=-1;
+	category_list_editor_cursor_prev=-1;
 	category_list_reverb_cursor_prev=-1;
 	category_list_chorus_cursor_prev=-1;
 	category_list_variation_cursor_prev=-1;
