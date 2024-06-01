@@ -1,5 +1,5 @@
 # Yamaha S-YXG50 Control Panel
-A [Reaper](https://www.reaper.fm/) JSFX plugin that allows to control the Yamaha S-YXG50 synth, this effect is a modified version of [Shiru's control panel](https://www.kvraudio.com/forum/viewtopic.php?t=486318).
+A [Reaper](https://www.reaper.fm/) JSFX plugin that allows to control the Yamaha S-YXG50 synth, this project is a modified version of [Shiru's control panel](https://www.kvraudio.com/forum/viewtopic.php?t=486318).
 
 ![Screenshot](https://github.com/samlletas/syxg50-control-panel/assets/7089504/1b4fbcb5-d8f2-4436-8848-653080780256)
 
@@ -7,14 +7,16 @@ A [Reaper](https://www.reaper.fm/) JSFX plugin that allows to control the Yamaha
 The following features were added:
 
 - Default values for every parameter (obtained from both XGworks and the [XG Specifications manual](http://www.jososoft.dk/yamaha/pdf/XGspec2-00e.pdf)).
-- A new editor tab that allows the user to edit common voice parameters (filter, envelope, vibrato, portamento, etc).
+- A new editor tab for changing voice parameters (filter, envelopes, modulation, tuning, etc).
 - Instruments are now saved per part (parameters from the editor tab are saved per part as well).
 - Adds the few missing reverb, chorus and variation effects.
 - UI improvements:
-     - New UI colors and bigger font for increased readability.
+     - New colors and bigger font for increased readability.
+     - New "XG" button to force re-send all parameters.
      - Highlight user-changed parameters.
-     - When changing part the instrument category switches accordingly.
+     - Draw bipolar parameters with bipolar sliders (thanks @mkruselj).
 - Serialize parameter values instead of slider positions to avoid inconsistencies due to float precision loss.
+- And many more small improvements and bug fixes.
 
 > 💡 This modified version is **NOT** compatible with Shiru's original version due to serialization changes, if you need to open old projects then you should keep both versions installed.
 
