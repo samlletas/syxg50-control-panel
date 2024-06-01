@@ -1799,23 +1799,23 @@ midi_first_time ? (
 		sysex_add_queue_multipart(part,0x4b,voice_scale_as[part],1);
 		sysex_add_queue_multipart(part,0x4c,voice_scale_b[part],1);
 
-		sysex_add_queue_multipart(part_number,0x30,voice_recv_pb[part_number],1);
-		sysex_add_queue_multipart(part_number,0x31,voice_recv_cat[part_number],1);
-		sysex_add_queue_multipart(part_number,0x32,voice_recv_pc[part_number],1);
-		sysex_add_queue_multipart(part_number,0x33,voice_recv_cc[part_number],1);
-		sysex_add_queue_multipart(part_number,0x34,voice_recv_pat[part_number],1);
-		sysex_add_queue_multipart(part_number,0x35,voice_recv_note[part_number],1);
-		sysex_add_queue_multipart(part_number,0x36,voice_recv_rpn[part_number],1);
-		sysex_add_queue_multipart(part_number,0x37,voice_recv_nrpn[part_number],1);
-		sysex_add_queue_multipart(part_number,0x38,voice_recv_mod[part_number],1);
-		sysex_add_queue_multipart(part_number,0x39,voice_recv_vol[part_number],1);
-		sysex_add_queue_multipart(part_number,0x3a,voice_recv_pan[part_number],1);
-		sysex_add_queue_multipart(part_number,0x3b,voice_recv_exp[part_number],1);
-		sysex_add_queue_multipart(part_number,0x3c,voice_recv_sus[part_number],1);
-		sysex_add_queue_multipart(part_number,0x3d,voice_recv_port[part_number],1);
-		sysex_add_queue_multipart(part_number,0x3e,voice_recv_sost[part_number],1);
-		sysex_add_queue_multipart(part_number,0x3f,voice_recv_soft[part_number],1);
-		sysex_add_queue_multipart(part_number,0x40,voice_recv_bs[part_number],1);
+		sysex_add_queue_multipart(part,0x30,voice_recv_pb[part],1);
+		sysex_add_queue_multipart(part,0x31,voice_recv_cat[part],1);
+		sysex_add_queue_multipart(part,0x32,voice_recv_pc[part],1);
+		sysex_add_queue_multipart(part,0x33,voice_recv_cc[part],1);
+		sysex_add_queue_multipart(part,0x34,voice_recv_pat[part],1);
+		sysex_add_queue_multipart(part,0x35,voice_recv_note[part],1);
+		sysex_add_queue_multipart(part,0x36,voice_recv_rpn[part],1);
+		sysex_add_queue_multipart(part,0x37,voice_recv_nrpn[part],1);
+		sysex_add_queue_multipart(part,0x38,voice_recv_mod[part],1);
+		sysex_add_queue_multipart(part,0x39,voice_recv_vol[part],1);
+		sysex_add_queue_multipart(part,0x3a,voice_recv_pan[part],1);
+		sysex_add_queue_multipart(part,0x3b,voice_recv_exp[part],1);
+		sysex_add_queue_multipart(part,0x3c,voice_recv_sus[part],1);
+		sysex_add_queue_multipart(part,0x3d,voice_recv_port[part],1);
+		sysex_add_queue_multipart(part,0x3e,voice_recv_sost[part],1);
+		sysex_add_queue_multipart(part,0x3f,voice_recv_soft[part],1);
+		sysex_add_queue_multipart(part,0x40,voice_recv_bs[part],1);
 
 		// restore effect sends
 		sysex_add_queue_multipart(part,0x13,effect_reverb_send[part],1);
