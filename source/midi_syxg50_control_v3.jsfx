@@ -169,7 +169,7 @@ category_list_width=180;
 category_list_length=0;
 
 list_item_height=27;
-list_item_width=150;
+list_item_width=210;
 menu_height=44;
 
 effect_chorus_send_reverb=-1;
@@ -1874,7 +1874,7 @@ sysex_queue_ptr=0;
 spinlock.unlock();
 
 
-@gfx 730 750
+@gfx 750 750
 
 // main window----------------------------------------------------------------
 
