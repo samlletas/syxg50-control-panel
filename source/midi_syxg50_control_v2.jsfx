@@ -2,17 +2,31 @@
 // https://www.patreon.com/shiru8bit shiru@mail.ru
 // released under the CC0 terms
 
+// v2.6 31.05.24 - Increase the GUI size once again;
+//                 Tweak colors for better contrast a bit;
+//                 Adjust naming of some parameters and parameter values;
+//                 Filter modulation amount shows values in cents;
+//                 Remove "FX:" from tab names;
+//                 Draw bipolar parameters with bipolar sliders;
+//                 Add more param value tables (mid width, high damp, send/return dB, percent...);
+//                 Add support for channel/poly aftertouch modulation params;
+//                 Add Tuning page to Voice Editor;
+//                 Add Pitch EG parameters to Voice Editor->Common;
+//                 Use unicode up-down arrows instead of ... on Variation page;
+//                 Add support for MIDI filters and Same Key Assign parameters;
+//                 Fix two typos in table data file;
+//                 Fix cursor going out of bounds on mousewheel
 // v2.5 27.05.24 - Enable default FXs as defined in the XG standard (Hall 1, Chorus 1, Delay LCR);
-//               - Adjust Reverbs/Delays defaults to match XGworks;
-//               - Rename "Channel" to "Part" as defined in the XG standard;
-//               - Change part 11-16 with QWERTY keys;
-//               - Add "XG" button to force re-send all parameters;
-//               - Add "Modulation" and "Keyboard" sections to "Voice Editor" tab;
-//               - Move FX sends to "Voice Editor" tab;
-//               - Slightly increase window size;
-//               - Fix data corruption due to concurrency;
-//               - Fix sending duplicated sysex messages;
-//               - Fix category offset when opening the first time
+//                 Adjust Reverbs/Delays defaults to match XGworks;
+//                 Rename "Channel" to "Part" as defined in the XG standard;
+//                 Change part 11-16 with QWERTY keys;
+//                 Add "XG" button to force re-send all parameters;
+//                 Add "Modulation" and "Keyboard" sections to "Voice Editor" tab;
+//                 Move FX sends to "Voice Editor" tab;
+//                 Slightly increase window size;
+//                 Fix data corruption due to concurrency;
+//                 Fix sending duplicated sysex messages;
+//                 Fix category offset when opening the first time
 // v2.4 12.01.24 - Change midi channel with number keys
 // v2.3 11.01.24 - Ctrl+left click to reset sliders to default;
 //                 Make the selected menu item visible on page enter;
@@ -40,7 +54,7 @@
 // v0.0 31.05.17 - Work started
 
 // Special thanks to phonymacaroni, EvilDragon
-// Changes in v2 release implemented by samlletas
+// Changes in v2 release implemented by samlletas, mkruselj
 
 desc:MIDI S-YXG50 Control Panel v2
 
