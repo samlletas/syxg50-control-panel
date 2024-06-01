@@ -54,9 +54,9 @@
 // v0.0 31.05.17 - Work started
 
 // Special thanks to phonymacaroni, EvilDragon
-// Changes in v2 release implemented by samlletas, mkruselj
+// Changes in v2/v3 implemented by samlletas, mkruselj
 
-desc:MIDI S-YXG50 Control Panel v2
+desc:MIDI S-YXG50 Control Panel v3
 
 in_pin:none
 out_pin:none
