@@ -317,7 +317,7 @@ X042:000:000 Viola
 X043:000:000 Cello
 X044:000:000 Contrabass
 X045:000:000 Tremolo Strings
-X045:000:008 Slow Trenolo Strings
+X045:000:008 Slow Tremolo Strings
 X045:000:040 Suspense Strings
 X046:000:000 Pizzicato Strings
 X047:000:000 Harp
@@ -381,7 +381,7 @@ X061:000:006 French Horn Solo
 X061:000:032 French Horn 2
 X061:000:037 Horn Orchestra
 X062:000:000 Brass Section 1
-X062:000:035 Trumpet & Trombone Section
+X062:000:035 Trumpet & Trombone
 X062:000:040 Brass Section 2
 X062:000:041 High Brass
 X062:000:042 Mellow Brass
