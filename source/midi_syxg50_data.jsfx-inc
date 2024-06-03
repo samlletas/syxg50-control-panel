@@ -710,7 +710,7 @@ X057:120:000 GM2 SFX
 //-----------------------------------------------------------------------------
 
 //#entry number
-//param number (translated to sysex address in code), min, max, default, display table, name
+//param number (translated to sysex address in code), min, max, default, display table, type (0:normal, 1:bipolar), name
 //all numbers dec
 
 reverb_params_list="
