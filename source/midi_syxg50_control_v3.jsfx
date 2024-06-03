@@ -169,7 +169,7 @@ category_list_width=180;
 category_list_length=0;
 
 list_item_height=27;
-list_item_width=185;
+list_item_width=200;
 menu_height=44;
 
 effect_chorus_send_reverb=-1;

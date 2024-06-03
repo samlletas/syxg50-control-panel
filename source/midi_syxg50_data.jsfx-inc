@@ -204,7 +204,7 @@ X017:000:066 Cheezy Organ
 X017:000:067 Drawbar Organ 3
 X018:000:000 Percussive Organ
 X018:000:024 70s Percussive Organ
-X018:000:032 Detuned Percussive Org
+X018:000:032 Detuned Percussive Organ
 X018:000:033 Light Organ
 X018:000:037 Percussive Organ 2
 X019:000:000 Rock Organ
@@ -233,7 +233,7 @@ list_contents_guitar="
 X025:000:000 Nylon Guitar 1
 X025:000:016 Nylon Guitar 2
 X025:000:025 Nylon Guitar 3
-X025:000:043 Velocity Gtr Harmonics
+X025:000:043 Velocity Guitar Harmonics
 X025:000:096 Ukulele
 X026:000:000 Steel Guitar 1
 X026:000:016 Steel Guitar 2
