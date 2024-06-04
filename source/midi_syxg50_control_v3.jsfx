@@ -648,7 +648,7 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 					gfx_rect(0,list_y,8,list_item_height);
 				);
 
-				mouse_x>=list_x && mouse_x<(list_x+list_item_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
+				mouse_x>=list_x && mouse_x<(list_x+category_list_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
 
 					gui_mouse_lmb==1 ? cursor_category=category_list_count;
 					list_hover=1;
@@ -930,7 +930,7 @@ function gui_pages()
 
 			list_hover ? set_color(color_bg_cursor) : set_color(color_fg_list);
 
-			gfx_x=list_x+2;
+			gfx_x=list_x+3;
 			gfx_y=list_y+2;
 
 			gfx_drawstr(list_item_text);
