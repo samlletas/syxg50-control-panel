@@ -2,7 +2,8 @@
 // https://www.patreon.com/shiru8bit shiru@mail.ru
 // released under the CC0 terms
 
-// v2.6 31.05.24 - Increase the GUI size once again;
+// v2.6 04.06.24 - Use full names for all voices;
+//                 Increase the GUI size once again;
 //                 Tweak colors for better contrast a bit;
 //                 Adjust naming of some parameters and parameter values;
 //                 Filter modulation amount shows values in cents;
