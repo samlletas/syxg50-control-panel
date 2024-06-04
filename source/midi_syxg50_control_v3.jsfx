@@ -169,7 +169,7 @@ category_list_width=180;
 category_list_length=0;
 
 list_item_height=27;
-list_item_width=150;
+list_item_width=200;
 menu_height=44;
 
 effect_chorus_send_reverb=-1;
@@ -632,7 +632,7 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 
 				list_hover=0;
 				gfx_x=list_x+16;
-				gfx_y=list_y+3;
+				gfx_y=list_y+2;
 
 				category_list_count==cursor_category ? (
 
@@ -648,7 +648,7 @@ function gui_category(list_category,cursor_category,offset_category,highlight_ca
 					gfx_rect(0,list_y,8,list_item_height);
 				);
 
-				mouse_x>=list_x && mouse_x<(list_x+list_item_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
+				mouse_x>=list_x && mouse_x<(list_x+category_list_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
 
 					gui_mouse_lmb==1 ? cursor_category=category_list_count;
 					list_hover=1;
@@ -930,10 +930,9 @@ function gui_pages()
 
 			list_hover ? set_color(color_bg_cursor) : set_color(color_fg_list);
 
-			gfx_x=list_x+8;
-			gfx_y=list_y+3;
+			gfx_x=list_x+3;
+			gfx_y=list_y+2;
 
-			gfx_printf("%2.2i:",instrument_list_count+1);
 			gfx_drawstr(list_item_text);
 
 			instrument_list_count+=1;
@@ -1874,7 +1873,7 @@ sysex_queue_ptr=0;
 spinlock.unlock();
 
 
-@gfx 730 750
+@gfx 750 750
 
 // main window----------------------------------------------------------------
 
