@@ -14,6 +14,7 @@ The following features were added:
      - New colors and bigger font for increased readability.
      - New "XG" button to force re-send all parameters.
      - Highlight user-changed parameters.
+     - Use full names for all voices (thanks @mkruselj).
      - Draw bipolar parameters with bipolar sliders (thanks @mkruselj).
 - Serialize parameter values instead of slider positions to avoid inconsistencies due to float precision loss.
 - And many more small improvements and bug fixes.
