@@ -888,9 +888,8 @@ function gui_pages()
 		category_list_voice_cursor==12 ? list_contents=list_contents_synth_pad;
 		category_list_voice_cursor==13 ? list_contents=list_contents_synth_effects;
 		category_list_voice_cursor==14 ? list_contents=list_contents_sound_effects;
-		category_list_voice_cursor==15 ? list_contents=list_contents_voice_effects;
-		category_list_voice_cursor==16 ? list_contents=list_contents_percussive;
-		category_list_voice_cursor==17 ? list_contents=list_contents_drum_kits;
+		category_list_voice_cursor==15 ? list_contents=list_contents_percussive;
+		category_list_voice_cursor==16 ? list_contents=list_contents_drum_kits;
 
 		list_x=category_list_width+10-list_item_width;
 		list_y=gfx_h;

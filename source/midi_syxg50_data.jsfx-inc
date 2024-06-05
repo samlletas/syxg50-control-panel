@@ -17,10 +17,9 @@ list_voice_category="
 11:Synth Lead
 12:Synth Pad
 13:Synth Effects
-14:Sound Effects 1
-15:Sound Effects 2
-16:Percussive
-17:Drum Kits
+14:Sound Effects
+15:Percussive
+16:Drum Kits
 ";
 
 //-----------------------------------------------------------------------------
@@ -628,16 +627,11 @@ list_contents_sound_effects="
 X121:000:000 Fret Noise
 X122:000:000 Breath Noise
 X123:000:000 Seashore
-X124:000:000 Bird Tweet
-X125:000:000 Telephone
+X124:000:000 Bird Tweet 1
+X125:000:000 Telephone Ring 1
 X126:000:000 Helicopter
 X127:000:000 Applause
 X128:000:000 Gunshot
-";
-
-//-----------------------------------------------------------------------------
-
-list_contents_voice_effects="
 X001:064:000 Cutting Noise 1
 X002:064:000 Cutting Noise 2
 X004:064:000 String Slap
@@ -650,10 +644,10 @@ X037:064:000 Bubble
 X038:064:000 Feed
 X049:064:000 Dog
 X050:064:000 Horse
-X051:064:000 Bird 2
+X051:064:000 Bird Tweet 2
 X055:064:000 Ghost
 X056:064:000 Maou
-X065:064:000 Telephone Ring 1
+X065:064:000 Phone Call
 X066:064:000 Door Squeak
 X067:064:000 Door Slam
 X068:064:000 Scratch 1
