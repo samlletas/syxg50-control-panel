@@ -11,5 +11,5 @@ charset = utf-8
 
 # JSFX scripts.
 [*.{jsfx,jsfx-inc}]
-indent_style = tab
-indent_size = 4
+indent_style = space
+indent_size = 2

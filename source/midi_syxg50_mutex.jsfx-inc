@@ -9,7 +9,7 @@ function getthreadid() local(thisid) instance(counter)
 );
 
 function lock()
-( 
+(
   this.ownid == getthreadid() ? (
     this.l += 1;
   ) : (
@@ -18,8 +18,8 @@ function lock()
   );
 );
 
-function unlock() 
-( 
+function unlock()
+(
   this.l <= 1 ? this.ownid = -1;
   this.l -= 1;
 );
