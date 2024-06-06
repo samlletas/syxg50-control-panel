@@ -70,714 +70,714 @@ import midi_syxg50_mutex.jsfx-inc
 
 spinlock.lock();
 
-CAP_LMB=0x01;
-CAP_RMB=0x02;
-CAP_MMB=0x40;
-CAP_CTRL=0x04;
-CAP_ALT=0x10;
-CAP_SHIFT=0X08;
+CAP_LMB = 0x01;
+CAP_RMB = 0x02;
+CAP_MMB = 0x40;
+CAP_CTRL = 0x04;
+CAP_ALT = 0x10;
+CAP_SHIFT = 0X08;
 
-ext_noinit=1;
-gfx_clear=-1;
-gfx_a=1;
+ext_noinit = 1;
+gfx_clear = -1;
+gfx_a = 1;
 
-color_bg_darkest=0x161616;
-color_bg_darker =0x202020;
-color_bg_dark   =0x292929;
-color_bg_light  =0x363636;
-color_bg_cursor =0xFFCC66;
-color_bg_changed=0x5CCFE6;
-color_bg_voice  =0x514631;
-color_fg_menu   =0x707070;
-color_fg_list   =0xD4D4D4;
+color_bg_darkest = 0x161616;
+color_bg_darker  = 0x202020;
+color_bg_dark    = 0x292929;
+color_bg_light   = 0x363636;
+color_bg_cursor  = 0xFFCC66;
+color_bg_changed = 0x5CCFE6;
+color_bg_voice   = 0x514631;
+color_fg_menu    = 0x707070;
+color_fg_list    = 0xD4D4D4;
 
-gui_page=0;
-gui_page_prev=-1;
+gui_page = 0;
+gui_page_prev = -1;
 
-gui_mouse_lmb=0;
-gui_mouse_rmb=0;
+gui_mouse_lmb = 0;
+gui_mouse_rmb = 0;
 
-gui_slider_width=256;
-gui_slider_halfwidth=gui_slider_width*0.5;
-gui_slider_height=12;
-gui_slider_spacing=26;
-gui_slider_x=0;
-gui_slider_y=0;
-gui_slider_change=0;
-force_update=0;
+gui_slider_width = 256;
+gui_slider_halfwidth = gui_slider_width * 0.5;
+gui_slider_height = 12;
+gui_slider_spacing = 26;
+gui_slider_x = 0;
+gui_slider_y = 0;
+gui_slider_change = 0;
+force_update = 0;
 
-midi_first_time=1;
-midi_synth_mode_xg=0;
-midi_synth_mode_tg300=1;
-midi_synth_mode=midi_synth_mode_xg;
-midi_synth_mode_prev=-1;  // send sysex only if changed
+midi_first_time = 1;
+midi_synth_mode_xg = 0;
+midi_synth_mode_tg300 = 1;
+midi_synth_mode = midi_synth_mode_xg;
+midi_synth_mode_prev = -1;  // send sysex only if changed
 
-sysex_buf=100000;
-sysex_queue=100100;
-sysex_queue_ptr=0;
-sysex_delay=0;
+sysex_buf = 100000;
+sysex_queue = 100100;
+sysex_queue_ptr = 0;
+sysex_delay = 0;
 
-part_number=0;
-part_number_prev=-1;
+part_number = 0;
+part_number_prev = -1;
 
-midi_program=200000;
-midi_bank=200100;
-instrument_voice=200200;
-instrument_category=200300;
+midi_program = 200000;
+midi_bank = 200100;
+instrument_voice = 200200;
+instrument_category = 200300;
 
-effect_reverb_send=200400;
-effect_chorus_send=200500;
-effect_variation_send=200600;
+effect_reverb_send = 200400;
+effect_chorus_send = 200500;
+effect_variation_send = 200600;
 
-var_offset=0;
+var_offset = 0;
 
-loop(16,
-  midi_program[var_offset]=0;
-  midi_bank[var_offset]=0;
-  instrument_voice[var_offset]=0;
-  instrument_category[var_offset]=0;
+loop (16,
+  midi_program[var_offset] = 0;
+  midi_bank[var_offset] = 0;
+  instrument_voice[var_offset] = 0;
+  instrument_category[var_offset] = 0;
 
-  effect_reverb_send[var_offset]=40;
-  effect_chorus_send[var_offset]=0;
-  effect_variation_send[var_offset]=0;
+  effect_reverb_send[var_offset] = 40;
+  effect_chorus_send[var_offset] = 0;
+  effect_variation_send[var_offset] = 0;
 
-  var_offset+=1;
+  var_offset += 1;
 );
 
-category_list_voice_cursor=0;
-category_list_voice_offset=0;
-category_list_voice_cursor_prev=-1;
+category_list_voice_cursor = 0;
+category_list_voice_offset = 0;
+category_list_voice_cursor_prev = -1;
 
-category_list_editor_cursor=0;
-category_list_editor_offset=0;
-category_list_editor_cursor_prev=-1;
+category_list_editor_cursor = 0;
+category_list_editor_offset = 0;
+category_list_editor_cursor_prev = -1;
 
-category_list_reverb_cursor=1;
-category_list_reverb_offset=0;
-category_list_reverb_cursor_prev=-1;
+category_list_reverb_cursor = 1;
+category_list_reverb_offset = 0;
+category_list_reverb_cursor_prev = -1;
 
-category_list_chorus_cursor=1;
-category_list_chorus_offset=0;
-category_list_chorus_cursor_prev=-1;
+category_list_chorus_cursor = 1;
+category_list_chorus_offset = 0;
+category_list_chorus_cursor_prev = -1;
 
-category_list_variation_cursor=9;
-category_list_variation_offset=0;
-category_list_variation_cursor_prev=-1;
+category_list_variation_cursor = 9;
+category_list_variation_offset = 0;
+category_list_variation_cursor_prev = -1;
 
-category_list_height=0;
-category_list_width=180;
-category_list_length=0;
+category_list_height = 0;
+category_list_width = 180;
+category_list_length = 0;
 
-list_item_height=27;
-list_item_width=200;
-menu_height=44;
+list_item_height = 27;
+list_item_width = 200;
+menu_height = 44;
 
-effect_chorus_send_reverb=-1;
-effect_variation_send_reverb=-1;
-effect_variation_send_chorus=-1;
+effect_chorus_send_reverb = -1;
+effect_variation_send_reverb = -1;
+effect_variation_send_chorus = -1;
 
-effect_reverb_return=-1;
-effect_chorus_return=-1;
-effect_variation_return=-1;
+effect_reverb_return = -1;
+effect_chorus_return = -1;
+effect_variation_return = -1;
 
-effect_reverb_pan=-1;
-effect_chorus_pan=-1;
-effect_variation_pan=-1;
+effect_reverb_pan = -1;
+effect_chorus_pan = -1;
+effect_variation_pan = -1;
 
-effect_params=250000;
-var_offset=0;
+effect_params = 250000;
+var_offset = 0;
 
-loop(42*16*3,
-  effect_params[var_offset]=-1;
-  var_offset+=1;
+loop (42 * 16 * 3,
+  effect_params[var_offset] = -1;
+  var_offset += 1;
 );
 
-voice_rcv_channel=300000;
-voice_mode=300100;
-voice_volume=300200;
-voice_pan=300300;
-voice_transpose=300400;
-voice_detune=300500;
-voice_filter_cutoff=300600;
-voice_filter_resonance=300700;
-voice_eg_attack=300800;
-voice_eg_decay=300900;
-voice_eg_release=301000;
-voice_portamento_switch=301100;
-voice_portamento_time=301200;
-voice_vibrato_rate=301300;
-voice_vibrato_depth=301400;
-voice_vibrato_delay=301500;
-voice_bend_pitch_control=301600;
-voice_bend_filter_control=301700;
-voice_bend_amplitude_control=301800;
-voice_bend_lfo_pmod_depth=301900;
-voice_bend_lfo_fmod_depth=302000;
-voice_bend_lfo_amod_depth=302100;
-voice_mw_pitch_control=302200;
-voice_mw_filter_control=302300;
-voice_mw_amplitude_control=302400;
-voice_mw_lfo_pmod_depth=302500;
-voice_mw_lfo_fmod_depth=302600;
-voice_mw_lfo_amod_depth=302700;
-voice_dry_level=302800;
-voice_note_limit_low=302900;
-voice_note_limit_high=303000;
-voice_velocity_limit_low=303100;
-voice_velocity_limit_high=303200;
-voice_velocity_sense_depth=303300;
-voice_velocity_sense_offset=303400;
-voice_at_pitch_control=303500;
-voice_at_filter_control=303600;
-voice_at_amp_control=303700;
-voice_at_lfo_pmod_depth=303800;
-voice_at_lfo_fmod_depth=303900;
-voice_at_lfo_amod_depth=304000;
-voice_pitch_eg_init_level=304100;
-voice_pitch_eg_attack=304200;
-voice_pitch_eg_release_level=304300;
-voice_pitch_eg_release=304400;
-voice_scale_c=305000;
-voice_scale_cs=305100;
-voice_scale_d=305200;
-voice_scale_ds=305300;
-voice_scale_e=305400;
-voice_scale_f=305500;
-voice_scale_fs=305600;
-voice_scale_g=305700;
-voice_scale_gs=305800;
-voice_scale_a=305900;
-voice_scale_as=306000;
-voice_scale_b=306100;
-voice_same_note_assign=306200;
-voice_recv_pb=306300;
-voice_recv_cat=306400;
-voice_recv_pc=306500;
-voice_recv_cc=306600;
-voice_recv_pat=306700;
-voice_recv_note=306800;
-voice_recv_rpn=306900;
-voice_recv_nrpn=307000;
-voice_recv_mod=307100;
-voice_recv_vol=307200;
-voice_recv_pan=307300;
-voice_recv_exp=307400;
-voice_recv_sus=307500;
-voice_recv_port=307600;
-voice_recv_sost=307700;
-voice_recv_soft=307800;
-voice_recv_bs=307900;
+voice_rcv_channel = 300000;
+voice_mode = 300100;
+voice_volume = 300200;
+voice_pan = 300300;
+voice_transpose = 300400;
+voice_detune = 300500;
+voice_filter_cutoff = 300600;
+voice_filter_resonance = 300700;
+voice_eg_attack = 300800;
+voice_eg_decay = 300900;
+voice_eg_release = 301000;
+voice_portamento_switch = 301100;
+voice_portamento_time = 301200;
+voice_vibrato_rate = 301300;
+voice_vibrato_depth = 301400;
+voice_vibrato_delay = 301500;
+voice_bend_pitch_control = 301600;
+voice_bend_filter_control = 301700;
+voice_bend_amplitude_control = 301800;
+voice_bend_lfo_pmod_depth = 301900;
+voice_bend_lfo_fmod_depth = 302000;
+voice_bend_lfo_amod_depth = 302100;
+voice_mw_pitch_control = 302200;
+voice_mw_filter_control = 302300;
+voice_mw_amplitude_control = 302400;
+voice_mw_lfo_pmod_depth = 302500;
+voice_mw_lfo_fmod_depth = 302600;
+voice_mw_lfo_amod_depth = 302700;
+voice_dry_level = 302800;
+voice_note_limit_low = 302900;
+voice_note_limit_high = 303000;
+voice_velocity_limit_low = 303100;
+voice_velocity_limit_high = 303200;
+voice_velocity_sense_depth = 303300;
+voice_velocity_sense_offset = 303400;
+voice_at_pitch_control = 303500;
+voice_at_filter_control = 303600;
+voice_at_amp_control = 303700;
+voice_at_lfo_pmod_depth = 303800;
+voice_at_lfo_fmod_depth = 303900;
+voice_at_lfo_amod_depth = 304000;
+voice_pitch_eg_init_level = 304100;
+voice_pitch_eg_attack = 304200;
+voice_pitch_eg_release_level = 304300;
+voice_pitch_eg_release = 304400;
+voice_scale_c = 305000;
+voice_scale_cs = 305100;
+voice_scale_d = 305200;
+voice_scale_ds = 305300;
+voice_scale_e = 305400;
+voice_scale_f = 305500;
+voice_scale_fs = 305600;
+voice_scale_g = 305700;
+voice_scale_gs = 305800;
+voice_scale_a = 305900;
+voice_scale_as = 306000;
+voice_scale_b = 306100;
+voice_same_note_assign = 306200;
+voice_recv_pb = 306300;
+voice_recv_cat = 306400;
+voice_recv_pc = 306500;
+voice_recv_cc = 306600;
+voice_recv_pat = 306700;
+voice_recv_note = 306800;
+voice_recv_rpn = 306900;
+voice_recv_nrpn = 307000;
+voice_recv_mod = 307100;
+voice_recv_vol = 307200;
+voice_recv_pan = 307300;
+voice_recv_exp = 307400;
+voice_recv_sus = 307500;
+voice_recv_port = 307600;
+voice_recv_sost = 307700;
+voice_recv_soft = 307800;
+voice_recv_bs = 307900;
 
-var_offset=0;
+var_offset = 0;
 
-loop(16,
-  voice_rcv_channel[var_offset]=var_offset;
-  voice_mode[var_offset]=1;
-  voice_volume[var_offset]=100;
-  voice_pan[var_offset]=64;
-  voice_transpose[var_offset]=64;
-  voice_detune[var_offset]=2048;
-  voice_filter_cutoff[var_offset]=64;
-  voice_filter_resonance[var_offset]=64;
-  voice_eg_attack[var_offset]=64;
-  voice_eg_decay[var_offset]=64;
-  voice_eg_release[var_offset]=64;
-  voice_portamento_switch[var_offset]=0;
-  voice_portamento_time[var_offset]=0;
-  voice_vibrato_rate[var_offset]=64;
-  voice_vibrato_depth[var_offset]=64;
-  voice_vibrato_delay[var_offset]=64;
-  voice_bend_pitch_control[var_offset]=66;
-  voice_bend_filter_control[var_offset]=64;
-  voice_bend_amplitude_control[var_offset]=64;
-  voice_bend_lfo_pmod_depth[var_offset]=0;
-  voice_bend_lfo_fmod_depth[var_offset]=0;
-  voice_bend_lfo_amod_depth[var_offset]=0;
-  voice_mw_pitch_control[var_offset]=64;
-  voice_mw_filter_control[var_offset]=64;
-  voice_mw_amplitude_control[var_offset]=64;
-  voice_mw_lfo_pmod_depth[var_offset]=10;
-  voice_mw_lfo_fmod_depth[var_offset]=0;
-  voice_mw_lfo_amod_depth[var_offset]=0;
-  voice_dry_level[var_offset]=127;
-  voice_note_limit_low[var_offset]=0;
-  voice_note_limit_high[var_offset]=127;
-  voice_velocity_limit_low[var_offset]=1;
-  voice_velocity_limit_high[var_offset]=127;
-  voice_velocity_sense_depth[var_offset]=64;
-  voice_velocity_sense_offset[var_offset]=64;
-  voice_same_note_assign[var_offset]=1;
-  voice_at_pitch_control[var_offset]=64;
-  voice_at_filter_control[var_offset]=64;
-  voice_at_amp_control[var_offset]=64;
-  voice_at_lfo_pmod_depth[var_offset]=0;
-  voice_at_lfo_fmod_depth[var_offset]=0;
-  voice_at_lfo_amod_depth[var_offset]=0;
-  voice_pitch_eg_init_level[var_offset]=64;
-  voice_pitch_eg_attack[var_offset]=64;
-  voice_pitch_eg_release_level[var_offset]=64;
-  voice_pitch_eg_release[var_offset]=64;
-  voice_scale_c[var_offset]=64;
-  voice_scale_cs[var_offset]=64;
-  voice_scale_d[var_offset]=64;
-  voice_scale_ds[var_offset]=64;
-  voice_scale_e[var_offset]=64;
-  voice_scale_f[var_offset]=64;
-  voice_scale_fs[var_offset]=64;
-  voice_scale_g[var_offset]=64;
-  voice_scale_gs[var_offset]=64;
-  voice_scale_a[var_offset]=64;
-  voice_scale_as[var_offset]=64;
-  voice_scale_b[var_offset]=64;
-  voice_recv_pb[var_offset]=1;
-  voice_recv_cat[var_offset]=1;
-  voice_recv_pc[var_offset]=1;
-  voice_recv_cc[var_offset]=1;
-  voice_recv_pat[var_offset]=1;
-  voice_recv_note[var_offset]=1;
-  voice_recv_rpn[var_offset]=1;
-  voice_recv_nrpn[var_offset]=1;
-  voice_recv_mod[var_offset]=1;
-  voice_recv_vol[var_offset]=1;
-  voice_recv_pan[var_offset]=1;
-  voice_recv_exp[var_offset]=1;
-  voice_recv_sus[var_offset]=1;
-  voice_recv_port[var_offset]=1;
-  voice_recv_sost[var_offset]=1;
-  voice_recv_soft[var_offset]=1;
-  voice_recv_bs[var_offset]=1;
+loop (16,
+  voice_rcv_channel[var_offset] = var_offset;
+  voice_mode[var_offset] = 1;
+  voice_volume[var_offset] = 100;
+  voice_pan[var_offset] = 64;
+  voice_transpose[var_offset] = 64;
+  voice_detune[var_offset] = 2048;
+  voice_filter_cutoff[var_offset] = 64;
+  voice_filter_resonance[var_offset] = 64;
+  voice_eg_attack[var_offset] = 64;
+  voice_eg_decay[var_offset] = 64;
+  voice_eg_release[var_offset] = 64;
+  voice_portamento_switch[var_offset] = 0;
+  voice_portamento_time[var_offset] = 0;
+  voice_vibrato_rate[var_offset] = 64;
+  voice_vibrato_depth[var_offset] = 64;
+  voice_vibrato_delay[var_offset] = 64;
+  voice_bend_pitch_control[var_offset] = 66;
+  voice_bend_filter_control[var_offset] = 64;
+  voice_bend_amplitude_control[var_offset] = 64;
+  voice_bend_lfo_pmod_depth[var_offset] = 0;
+  voice_bend_lfo_fmod_depth[var_offset] = 0;
+  voice_bend_lfo_amod_depth[var_offset] = 0;
+  voice_mw_pitch_control[var_offset] = 64;
+  voice_mw_filter_control[var_offset] = 64;
+  voice_mw_amplitude_control[var_offset] = 64;
+  voice_mw_lfo_pmod_depth[var_offset] = 10;
+  voice_mw_lfo_fmod_depth[var_offset] = 0;
+  voice_mw_lfo_amod_depth[var_offset] = 0;
+  voice_dry_level[var_offset] = 127;
+  voice_note_limit_low[var_offset] = 0;
+  voice_note_limit_high[var_offset] = 127;
+  voice_velocity_limit_low[var_offset] = 1;
+  voice_velocity_limit_high[var_offset] = 127;
+  voice_velocity_sense_depth[var_offset] = 64;
+  voice_velocity_sense_offset[var_offset] = 64;
+  voice_same_note_assign[var_offset] = 1;
+  voice_at_pitch_control[var_offset] = 64;
+  voice_at_filter_control[var_offset] = 64;
+  voice_at_amp_control[var_offset] = 64;
+  voice_at_lfo_pmod_depth[var_offset] = 0;
+  voice_at_lfo_fmod_depth[var_offset] = 0;
+  voice_at_lfo_amod_depth[var_offset] = 0;
+  voice_pitch_eg_init_level[var_offset] = 64;
+  voice_pitch_eg_attack[var_offset] = 64;
+  voice_pitch_eg_release_level[var_offset] = 64;
+  voice_pitch_eg_release[var_offset] = 64;
+  voice_scale_c[var_offset] = 64;
+  voice_scale_cs[var_offset] = 64;
+  voice_scale_d[var_offset] = 64;
+  voice_scale_ds[var_offset] = 64;
+  voice_scale_e[var_offset] = 64;
+  voice_scale_f[var_offset] = 64;
+  voice_scale_fs[var_offset] = 64;
+  voice_scale_g[var_offset] = 64;
+  voice_scale_gs[var_offset] = 64;
+  voice_scale_a[var_offset] = 64;
+  voice_scale_as[var_offset] = 64;
+  voice_scale_b[var_offset] = 64;
+  voice_recv_pb[var_offset] = 1;
+  voice_recv_cat[var_offset] = 1;
+  voice_recv_pc[var_offset] = 1;
+  voice_recv_cc[var_offset] = 1;
+  voice_recv_pat[var_offset] = 1;
+  voice_recv_note[var_offset] = 1;
+  voice_recv_rpn[var_offset] = 1;
+  voice_recv_nrpn[var_offset] = 1;
+  voice_recv_mod[var_offset] = 1;
+  voice_recv_vol[var_offset] = 1;
+  voice_recv_pan[var_offset] = 1;
+  voice_recv_exp[var_offset] = 1;
+  voice_recv_sus[var_offset] = 1;
+  voice_recv_port[var_offset] = 1;
+  voice_recv_sost[var_offset] = 1;
+  voice_recv_soft[var_offset] = 1;
+  voice_recv_bs[var_offset] = 1;
 
-  var_offset+=1;
+  var_offset += 1;
 );
 
-list_contents="";
-slider_value_table="";
+list_contents = "";
+slider_value_table = "";
 
 function set_color(color) (
-  gfx_r=((color>>16)&0xff)/255;
-  gfx_g=((color>>8 )&0xff)/255;
-  gfx_b=( color     &0xff)/255;
+  gfx_r = ((color >> 16) & 0xff) / 255;
+  gfx_g = ((color >> 8 ) & 0xff) / 255;
+  gfx_b = ( color        & 0xff) / 255;
 );
 
-function sysex_add_queue(address,value,length) (
-  sysex_queue[sysex_queue_ptr+0]=address;
-  sysex_queue[sysex_queue_ptr+1]=value;
-  sysex_queue[sysex_queue_ptr+2]=length;
-  sysex_queue_ptr+=3;
+function sysex_add_queue(address, value, length) (
+  sysex_queue[sysex_queue_ptr + 0] = address;
+  sysex_queue[sysex_queue_ptr + 1] = value;
+  sysex_queue[sysex_queue_ptr + 2] = length;
+  sysex_queue_ptr += 3;
 );
 
-function sysex_add_queue_multipart(address_part,address_parameter,value,length) (
-  sysex_add_queue((0x08<<16)|(address_part<<8)|(address_parameter<<0),value,length);
+function sysex_add_queue_multipart(address_part, address_parameter, value, length) (
+  sysex_add_queue((0x08 << 16) | (address_part << 8) | (address_parameter << 0), value, length);
 );
 
-function xgsend_sysex(address,value,len) (
-  address>=0 ? (
-    sysex_buf[0x00]=0x43;                // Yamaha ID
-    sysex_buf[0x01]=0x10;                // device number
-    sysex_buf[0x02]=0x4c;                // XG model ID
-    sysex_buf[0x03]=(address>>16)&0x7f;  // address high
-    sysex_buf[0x04]=(address>>8 )&0x7f;  // address mid
-    sysex_buf[0x05]= address     &0x7f;  // address low
+function xgsend_sysex(address, value, len) (
+  address >= 0 ? (
+    sysex_buf[0x00] = 0x43;                    // Yamaha ID
+    sysex_buf[0x01] = 0x10;                    // device number
+    sysex_buf[0x02] = 0x4c;                    // XG model ID
+    sysex_buf[0x03] = (address >> 16) & 0x7f;  // address high
+    sysex_buf[0x04] = (address >> 8 ) & 0x7f;  // address mid
+    sysex_buf[0x05] =  address        & 0x7f;  // address low
 
-    len==1 ? (
-      sysex_buf[0x06]=value&0x7f;  // value lsb
-      midisend_buf(sysex_delay,sysex_buf,0x07);
+    len == 1 ? (
+      sysex_buf[0x06] = value & 0x7f;  // value lsb
+      midisend_buf(sysex_delay, sysex_buf, 0x07);
     );
 
-    len==2 ? (
-      sysex_buf[0x06]=(value>>8)&0x7f;  // value msb
-      sysex_buf[0x07]= value    &0x7f;  // value lsb
-      midisend_buf(sysex_delay,sysex_buf,0x08);
+    len == 2 ? (
+      sysex_buf[0x06] = (value >> 8) & 0x7f;  // value msb
+      sysex_buf[0x07] =  value       & 0x7f;  // value lsb
+      midisend_buf(sysex_delay, sysex_buf, 0x08);
     );
 
-    sysex_delay+=1;
+    sysex_delay += 1;
   );
 );
 
-function parse_number_dec(string,offset,length) (
-  dec_value=0;
+function parse_number_dec(string, offset, length) (
+  dec_value = 0;
 
-  loop(length,
-    dec_value*=10;
-    dec_value+=(str_getchar(string,offset)-48);
-    offset+=1;
+  loop (length,
+    dec_value *= 10;
+    dec_value += (str_getchar(string, offset) - 48);
+    offset += 1;
   );
 
   dec_value;
 );
 
-function parse_to_line_end(string,offset) (
-  length=strlen(string);
-  while(str_getchar(string,offset)>=32&&offset<length) (offset+=1);
+function parse_to_line_end(string, offset) (
+  length = strlen(string);
+  while (str_getchar(string, offset) >= 32 && offset < length) (offset += 1);
   offset;
 );
 
-function parse_to_next_line(string,offset) (
-  length=strlen(string);
-  while(str_getchar(string,offset)<32&&offset<length) (offset+=1);
+function parse_to_next_line(string, offset) (
+  length = strlen(string);
+  while (str_getchar(string, offset) < 32 && offset < length) (offset += 1);
   offset;
 );
 
-function gui_slider_float_to_value(slider_value_float,slider_min,slider_max) (
-  slider_value=floor((slider_min+(slider_max-slider_min)*slider_value_float)+0.5);
-  slider_value<slider_min ? slider_value=slider_min;
-  slider_value>slider_max ? slider_value=slider_max;
+function gui_slider_float_to_value(slider_value_float, slider_min, slider_max) (
+  slider_value = floor((slider_min + (slider_max - slider_min) * slider_value_float) + 0.5);
+  slider_value < slider_min ? slider_value = slider_min;
+  slider_value > slider_max ? slider_value = slider_max;
   slider_value;
 );
 
-function gui_slider_value_to_float(slider_value,slider_min,slider_max) (
-  slider_value_float=(slider_value-slider_min)/(slider_max-slider_min);
-  slider_value_float<0 ? slider_value_float=0;
-  slider_value_float>1 ? slider_value_float=1;
+function gui_slider_value_to_float(slider_value, slider_min, slider_max) (
+  slider_value_float = (slider_value - slider_min) / (slider_max - slider_min);
+  slider_value_float < 0 ? slider_value_float = 0;
+  slider_value_float > 1 ? slider_value_float = 1;
   slider_value_float;
 );
 
-function gui_slider(slider_value,slider_min,slider_max,slider_caption,slider_def,slider_bipolar) (
-  slider_value_old=slider_value;
-  slider_value<0 ? slider_value=slider_def;
-  slider_value_float=gui_slider_value_to_float(slider_value,slider_min,slider_max);
-  slider_value_width=floor((gui_slider_width*slider_value_float)+0.5);
+function gui_slider(slider_value, slider_min, slider_max, slider_caption, slider_def, slider_bipolar) (
+  slider_value_old = slider_value;
+  slider_value < 0 ? slider_value = slider_def;
+  slider_value_float = gui_slider_value_to_float(slider_value, slider_min, slider_max);
+  slider_value_width = floor((gui_slider_width * slider_value_float) + 0.5);
 
   // slider background
   set_color(color_bg_darker);
-  gfx_rect(gui_slider_x,gui_slider_y,gui_slider_width,gui_slider_height);
+  gfx_rect(gui_slider_x, gui_slider_y, gui_slider_width, gui_slider_height);
 
-  slider_value==slider_def ? set_color(color_bg_cursor);
-  slider_value!=slider_def ? set_color(color_bg_changed);
+  slider_value == slider_def ? set_color(color_bg_cursor);
+  slider_value != slider_def ? set_color(color_bg_changed);
 
   // slider fill
-  slider_bipolar!=0 ? (
-    slider_value_width=abs(floor((gui_slider_halfwidth*((slider_value_float*2.0)-1.0))+0.5));
+  slider_bipolar != 0 ? (
+    slider_value_width = abs(floor((gui_slider_halfwidth * ((slider_value_float * 2.0) - 1.0)) + 0.5));
 
-    slider_value_float<0.5 ? (
-      slider_value_temp=floor((gui_slider_width*slider_value_float)+0.5);
-      gfx_rect(gui_slider_x+slider_value_temp,gui_slider_y,slider_value_width,gui_slider_height);
+    slider_value_float < 0.5 ? (
+      slider_value_temp = floor((gui_slider_width * slider_value_float) + 0.5);
+      gfx_rect(gui_slider_x + slider_value_temp, gui_slider_y, slider_value_width, gui_slider_height);
     ) : (
-      gfx_rect(gui_slider_x+gui_slider_halfwidth,gui_slider_y,slider_value_width,gui_slider_height);
+      gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, slider_value_width, gui_slider_height);
     );
 
     // center notch
-    gfx_rect(gui_slider_x+gui_slider_halfwidth,gui_slider_y,1,gui_slider_height);
+    gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, 1, gui_slider_height);
   ) : (
-    gfx_rect(gui_slider_x,gui_slider_y,slider_value_width,gui_slider_height);
+    gfx_rect(gui_slider_x, gui_slider_y, slider_value_width, gui_slider_height);
   );
 
-  mouse_x>=gui_slider_x-20 && mouse_x<=gui_slider_x+gui_slider_width+20 && mouse_y>=gui_slider_y-5 && mouse_y<=gui_slider_y+gui_slider_height+5 ? (
-    mouse_wheel!=0 ? (
-      slider_range=slider_max-slider_min;
-      slider_range>127 ? step_size=floor((slider_range/64)+0.5) : step_size=1;
-      slider_value+=sign(mouse_wheel)*max(step_size, 1);
+  mouse_x >= gui_slider_x - 20 && mouse_x <= gui_slider_x + gui_slider_width + 20 && mouse_y >= gui_slider_y - 5 && mouse_y <= gui_slider_y + gui_slider_height + 5 ? (
+    mouse_wheel != 0 ? (
+      slider_range = slider_max - slider_min;
+      slider_range > 127 ? step_size = floor((slider_range / 64) + 0.5) : step_size = 1;
+      slider_value += sign(mouse_wheel) * max(step_size, 1);
     );
 
-    mouse_cap&CAP_LMB && !(mouse_cap&CAP_CTRL) ? (
-      slider_value_float=(mouse_x-gui_slider_x)/gui_slider_width;
-      slider_value=gui_slider_float_to_value(slider_value_float,slider_min,slider_max);
+    mouse_cap & CAP_LMB && !(mouse_cap & CAP_CTRL) ? (
+      slider_value_float = (mouse_x - gui_slider_x) / gui_slider_width;
+      slider_value = gui_slider_float_to_value(slider_value_float, slider_min, slider_max);
     );
 
-    mouse_cap&CAP_RMB || (mouse_cap&CAP_LMB && mouse_cap&CAP_CTRL) ? (
-      slider_value=slider_def;
+    mouse_cap & CAP_RMB || (mouse_cap & CAP_LMB && mouse_cap & CAP_CTRL) ? (
+      slider_value = slider_def;
     );
 
-    slider_value<slider_min ? slider_value=slider_min;
-    slider_value>slider_max ? slider_value=slider_max;
+    slider_value < slider_min ? slider_value = slider_min;
+    slider_value > slider_max ? slider_value = slider_max;
   );
 
-  gui_slider_change=force_update|(slider_value!=slider_value_old);
+  gui_slider_change = force_update | (slider_value != slider_value_old);
 
-  slider_value==slider_def ? set_color(color_fg_list);
-  slider_value!=slider_def ? set_color(color_bg_changed);
+  slider_value == slider_def ? set_color(color_fg_list);
+  slider_value != slider_def ? set_color(color_bg_changed);
 
-  gfx_measurestr(slider_caption,w,h);
-  gfx_x=gui_slider_x-w-8;
-  gfx_y=gui_slider_y-6;
+  gfx_measurestr(slider_caption, w, h);
+  gfx_x = gui_slider_x - w - 8;
+  gfx_y = gui_slider_y - 6;
   gfx_drawstr(slider_caption);
 
-  gfx_x=gui_slider_x+gui_slider_width+5;
-  table_len=strlen(slider_value_table);
+  gfx_x = gui_slider_x + gui_slider_width + 5;
+  table_len = strlen(slider_value_table);
 
-  table_len>0 ? (
-    strcpy(slider_value_display,"not found");
-    table_ptr=1;
+  table_len > 0 ? (
+    strcpy(slider_value_display, "not found");
+    table_ptr = 1;
 
-    while(table_ptr<table_len) (
-      table_value=parse_number_dec(slider_value_table,table_ptr,3);
-      table_ptr+=4;
-      table_ptr_old=table_ptr;
-      table_ptr=parse_to_line_end(slider_value_table,table_ptr)+1;
+    while (table_ptr < table_len) (
+      table_value = parse_number_dec(slider_value_table, table_ptr, 3);
+      table_ptr += 4;
+      table_ptr_old = table_ptr;
+      table_ptr = parse_to_line_end(slider_value_table, table_ptr) + 1;
 
-      table_value==slider_value ? (
-        strcpy_substr(slider_value_display,slider_value_table,table_ptr_old,table_ptr-table_ptr_old);
-        table_ptr=table_len;
+      table_value == slider_value ? (
+        strcpy_substr(slider_value_display, slider_value_table, table_ptr_old, table_ptr - table_ptr_old);
+        table_ptr = table_len;
       );
     );
 
     gfx_drawstr(slider_value_display);
   ) : (
-    gfx_drawnumber(slider_value,0);
+    gfx_drawnumber(slider_value, 0);
   );
 
-  gui_slider_y+=gui_slider_spacing;
+  gui_slider_y += gui_slider_spacing;
   slider_value;
 );
 
 // mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
-function gui_menu_item(item_x,item_y,item_caption,item_selected,mode) (
-  gfx_x=item_x;
-  gfx_y=item_y;
+function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) (
+  gfx_x = item_x;
+  gfx_y = item_y;
 
-  gfx_measurestr(item_caption,w,h);
+  gfx_measurestr(item_caption, w, h);
 
   item_selected ? (
     set_color(color_bg_dark);
-    gfx_rect(gfx_x-8,gfx_y-4,w+16,h+8);
+    gfx_rect(gfx_x - 8, gfx_y - 4, w + 16, h + 8);
     set_color(color_bg_cursor);
   ) : (
     set_color(color_fg_menu);
   );
 
-  item_selected=0;
+  item_selected = 0;
 
-  mouse_x>=item_x-8 && mouse_x<item_x+w+8 && mouse_y>=item_y-4 && mouse_y<item_y+h+4 ? (
+  mouse_x >= item_x - 8 && mouse_x < item_x + w + 8 && mouse_y >= item_y - 4 && mouse_y < item_y + h + 4 ? (
     set_color(color_bg_cursor);
 
-    mode==0 ? (
-      gui_mouse_lmb>0 ? item_selected|=1;
-      gui_mouse_rmb>0 ? item_selected|=2;
+    mode == 0 ? (
+      gui_mouse_lmb > 0 ? item_selected |= 1;
+      gui_mouse_rmb > 0 ? item_selected |= 2;
     );
 
-    mode==1 ? (
-      gui_mouse_lmb==1 ? item_selected|=1;
-      gui_mouse_rmb==1 ? item_selected|=2;
+    mode == 1 ? (
+      gui_mouse_lmb == 1 ? item_selected |= 1;
+      gui_mouse_rmb == 1 ? item_selected |= 2;
     );
 
-    mode==2 ? item_selected=4;
+    mode == 2 ? item_selected = 4;
   );
 
   gfx_drawstr(item_caption);
   item_selected;
 );
 
-function gui_category(list_category,cursor_category,offset_category,highlight_category) (
-  list_x=0;
-  list_y=menu_height+20;
+function gui_category(list_category, cursor_category, offset_category, highlight_category) (
+  list_x = 0;
+  list_y = menu_height + 20;
 
-  category_list_count=0;
-  category_display_count=0;
+  category_list_count = 0;
+  category_display_count = 0;
 
-  list_string_ptr=1;
-  list_category_length=strlen(list_category);
+  list_string_ptr = 1;
+  list_category_length = strlen(list_category);
 
-  while(list_string_ptr<list_category_length) (
-    list_string_old_ptr=list_string_ptr;
-    list_string_ptr=parse_to_line_end(list_category,list_string_ptr);
+  while (list_string_ptr < list_category_length) (
+    list_string_old_ptr = list_string_ptr;
+    list_string_ptr = parse_to_line_end(list_category, list_string_ptr);
 
-    strcpy_substr(list_item_text,list_category,list_string_old_ptr+3,list_string_ptr-list_string_old_ptr-3);
-    list_string_ptr+=1;
+    strcpy_substr(list_item_text, list_category, list_string_old_ptr + 3, list_string_ptr - list_string_old_ptr - 3);
+    list_string_ptr += 1;
 
-    category_list_count>=offset_category ? (
-      category_display_count<category_list_height ? (
-        list_hover=0;
-        gfx_x=list_x+16;
-        gfx_y=list_y+2;
+    category_list_count >= offset_category ? (
+      category_display_count < category_list_height ? (
+        list_hover = 0;
+        gfx_x = list_x + 16;
+        gfx_y = list_y + 2;
 
-        category_list_count==cursor_category ? (
-          list_hover=1;
-          gfx_x-=4;
+        category_list_count == cursor_category ? (
+          list_hover = 1;
+          gfx_x -= 4;
           set_color(color_bg_light);
-          gfx_rect(list_x,list_y,category_list_width,list_item_height);
+          gfx_rect(list_x, list_y, category_list_width, list_item_height);
         );
 
-        category_list_count==highlight_category ? (
+        category_list_count == highlight_category ? (
           set_color(color_bg_cursor);
-          gfx_rect(0,list_y,8,list_item_height);
+          gfx_rect(0, list_y, 8, list_item_height);
         );
 
-        mouse_x>=list_x && mouse_x<(list_x+category_list_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
-          gui_mouse_lmb==1 ? cursor_category=category_list_count;
-          list_hover=1;
+        mouse_x >= list_x && mouse_x < (list_x + category_list_width) && mouse_y >= list_y && mouse_y < (list_y + list_item_height) ? (
+          gui_mouse_lmb == 1 ? cursor_category = category_list_count;
+          list_hover = 1;
         );
 
         list_hover ? set_color(color_bg_cursor) : set_color(color_fg_menu);
         gfx_drawstr(list_item_text);
 
-        category_display_count+=1;
+        category_display_count += 1;
       );
 
-      list_y+=list_item_height;
+      list_y += list_item_height;
     );
 
-    category_list_count+=1;
+    category_list_count += 1;
   );
 
-  category_list_length=category_list_count;
+  category_list_length = category_list_count;
 
-  mouse_y>=menu_height && mouse_x<category_list_width ? (
-    mouse_wheel!=0 ? (
-      mouse_wheel<0 ? cursor_category+=1 : cursor_category-=1;
-      cursor_category<0 ? cursor_category=0;
-      cursor_category>=category_list_count-1 ? cursor_category=category_list_count-1;
+  mouse_y >= menu_height && mouse_x < category_list_width ? (
+    mouse_wheel != 0 ? (
+      mouse_wheel < 0 ? cursor_category += 1 : cursor_category -= 1;
+      cursor_category < 0 ? cursor_category = 0;
+      cursor_category >= category_list_count - 1 ? cursor_category = category_list_count - 1;
     );
   );
 
   cursor_category;
 );
 
-function gui_category_adjust_view(list_offset,list_cursor,list_cursor_prev,list_length) (
-  category_list_height>0 && (list_cursor!=list_cursor_prev || gui_page!=gui_page_prev) ? (
+function gui_category_adjust_view(list_offset, list_cursor, list_cursor_prev, list_length) (
+  category_list_height > 0 && (list_cursor != list_cursor_prev || gui_page != gui_page_prev) ? (
     // makes sure the selected item is always visible
-    list_offset=min(list_offset, list_cursor);
-    list_offset=max(list_offset, list_cursor-category_list_height+1);
+    list_offset = min(list_offset, list_cursor);
+    list_offset = max(list_offset, list_cursor - category_list_height + 1);
   );
 
-  item_x=16;
-  item_y=menu_height+22-list_item_height;
+  item_x = 16;
+  item_y = menu_height + 22 - list_item_height;
 
-  list_offset>0 ? (
-    gui_menu_item(item_x,item_y,"                 ↑                 ",0,0) ? list_offset-=1;
+  list_offset > 0 ? (
+    gui_menu_item(item_x, item_y, "                 ↑                 ", 0, 0) ? list_offset -= 1;
   );
 
-  item_y=menu_height+24+category_list_height*list_item_height;
+  item_y = menu_height + 24 + category_list_height * list_item_height;
 
-  category_list_height<list_length && (list_offset+category_list_height)<list_length ? (
-    gui_menu_item(item_x,item_y,"                 ↓                 ",0,0) ? list_offset+=1;
+  category_list_height < list_length && (list_offset + category_list_height) < list_length ? (
+    gui_menu_item(item_x, item_y, "                 ↓                 ", 0, 0) ? list_offset += 1;
   );
 
-  list_offset<0 ? list_offset=0;
-  list_offset>(list_length-category_list_height) ? list_offset=list_length-category_list_height;
+  list_offset < 0 ? list_offset = 0;
+  list_offset > (list_length - category_list_height) ? list_offset = list_length - category_list_height;
   list_offset;
 );
 
-function gui_slider_list(list,cursor,effect_type) (
-  entry=-1;
-  entry_ptr=-1;
-  list_ptr=1;
-  list_length=strlen(list);
+function gui_slider_list(list, cursor, effect_type) (
+  entry = -1;
+  entry_ptr = -1;
+  list_ptr = 1;
+  list_length = strlen(list);
 
-  while(list_ptr<list_length) (
-    id=str_getchar(list,list_ptr);
+  while (list_ptr < list_length) (
+    id = str_getchar(list, list_ptr);
 
-    id==0x23 ? (  // seek for #
-      entry=parse_number_dec(list,list_ptr+1,2);
+    id == 0x23 ? (  // seek for #
+      entry = parse_number_dec(list, list_ptr + 1, 2);
     );
 
-    list_ptr=parse_to_line_end(list,list_ptr);
-    list_ptr=parse_to_next_line(list,list_ptr);
+    list_ptr = parse_to_line_end(list, list_ptr);
+    list_ptr = parse_to_next_line(list, list_ptr);
 
-    entry==cursor ? (
-      entry_ptr=list_ptr;
-      list_ptr=list_length;
+    entry == cursor ? (
+      entry_ptr = list_ptr;
+      list_ptr = list_length;
     );
   );
 
-  entry_ptr>=0 ? (
-    list_ptr=entry_ptr;
+  entry_ptr >= 0 ? (
+    list_ptr = entry_ptr;
 
-    while(list_ptr<list_length) (
-      sysex_param =parse_number_dec(list,list_ptr+0,2);
-      param_offset=effect_type*42*16+entry*16+sysex_param;
+    while (list_ptr < list_length) (
+      sysex_param  = parse_number_dec(list, list_ptr + 0, 2);
+      param_offset = effect_type * 42 * 16 + entry * 16 + sysex_param;
 
-      slider_min    =parse_number_dec(list,list_ptr+3,5);
-      slider_max    =parse_number_dec(list,list_ptr+9,5);
-      slider_def    =parse_number_dec(list,list_ptr+15,5);
-      slider_table  =str_getchar(list,list_ptr+21);
-      slider_bipolar=parse_number_dec(list,list_ptr+23,1);
+      slider_min     = parse_number_dec(list, list_ptr + 3, 5);
+      slider_max     = parse_number_dec(list, list_ptr + 9, 5);
+      slider_def     = parse_number_dec(list, list_ptr + 15, 5);
+      slider_table   = str_getchar(list, list_ptr + 21);
+      slider_bipolar = parse_number_dec(list, list_ptr + 23, 1);
 
-      slider_value_table="";
+      slider_value_table = "";
 
-      slider_table==0x31 ? slider_value_table=effect_value_names_1_lfo_frequency;
-      slider_table==0x32 ? slider_value_table=effect_value_names_2_delay_offset;
-      slider_table==0x33 ? slider_value_table=effect_value_names_3_eq_frequency;
-      slider_table==0x34 ? slider_value_table=effect_value_names_4_reverb_time;
-      slider_table==0x35 ? slider_value_table=effect_value_names_5_delay_time;
-      slider_table==0x36 ? slider_value_table=effect_value_names_6_room_size;
-      slider_table==0x37 ? slider_value_table=effect_value_names_7_delay_time;
-      slider_table==0x38 ? slider_value_table=effect_value_names_8_reverb_wdh;
-      slider_table==0x39 ? slider_value_table=effect_value_names_9_stereo;
-      slider_table==0x41 ? slider_value_table=effect_value_names_10_ref_type;
-      slider_table==0x42 ? slider_value_table=effect_value_names_11_pan_direction;
-      slider_table==0x43 ? slider_value_table=effect_value_names_12_mono_stereo;
-      slider_table==0x44 ? slider_value_table=effect_value_names_13_amp_type;
-      slider_table==0x45 ? slider_value_table=effect_value_names_14_eq_gain;
-      slider_table==0x46 ? slider_value_table=effect_value_names_15_er_rev;
-      slider_table==0x47 ? slider_value_table=effect_value_names_16_lfo_phase_diff;
-      slider_table==0x48 ? slider_value_table=effect_value_names_17_gate_type;
-      slider_table==0x49 ? slider_value_table=effect_value_names_18_generic;
-      slider_table==0x4A ? slider_value_table=effect_value_names_19_high_damp;
-      slider_table==0x4B ? slider_value_table=effect_value_names_20_mid_width;
+      slider_table == 0x31 ? slider_value_table = effect_value_names_1_lfo_frequency;
+      slider_table == 0x32 ? slider_value_table = effect_value_names_2_delay_offset;
+      slider_table == 0x33 ? slider_value_table = effect_value_names_3_eq_frequency;
+      slider_table == 0x34 ? slider_value_table = effect_value_names_4_reverb_time;
+      slider_table == 0x35 ? slider_value_table = effect_value_names_5_delay_time;
+      slider_table == 0x36 ? slider_value_table = effect_value_names_6_room_size;
+      slider_table == 0x37 ? slider_value_table = effect_value_names_7_delay_time;
+      slider_table == 0x38 ? slider_value_table = effect_value_names_8_reverb_wdh;
+      slider_table == 0x39 ? slider_value_table = effect_value_names_9_stereo;
+      slider_table == 0x41 ? slider_value_table = effect_value_names_10_ref_type;
+      slider_table == 0x42 ? slider_value_table = effect_value_names_11_pan_direction;
+      slider_table == 0x43 ? slider_value_table = effect_value_names_12_mono_stereo;
+      slider_table == 0x44 ? slider_value_table = effect_value_names_13_amp_type;
+      slider_table == 0x45 ? slider_value_table = effect_value_names_14_eq_gain;
+      slider_table == 0x46 ? slider_value_table = effect_value_names_15_er_rev;
+      slider_table == 0x47 ? slider_value_table = effect_value_names_16_lfo_phase_diff;
+      slider_table == 0x48 ? slider_value_table = effect_value_names_17_gate_type;
+      slider_table == 0x49 ? slider_value_table = effect_value_names_18_generic;
+      slider_table == 0x4A ? slider_value_table = effect_value_names_19_high_damp;
+      slider_table == 0x4B ? slider_value_table = effect_value_names_20_mid_width;
 
-      list_ptr+=25;
-      list_ptr_old=list_ptr;
-      list_ptr=parse_to_line_end(list,list_ptr);
-      strcpy_substr(slider_caption,list,list_ptr_old,list_ptr-list_ptr_old);
-      list_ptr=parse_to_next_line(list,list_ptr);
+      list_ptr += 25;
+      list_ptr_old = list_ptr;
+      list_ptr = parse_to_line_end(list, list_ptr);
+      strcpy_substr(slider_caption, list, list_ptr_old, list_ptr - list_ptr_old);
+      list_ptr = parse_to_next_line(list, list_ptr);
 
-      effect_params[param_offset]=gui_slider(effect_params[param_offset],slider_min,slider_max,slider_caption,slider_def,slider_bipolar);
+      effect_params[param_offset] = gui_slider(effect_params[param_offset], slider_min, slider_max, slider_caption, slider_def, slider_bipolar);
 
       gui_slider_change ? (
-        sysex_size=1;
+        sysex_size = 1;
 
-        effect_type==0 ? (  // reverb
-          sysex_param==1 ? sysex_addr=0x020102;
-          sysex_param==2 ? sysex_addr=0x020103;
-          sysex_param==3 ? sysex_addr=0x020104;
-          sysex_param==4 ? sysex_addr=0x020105;
-          sysex_param==5 ? sysex_addr=0x020106;
-          sysex_param==6 ? sysex_addr=0x020107;
-          sysex_param==7 ? sysex_addr=0x020108;
-          sysex_param==8 ? sysex_addr=0x020109;
-          sysex_param==9 ? sysex_addr=0x02010a;
-          sysex_param==10 ? sysex_addr=0x02010b;
-          sysex_param==11 ? sysex_addr=0x020110;
-          sysex_param==12 ? sysex_addr=0x020111;
-          sysex_param==13 ? sysex_addr=0x020112;
-          sysex_param==14 ? sysex_addr=0x020113;
-          sysex_param==15 ? sysex_addr=0x020114;
-          sysex_param==16 ? sysex_addr=0x020115;
+        effect_type == 0 ? (  // reverb
+          sysex_param == 1 ? sysex_addr = 0x020102;
+          sysex_param == 2 ? sysex_addr = 0x020103;
+          sysex_param == 3 ? sysex_addr = 0x020104;
+          sysex_param == 4 ? sysex_addr = 0x020105;
+          sysex_param == 5 ? sysex_addr = 0x020106;
+          sysex_param == 6 ? sysex_addr = 0x020107;
+          sysex_param == 7 ? sysex_addr = 0x020108;
+          sysex_param == 8 ? sysex_addr = 0x020109;
+          sysex_param == 9 ? sysex_addr = 0x02010a;
+          sysex_param == 10 ? sysex_addr = 0x02010b;
+          sysex_param == 11 ? sysex_addr = 0x020110;
+          sysex_param == 12 ? sysex_addr = 0x020111;
+          sysex_param == 13 ? sysex_addr = 0x020112;
+          sysex_param == 14 ? sysex_addr = 0x020113;
+          sysex_param == 15 ? sysex_addr = 0x020114;
+          sysex_param == 16 ? sysex_addr = 0x020115;
         );
 
-        effect_type==1 ? (  // chorus
-          sysex_param==1 ? sysex_addr=0x020122;
-          sysex_param==2 ? sysex_addr=0x020123;
-          sysex_param==3 ? sysex_addr=0x020124;
-          sysex_param==4 ? sysex_addr=0x020125;
-          sysex_param==5 ? sysex_addr=0x020126;
-          sysex_param==6 ? sysex_addr=0x020127;
-          sysex_param==7 ? sysex_addr=0x020128;
-          sysex_param==8 ? sysex_addr=0x020129;
-          sysex_param==9 ? sysex_addr=0x02012a;
-          sysex_param==10 ? sysex_addr=0x02012b;
-          sysex_param==11 ? sysex_addr=0x020130;
-          sysex_param==12 ? sysex_addr=0x020131;
-          sysex_param==13 ? sysex_addr=0x020132;
-          sysex_param==14 ? sysex_addr=0x020133;
-          sysex_param==15 ? sysex_addr=0x020134;
-          sysex_param==16 ? sysex_addr=0x020135;
+        effect_type == 1 ? (  // chorus
+          sysex_param == 1 ? sysex_addr = 0x020122;
+          sysex_param == 2 ? sysex_addr = 0x020123;
+          sysex_param == 3 ? sysex_addr = 0x020124;
+          sysex_param == 4 ? sysex_addr = 0x020125;
+          sysex_param == 5 ? sysex_addr = 0x020126;
+          sysex_param == 6 ? sysex_addr = 0x020127;
+          sysex_param == 7 ? sysex_addr = 0x020128;
+          sysex_param == 8 ? sysex_addr = 0x020129;
+          sysex_param == 9 ? sysex_addr = 0x02012a;
+          sysex_param == 10 ? sysex_addr = 0x02012b;
+          sysex_param == 11 ? sysex_addr = 0x020130;
+          sysex_param == 12 ? sysex_addr = 0x020131;
+          sysex_param == 13 ? sysex_addr = 0x020132;
+          sysex_param == 14 ? sysex_addr = 0x020133;
+          sysex_param == 15 ? sysex_addr = 0x020134;
+          sysex_param == 16 ? sysex_addr = 0x020135;
         );
 
-        effect_type==2 ? (  // variation
-          sysex_param>=1 && sysex_param<=10 ? sysex_size=2;
-          sysex_param==1 ? sysex_addr=0x020142;
-          sysex_param==2 ? sysex_addr=0x020144;
-          sysex_param==3 ? sysex_addr=0x020146;
-          sysex_param==4 ? sysex_addr=0x020148;
-          sysex_param==5 ? sysex_addr=0x02014a;
-          sysex_param==6 ? sysex_addr=0x02014c;
-          sysex_param==7 ? sysex_addr=0x02014e;
-          sysex_param==8 ? sysex_addr=0x020150;
-          sysex_param==9 ? sysex_addr=0x020152;
-          sysex_param==10 ? sysex_addr=0x020154;
-          sysex_param==11 ? sysex_addr=0x020170;
-          sysex_param==12 ? sysex_addr=0x020171;
-          sysex_param==13 ? sysex_addr=0x020172;
-          sysex_param==14 ? sysex_addr=0x020173;
-          sysex_param==15 ? sysex_addr=0x020174;
-          sysex_param==16 ? sysex_addr=0x020175;
+        effect_type == 2 ? (  // variation
+          sysex_param >= 1 && sysex_param <= 10 ? sysex_size = 2;
+          sysex_param == 1 ? sysex_addr = 0x020142;
+          sysex_param == 2 ? sysex_addr = 0x020144;
+          sysex_param == 3 ? sysex_addr = 0x020146;
+          sysex_param == 4 ? sysex_addr = 0x020148;
+          sysex_param == 5 ? sysex_addr = 0x02014a;
+          sysex_param == 6 ? sysex_addr = 0x02014c;
+          sysex_param == 7 ? sysex_addr = 0x02014e;
+          sysex_param == 8 ? sysex_addr = 0x020150;
+          sysex_param == 9 ? sysex_addr = 0x020152;
+          sysex_param == 10 ? sysex_addr = 0x020154;
+          sysex_param == 11 ? sysex_addr = 0x020170;
+          sysex_param == 12 ? sysex_addr = 0x020171;
+          sysex_param == 13 ? sysex_addr = 0x020172;
+          sysex_param == 14 ? sysex_addr = 0x020173;
+          sysex_param == 15 ? sysex_addr = 0x020174;
+          sysex_param == 16 ? sysex_addr = 0x020175;
         );
 
-        sysex_add_queue(sysex_addr,effect_params[param_offset],sysex_size);
+        sysex_add_queue(sysex_addr, effect_params[param_offset], sysex_size);
       );
 
-      str_getchar(list,list_ptr)==0x23 ? list_ptr=list_length;
+      str_getchar(list, list_ptr) == 0x23 ? list_ptr = list_length;
     );
   );
 );
@@ -785,646 +785,646 @@ function gui_slider_list(list,cursor,effect_type) (
 function gui_pages() (
   // voice catalog ------------------------------------------------------------
 
-  gui_page==0 ? (
+  gui_page == 0 ? (
     // render category list
-    category_list_voice_cursor=gui_category(list_voice_category,category_list_voice_cursor,category_list_voice_offset,instrument_category[part_number]);
-    category_list_voice_offset=gui_category_adjust_view(category_list_voice_offset,category_list_voice_cursor,category_list_voice_cursor_prev,category_list_length);
+    category_list_voice_cursor = gui_category(list_voice_category, category_list_voice_cursor, category_list_voice_offset, instrument_category[part_number]);
+    category_list_voice_offset = gui_category_adjust_view(category_list_voice_offset, category_list_voice_cursor, category_list_voice_cursor_prev, category_list_length);
 
     // render voice list
-    list_contents="";
+    list_contents = "";
 
-    category_list_voice_cursor==0 ? list_contents=list_contents_piano;
-    category_list_voice_cursor==1 ? list_contents=list_contents_chromatic_percussion;
-    category_list_voice_cursor==2 ? list_contents=list_contents_organ;
-    category_list_voice_cursor==3 ? list_contents=list_contents_guitar;
-    category_list_voice_cursor==4 ? list_contents=list_contents_bass;
-    category_list_voice_cursor==5 ? list_contents=list_contents_strings;
-    category_list_voice_cursor==6 ? list_contents=list_contents_ensemble;
-    category_list_voice_cursor==7 ? list_contents=list_contents_brass;
-    category_list_voice_cursor==8 ? list_contents=list_contents_reed;
-    category_list_voice_cursor==9 ? list_contents=list_contents_pipe;
-    category_list_voice_cursor==10 ? list_contents=list_contents_ethnic;
-    category_list_voice_cursor==11 ? list_contents=list_contents_synth_lead;
-    category_list_voice_cursor==12 ? list_contents=list_contents_synth_pad;
-    category_list_voice_cursor==13 ? list_contents=list_contents_synth_effects;
-    category_list_voice_cursor==14 ? list_contents=list_contents_sound_effects;
-    category_list_voice_cursor==15 ? list_contents=list_contents_percussive;
-    category_list_voice_cursor==16 ? list_contents=list_contents_drum_kits;
+    category_list_voice_cursor == 0 ? list_contents = list_contents_piano;
+    category_list_voice_cursor == 1 ? list_contents = list_contents_chromatic_percussion;
+    category_list_voice_cursor == 2 ? list_contents = list_contents_organ;
+    category_list_voice_cursor == 3 ? list_contents = list_contents_guitar;
+    category_list_voice_cursor == 4 ? list_contents = list_contents_bass;
+    category_list_voice_cursor == 5 ? list_contents = list_contents_strings;
+    category_list_voice_cursor == 6 ? list_contents = list_contents_ensemble;
+    category_list_voice_cursor == 7 ? list_contents = list_contents_brass;
+    category_list_voice_cursor == 8 ? list_contents = list_contents_reed;
+    category_list_voice_cursor == 9 ? list_contents = list_contents_pipe;
+    category_list_voice_cursor == 10 ? list_contents = list_contents_ethnic;
+    category_list_voice_cursor == 11 ? list_contents = list_contents_synth_lead;
+    category_list_voice_cursor == 12 ? list_contents = list_contents_synth_pad;
+    category_list_voice_cursor == 13 ? list_contents = list_contents_synth_effects;
+    category_list_voice_cursor == 14 ? list_contents = list_contents_sound_effects;
+    category_list_voice_cursor == 15 ? list_contents = list_contents_percussive;
+    category_list_voice_cursor == 16 ? list_contents = list_contents_drum_kits;
 
-    list_x=category_list_width+10-list_item_width;
-    list_y=gfx_h;
+    list_x = category_list_width + 10 - list_item_width;
+    list_y = gfx_h;
 
-    instrument_change=-1;
+    instrument_change = -1;
 
-    list_string_ptr=1;
-    instrument_list_count=0;
-    list_contents_length=strlen(list_contents);
+    list_string_ptr = 1;
+    instrument_list_count = 0;
+    list_contents_length = strlen(list_contents);
 
-    while(list_string_ptr<list_contents_length) (
-      (list_y+list_item_height)>=gfx_h ? (
-        list_y=menu_height+10;
-        list_x+=list_item_width;
+    while (list_string_ptr < list_contents_length) (
+      (list_y + list_item_height) >= gfx_h ? (
+        list_y = menu_height + 10;
+        list_x += list_item_width;
       );
 
-      list_string_old_ptr=list_string_ptr;
-      list_string_ptr=parse_to_line_end(list_contents,list_string_ptr);
-      strcpy_substr(list_item_text,list_contents,list_string_old_ptr+12,list_string_ptr-list_string_old_ptr-12);
-      list_string_ptr+=1;
+      list_string_old_ptr = list_string_ptr;
+      list_string_ptr = parse_to_line_end(list_contents, list_string_ptr);
+      strcpy_substr(list_item_text, list_contents, list_string_old_ptr + 12, list_string_ptr - list_string_old_ptr - 12);
+      list_string_ptr += 1;
 
-      list_hover=0;
+      list_hover = 0;
 
-      instrument_list_count==instrument_voice[part_number] && category_list_voice_cursor==instrument_category[part_number] ? (
-        list_hover=1;
+      instrument_list_count == instrument_voice[part_number] && category_list_voice_cursor == instrument_category[part_number] ? (
+        list_hover = 1;
         set_color(color_bg_voice);
-        gfx_rect(list_x,list_y,list_item_width,list_item_height);
+        gfx_rect(list_x, list_y, list_item_width, list_item_height);
       );
 
-      mouse_x>=list_x && mouse_x<(list_x+list_item_width) && mouse_y>=list_y && mouse_y<(list_y+list_item_height) ? (
-        gui_mouse_lmb ? instrument_change=instrument_list_count;
-        list_hover=1;
+      mouse_x >= list_x && mouse_x < (list_x + list_item_width) && mouse_y >= list_y && mouse_y < (list_y + list_item_height) ? (
+        gui_mouse_lmb ? instrument_change = instrument_list_count;
+        list_hover = 1;
       );
 
       list_hover ? set_color(color_bg_cursor) : set_color(color_fg_list);
 
-      gfx_x=list_x+3;
-      gfx_y=list_y+2;
+      gfx_x = list_x + 3;
+      gfx_y = list_y + 2;
 
       gfx_drawstr(list_item_text);
 
-      instrument_list_count+=1;
-      list_y+=list_item_height;
+      instrument_list_count += 1;
+      list_y += list_item_height;
     );
 
-    mouse_y>=menu_height && mouse_x>=category_list_width ? (
-      mouse_wheel!=0 ? (
-        instrument_change=instrument_voice[part_number];
-        mouse_wheel<0 ? instrument_change+=1 : instrument_change-=1;
-        instrument_change<0 ? instrument_change=0;
-        instrument_change>=instrument_list_count-1 ? instrument_change=instrument_list_count-1;
+    mouse_y >= menu_height && mouse_x >= category_list_width ? (
+      mouse_wheel != 0 ? (
+        instrument_change = instrument_voice[part_number];
+        mouse_wheel < 0 ? instrument_change += 1 : instrument_change -= 1;
+        instrument_change < 0 ? instrument_change = 0;
+        instrument_change >= instrument_list_count - 1 ? instrument_change = instrument_list_count - 1;
       );
     );
 
-    instrument_change>=0 && (instrument_change!=instrument_voice[part_number] || category_list_voice_cursor!=instrument_category[part_number]) ? (
-      list_string_ptr=1;
-      instrument_list_count=0;
+    instrument_change >= 0 && (instrument_change != instrument_voice[part_number] || category_list_voice_cursor != instrument_category[part_number]) ? (
+      list_string_ptr = 1;
+      instrument_list_count = 0;
 
-      while(list_string_ptr<list_contents_length) (
-        list_string_old_ptr=list_string_ptr;
-        list_string_ptr=parse_to_line_end(list_contents,list_string_ptr);
-        strcpy_substr(list_item_text,list_contents,list_string_old_ptr+12,list_string_ptr-list_string_old_ptr-12);
-        list_string_ptr+=1;
+      while (list_string_ptr < list_contents_length) (
+        list_string_old_ptr = list_string_ptr;
+        list_string_ptr = parse_to_line_end(list_contents, list_string_ptr);
+        strcpy_substr(list_item_text, list_contents, list_string_old_ptr + 12, list_string_ptr - list_string_old_ptr - 12);
+        list_string_ptr += 1;
 
-        instrument_list_count==instrument_change ? (
-          instrument_voice[part_number]=instrument_list_count;
-          instrument_category[part_number]=category_list_voice_cursor;
+        instrument_list_count == instrument_change ? (
+          instrument_voice[part_number] = instrument_list_count;
+          instrument_category[part_number] = category_list_voice_cursor;
 
-          mode=str_getchar(list_contents,list_string_old_ptr+0);
+          mode = str_getchar(list_contents, list_string_old_ptr + 0);
 
-          mode==0x58 ? midi_synth_mode=midi_synth_mode_xg;     // X
-          mode==0x54 ? midi_synth_mode=midi_synth_mode_tg300;  // T
+          mode == 0x58 ? midi_synth_mode = midi_synth_mode_xg;     // X
+          mode == 0x54 ? midi_synth_mode = midi_synth_mode_tg300;  // T
 
-          midi_program[part_number]=parse_number_dec(list_contents,list_string_old_ptr+1,3)-1;
+          midi_program[part_number] = parse_number_dec(list_contents, list_string_old_ptr + 1, 3) - 1;
 
-          msb=parse_number_dec(list_contents,list_string_old_ptr+5,3);
-          lsb=parse_number_dec(list_contents,list_string_old_ptr+9,3);
+          msb = parse_number_dec(list_contents, list_string_old_ptr + 5, 3);
+          lsb = parse_number_dec(list_contents, list_string_old_ptr + 9, 3);
 
-          midi_bank[part_number]=msb*256+lsb;
+          midi_bank[part_number] = msb * 256 + lsb;
 
-          sysex_add_queue_multipart(part_number,0x01,(midi_bank[part_number]>>8)&0x7f,1);  // bank change MSB
-          sysex_add_queue_multipart(part_number,0x02,(midi_bank[part_number]>>0)&0x7f,1);  // bank change LSB
-          sysex_add_queue_multipart(part_number,0x03,midi_program[part_number],1);         // program change
+          sysex_add_queue_multipart(part_number, 0x01, (midi_bank[part_number] >> 8) & 0x7f, 1);  // bank change MSB
+          sysex_add_queue_multipart(part_number, 0x02, (midi_bank[part_number] >> 0) & 0x7f, 1);  // bank change LSB
+          sysex_add_queue_multipart(part_number, 0x03, midi_program[part_number], 1);             // program change
         );
 
-        instrument_list_count+=1;
+        instrument_list_count += 1;
       );
     );
 
-    category_list_voice_cursor_prev=category_list_voice_cursor;
+    category_list_voice_cursor_prev = category_list_voice_cursor;
   );
 
   // voice editor -------------------------------------------------------------
 
-  gui_page==1 ? (
-    category_list_editor_cursor=gui_category(list_editor_category,category_list_editor_cursor,category_list_editor_offset,category_list_editor_cursor);
-    category_list_editor_offset=gui_category_adjust_view(category_list_editor_offset,category_list_editor_cursor,category_list_editor_cursor_prev,category_list_length);
+  gui_page == 1 ? (
+    category_list_editor_cursor = gui_category(list_editor_category, category_list_editor_cursor, category_list_editor_offset, category_list_editor_cursor);
+    category_list_editor_offset = gui_category_adjust_view(category_list_editor_offset, category_list_editor_cursor, category_list_editor_cursor_prev, category_list_length);
 
-    force_update=0;
+    force_update = 0;
 
-    gui_slider_x=category_list_width+190;
-    gui_slider_y=menu_height+20;
+    gui_slider_x = category_list_width + 190;
+    gui_slider_y = menu_height + 20;
 
     // common parameters
-    category_list_editor_cursor==0 ? (
-      slider_value_table=param_value_names_channel;
-      voice_rcv_channel[part_number]=gui_slider(voice_rcv_channel[part_number],0,15,"Receive Channel",part_number,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x04,voice_rcv_channel[part_number],1);
+    category_list_editor_cursor == 0 ? (
+      slider_value_table = param_value_names_channel;
+      voice_rcv_channel[part_number] = gui_slider(voice_rcv_channel[part_number], 0, 15, "Receive Channel", part_number, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x04, voice_rcv_channel[part_number], 1);
 
-      slider_value_table=param_value_names_mono_poly;
-      voice_mode[part_number]=gui_slider(voice_mode[part_number],0,1,"Mode",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x05,voice_mode[part_number],1);
+      slider_value_table = param_value_names_mono_poly;
+      voice_mode[part_number] = gui_slider(voice_mode[part_number], 0, 1, "Mode", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x05, voice_mode[part_number], 1);
 
-      slider_value_table=param_value_names_off_on;
-      voice_portamento_switch[part_number]=gui_slider(voice_portamento_switch[part_number],0,1,"Portamento",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x67,voice_portamento_switch[part_number],1);
+      slider_value_table = param_value_names_off_on;
+      voice_portamento_switch[part_number] = gui_slider(voice_portamento_switch[part_number], 0, 1, "Portamento", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x67, voice_portamento_switch[part_number], 1);
 
-      slider_value_table="";
-      voice_portamento_time[part_number]=gui_slider(voice_portamento_time[part_number],0,127,"Portamento Time",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x68,voice_portamento_time[part_number],1);
+      slider_value_table = "";
+      voice_portamento_time[part_number] = gui_slider(voice_portamento_time[part_number], 0, 127, "Portamento Time", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x68, voice_portamento_time[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      voice_volume[part_number]=gui_slider(voice_volume[part_number],0,127,"Volume",100,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x0b,voice_volume[part_number],1);
+      voice_volume[part_number] = gui_slider(voice_volume[part_number], 0, 127, "Volume", 100, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x0b, voice_volume[part_number], 1);
 
-      slider_value_table=param_value_names_pan;
-      voice_pan[part_number]=gui_slider(voice_pan[part_number],0,127,"Pan",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x0e,voice_pan[part_number],1);
+      slider_value_table = param_value_names_pan;
+      voice_pan[part_number] = gui_slider(voice_pan[part_number], 0, 127, "Pan", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x0e, voice_pan[part_number], 1);
 
-      slider_value_table=param_value_names_semitones;
-      voice_transpose[part_number]=gui_slider(voice_transpose[part_number],40,88,"Transpose",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x08,voice_transpose[part_number],1);
+      slider_value_table = param_value_names_semitones;
+      voice_transpose[part_number] = gui_slider(voice_transpose[part_number], 40, 88, "Transpose", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x08, voice_transpose[part_number], 1);
 
-      slider_value_table="";
-      voice_detune[part_number]=gui_slider(voice_detune[part_number],0,4096,"Detune",2048,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x09,voice_detune[part_number],2);
+      slider_value_table = "";
+      voice_detune[part_number] = gui_slider(voice_detune[part_number], 0, 4096, "Detune", 2048, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x09, voice_detune[part_number], 2);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      slider_value_table=effect_value_names_18_generic;
-      voice_filter_cutoff[part_number]=gui_slider(voice_filter_cutoff[part_number],0,127,"Filter Cutoff",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x18,voice_filter_cutoff[part_number],1);
+      slider_value_table = effect_value_names_18_generic;
+      voice_filter_cutoff[part_number] = gui_slider(voice_filter_cutoff[part_number], 0, 127, "Filter Cutoff", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x18, voice_filter_cutoff[part_number], 1);
 
-      voice_filter_resonance[part_number]=gui_slider(voice_filter_resonance[part_number],0,127,"Filter Resonance",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x19,voice_filter_resonance[part_number],1);
+      voice_filter_resonance[part_number] = gui_slider(voice_filter_resonance[part_number], 0, 127, "Filter Resonance", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x19, voice_filter_resonance[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      voice_eg_attack[part_number]=gui_slider(voice_eg_attack[part_number],0,127,"EG Attack",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x1a,voice_eg_attack[part_number],1);
+      voice_eg_attack[part_number] = gui_slider(voice_eg_attack[part_number], 0, 127, "EG Attack", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x1a, voice_eg_attack[part_number], 1);
 
-      voice_eg_decay[part_number]=gui_slider(voice_eg_decay[part_number],0,127,"EG Decay",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x1b,voice_eg_decay[part_number],1);
+      voice_eg_decay[part_number] = gui_slider(voice_eg_decay[part_number], 0, 127, "EG Decay", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x1b, voice_eg_decay[part_number], 1);
 
-      voice_eg_release[part_number]=gui_slider(voice_eg_release[part_number],0,127,"EG Release",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x1c,voice_eg_release[part_number],1);
+      voice_eg_release[part_number] = gui_slider(voice_eg_release[part_number], 0, 127, "EG Release", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x1c, voice_eg_release[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      voice_pitch_eg_init_level[part_number]=gui_slider(voice_pitch_eg_init_level[part_number],0,127,"Pitch EG Init Level",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x69,voice_pitch_eg_init_level[part_number],1);
+      voice_pitch_eg_init_level[part_number] = gui_slider(voice_pitch_eg_init_level[part_number], 0, 127, "Pitch EG Init Level", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x69, voice_pitch_eg_init_level[part_number], 1);
 
-      voice_pitch_eg_attack[part_number]=gui_slider(voice_pitch_eg_attack[part_number],0,127,"Pitch EG Attack",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x6a,voice_pitch_eg_attack[part_number],1);
+      voice_pitch_eg_attack[part_number] = gui_slider(voice_pitch_eg_attack[part_number], 0, 127, "Pitch EG Attack", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x6a, voice_pitch_eg_attack[part_number], 1);
 
-      voice_pitch_eg_release_level[part_number]=gui_slider(voice_pitch_eg_release_level[part_number],0,127,"Pitch EG Release Level",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x6b,voice_pitch_eg_release_level[part_number],1);
+      voice_pitch_eg_release_level[part_number] = gui_slider(voice_pitch_eg_release_level[part_number], 0, 127, "Pitch EG Release Level", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x6b, voice_pitch_eg_release_level[part_number], 1);
 
-      voice_pitch_eg_release[part_number]=gui_slider(voice_pitch_eg_release[part_number],0,127,"Pitch EG Release",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x6c,voice_pitch_eg_release[part_number],1);
+      voice_pitch_eg_release[part_number] = gui_slider(voice_pitch_eg_release[part_number], 0, 127, "Pitch EG Release", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x6c, voice_pitch_eg_release[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      slider_value_table="";
-      effect_reverb_send[part_number]=gui_slider(effect_reverb_send[part_number],0,127,"Reverb Send",40,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x13,effect_reverb_send[part_number],1);
+      slider_value_table = "";
+      effect_reverb_send[part_number] = gui_slider(effect_reverb_send[part_number], 0, 127, "Reverb Send", 40, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x13, effect_reverb_send[part_number], 1);
 
-      effect_chorus_send[part_number]=gui_slider(effect_chorus_send[part_number],0,127,"Chorus Send",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x12,effect_chorus_send[part_number],1);
+      effect_chorus_send[part_number] = gui_slider(effect_chorus_send[part_number], 0, 127, "Chorus Send", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x12, effect_chorus_send[part_number], 1);
 
-      effect_variation_send[part_number]=gui_slider(effect_variation_send[part_number],0,127,"Variation Send",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x14,effect_variation_send[part_number],1);
+      effect_variation_send[part_number] = gui_slider(effect_variation_send[part_number], 0, 127, "Variation Send", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x14, effect_variation_send[part_number], 1);
 
-      voice_dry_level[part_number]=gui_slider(voice_dry_level[part_number],0,127,"Dry",127,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x11,voice_dry_level[part_number],1);
+      voice_dry_level[part_number] = gui_slider(voice_dry_level[part_number], 0, 127, "Dry", 127, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x11, voice_dry_level[part_number], 1);
     );
 
     // modulation parameters
-    category_list_editor_cursor==1 ? (
-      slider_value_table=effect_value_names_18_generic;
-      voice_vibrato_rate[part_number]=gui_slider(voice_vibrato_rate[part_number],0,127,"Vibrato Rate",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x15,voice_vibrato_rate[part_number],1);
+    category_list_editor_cursor == 1 ? (
+      slider_value_table = effect_value_names_18_generic;
+      voice_vibrato_rate[part_number] = gui_slider(voice_vibrato_rate[part_number], 0, 127, "Vibrato Rate", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x15, voice_vibrato_rate[part_number], 1);
 
-      voice_vibrato_depth[part_number]=gui_slider(voice_vibrato_depth[part_number],0,127,"Vibrato Depth",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x16,voice_vibrato_depth[part_number],1);
+      voice_vibrato_depth[part_number] = gui_slider(voice_vibrato_depth[part_number], 0, 127, "Vibrato Depth", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x16, voice_vibrato_depth[part_number], 1);
 
-      voice_vibrato_delay[part_number]=gui_slider(voice_vibrato_delay[part_number],0,127,"Vibrato Delay",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x17,voice_vibrato_delay[part_number],1);
+      voice_vibrato_delay[part_number] = gui_slider(voice_vibrato_delay[part_number], 0, 127, "Vibrato Delay", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x17, voice_vibrato_delay[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      slider_value_table=param_value_names_semitones;
-      voice_bend_pitch_control[part_number]=gui_slider(voice_bend_pitch_control[part_number],40,88,"PB Pitch Control",66,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x23,voice_bend_pitch_control[part_number],1);
+      slider_value_table = param_value_names_semitones;
+      voice_bend_pitch_control[part_number] = gui_slider(voice_bend_pitch_control[part_number], 40, 88, "PB Pitch Control", 66, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x23, voice_bend_pitch_control[part_number], 1);
 
-      slider_value_table=param_value_names_filter_mod;
-      voice_bend_filter_control[part_number]=gui_slider(voice_bend_filter_control[part_number],0,127,"PB Filter Control",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x24,voice_bend_filter_control[part_number],1);
+      slider_value_table = param_value_names_filter_mod;
+      voice_bend_filter_control[part_number] = gui_slider(voice_bend_filter_control[part_number], 0, 127, "PB Filter Control", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x24, voice_bend_filter_control[part_number], 1);
 
-      slider_value_table=param_value_names_percent;
-      voice_bend_amplitude_control[part_number]=gui_slider(voice_bend_amplitude_control[part_number],0,127,"PB Amp Control",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x25,voice_bend_amplitude_control[part_number],1);
+      slider_value_table = param_value_names_percent;
+      voice_bend_amplitude_control[part_number] = gui_slider(voice_bend_amplitude_control[part_number], 0, 127, "PB Amp Control", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x25, voice_bend_amplitude_control[part_number], 1);
 
-      slider_value_table="";
-      voice_bend_lfo_pmod_depth[part_number]=gui_slider(voice_bend_lfo_pmod_depth[part_number],0,127,"PB LFO Pitch Depth",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x26,voice_bend_lfo_pmod_depth[part_number],1);
+      slider_value_table = "";
+      voice_bend_lfo_pmod_depth[part_number] = gui_slider(voice_bend_lfo_pmod_depth[part_number], 0, 127, "PB LFO Pitch Depth", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x26, voice_bend_lfo_pmod_depth[part_number], 1);
 
-      voice_bend_lfo_fmod_depth[part_number]=gui_slider(voice_bend_lfo_fmod_depth[part_number],0,127,"PB LFO Filter Depth",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x27,voice_bend_lfo_fmod_depth[part_number],1);
+      voice_bend_lfo_fmod_depth[part_number] = gui_slider(voice_bend_lfo_fmod_depth[part_number], 0, 127, "PB LFO Filter Depth", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x27, voice_bend_lfo_fmod_depth[part_number], 1);
 
-      voice_bend_lfo_amod_depth[part_number]=gui_slider(voice_bend_lfo_amod_depth[part_number],0,127,"PB LFO Amp Depth",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x28,voice_bend_lfo_amod_depth[part_number],1);
+      voice_bend_lfo_amod_depth[part_number] = gui_slider(voice_bend_lfo_amod_depth[part_number], 0, 127, "PB LFO Amp Depth", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x28, voice_bend_lfo_amod_depth[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      slider_value_table=param_value_names_semitones;
-      voice_mw_pitch_control[part_number]=gui_slider(voice_mw_pitch_control[part_number],40,88,"MW Pitch Control",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x1d,voice_mw_pitch_control[part_number],1);
+      slider_value_table = param_value_names_semitones;
+      voice_mw_pitch_control[part_number] = gui_slider(voice_mw_pitch_control[part_number], 40, 88, "MW Pitch Control", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x1d, voice_mw_pitch_control[part_number], 1);
 
-      slider_value_table=param_value_names_filter_mod;
-      voice_mw_filter_control[part_number]=gui_slider(voice_mw_filter_control[part_number],0,127,"MW Filter Control",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x1e,voice_mw_filter_control[part_number],1);
+      slider_value_table = param_value_names_filter_mod;
+      voice_mw_filter_control[part_number] = gui_slider(voice_mw_filter_control[part_number], 0, 127, "MW Filter Control", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x1e, voice_mw_filter_control[part_number], 1);
 
-      slider_value_table=param_value_names_percent;
-      voice_mw_amplitude_control[part_number]=gui_slider(voice_mw_amplitude_control[part_number],0,127,"MW Amp Control",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x1f,voice_mw_amplitude_control[part_number],1);
+      slider_value_table = param_value_names_percent;
+      voice_mw_amplitude_control[part_number] = gui_slider(voice_mw_amplitude_control[part_number], 0, 127, "MW Amp Control", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x1f, voice_mw_amplitude_control[part_number], 1);
 
-      slider_value_table="";
-      voice_mw_lfo_pmod_depth[part_number]=gui_slider(voice_mw_lfo_pmod_depth[part_number],0,127,"MW LFO Pitch Depth",10,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x20,voice_mw_lfo_pmod_depth[part_number],1);
+      slider_value_table = "";
+      voice_mw_lfo_pmod_depth[part_number] = gui_slider(voice_mw_lfo_pmod_depth[part_number], 0, 127, "MW LFO Pitch Depth", 10, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x20, voice_mw_lfo_pmod_depth[part_number], 1);
 
-      voice_mw_lfo_fmod_depth[part_number]=gui_slider(voice_mw_lfo_fmod_depth[part_number],0,127,"MW LFO Filter Depth",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x21,voice_mw_lfo_fmod_depth[part_number],1);
+      voice_mw_lfo_fmod_depth[part_number] = gui_slider(voice_mw_lfo_fmod_depth[part_number], 0, 127, "MW LFO Filter Depth", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x21, voice_mw_lfo_fmod_depth[part_number], 1);
 
-      voice_mw_lfo_amod_depth[part_number]=gui_slider(voice_mw_lfo_amod_depth[part_number],0,127,"MW LFO Amp Depth",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x22,voice_mw_lfo_amod_depth[part_number],1);
+      voice_mw_lfo_amod_depth[part_number] = gui_slider(voice_mw_lfo_amod_depth[part_number], 0, 127, "MW LFO Amp Depth", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x22, voice_mw_lfo_amod_depth[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
       // these control both channel and poly aftertouch assignments (because why the hell not)!
-      slider_value_table=param_value_names_semitones;
-      voice_at_pitch_control[part_number]=gui_slider(voice_at_pitch_control[part_number],40,88,"AT Pitch Control",64,1);
+      slider_value_table = param_value_names_semitones;
+      voice_at_pitch_control[part_number] = gui_slider(voice_at_pitch_control[part_number], 40, 88, "AT Pitch Control", 64, 1);
       gui_slider_change ? (
-        sysex_add_queue_multipart(part_number,0x4d,voice_at_pitch_control[part_number],1);
-        sysex_add_queue_multipart(part_number,0x53,voice_at_pitch_control[part_number],1);
+        sysex_add_queue_multipart(part_number, 0x4d, voice_at_pitch_control[part_number], 1);
+        sysex_add_queue_multipart(part_number, 0x53, voice_at_pitch_control[part_number], 1);
       );
 
-      slider_value_table=param_value_names_filter_mod;
-      voice_at_filter_control[part_number]=gui_slider(voice_at_filter_control[part_number],0,127,"AT Filter Control",64,1);
+      slider_value_table = param_value_names_filter_mod;
+      voice_at_filter_control[part_number] = gui_slider(voice_at_filter_control[part_number], 0, 127, "AT Filter Control", 64, 1);
       gui_slider_change ? (
-        sysex_add_queue_multipart(part_number,0x4e,voice_at_filter_control[part_number],1);
-        sysex_add_queue_multipart(part_number,0x54,voice_at_filter_control[part_number],1);
+        sysex_add_queue_multipart(part_number, 0x4e, voice_at_filter_control[part_number], 1);
+        sysex_add_queue_multipart(part_number, 0x54, voice_at_filter_control[part_number], 1);
       );
 
-      slider_value_table=param_value_names_percent;
-      voice_at_amp_control[part_number]=gui_slider(voice_at_amp_control[part_number],0,127,"AT Amp Control",64,1);
+      slider_value_table = param_value_names_percent;
+      voice_at_amp_control[part_number] = gui_slider(voice_at_amp_control[part_number], 0, 127, "AT Amp Control", 64, 1);
       gui_slider_change ? (
-        sysex_add_queue_multipart(part_number,0x4f,voice_at_amp_control[part_number],1);
-        sysex_add_queue_multipart(part_number,0x55,voice_at_amp_control[part_number],1);
+        sysex_add_queue_multipart(part_number, 0x4f, voice_at_amp_control[part_number], 1);
+        sysex_add_queue_multipart(part_number, 0x55, voice_at_amp_control[part_number], 1);
       );
 
-      slider_value_table="";
-      voice_at_lfo_pmod_depth[part_number]=gui_slider(voice_at_lfo_pmod_depth[part_number],0,127,"AT LFO Pitch Depth",0,0);
+      slider_value_table = "";
+      voice_at_lfo_pmod_depth[part_number] = gui_slider(voice_at_lfo_pmod_depth[part_number], 0, 127, "AT LFO Pitch Depth", 0, 0);
       gui_slider_change ? (
-        sysex_add_queue_multipart(part_number,0x50,voice_at_lfo_pmod_depth[part_number],1);
-        sysex_add_queue_multipart(part_number,0x56,voice_at_lfo_pmod_depth[part_number],1);
+        sysex_add_queue_multipart(part_number, 0x50, voice_at_lfo_pmod_depth[part_number], 1);
+        sysex_add_queue_multipart(part_number, 0x56, voice_at_lfo_pmod_depth[part_number], 1);
       );
 
-      voice_at_lfo_fmod_depth[part_number]=gui_slider(voice_at_lfo_fmod_depth[part_number],0,127,"AT LFO Filter Depth",0,0);
+      voice_at_lfo_fmod_depth[part_number] = gui_slider(voice_at_lfo_fmod_depth[part_number], 0, 127, "AT LFO Filter Depth", 0, 0);
       gui_slider_change ? (
-        sysex_add_queue_multipart(part_number,0x51,voice_at_lfo_fmod_depth[part_number],1);
-        sysex_add_queue_multipart(part_number,0x57,voice_at_lfo_fmod_depth[part_number],1);
+        sysex_add_queue_multipart(part_number, 0x51, voice_at_lfo_fmod_depth[part_number], 1);
+        sysex_add_queue_multipart(part_number, 0x57, voice_at_lfo_fmod_depth[part_number], 1);
       );
 
-      voice_at_lfo_amod_depth[part_number]=gui_slider(voice_at_lfo_amod_depth[part_number],0,127,"AT LFO Amp Depth",0,0);
+      voice_at_lfo_amod_depth[part_number] = gui_slider(voice_at_lfo_amod_depth[part_number], 0, 127, "AT LFO Amp Depth", 0, 0);
       gui_slider_change ? (
-        sysex_add_queue_multipart(part_number,0x52,voice_at_lfo_amod_depth[part_number],1);
-        sysex_add_queue_multipart(part_number,0x58,voice_at_lfo_amod_depth[part_number],1);
+        sysex_add_queue_multipart(part_number, 0x52, voice_at_lfo_amod_depth[part_number], 1);
+        sysex_add_queue_multipart(part_number, 0x58, voice_at_lfo_amod_depth[part_number], 1);
       );
     );
 
     // keyboard parameters
-    category_list_editor_cursor==2 ? (
-      slider_value_table=param_value_names_notes;
-      voice_note_limit_low[part_number]=gui_slider(voice_note_limit_low[part_number],0,127,"Note Limit Low",0,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x0f,voice_note_limit_low[part_number],1);
+    category_list_editor_cursor == 2 ? (
+      slider_value_table = param_value_names_notes;
+      voice_note_limit_low[part_number] = gui_slider(voice_note_limit_low[part_number], 0, 127, "Note Limit Low", 0, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x0f, voice_note_limit_low[part_number], 1);
 
-      voice_note_limit_high[part_number]=gui_slider(voice_note_limit_high[part_number],0,127,"Note Limit High",127,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x10,voice_note_limit_high[part_number],1);
+      voice_note_limit_high[part_number] = gui_slider(voice_note_limit_high[part_number], 0, 127, "Note Limit High", 127, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x10, voice_note_limit_high[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      slider_value_table="";
-      voice_velocity_limit_low[part_number]=gui_slider(voice_velocity_limit_low[part_number],1,127,"Velocity Limit Low",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x6d,voice_velocity_limit_low[part_number],1);
+      slider_value_table = "";
+      voice_velocity_limit_low[part_number] = gui_slider(voice_velocity_limit_low[part_number], 1, 127, "Velocity Limit Low", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x6d, voice_velocity_limit_low[part_number], 1);
 
-      voice_velocity_limit_high[part_number]=gui_slider(voice_velocity_limit_high[part_number],1,127,"Velocity Limit High",127,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x6e,voice_velocity_limit_high[part_number],1);
+      voice_velocity_limit_high[part_number] = gui_slider(voice_velocity_limit_high[part_number], 1, 127, "Velocity Limit High", 127, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x6e, voice_velocity_limit_high[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      voice_velocity_sense_depth[part_number]=gui_slider(voice_velocity_sense_depth[part_number],0,127,"Velocity Sense Depth",64,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x0c,voice_velocity_sense_depth[part_number],1);
+      voice_velocity_sense_depth[part_number] = gui_slider(voice_velocity_sense_depth[part_number], 0, 127, "Velocity Sense Depth", 64, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x0c, voice_velocity_sense_depth[part_number], 1);
 
-      voice_velocity_sense_offset[part_number]=gui_slider(voice_velocity_sense_offset[part_number],0,127,"Velocity Sense Offset",64,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x0d,voice_velocity_sense_offset[part_number],1);
+      voice_velocity_sense_offset[part_number] = gui_slider(voice_velocity_sense_offset[part_number], 0, 127, "Velocity Sense Offset", 64, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x0d, voice_velocity_sense_offset[part_number], 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      slider_value_table=param_value_names_same_note_assign;
-      voice_same_note_assign[part_number]=gui_slider(voice_same_note_assign[part_number],0,2,"Same Note Assign",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x06,voice_same_note_assign[part_number],1);
+      slider_value_table = param_value_names_same_note_assign;
+      voice_same_note_assign[part_number] = gui_slider(voice_same_note_assign[part_number], 0, 2, "Same Note Assign", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x06, voice_same_note_assign[part_number], 1);
     );
 
     // tuning parameters
-    category_list_editor_cursor==3 ? (
-      slider_value_table=effect_value_names_18_generic;
+    category_list_editor_cursor == 3 ? (
+      slider_value_table = effect_value_names_18_generic;
 
-      voice_scale_c[part_number]=gui_slider(voice_scale_c[part_number],0,127,"C",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x41,voice_scale_c[part_number],1);
+      voice_scale_c[part_number] = gui_slider(voice_scale_c[part_number], 0, 127, "C", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x41, voice_scale_c[part_number], 1);
 
-      voice_scale_cs[part_number]=gui_slider(voice_scale_cs[part_number],0,127,"C#",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x42,voice_scale_cs[part_number],1);
+      voice_scale_cs[part_number] = gui_slider(voice_scale_cs[part_number], 0, 127, "C#", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x42, voice_scale_cs[part_number], 1);
 
-      voice_scale_d[part_number]=gui_slider(voice_scale_d[part_number],0,127,"D",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x43,voice_scale_d[part_number],1);
+      voice_scale_d[part_number] = gui_slider(voice_scale_d[part_number], 0, 127, "D", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x43, voice_scale_d[part_number], 1);
 
-      voice_scale_ds[part_number]=gui_slider(voice_scale_ds[part_number],0,127,"D#",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x44,voice_scale_ds[part_number],1);
+      voice_scale_ds[part_number] = gui_slider(voice_scale_ds[part_number], 0, 127, "D#", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x44, voice_scale_ds[part_number], 1);
 
-      voice_scale_e[part_number]=gui_slider(voice_scale_e[part_number],0,127,"E",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x45,voice_scale_e[part_number],1);
+      voice_scale_e[part_number] = gui_slider(voice_scale_e[part_number], 0, 127, "E", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x45, voice_scale_e[part_number], 1);
 
-      voice_scale_f[part_number]=gui_slider(voice_scale_f[part_number],0,127,"F",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x46,voice_scale_f[part_number],1);
+      voice_scale_f[part_number] = gui_slider(voice_scale_f[part_number], 0, 127, "F", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x46, voice_scale_f[part_number], 1);
 
-      voice_scale_fs[part_number]=gui_slider(voice_scale_fs[part_number],0,127,"F#",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x47,voice_scale_fs[part_number],1);
+      voice_scale_fs[part_number] = gui_slider(voice_scale_fs[part_number], 0, 127, "F#", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x47, voice_scale_fs[part_number], 1);
 
-      voice_scale_g[part_number]=gui_slider(voice_scale_g[part_number],0,127,"G",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x48,voice_scale_g[part_number],1);
+      voice_scale_g[part_number] = gui_slider(voice_scale_g[part_number], 0, 127, "G", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x48, voice_scale_g[part_number], 1);
 
-      voice_scale_gs[part_number]=gui_slider(voice_scale_gs[part_number],0,127,"G#",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x49,voice_scale_gs[part_number],1);
+      voice_scale_gs[part_number] = gui_slider(voice_scale_gs[part_number], 0, 127, "G#", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x49, voice_scale_gs[part_number], 1);
 
-      voice_scale_a[part_number]=gui_slider(voice_scale_a[part_number],0,127,"A",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x4a,voice_scale_a[part_number],1);
+      voice_scale_a[part_number] = gui_slider(voice_scale_a[part_number], 0, 127, "A", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x4a, voice_scale_a[part_number], 1);
 
-      voice_scale_as[part_number]=gui_slider(voice_scale_as[part_number],0,127,"A#",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x4b,voice_scale_as[part_number],1);
+      voice_scale_as[part_number] = gui_slider(voice_scale_as[part_number], 0, 127, "A#", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x4b, voice_scale_as[part_number], 1);
 
-      voice_scale_b[part_number]=gui_slider(voice_scale_b[part_number],0,127,"B",64,1);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x4c,voice_scale_b[part_number],1);
+      voice_scale_b[part_number] = gui_slider(voice_scale_b[part_number], 0, 127, "B", 64, 1);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x4c, voice_scale_b[part_number], 1);
     );
 
     // MIDI filter parameters
-    category_list_editor_cursor==4 ? (
-      slider_value_table=param_value_names_off_on;
+    category_list_editor_cursor == 4 ? (
+      slider_value_table = param_value_names_off_on;
 
-      voice_recv_note[part_number]=gui_slider(voice_recv_note[part_number],0,1,"Note On/Off",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x35,voice_recv_note[part_number],1);
+      voice_recv_note[part_number] = gui_slider(voice_recv_note[part_number], 0, 1, "Note On/Off", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x35, voice_recv_note[part_number], 1);
 
-      voice_recv_pc[part_number]=gui_slider(voice_recv_pc[part_number],0,1,"Program Change",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x32,voice_recv_pc[part_number],1);
+      voice_recv_pc[part_number] = gui_slider(voice_recv_pc[part_number], 0, 1, "Program Change", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x32, voice_recv_pc[part_number], 1);
 
-      voice_recv_bs[part_number]=gui_slider(voice_recv_bs[part_number],0,1,"Bank Select",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x40,voice_recv_bs[part_number],1);
+      voice_recv_bs[part_number] = gui_slider(voice_recv_bs[part_number], 0, 1, "Bank Select", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x40, voice_recv_bs[part_number], 1);
 
-      voice_recv_cat[part_number]=gui_slider(voice_recv_cat[part_number],0,1,"Channel AT",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x31,voice_recv_cat[part_number],1);
+      voice_recv_cat[part_number] = gui_slider(voice_recv_cat[part_number], 0, 1, "Channel AT", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x31, voice_recv_cat[part_number], 1);
 
-      voice_recv_pat[part_number]=gui_slider(voice_recv_pat[part_number],0,1,"Poly AT",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x34,voice_recv_pat[part_number],1);
+      voice_recv_pat[part_number] = gui_slider(voice_recv_pat[part_number], 0, 1, "Poly AT", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x34, voice_recv_pat[part_number], 1);
 
-      voice_recv_pb[part_number]=gui_slider(voice_recv_pb[part_number],0,1,"Pitch Bend",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x30,voice_recv_pb[part_number],1);
+      voice_recv_pb[part_number] = gui_slider(voice_recv_pb[part_number], 0, 1, "Pitch Bend", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x30, voice_recv_pb[part_number], 1);
 
-      voice_recv_cc[part_number]=gui_slider(voice_recv_cc[part_number],0,1,"Control Change",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x33,voice_recv_cc[part_number],1);
+      voice_recv_cc[part_number] = gui_slider(voice_recv_cc[part_number], 0, 1, "Control Change", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x33, voice_recv_cc[part_number], 1);
 
-      voice_recv_mod[part_number]=gui_slider(voice_recv_mod[part_number],0,1,"Modulation",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x38,voice_recv_mod[part_number],1);
+      voice_recv_mod[part_number] = gui_slider(voice_recv_mod[part_number], 0, 1, "Modulation", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x38, voice_recv_mod[part_number], 1);
 
-      voice_recv_vol[part_number]=gui_slider(voice_recv_vol[part_number],0,1,"Volume",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x39,voice_recv_vol[part_number],1);
+      voice_recv_vol[part_number] = gui_slider(voice_recv_vol[part_number], 0, 1, "Volume", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x39, voice_recv_vol[part_number], 1);
 
-      voice_recv_pan[part_number]=gui_slider(voice_recv_pan[part_number],0,1,"Pan",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x3a,voice_recv_pan[part_number],1);
+      voice_recv_pan[part_number] = gui_slider(voice_recv_pan[part_number], 0, 1, "Pan", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x3a, voice_recv_pan[part_number], 1);
 
-      voice_recv_exp[part_number]=gui_slider(voice_recv_exp[part_number],0,1,"Expression",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x3b,voice_recv_exp[part_number],1);
+      voice_recv_exp[part_number] = gui_slider(voice_recv_exp[part_number], 0, 1, "Expression", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x3b, voice_recv_exp[part_number], 1);
 
-      voice_recv_sus[part_number]=gui_slider(voice_recv_sus[part_number],0,1,"Sustain Pedal",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x3c,voice_recv_sus[part_number],1);
+      voice_recv_sus[part_number] = gui_slider(voice_recv_sus[part_number], 0, 1, "Sustain Pedal", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x3c, voice_recv_sus[part_number], 1);
 
-      voice_recv_sost[part_number]=gui_slider(voice_recv_sost[part_number],0,1,"Sostenuto Pedal",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x3e,voice_recv_sost[part_number],1);
+      voice_recv_sost[part_number] = gui_slider(voice_recv_sost[part_number], 0, 1, "Sostenuto Pedal", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x3e, voice_recv_sost[part_number], 1);
 
-      voice_recv_soft[part_number]=gui_slider(voice_recv_soft[part_number],0,1,"Soft Pedal",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x3f,voice_recv_soft[part_number],1);
+      voice_recv_soft[part_number] = gui_slider(voice_recv_soft[part_number], 0, 1, "Soft Pedal", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x3f, voice_recv_soft[part_number], 1);
 
-      voice_recv_port[part_number]=gui_slider(voice_recv_port[part_number],0,1,"Portamento",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x3d,voice_recv_port[part_number],1);
+      voice_recv_port[part_number] = gui_slider(voice_recv_port[part_number], 0, 1, "Portamento", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x3d, voice_recv_port[part_number], 1);
 
-      voice_recv_rpn[part_number]=gui_slider(voice_recv_rpn[part_number],0,1,"RPN",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x36,voice_recv_rpn[part_number],1);
+      voice_recv_rpn[part_number] = gui_slider(voice_recv_rpn[part_number], 0, 1, "RPN", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x36, voice_recv_rpn[part_number], 1);
 
-      voice_recv_nrpn[part_number]=gui_slider(voice_recv_nrpn[part_number],0,1,"NRPN",1,0);
-      gui_slider_change ? sysex_add_queue_multipart(part_number,0x37,voice_recv_nrpn[part_number],1);
+      voice_recv_nrpn[part_number] = gui_slider(voice_recv_nrpn[part_number], 0, 1, "NRPN", 1, 0);
+      gui_slider_change ? sysex_add_queue_multipart(part_number, 0x37, voice_recv_nrpn[part_number], 1);
     );
 
-    category_list_editor_cursor_prev=category_list_editor_cursor;
+    category_list_editor_cursor_prev = category_list_editor_cursor;
   );
 
   // reverb editor ------------------------------------------------------------
 
-  gui_page==2 || category_list_reverb_cursor_prev<0 ? (
-    category_list_reverb_cursor=gui_category(list_reverb_category,category_list_reverb_cursor,category_list_reverb_offset,category_list_reverb_cursor);
-    category_list_reverb_offset=gui_category_adjust_view(category_list_reverb_offset,category_list_reverb_cursor,category_list_reverb_cursor_prev,category_list_length);
+  gui_page == 2 || category_list_reverb_cursor_prev < 0 ? (
+    category_list_reverb_cursor = gui_category(list_reverb_category, category_list_reverb_cursor, category_list_reverb_offset, category_list_reverb_cursor);
+    category_list_reverb_offset = gui_category_adjust_view(category_list_reverb_offset, category_list_reverb_cursor, category_list_reverb_cursor_prev, category_list_length);
 
-    category_list_reverb_cursor!=category_list_reverb_cursor_prev ? (
-      category_list_reverb_cursor==0 ? value=0x0000;
-      category_list_reverb_cursor==1 ? value=0x0100;
-      category_list_reverb_cursor==2 ? value=0x0101;
-      category_list_reverb_cursor==3 ? value=0x0200;
-      category_list_reverb_cursor==4 ? value=0x0201;
-      category_list_reverb_cursor==5 ? value=0x0202;
-      category_list_reverb_cursor==6 ? value=0x0300;
-      category_list_reverb_cursor==7 ? value=0x0301;
-      category_list_reverb_cursor==8 ? value=0x0400;
-      category_list_reverb_cursor==9 ? value=0x1000;
-      category_list_reverb_cursor==10 ? value=0x1100;
-      category_list_reverb_cursor==11 ? value=0x1300;
+    category_list_reverb_cursor != category_list_reverb_cursor_prev ? (
+      category_list_reverb_cursor == 0 ? value = 0x0000;
+      category_list_reverb_cursor == 1 ? value = 0x0100;
+      category_list_reverb_cursor == 2 ? value = 0x0101;
+      category_list_reverb_cursor == 3 ? value = 0x0200;
+      category_list_reverb_cursor == 4 ? value = 0x0201;
+      category_list_reverb_cursor == 5 ? value = 0x0202;
+      category_list_reverb_cursor == 6 ? value = 0x0300;
+      category_list_reverb_cursor == 7 ? value = 0x0301;
+      category_list_reverb_cursor == 8 ? value = 0x0400;
+      category_list_reverb_cursor == 9 ? value = 0x1000;
+      category_list_reverb_cursor == 10 ? value = 0x1100;
+      category_list_reverb_cursor == 11 ? value = 0x1300;
 
-      sysex_add_queue(0x020100,value,2);
-      force_update=1;
+      sysex_add_queue(0x020100, value, 2);
+      force_update = 1;
     ) : (
-      force_update=0;
+      force_update = 0;
     );
 
-    category_list_reverb_cursor>0 ? (
-      gui_slider_x=category_list_width+190;
-      gui_slider_y=menu_height+20;
+    category_list_reverb_cursor > 0 ? (
+      gui_slider_x = category_list_width + 190;
+      gui_slider_y = menu_height + 20;
 
-      slider_value_table=param_value_names_send_return;
-      effect_reverb_return=gui_slider(effect_reverb_return,0,127,"Return",64,1);
-      gui_slider_change ? sysex_add_queue(0x02010c,effect_reverb_return,1);
+      slider_value_table = param_value_names_send_return;
+      effect_reverb_return = gui_slider(effect_reverb_return, 0, 127, "Return", 64, 1);
+      gui_slider_change ? sysex_add_queue(0x02010c, effect_reverb_return, 1);
 
-      slider_value_table=param_value_names_pan;
-      effect_reverb_pan=gui_slider(effect_reverb_pan,1,127,"Pan",64,1);
-      gui_slider_change ? sysex_add_queue(0x02010d,effect_reverb_pan,1);
+      slider_value_table = param_value_names_pan;
+      effect_reverb_pan = gui_slider(effect_reverb_pan, 1, 127, "Pan", 64, 1);
+      gui_slider_change ? sysex_add_queue(0x02010d, effect_reverb_pan, 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      gui_slider_list(reverb_params_list,category_list_reverb_cursor-1,0);
+      gui_slider_list(reverb_params_list, category_list_reverb_cursor - 1, 0);
     );
 
-    category_list_reverb_cursor_prev=category_list_reverb_cursor;
+    category_list_reverb_cursor_prev = category_list_reverb_cursor;
   );
 
   // chorus editor ------------------------------------------------------------
 
-  gui_page==3 || category_list_chorus_cursor_prev<0 ? (
-    category_list_chorus_cursor=gui_category(list_chorus_category,category_list_chorus_cursor,category_list_chorus_offset,category_list_chorus_cursor);
-    category_list_chorus_offset=gui_category_adjust_view(category_list_chorus_offset,category_list_chorus_cursor,category_list_chorus_cursor_prev,category_list_length);
+  gui_page == 3 || category_list_chorus_cursor_prev < 0 ? (
+    category_list_chorus_cursor = gui_category(list_chorus_category, category_list_chorus_cursor, category_list_chorus_offset, category_list_chorus_cursor);
+    category_list_chorus_offset = gui_category_adjust_view(category_list_chorus_offset, category_list_chorus_cursor, category_list_chorus_cursor_prev, category_list_length);
 
-    category_list_chorus_cursor!=category_list_chorus_cursor_prev ? (
-      category_list_chorus_cursor==0 ? value=0x0000;
-      category_list_chorus_cursor==1 ? value=0x4100;
-      category_list_chorus_cursor==2 ? value=0x4101;
-      category_list_chorus_cursor==3 ? value=0x4102;
-      category_list_chorus_cursor==4 ? value=0x4108;
-      category_list_chorus_cursor==5 ? value=0x4200;
-      category_list_chorus_cursor==6 ? value=0x4201;
-      category_list_chorus_cursor==7 ? value=0x4202;
-      category_list_chorus_cursor==8 ? value=0x4208;
-      category_list_chorus_cursor==9 ? value=0x4300;
-      category_list_chorus_cursor==10 ? value=0x4301;
-      category_list_chorus_cursor==11 ? value=0x4308;
+    category_list_chorus_cursor != category_list_chorus_cursor_prev ? (
+      category_list_chorus_cursor == 0 ? value = 0x0000;
+      category_list_chorus_cursor == 1 ? value = 0x4100;
+      category_list_chorus_cursor == 2 ? value = 0x4101;
+      category_list_chorus_cursor == 3 ? value = 0x4102;
+      category_list_chorus_cursor == 4 ? value = 0x4108;
+      category_list_chorus_cursor == 5 ? value = 0x4200;
+      category_list_chorus_cursor == 6 ? value = 0x4201;
+      category_list_chorus_cursor == 7 ? value = 0x4202;
+      category_list_chorus_cursor == 8 ? value = 0x4208;
+      category_list_chorus_cursor == 9 ? value = 0x4300;
+      category_list_chorus_cursor == 10 ? value = 0x4301;
+      category_list_chorus_cursor == 11 ? value = 0x4308;
 
-      sysex_add_queue(0x020120,value,2);
-      force_update=1;
+      sysex_add_queue(0x020120, value, 2);
+      force_update = 1;
     ) : (
-      force_update=0;
+      force_update = 0;
     );
 
-    category_list_chorus_cursor>0 ? (
-      gui_slider_x=category_list_width+190;
-      gui_slider_y=menu_height+20;
+    category_list_chorus_cursor > 0 ? (
+      gui_slider_x = category_list_width + 190;
+      gui_slider_y = menu_height + 20;
 
-      slider_value_table=param_value_names_send_return;
-      effect_chorus_return=gui_slider(effect_chorus_return,0,127,"Return",64,1);
-      gui_slider_change ? sysex_add_queue(0x02012c,effect_chorus_return,1);
+      slider_value_table = param_value_names_send_return;
+      effect_chorus_return = gui_slider(effect_chorus_return, 0, 127, "Return", 64, 1);
+      gui_slider_change ? sysex_add_queue(0x02012c, effect_chorus_return, 1);
 
-      slider_value_table=param_value_names_pan;
-      effect_chorus_pan=gui_slider(effect_chorus_pan,1,127,"Pan",64,1);
-      gui_slider_change ? sysex_add_queue(0x02012d,effect_chorus_pan,1);
+      slider_value_table = param_value_names_pan;
+      effect_chorus_pan = gui_slider(effect_chorus_pan, 1, 127, "Pan", 64, 1);
+      gui_slider_change ? sysex_add_queue(0x02012d, effect_chorus_pan, 1);
 
-      slider_value_table=param_value_names_send_return;
-      effect_chorus_send_reverb=gui_slider(effect_chorus_send_reverb,0,127,"Reverb Send",0,0);
-      gui_slider_change ? sysex_add_queue(0x02012e,effect_chorus_send_reverb,1);
+      slider_value_table = param_value_names_send_return;
+      effect_chorus_send_reverb = gui_slider(effect_chorus_send_reverb, 0, 127, "Reverb Send", 0, 0);
+      gui_slider_change ? sysex_add_queue(0x02012e, effect_chorus_send_reverb, 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      gui_slider_list(chorus_params_list,category_list_chorus_cursor-1,1);
+      gui_slider_list(chorus_params_list, category_list_chorus_cursor - 1, 1);
     );
 
-    category_list_chorus_cursor_prev=category_list_chorus_cursor;
+    category_list_chorus_cursor_prev = category_list_chorus_cursor;
   );
 
   // variation editor ---------------------------------------------------------
 
-  gui_page==4 || category_list_variation_cursor_prev<0 ? (
-    category_list_variation_cursor=gui_category(list_variation_category,category_list_variation_cursor,category_list_variation_offset,category_list_variation_cursor);
-    category_list_variation_offset=gui_category_adjust_view(category_list_variation_offset,category_list_variation_cursor,category_list_variation_cursor_prev,category_list_length);
+  gui_page == 4 || category_list_variation_cursor_prev < 0 ? (
+    category_list_variation_cursor = gui_category(list_variation_category, category_list_variation_cursor, category_list_variation_offset, category_list_variation_cursor);
+    category_list_variation_offset = gui_category_adjust_view(category_list_variation_offset, category_list_variation_cursor, category_list_variation_cursor_prev, category_list_length);
 
-    category_list_variation_cursor!=category_list_variation_cursor_prev ? (
-      category_list_variation_cursor==0 ? value=0x0000;
-      category_list_variation_cursor==1 ? value=0x0100;
-      category_list_variation_cursor==2 ? value=0x0101;
-      category_list_variation_cursor==3 ? value=0x0200;
-      category_list_variation_cursor==4 ? value=0x0201;
-      category_list_variation_cursor==5 ? value=0x0202;
-      category_list_variation_cursor==6 ? value=0x0300;
-      category_list_variation_cursor==7 ? value=0x0301;
-      category_list_variation_cursor==8 ? value=0x0400;
-      category_list_variation_cursor==9 ? value=0x0500;
-      category_list_variation_cursor==10 ? value=0x0600;
-      category_list_variation_cursor==11 ? value=0x0700;
-      category_list_variation_cursor==12 ? value=0x0800;
-      category_list_variation_cursor==13 ? value=0x0900;
-      category_list_variation_cursor==14 ? value=0x0901;
-      category_list_variation_cursor==15 ? value=0x0a00;
-      category_list_variation_cursor==16 ? value=0x0b00;
-      category_list_variation_cursor==17 ? value=0x1400;
-      category_list_variation_cursor==18 ? value=0x1401;
-      category_list_variation_cursor==19 ? value=0x1402;
-      category_list_variation_cursor==20 ? value=0x4100;
-      category_list_variation_cursor==21 ? value=0x4101;
-      category_list_variation_cursor==22 ? value=0x4102;
-      category_list_variation_cursor==23 ? value=0x4108;
-      category_list_variation_cursor==24 ? value=0x4200;
-      category_list_variation_cursor==25 ? value=0x4201;
-      category_list_variation_cursor==26 ? value=0x4202;
-      category_list_variation_cursor==27 ? value=0x4208;
-      category_list_variation_cursor==28 ? value=0x4300;
-      category_list_variation_cursor==29 ? value=0x4301;
-      category_list_variation_cursor==30 ? value=0x4308;
-      category_list_variation_cursor==31 ? value=0x4400;
-      category_list_variation_cursor==32 ? value=0x4500;
-      category_list_variation_cursor==33 ? value=0x4600;
-      category_list_variation_cursor==34 ? value=0x4700;
-      category_list_variation_cursor==35 ? value=0x4800;
-      category_list_variation_cursor==36 ? value=0x4808;
-      category_list_variation_cursor==37 ? value=0x4900;
-      category_list_variation_cursor==38 ? value=0x4a00;
-      category_list_variation_cursor==39 ? value=0x4b00;
-      category_list_variation_cursor==40 ? value=0x4c00;
-      category_list_variation_cursor==41 ? value=0x4d00;
-      category_list_variation_cursor==42 ? value=0x4e00;
+    category_list_variation_cursor != category_list_variation_cursor_prev ? (
+      category_list_variation_cursor == 0 ? value = 0x0000;
+      category_list_variation_cursor == 1 ? value = 0x0100;
+      category_list_variation_cursor == 2 ? value = 0x0101;
+      category_list_variation_cursor == 3 ? value = 0x0200;
+      category_list_variation_cursor == 4 ? value = 0x0201;
+      category_list_variation_cursor == 5 ? value = 0x0202;
+      category_list_variation_cursor == 6 ? value = 0x0300;
+      category_list_variation_cursor == 7 ? value = 0x0301;
+      category_list_variation_cursor == 8 ? value = 0x0400;
+      category_list_variation_cursor == 9 ? value = 0x0500;
+      category_list_variation_cursor == 10 ? value = 0x0600;
+      category_list_variation_cursor == 11 ? value = 0x0700;
+      category_list_variation_cursor == 12 ? value = 0x0800;
+      category_list_variation_cursor == 13 ? value = 0x0900;
+      category_list_variation_cursor == 14 ? value = 0x0901;
+      category_list_variation_cursor == 15 ? value = 0x0a00;
+      category_list_variation_cursor == 16 ? value = 0x0b00;
+      category_list_variation_cursor == 17 ? value = 0x1400;
+      category_list_variation_cursor == 18 ? value = 0x1401;
+      category_list_variation_cursor == 19 ? value = 0x1402;
+      category_list_variation_cursor == 20 ? value = 0x4100;
+      category_list_variation_cursor == 21 ? value = 0x4101;
+      category_list_variation_cursor == 22 ? value = 0x4102;
+      category_list_variation_cursor == 23 ? value = 0x4108;
+      category_list_variation_cursor == 24 ? value = 0x4200;
+      category_list_variation_cursor == 25 ? value = 0x4201;
+      category_list_variation_cursor == 26 ? value = 0x4202;
+      category_list_variation_cursor == 27 ? value = 0x4208;
+      category_list_variation_cursor == 28 ? value = 0x4300;
+      category_list_variation_cursor == 29 ? value = 0x4301;
+      category_list_variation_cursor == 30 ? value = 0x4308;
+      category_list_variation_cursor == 31 ? value = 0x4400;
+      category_list_variation_cursor == 32 ? value = 0x4500;
+      category_list_variation_cursor == 33 ? value = 0x4600;
+      category_list_variation_cursor == 34 ? value = 0x4700;
+      category_list_variation_cursor == 35 ? value = 0x4800;
+      category_list_variation_cursor == 36 ? value = 0x4808;
+      category_list_variation_cursor == 37 ? value = 0x4900;
+      category_list_variation_cursor == 38 ? value = 0x4a00;
+      category_list_variation_cursor == 39 ? value = 0x4b00;
+      category_list_variation_cursor == 40 ? value = 0x4c00;
+      category_list_variation_cursor == 41 ? value = 0x4d00;
+      category_list_variation_cursor == 42 ? value = 0x4e00;
 
-      sysex_add_queue(0x020140,value,2);
-      force_update=1;
+      sysex_add_queue(0x020140, value, 2);
+      force_update = 1;
     ) : (
-      force_update=0;
+      force_update = 0;
     );
 
-    category_list_variation_cursor>0 ? (
-      gui_slider_x=category_list_width+190;
-      gui_slider_y=menu_height+20;
+    category_list_variation_cursor > 0 ? (
+      gui_slider_x = category_list_width + 190;
+      gui_slider_y = menu_height + 20;
 
-      slider_value_table=param_value_names_send_return;
-      effect_variation_return=gui_slider(effect_variation_return,0,127,"Return",64,1);
-      gui_slider_change ? sysex_add_queue(0x020156,effect_variation_return,1);
+      slider_value_table = param_value_names_send_return;
+      effect_variation_return = gui_slider(effect_variation_return, 0, 127, "Return", 64, 1);
+      gui_slider_change ? sysex_add_queue(0x020156, effect_variation_return, 1);
 
-      slider_value_table=param_value_names_pan;
-      effect_variation_pan=gui_slider(effect_variation_pan,1,127,"Pan",64,1);
-      gui_slider_change ? sysex_add_queue(0x020157,effect_variation_pan,1);
+      slider_value_table = param_value_names_pan;
+      effect_variation_pan = gui_slider(effect_variation_pan, 1, 127, "Pan", 64, 1);
+      gui_slider_change ? sysex_add_queue(0x020157, effect_variation_pan, 1);
 
-      slider_value_table=param_value_names_send_return;
-      effect_variation_send_reverb=gui_slider(effect_variation_send_reverb,0,127,"Reverb Send",0,0);
-      gui_slider_change ? sysex_add_queue(0x020158,effect_variation_send_reverb,1);
+      slider_value_table = param_value_names_send_return;
+      effect_variation_send_reverb = gui_slider(effect_variation_send_reverb, 0, 127, "Reverb Send", 0, 0);
+      gui_slider_change ? sysex_add_queue(0x020158, effect_variation_send_reverb, 1);
 
-      effect_variation_send_chorus=gui_slider(effect_variation_send_chorus,0,127,"Chorus Send",0,0);
-      gui_slider_change ? sysex_add_queue(0x020159,effect_variation_send_chorus,1);
+      effect_variation_send_chorus = gui_slider(effect_variation_send_chorus, 0, 127, "Chorus Send", 0, 0);
+      gui_slider_change ? sysex_add_queue(0x020159, effect_variation_send_chorus, 1);
 
-      gui_slider_y+=25;
+      gui_slider_y += 25;
 
-      gui_slider_list(variation_params_list,category_list_variation_cursor-1,2);
+      gui_slider_list(variation_params_list, category_list_variation_cursor - 1, 2);
     );
 
-    category_list_variation_cursor_prev=category_list_variation_cursor;
+    category_list_variation_cursor_prev = category_list_variation_cursor;
   );
 );
 
 function resend_midi() (
-  midi_first_time=1;
-  part_number_prev=-1;
-  category_list_voice_cursor_prev=-1;
-  category_list_editor_cursor_prev=-1;
-  category_list_reverb_cursor_prev=-1;
-  category_list_chorus_cursor_prev=-1;
-  category_list_variation_cursor_prev=-1;
-  gui_page_prev=-1;
+  midi_first_time = 1;
+  part_number_prev = -1;
+  category_list_voice_cursor_prev = -1;
+  category_list_editor_cursor_prev = -1;
+  category_list_reverb_cursor_prev = -1;
+  category_list_chorus_cursor_prev = -1;
+  category_list_variation_cursor_prev = -1;
+  gui_page_prev = -1;
 );
 
 spinlock.unlock();
@@ -1434,161 +1434,161 @@ spinlock.unlock();
 
 spinlock.lock();
 
-file_var(0,gui_page);
-file_var(0,part_number);
+file_var(0, gui_page);
+file_var(0, part_number);
 
-var_offset=0;
+var_offset = 0;
 
-loop(16,
-  file_var(0,midi_program[var_offset]);
-  file_var(0,midi_bank[var_offset]);
-  file_var(0,instrument_voice[var_offset]);
-  file_var(0,instrument_category[var_offset]);
+loop (16,
+  file_var(0, midi_program[var_offset]);
+  file_var(0, midi_bank[var_offset]);
+  file_var(0, instrument_voice[var_offset]);
+  file_var(0, instrument_category[var_offset]);
 
-  file_var(0,effect_reverb_send[var_offset]);
-  file_var(0,effect_chorus_send[var_offset]);
-  file_var(0,effect_variation_send[var_offset]);
+  file_var(0, effect_reverb_send[var_offset]);
+  file_var(0, effect_chorus_send[var_offset]);
+  file_var(0, effect_variation_send[var_offset]);
 
-  var_offset+=1;
+  var_offset += 1;
 );
 
-file_var(0,category_list_voice_cursor);
-file_var(0,category_list_editor_cursor);
-file_var(0,category_list_reverb_cursor);
-file_var(0,category_list_chorus_cursor);
-file_var(0,category_list_variation_cursor);
+file_var(0, category_list_voice_cursor);
+file_var(0, category_list_editor_cursor);
+file_var(0, category_list_reverb_cursor);
+file_var(0, category_list_chorus_cursor);
+file_var(0, category_list_variation_cursor);
 
-file_var(0,effect_chorus_send_reverb);
-file_var(0,effect_variation_send_reverb);
-file_var(0,effect_variation_send_chorus);
+file_var(0, effect_chorus_send_reverb);
+file_var(0, effect_variation_send_reverb);
+file_var(0, effect_variation_send_chorus);
 
-file_var(0,effect_reverb_return);
-file_var(0,effect_chorus_return);
-file_var(0,effect_variation_return);
+file_var(0, effect_reverb_return);
+file_var(0, effect_chorus_return);
+file_var(0, effect_variation_return);
 
-file_var(0,effect_reverb_pan);
-file_var(0,effect_chorus_pan);
-file_var(0,effect_variation_pan);
+file_var(0, effect_reverb_pan);
+file_var(0, effect_chorus_pan);
+file_var(0, effect_variation_pan);
 
-var_offset=0;
+var_offset = 0;
 
-loop(42*16*3,
-  file_var(0,effect_params[var_offset]);
-  var_offset+=1;
+loop (42 * 16 * 3,
+  file_var(0, effect_params[var_offset]);
+  var_offset += 1;
 );
 
-var_offset=0;
+var_offset = 0;
 
-loop(16,
-  file_var(0,voice_rcv_channel[var_offset]);
-  file_var(0,voice_mode[var_offset]);
+loop (16,
+  file_var(0, voice_rcv_channel[var_offset]);
+  file_var(0, voice_mode[var_offset]);
 
-  file_var(0,voice_volume[var_offset]);
-  file_var(0,voice_pan[var_offset]);
-  file_var(0,voice_transpose[var_offset]);
-  file_var(0,voice_detune[var_offset]);
+  file_var(0, voice_volume[var_offset]);
+  file_var(0, voice_pan[var_offset]);
+  file_var(0, voice_transpose[var_offset]);
+  file_var(0, voice_detune[var_offset]);
 
-  file_var(0,voice_filter_cutoff[var_offset]);
-  file_var(0,voice_filter_resonance[var_offset]);
+  file_var(0, voice_filter_cutoff[var_offset]);
+  file_var(0, voice_filter_resonance[var_offset]);
 
-  file_var(0,voice_eg_attack[var_offset]);
-  file_var(0,voice_eg_decay[var_offset]);
-  file_var(0,voice_eg_release[var_offset]);
+  file_var(0, voice_eg_attack[var_offset]);
+  file_var(0, voice_eg_decay[var_offset]);
+  file_var(0, voice_eg_release[var_offset]);
 
-  file_var(0,voice_portamento_switch[var_offset]);
-  file_var(0,voice_portamento_time[var_offset]);
+  file_var(0, voice_portamento_switch[var_offset]);
+  file_var(0, voice_portamento_time[var_offset]);
 
-  file_var(0,voice_vibrato_rate[var_offset]);
-  file_var(0,voice_vibrato_depth[var_offset]);
-  file_var(0,voice_vibrato_delay[var_offset]);
+  file_var(0, voice_vibrato_rate[var_offset]);
+  file_var(0, voice_vibrato_depth[var_offset]);
+  file_var(0, voice_vibrato_delay[var_offset]);
 
-  file_var(0,voice_bend_pitch_control[var_offset]);
+  file_var(0, voice_bend_pitch_control[var_offset]);
 
-  file_var(0,voice_mw_lfo_pmod_depth[var_offset]);
+  file_var(0, voice_mw_lfo_pmod_depth[var_offset]);
 
-  file_var(0,voice_dry_level[var_offset]);
+  file_var(0, voice_dry_level[var_offset]);
 
-  var_offset+=1;
+  var_offset += 1;
 );
 
-var_offset=0;
+var_offset = 0;
 
-loop(16,
-  file_var(0,voice_bend_filter_control[var_offset]);
-  file_var(0,voice_bend_amplitude_control[var_offset]);
-  file_var(0,voice_bend_lfo_pmod_depth[var_offset]);
-  file_var(0,voice_bend_lfo_fmod_depth[var_offset]);
-  file_var(0,voice_bend_lfo_amod_depth[var_offset]);
+loop (16,
+  file_var(0, voice_bend_filter_control[var_offset]);
+  file_var(0, voice_bend_amplitude_control[var_offset]);
+  file_var(0, voice_bend_lfo_pmod_depth[var_offset]);
+  file_var(0, voice_bend_lfo_fmod_depth[var_offset]);
+  file_var(0, voice_bend_lfo_amod_depth[var_offset]);
 
-  file_var(0,voice_mw_pitch_control[var_offset]);
-  file_var(0,voice_mw_filter_control[var_offset]);
-  file_var(0,voice_mw_amplitude_control[var_offset]);
-  file_var(0,voice_mw_lfo_fmod_depth[var_offset]);
-  file_var(0,voice_mw_lfo_amod_depth[var_offset]);
+  file_var(0, voice_mw_pitch_control[var_offset]);
+  file_var(0, voice_mw_filter_control[var_offset]);
+  file_var(0, voice_mw_amplitude_control[var_offset]);
+  file_var(0, voice_mw_lfo_fmod_depth[var_offset]);
+  file_var(0, voice_mw_lfo_amod_depth[var_offset]);
 
-  file_var(0,voice_note_limit_low[var_offset]);
-  file_var(0,voice_note_limit_high[var_offset]);
-  file_var(0,voice_velocity_limit_low[var_offset]);
-  file_var(0,voice_velocity_limit_high[var_offset]);
-  file_var(0,voice_velocity_sense_depth[var_offset]);
-  file_var(0,voice_velocity_sense_offset[var_offset]);
+  file_var(0, voice_note_limit_low[var_offset]);
+  file_var(0, voice_note_limit_high[var_offset]);
+  file_var(0, voice_velocity_limit_low[var_offset]);
+  file_var(0, voice_velocity_limit_high[var_offset]);
+  file_var(0, voice_velocity_sense_depth[var_offset]);
+  file_var(0, voice_velocity_sense_offset[var_offset]);
 
-  var_offset+=1;
+  var_offset += 1;
 );
 
-var_offset=0;
+var_offset = 0;
 
-loop(16,
-  file_var(0,voice_same_note_assign[var_offset]);
+loop (16,
+  file_var(0, voice_same_note_assign[var_offset]);
 
-  file_var(0,voice_pitch_eg_init_level[var_offset]);
-  file_var(0,voice_pitch_eg_attack[var_offset]);
-  file_var(0,voice_pitch_eg_release_level[var_offset]);
-  file_var(0,voice_pitch_eg_release[var_offset]);
+  file_var(0, voice_pitch_eg_init_level[var_offset]);
+  file_var(0, voice_pitch_eg_attack[var_offset]);
+  file_var(0, voice_pitch_eg_release_level[var_offset]);
+  file_var(0, voice_pitch_eg_release[var_offset]);
 
-  file_var(0,voice_at_pitch_control[var_offset]);
-  file_var(0,voice_at_filter_control[var_offset]);
-  file_var(0,voice_at_amp_control[var_offset]);
-  file_var(0,voice_at_lfo_pmod_depth[var_offset]);
-  file_var(0,voice_at_lfo_fmod_depth[var_offset]);
-  file_var(0,voice_at_lfo_amod_depth[var_offset]);
+  file_var(0, voice_at_pitch_control[var_offset]);
+  file_var(0, voice_at_filter_control[var_offset]);
+  file_var(0, voice_at_amp_control[var_offset]);
+  file_var(0, voice_at_lfo_pmod_depth[var_offset]);
+  file_var(0, voice_at_lfo_fmod_depth[var_offset]);
+  file_var(0, voice_at_lfo_amod_depth[var_offset]);
 
-  file_var(0,voice_scale_c[var_offset]);
-  file_var(0,voice_scale_cs[var_offset]);
-  file_var(0,voice_scale_d[var_offset]);
-  file_var(0,voice_scale_ds[var_offset]);
-  file_var(0,voice_scale_e[var_offset]);
-  file_var(0,voice_scale_f[var_offset]);
-  file_var(0,voice_scale_fs[var_offset]);
-  file_var(0,voice_scale_g[var_offset]);
-  file_var(0,voice_scale_gs[var_offset]);
-  file_var(0,voice_scale_a[var_offset]);
-  file_var(0,voice_scale_as[var_offset]);
-  file_var(0,voice_scale_b[var_offset]);
+  file_var(0, voice_scale_c[var_offset]);
+  file_var(0, voice_scale_cs[var_offset]);
+  file_var(0, voice_scale_d[var_offset]);
+  file_var(0, voice_scale_ds[var_offset]);
+  file_var(0, voice_scale_e[var_offset]);
+  file_var(0, voice_scale_f[var_offset]);
+  file_var(0, voice_scale_fs[var_offset]);
+  file_var(0, voice_scale_g[var_offset]);
+  file_var(0, voice_scale_gs[var_offset]);
+  file_var(0, voice_scale_a[var_offset]);
+  file_var(0, voice_scale_as[var_offset]);
+  file_var(0, voice_scale_b[var_offset]);
 
-  file_var(0,voice_recv_pb[var_offset]);
-  file_var(0,voice_recv_cat[var_offset]);
-  file_var(0,voice_recv_pc[var_offset]);
-  file_var(0,voice_recv_cc[var_offset]);
-  file_var(0,voice_recv_pat[var_offset]);
-  file_var(0,voice_recv_note[var_offset]);
-  file_var(0,voice_recv_rpn[var_offset]);
-  file_var(0,voice_recv_nrpn[var_offset]);
-  file_var(0,voice_recv_mod[var_offset]);
-  file_var(0,voice_recv_vol[var_offset]);
-  file_var(0,voice_recv_pan[var_offset]);
-  file_var(0,voice_recv_exp[var_offset]);
-  file_var(0,voice_recv_sus[var_offset]);
-  file_var(0,voice_recv_port[var_offset]);
-  file_var(0,voice_recv_sost[var_offset]);
-  file_var(0,voice_recv_soft[var_offset]);
-  file_var(0,voice_recv_bs[var_offset]);
+  file_var(0, voice_recv_pb[var_offset]);
+  file_var(0, voice_recv_cat[var_offset]);
+  file_var(0, voice_recv_pc[var_offset]);
+  file_var(0, voice_recv_cc[var_offset]);
+  file_var(0, voice_recv_pat[var_offset]);
+  file_var(0, voice_recv_note[var_offset]);
+  file_var(0, voice_recv_rpn[var_offset]);
+  file_var(0, voice_recv_nrpn[var_offset]);
+  file_var(0, voice_recv_mod[var_offset]);
+  file_var(0, voice_recv_vol[var_offset]);
+  file_var(0, voice_recv_pan[var_offset]);
+  file_var(0, voice_recv_exp[var_offset]);
+  file_var(0, voice_recv_sus[var_offset]);
+  file_var(0, voice_recv_port[var_offset]);
+  file_var(0, voice_recv_sost[var_offset]);
+  file_var(0, voice_recv_soft[var_offset]);
+  file_var(0, voice_recv_bs[var_offset]);
 
-  var_offset+=1;
+  var_offset += 1;
 );
 
 // force update after data was loaded
-file_avail(0)>=0 ? (
+file_avail(0) >= 0 ? (
   resend_midi();
 );
 
@@ -1597,155 +1597,155 @@ spinlock.unlock();
 
 @block
 
-while (midirecv(ts,msg1,msg23) ? midisend(ts,msg1,msg23));
+while (midirecv(ts, msg1, msg23) ? midisend(ts, msg1, msg23));
 
 spinlock.lock();
 
 midi_first_time ? (
-  midi_first_time=0;
-  sysex_add_queue(0x02015a,1,1);  // set variation connection to system
+  midi_first_time = 0;
+  sysex_add_queue(0x02015a, 1, 1);  // set variation connection to system
   gui_pages();
 
-  part=0;
+  part = 0;
 
-  loop(16,
+  loop (16,
     // restore voice
-    sysex_add_queue_multipart(part,0x01,(midi_bank[part]>>8)&0x7f,1);  // bank change MSB
-    sysex_add_queue_multipart(part,0x02,(midi_bank[part]>>0)&0x7f,1);  // bank change LSB
-    sysex_add_queue_multipart(part,0x03,midi_program[part],1);         // program change
+    sysex_add_queue_multipart(part, 0x01, (midi_bank[part] >> 8) & 0x7f, 1);  // bank change MSB
+    sysex_add_queue_multipart(part, 0x02, (midi_bank[part] >> 0) & 0x7f, 1);  // bank change LSB
+    sysex_add_queue_multipart(part, 0x03, midi_program[part], 1);             // program change
 
     // restore voice params
-    sysex_add_queue_multipart(part,0x04,voice_rcv_channel[part],1);
-    sysex_add_queue_multipart(part,0x05,voice_mode[part],1);
-    sysex_add_queue_multipart(part,0x0b,voice_volume[part],1);
-    sysex_add_queue_multipart(part,0x0e,voice_pan[part],1);
-    sysex_add_queue_multipart(part,0x08,voice_transpose[part],1);
-    sysex_add_queue_multipart(part,0x09,voice_detune[part],2);
-    sysex_add_queue_multipart(part,0x18,voice_filter_cutoff[part],1);
-    sysex_add_queue_multipart(part,0x19,voice_filter_resonance[part],1);
-    sysex_add_queue_multipart(part,0x1a,voice_eg_attack[part],1);
-    sysex_add_queue_multipart(part,0x1b,voice_eg_decay[part],1);
-    sysex_add_queue_multipart(part,0x1c,voice_eg_release[part],1);
-    sysex_add_queue_multipart(part,0x69,voice_pitch_eg_init_level[part],1);
-    sysex_add_queue_multipart(part,0x6a,voice_pitch_eg_attack[part],1);
-    sysex_add_queue_multipart(part,0x6b,voice_pitch_eg_release_level[part],1);
-    sysex_add_queue_multipart(part,0x6c,voice_pitch_eg_release[part],1);
-    sysex_add_queue_multipart(part,0x67,voice_portamento_switch[part],1);
-    sysex_add_queue_multipart(part,0x68,voice_portamento_time[part],1);
-    sysex_add_queue_multipart(part,0x15,voice_vibrato_rate[part],1);
-    sysex_add_queue_multipart(part,0x16,voice_vibrato_depth[part],1);
-    sysex_add_queue_multipart(part,0x17,voice_vibrato_delay[part],1);
-    sysex_add_queue_multipart(part,0x23,voice_bend_pitch_control[part],1);
-    sysex_add_queue_multipart(part,0x24,voice_bend_filter_control[part],1);
-    sysex_add_queue_multipart(part,0x25,voice_bend_amplitude_control[part],1);
-    sysex_add_queue_multipart(part,0x26,voice_bend_lfo_pmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x27,voice_bend_lfo_fmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x28,voice_bend_lfo_amod_depth[part],1);
-    sysex_add_queue_multipart(part,0x1d,voice_mw_pitch_control[part],1);
-    sysex_add_queue_multipart(part,0x1e,voice_mw_filter_control[part],1);
-    sysex_add_queue_multipart(part,0x1f,voice_mw_amplitude_control[part],1);
-    sysex_add_queue_multipart(part,0x20,voice_mw_lfo_pmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x21,voice_mw_lfo_fmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x22,voice_mw_lfo_amod_depth[part],1);
-    sysex_add_queue_multipart(part,0x4d,voice_at_pitch_control[part],1);
-    sysex_add_queue_multipart(part,0x53,voice_at_pitch_control[part],1);
-    sysex_add_queue_multipart(part,0x4e,voice_at_filter_control[part],1);
-    sysex_add_queue_multipart(part,0x54,voice_at_filter_control[part],1);
-    sysex_add_queue_multipart(part,0x4f,voice_at_amp_control[part],1);
-    sysex_add_queue_multipart(part,0x55,voice_at_amp_control[part],1);
-    sysex_add_queue_multipart(part,0x50,voice_at_lfo_pmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x56,voice_at_lfo_pmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x51,voice_at_lfo_fmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x57,voice_at_lfo_fmod_depth[part],1);
-    sysex_add_queue_multipart(part,0x52,voice_at_lfo_amod_depth[part],1);
-    sysex_add_queue_multipart(part,0x58,voice_at_lfo_amod_depth[part],1);
-    sysex_add_queue_multipart(part,0x11,voice_dry_level[part],1);
-    sysex_add_queue_multipart(part,0x0f,voice_note_limit_low[part],1);
-    sysex_add_queue_multipart(part,0x10,voice_note_limit_high[part],1);
-    sysex_add_queue_multipart(part,0x6d,voice_velocity_limit_low[part],1);
-    sysex_add_queue_multipart(part,0x6e,voice_velocity_limit_high[part],1);
-    sysex_add_queue_multipart(part,0x0c,voice_velocity_sense_depth[part],1);
-    sysex_add_queue_multipart(part,0x0d,voice_velocity_sense_offset[part],1);
-    sysex_add_queue_multipart(part,0x06,voice_same_note_assign[part],1);
+    sysex_add_queue_multipart(part, 0x04, voice_rcv_channel[part], 1);
+    sysex_add_queue_multipart(part, 0x05, voice_mode[part], 1);
+    sysex_add_queue_multipart(part, 0x0b, voice_volume[part], 1);
+    sysex_add_queue_multipart(part, 0x0e, voice_pan[part], 1);
+    sysex_add_queue_multipart(part, 0x08, voice_transpose[part], 1);
+    sysex_add_queue_multipart(part, 0x09, voice_detune[part], 2);
+    sysex_add_queue_multipart(part, 0x18, voice_filter_cutoff[part], 1);
+    sysex_add_queue_multipart(part, 0x19, voice_filter_resonance[part], 1);
+    sysex_add_queue_multipart(part, 0x1a, voice_eg_attack[part], 1);
+    sysex_add_queue_multipart(part, 0x1b, voice_eg_decay[part], 1);
+    sysex_add_queue_multipart(part, 0x1c, voice_eg_release[part], 1);
+    sysex_add_queue_multipart(part, 0x69, voice_pitch_eg_init_level[part], 1);
+    sysex_add_queue_multipart(part, 0x6a, voice_pitch_eg_attack[part], 1);
+    sysex_add_queue_multipart(part, 0x6b, voice_pitch_eg_release_level[part], 1);
+    sysex_add_queue_multipart(part, 0x6c, voice_pitch_eg_release[part], 1);
+    sysex_add_queue_multipart(part, 0x67, voice_portamento_switch[part], 1);
+    sysex_add_queue_multipart(part, 0x68, voice_portamento_time[part], 1);
+    sysex_add_queue_multipart(part, 0x15, voice_vibrato_rate[part], 1);
+    sysex_add_queue_multipart(part, 0x16, voice_vibrato_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x17, voice_vibrato_delay[part], 1);
+    sysex_add_queue_multipart(part, 0x23, voice_bend_pitch_control[part], 1);
+    sysex_add_queue_multipart(part, 0x24, voice_bend_filter_control[part], 1);
+    sysex_add_queue_multipart(part, 0x25, voice_bend_amplitude_control[part], 1);
+    sysex_add_queue_multipart(part, 0x26, voice_bend_lfo_pmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x27, voice_bend_lfo_fmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x28, voice_bend_lfo_amod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x1d, voice_mw_pitch_control[part], 1);
+    sysex_add_queue_multipart(part, 0x1e, voice_mw_filter_control[part], 1);
+    sysex_add_queue_multipart(part, 0x1f, voice_mw_amplitude_control[part], 1);
+    sysex_add_queue_multipart(part, 0x20, voice_mw_lfo_pmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x21, voice_mw_lfo_fmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x22, voice_mw_lfo_amod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x4d, voice_at_pitch_control[part], 1);
+    sysex_add_queue_multipart(part, 0x53, voice_at_pitch_control[part], 1);
+    sysex_add_queue_multipart(part, 0x4e, voice_at_filter_control[part], 1);
+    sysex_add_queue_multipart(part, 0x54, voice_at_filter_control[part], 1);
+    sysex_add_queue_multipart(part, 0x4f, voice_at_amp_control[part], 1);
+    sysex_add_queue_multipart(part, 0x55, voice_at_amp_control[part], 1);
+    sysex_add_queue_multipart(part, 0x50, voice_at_lfo_pmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x56, voice_at_lfo_pmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x51, voice_at_lfo_fmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x57, voice_at_lfo_fmod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x52, voice_at_lfo_amod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x58, voice_at_lfo_amod_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x11, voice_dry_level[part], 1);
+    sysex_add_queue_multipart(part, 0x0f, voice_note_limit_low[part], 1);
+    sysex_add_queue_multipart(part, 0x10, voice_note_limit_high[part], 1);
+    sysex_add_queue_multipart(part, 0x6d, voice_velocity_limit_low[part], 1);
+    sysex_add_queue_multipart(part, 0x6e, voice_velocity_limit_high[part], 1);
+    sysex_add_queue_multipart(part, 0x0c, voice_velocity_sense_depth[part], 1);
+    sysex_add_queue_multipart(part, 0x0d, voice_velocity_sense_offset[part], 1);
+    sysex_add_queue_multipart(part, 0x06, voice_same_note_assign[part], 1);
 
-    sysex_add_queue_multipart(part,0x41,voice_scale_c[part],1);
-    sysex_add_queue_multipart(part,0x42,voice_scale_cs[part],1);
-    sysex_add_queue_multipart(part,0x43,voice_scale_d[part],1);
-    sysex_add_queue_multipart(part,0x44,voice_scale_ds[part],1);
-    sysex_add_queue_multipart(part,0x45,voice_scale_e[part],1);
-    sysex_add_queue_multipart(part,0x46,voice_scale_f[part],1);
-    sysex_add_queue_multipart(part,0x47,voice_scale_fs[part],1);
-    sysex_add_queue_multipart(part,0x48,voice_scale_g[part],1);
-    sysex_add_queue_multipart(part,0x49,voice_scale_gs[part],1);
-    sysex_add_queue_multipart(part,0x4a,voice_scale_a[part],1);
-    sysex_add_queue_multipart(part,0x4b,voice_scale_as[part],1);
-    sysex_add_queue_multipart(part,0x4c,voice_scale_b[part],1);
+    sysex_add_queue_multipart(part, 0x41, voice_scale_c[part], 1);
+    sysex_add_queue_multipart(part, 0x42, voice_scale_cs[part], 1);
+    sysex_add_queue_multipart(part, 0x43, voice_scale_d[part], 1);
+    sysex_add_queue_multipart(part, 0x44, voice_scale_ds[part], 1);
+    sysex_add_queue_multipart(part, 0x45, voice_scale_e[part], 1);
+    sysex_add_queue_multipart(part, 0x46, voice_scale_f[part], 1);
+    sysex_add_queue_multipart(part, 0x47, voice_scale_fs[part], 1);
+    sysex_add_queue_multipart(part, 0x48, voice_scale_g[part], 1);
+    sysex_add_queue_multipart(part, 0x49, voice_scale_gs[part], 1);
+    sysex_add_queue_multipart(part, 0x4a, voice_scale_a[part], 1);
+    sysex_add_queue_multipart(part, 0x4b, voice_scale_as[part], 1);
+    sysex_add_queue_multipart(part, 0x4c, voice_scale_b[part], 1);
 
-    sysex_add_queue_multipart(part,0x30,voice_recv_pb[part],1);
-    sysex_add_queue_multipart(part,0x31,voice_recv_cat[part],1);
-    sysex_add_queue_multipart(part,0x32,voice_recv_pc[part],1);
-    sysex_add_queue_multipart(part,0x33,voice_recv_cc[part],1);
-    sysex_add_queue_multipart(part,0x34,voice_recv_pat[part],1);
-    sysex_add_queue_multipart(part,0x35,voice_recv_note[part],1);
-    sysex_add_queue_multipart(part,0x36,voice_recv_rpn[part],1);
-    sysex_add_queue_multipart(part,0x37,voice_recv_nrpn[part],1);
-    sysex_add_queue_multipart(part,0x38,voice_recv_mod[part],1);
-    sysex_add_queue_multipart(part,0x39,voice_recv_vol[part],1);
-    sysex_add_queue_multipart(part,0x3a,voice_recv_pan[part],1);
-    sysex_add_queue_multipart(part,0x3b,voice_recv_exp[part],1);
-    sysex_add_queue_multipart(part,0x3c,voice_recv_sus[part],1);
-    sysex_add_queue_multipart(part,0x3d,voice_recv_port[part],1);
-    sysex_add_queue_multipart(part,0x3e,voice_recv_sost[part],1);
-    sysex_add_queue_multipart(part,0x3f,voice_recv_soft[part],1);
-    sysex_add_queue_multipart(part,0x40,voice_recv_bs[part],1);
+    sysex_add_queue_multipart(part, 0x30, voice_recv_pb[part], 1);
+    sysex_add_queue_multipart(part, 0x31, voice_recv_cat[part], 1);
+    sysex_add_queue_multipart(part, 0x32, voice_recv_pc[part], 1);
+    sysex_add_queue_multipart(part, 0x33, voice_recv_cc[part], 1);
+    sysex_add_queue_multipart(part, 0x34, voice_recv_pat[part], 1);
+    sysex_add_queue_multipart(part, 0x35, voice_recv_note[part], 1);
+    sysex_add_queue_multipart(part, 0x36, voice_recv_rpn[part], 1);
+    sysex_add_queue_multipart(part, 0x37, voice_recv_nrpn[part], 1);
+    sysex_add_queue_multipart(part, 0x38, voice_recv_mod[part], 1);
+    sysex_add_queue_multipart(part, 0x39, voice_recv_vol[part], 1);
+    sysex_add_queue_multipart(part, 0x3a, voice_recv_pan[part], 1);
+    sysex_add_queue_multipart(part, 0x3b, voice_recv_exp[part], 1);
+    sysex_add_queue_multipart(part, 0x3c, voice_recv_sus[part], 1);
+    sysex_add_queue_multipart(part, 0x3d, voice_recv_port[part], 1);
+    sysex_add_queue_multipart(part, 0x3e, voice_recv_sost[part], 1);
+    sysex_add_queue_multipart(part, 0x3f, voice_recv_soft[part], 1);
+    sysex_add_queue_multipart(part, 0x40, voice_recv_bs[part], 1);
 
     // restore effect sends
-    sysex_add_queue_multipart(part,0x13,effect_reverb_send[part],1);
-    sysex_add_queue_multipart(part,0x12,effect_chorus_send[part],1);
-    sysex_add_queue_multipart(part,0x14,effect_variation_send[part],1);
+    sysex_add_queue_multipart(part, 0x13, effect_reverb_send[part], 1);
+    sysex_add_queue_multipart(part, 0x12, effect_chorus_send[part], 1);
+    sysex_add_queue_multipart(part, 0x14, effect_variation_send[part], 1);
 
-    part+=1;
+    part += 1;
   );
 );
 
-midi_synth_mode!=midi_synth_mode_prev ? (
-  midi_synth_mode_prev=midi_synth_mode;
+midi_synth_mode != midi_synth_mode_prev ? (
+  midi_synth_mode_prev = midi_synth_mode;
 
-  midi_synth_mode==midi_synth_mode_xg ? (
-    buf=100000;
-    buf[0x00]=0x43;
-    buf[0x01]=0x10;
-    buf[0x02]=0x4c;
-    buf[0x03]=0x00;
-    buf[0x04]=0x00;
-    buf[0x05]=0x7e;
-    buf[0x06]=0x00;
+  midi_synth_mode == midi_synth_mode_xg ? (
+    buf = 100000;
+    buf[0x00] = 0x43;
+    buf[0x01] = 0x10;
+    buf[0x02] = 0x4c;
+    buf[0x03] = 0x00;
+    buf[0x04] = 0x00;
+    buf[0x05] = 0x7e;
+    buf[0x06] = 0x00;
 
-    midisend_buf(0,buf,0x07);
+    midisend_buf(0, buf, 0x07);
   );
 
-  midi_synth_mode==midi_synth_mode_tg300 ? (
-    buf=100000;
-    buf[0x00]=0x43;
-    buf[0x01]=0x71;
-    buf[0x02]=0x7e;
-    buf[0x03]=0x09;
-    buf[0x04]=0x01;
+  midi_synth_mode == midi_synth_mode_tg300 ? (
+    buf = 100000;
+    buf[0x00] = 0x43;
+    buf[0x01] = 0x71;
+    buf[0x02] = 0x7e;
+    buf[0x03] = 0x09;
+    buf[0x04] = 0x01;
 
-    midisend_buf(0,buf,0x05);
+    midisend_buf(0, buf, 0x05);
   );
 );
 
-sysex_delay=0;
-sysex_queue_len=sysex_queue_ptr;
-sysex_queue_ptr=0;
+sysex_delay = 0;
+sysex_queue_len = sysex_queue_ptr;
+sysex_queue_ptr = 0;
 
-while(sysex_queue_ptr<sysex_queue_len) (
-  xgsend_sysex(sysex_queue[sysex_queue_ptr+0],sysex_queue[sysex_queue_ptr+1],sysex_queue[sysex_queue_ptr+2]);
-  sysex_queue_ptr+=3;
+while (sysex_queue_ptr < sysex_queue_len) (
+  xgsend_sysex(sysex_queue[sysex_queue_ptr + 0], sysex_queue[sysex_queue_ptr + 1], sysex_queue[sysex_queue_ptr + 2]);
+  sysex_queue_ptr += 3;
 );
 
-sysex_queue_ptr=0;
+sysex_queue_ptr = 0;
 
 spinlock.unlock();
 
@@ -1754,19 +1754,19 @@ spinlock.unlock();
 
 // main window ----------------------------------------------------------------
 
-gfx_setfont(1,"Segoe UI",22);
+gfx_setfont(1, "Segoe UI", 22);
 
 set_color(color_bg_darkest);
-gfx_rect(0,0,gfx_w,menu_height-10);
+gfx_rect(0, 0, gfx_w, menu_height - 10);
 
 set_color(color_bg_dark);
-gfx_rect(0,menu_height-10,gfx_w,10);
+gfx_rect(0, menu_height - 10, gfx_w, 10);
 
 set_color(color_bg_dark);
-gfx_rect(0,menu_height,category_list_width,gfx_h-menu_height);
+gfx_rect(0, menu_height, category_list_width, gfx_h - menu_height);
 
 set_color(color_bg_light);
-gfx_rect(category_list_width,menu_height,gfx_w-category_list_width,gfx_h-menu_height);
+gfx_rect(category_list_width, menu_height, gfx_w - category_list_width, gfx_h - menu_height);
 
 // setup ----------------------------------------------------------------------
 
@@ -1775,79 +1775,79 @@ spinlock.lock();
 key=gfx_getchar();
 
 !gui_mouse_lmb ? (
-  mouse_cap&CAP_LMB ? gui_mouse_lmb=1;
+  mouse_cap & CAP_LMB ? gui_mouse_lmb = 1;
 ) : (
-  !(mouse_cap&CAP_LMB) ? gui_mouse_lmb=0;
+  !(mouse_cap & CAP_LMB) ? gui_mouse_lmb = 0;
 );
 
 !gui_mouse_rmb ? (
-  mouse_cap&CAP_RMB ? gui_mouse_rmb=1;
+  mouse_cap & CAP_RMB ? gui_mouse_rmb = 1;
 ) : (
-  !(mouse_cap&CAP_RMB) ? gui_mouse_rmb=0;
+  !(mouse_cap & CAP_RMB) ? gui_mouse_rmb = 0;
 );
 
 // main menu ------------------------------------------------------------------
 
-gui_menu_item(020,10,"Voice Catalog",gui_page==0?1:0,1) ? gui_page=0;
-gui_menu_item(137,10,"Voice Editor" ,gui_page==1?1:0,1) ? gui_page=1;
-gui_menu_item(243,10,"Reverb"       ,gui_page==2?1:0,1) ? gui_page=2;
-gui_menu_item(314,10,"Chorus"       ,gui_page==3?1:0,1) ? gui_page=3;
-gui_menu_item(386,10,"Variation"    ,gui_page==4?1:0,1) ? gui_page=4;
+gui_menu_item(020, 10, "Voice Catalog", gui_page == 0 ? 1 : 0, 1) ? gui_page = 0;
+gui_menu_item(137, 10, "Voice Editor" , gui_page == 1 ? 1 : 0, 1) ? gui_page = 1;
+gui_menu_item(243, 10, "Reverb"       , gui_page == 2 ? 1 : 0, 1) ? gui_page = 2;
+gui_menu_item(314, 10, "Chorus"       , gui_page == 3 ? 1 : 0, 1) ? gui_page = 3;
+gui_menu_item(386, 10, "Variation"    , gui_page == 4 ? 1 : 0, 1) ? gui_page = 4;
 
-sprintf(caption,"Part: %i",part_number+1);
+sprintf(caption, "Part: %i", part_number + 1);
 
-gui_menu_item(gfx_w-64,10,caption,0,1)&1 ? part_number+=1;
-gui_menu_item(gfx_w-64,10,caption,0,1)&2 ? part_number-=1;
+gui_menu_item(gfx_w - 64, 10, caption, 0, 1) & 1 ? part_number += 1;
+gui_menu_item(gfx_w - 64, 10, caption, 0, 1) & 2 ? part_number -= 1;
 
-gui_menu_item(gfx_w-64,10,caption,0,2) ? (
-  mouse_wheel<0 ? part_number-=1;
-  mouse_wheel>0 ? part_number+=1;
+gui_menu_item(gfx_w - 64, 10, caption, 0, 2) ? (
+  mouse_wheel < 0 ? part_number -= 1;
+  mouse_wheel > 0 ? part_number += 1;
 );
 
-part_number>15 ? part_number=0;
-part_number<0 ? part_number=15;
+part_number > 15 ? part_number = 0;
+part_number < 0 ? part_number = 15;
 
 // change part number with number keys (1-10)
-key==49 ? part_number=0;
-key==50 ? part_number=1;
-key==51 ? part_number=2;
-key==52 ? part_number=3;
-key==53 ? part_number=4;
-key==54 ? part_number=5;
-key==55 ? part_number=6;
-key==56 ? part_number=7;
-key==57 ? part_number=8;
-key==48 ? part_number=9;
+key == 49 ? part_number = 0;
+key == 50 ? part_number = 1;
+key == 51 ? part_number = 2;
+key == 52 ? part_number = 3;
+key == 53 ? part_number = 4;
+key == 54 ? part_number = 5;
+key == 55 ? part_number = 6;
+key == 56 ? part_number = 7;
+key == 57 ? part_number = 8;
+key == 48 ? part_number = 9;
 
 // change part number with qwerty keys (11-16)
-key==81 || key==113 ? part_number=10;
-key==87 || key==119 ? part_number=11;
-key==69 || key==101 ? part_number=12;
-key==82 || key==114 ? part_number=13;
-key==84 || key==116 ? part_number=14;
-key==89 || key==121 ? part_number=15;
+key == 81 || key == 113 ? part_number = 10;
+key == 87 || key == 119 ? part_number = 11;
+key == 69 || key == 101 ? part_number = 12;
+key == 82 || key == 114 ? part_number = 13;
+key == 84 || key == 116 ? part_number = 14;
+key == 89 || key == 121 ? part_number = 15;
 
-part_number!=part_number_prev ? (
-  category_list_voice_cursor=instrument_category[part_number];
-  part_number_prev=part_number;
+part_number != part_number_prev ? (
+  category_list_voice_cursor = instrument_category[part_number];
+  part_number_prev = part_number;
 );
 
 // current page ---------------------------------------------------------------
 
-category_list_height=floor((gfx_h-menu_height-20)/list_item_height)-1;  // how many lines of the current category list is visible
-category_list_height<1 ? category_list_height=1;
+category_list_height = floor((gfx_h - menu_height - 20) / list_item_height) - 1;  // how many lines of the current category list is visible
+category_list_height < 1 ? category_list_height = 1;
 
-gui_menu_item(gfx_w-104,10,"XG",0,1) ? (
+gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
   resend_midi();
 ) : (
   gui_pages();
-  gui_page_prev=gui_page;
+  gui_page_prev = gui_page;
 );
 
 // cleanup --------------------------------------------------------------------
 
-gui_mouse_lmb ? gui_mouse_lmb=2;
-gui_mouse_rmb ? gui_mouse_rmb=2;
-mouse_wheel=0;
+gui_mouse_lmb ? gui_mouse_lmb = 2;
+gui_mouse_rmb ? gui_mouse_rmb = 2;
+mouse_wheel = 0;
 
 spinlock.unlock();

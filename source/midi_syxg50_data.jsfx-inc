@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------
 
-list_voice_category="
+list_voice_category = "
 00:Piano
 01:Chromatic Percussion
 02:Organ
@@ -24,7 +24,7 @@ list_voice_category="
 
 //-----------------------------------------------------------------------------
 
-list_editor_category="
+list_editor_category = "
 00:Common
 01:Modulation
 02:Keyboard
@@ -34,7 +34,7 @@ list_editor_category="
 
 //-----------------------------------------------------------------------------
 
-list_reverb_category="
+list_reverb_category = "
 00:No Effect
 01:Hall 1
 02:Hall 2
@@ -51,7 +51,7 @@ list_reverb_category="
 
 //-----------------------------------------------------------------------------
 
-list_chorus_category="
+list_chorus_category = "
 00:No Effect
 01:Chorus 1
 02:Chorus 2
@@ -68,7 +68,7 @@ list_chorus_category="
 
 //-----------------------------------------------------------------------------
 
-list_variation_category="
+list_variation_category = "
 00:No Effect
 01:Hall 1
 02:Hall 2
@@ -118,7 +118,7 @@ list_variation_category="
 //X (XG) or T (TG300), program:bank  msb:bank lsb, patch name
 //numbers are decimal
 
-list_contents_piano="
+list_contents_piano = "
 X001:000:000 Grand Piano
 X001:000:001 Grand Piano KSP
 X001:000:018 Mellow Grand Piano
@@ -162,7 +162,7 @@ X008:000:065 Pierce Clavinet
 
 //-----------------------------------------------------------------------------
 
-list_contents_chromatic_percussion="
+list_contents_chromatic_percussion = "
 X009:000:000 Celesta
 X010:000:000 Glockenspiel
 X011:000:000 Music Box
@@ -187,7 +187,7 @@ X016:000:097 Santur
 
 //-----------------------------------------------------------------------------
 
-list_contents_organ="
+list_contents_organ = "
 X017:000:000 Drawbar Organ 1
 X017:000:032 Detuned Drawbar Organ
 X017:000:033 60s Drawbar Organ 1
@@ -228,7 +228,7 @@ X024:000:064 Tango Accordion 2
 
 //-----------------------------------------------------------------------------
 
-list_contents_guitar="
+list_contents_guitar = "
 X025:000:000 Nylon Guitar 1
 X025:000:016 Nylon Guitar 2
 X025:000:025 Nylon Guitar 3
@@ -262,7 +262,7 @@ X032:000:066 Guitar Harmonics 2
 
 //-----------------------------------------------------------------------------
 
-list_contents_bass="
+list_contents_bass = "
 X033:000:000 Acoustic Bass
 X033:000:040 Jazz Rhythm
 X033:000:045 Vel XF Upright Bass
@@ -309,7 +309,7 @@ X040:000:064 X Wire Bass
 
 //-----------------------------------------------------------------------------
 
-list_contents_strings="
+list_contents_strings = "
 X041:000:000 Violin
 X041:000:008 Slow Violin
 X042:000:000 Viola
@@ -326,7 +326,7 @@ X048:000:000 Timpani
 
 //-----------------------------------------------------------------------------
 
-list_contents_ensemble="
+list_contents_ensemble = "
 X049:000:000 Strings 1
 X049:000:003 Stereo Strings
 X049:000:008 Slow Strings
@@ -365,7 +365,7 @@ X056:000:064 Impact
 
 //-----------------------------------------------------------------------------
 
-list_contents_brass="
+list_contents_brass = "
 X057:000:000 Trumpet 1
 X057:000:016 Trumpet 2
 X057:000:017 Bright Trumpet
@@ -402,7 +402,7 @@ X064:000:064 Analog Brass 2
 
 //-----------------------------------------------------------------------------
 
-list_contents_reed="
+list_contents_reed = "
 X065:000:000 Soprano Sax
 X066:000:000 Alto Sax
 X066:000:040 Sax Section
@@ -420,7 +420,7 @@ X072:000:000 Clarinet
 
 //-----------------------------------------------------------------------------
 
-list_contents_pipe="
+list_contents_pipe = "
 X073:000:000 Piccolo
 X074:000:000 Flute
 X075:000:000 Recorder
@@ -433,7 +433,7 @@ X080:000:000 Ocarina
 
 //-----------------------------------------------------------------------------
 
-list_contents_synth_lead="
+list_contents_synth_lead = "
 X081:000:000 Square Lead 1
 X081:000:006 Square Lead 2
 X081:000:008 LM Square
@@ -474,7 +474,7 @@ X088:000:065 Soft Whirl
 
 //-----------------------------------------------------------------------------
 
-list_contents_synth_pad="
+list_contents_synth_pad = "
 X089:000:000 New Age Pad
 X089:000:064 Fantasy
 X090:000:000 Warm Pad
@@ -508,7 +508,7 @@ X096:000:066 Celestial
 
 //-----------------------------------------------------------------------------
 
-list_contents_synth_effects="
+list_contents_synth_effects = "
 X097:000:000 Rain
 X097:000:045 Clavi Pad
 X097:000:064 Harmo Rain
@@ -569,7 +569,7 @@ X104:000:064 Starz
 
 //-----------------------------------------------------------------------------
 
-list_contents_ethnic="
+list_contents_ethnic = "
 X105:000:000 Sitar 1
 X105:000:032 Detuned Sitar 1
 X105:000:035 Sitar 2
@@ -595,7 +595,7 @@ X112:000:097 Hichiriki
 
 //-----------------------------------------------------------------------------
 
-list_contents_percussive="
+list_contents_percussive = "
 X113:000:000 Tinkle Bell
 X113:000:096 Bonang
 X113:000:097 Gender
@@ -623,7 +623,7 @@ X120:000:000 Reverse Cymbal
 
 //-----------------------------------------------------------------------------
 
-list_contents_sound_effects="
+list_contents_sound_effects = "
 X121:000:000 Fret Noise
 X122:000:000 Breath Noise
 X123:000:000 Seashore
@@ -678,7 +678,7 @@ X116:064:000 Firework
 
 //-----------------------------------------------------------------------------
 
-list_contents_drum_kits="
+list_contents_drum_kits = "
 X001:127:000 XG Standard 1
 X002:127:000 XG Standard 2
 X009:127:000 XG Room
@@ -707,7 +707,7 @@ X057:120:000 GM2 SFX
 //param number (translated to sysex address in code), min, max, default, display table, type (0:normal, 1:bipolar), name
 //all numbers dec
 
-reverb_params_list="
+reverb_params_list = "
 #00 Hall 1
 01|00000|00069|00018|4|0|Reverb Time
 02|00000|00010|00010|-|0|Diffusion
@@ -834,7 +834,7 @@ reverb_params_list="
 
 //-----------------------------------------------------------------------------
 
-chorus_params_list="
+chorus_params_list = "
 #00 Chorus 1
 01|00000|00127|00006|1|0|LFO Frequency
 02|00000|00127|00054|-|0|LFO Depth
@@ -949,7 +949,7 @@ chorus_params_list="
 
 //-----------------------------------------------------------------------------
 
-variation_params_list="
+variation_params_list = "
 #00 Hall 1
 01|00000|00069|00018|4|0|Reverb Time
 02|00000|00010|00010|-|0|Diffusion
@@ -1354,7 +1354,7 @@ variation_params_list="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_1_lfo_frequency="
+effect_value_names_1_lfo_frequency = "
 000|0.00 Hz
 001|0.04 Hz
 002|0.08 Hz
@@ -1487,7 +1487,7 @@ effect_value_names_1_lfo_frequency="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_2_delay_offset="
+effect_value_names_2_delay_offset = "
 000|0.0 ms
 001|0.1 ms
 002|0.2 ms
@@ -1620,7 +1620,7 @@ effect_value_names_2_delay_offset="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_3_eq_frequency="
+effect_value_names_3_eq_frequency = "
 000|20 Hz
 001|22 Hz
 002|25 Hz
@@ -1686,7 +1686,7 @@ effect_value_names_3_eq_frequency="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_4_reverb_time="
+effect_value_names_4_reverb_time = "
 000|0.3 s
 001|0.4 s
 002|0.5 s
@@ -1761,7 +1761,7 @@ effect_value_names_4_reverb_time="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_5_delay_time="
+effect_value_names_5_delay_time = "
 000|0.1 ms
 001|1.7 ms
 002|3.2 ms
@@ -1894,7 +1894,7 @@ effect_value_names_5_delay_time="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_6_room_size="
+effect_value_names_6_room_size = "
 000|0.1 m
 001|0.3 m
 002|0.4 m
@@ -1944,7 +1944,7 @@ effect_value_names_6_room_size="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_7_delay_time="
+effect_value_names_7_delay_time = "
 000|0.1 ms
 001|3.2 ms
 002|6.4 ms
@@ -2077,7 +2077,7 @@ effect_value_names_7_delay_time="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_8_reverb_wdh="
+effect_value_names_8_reverb_wdh = "
 000|0.5 m
 001|0.8 m
 002|1.0 m
@@ -2187,7 +2187,7 @@ effect_value_names_8_reverb_wdh="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_9_stereo="
+effect_value_names_9_stereo = "
 000|L
 001|R
 002|L&R
@@ -2195,7 +2195,7 @@ effect_value_names_9_stereo="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_10_ref_type="
+effect_value_names_10_ref_type = "
 000|Small Hall
 001|Large Hall
 002|Random
@@ -2206,7 +2206,7 @@ effect_value_names_10_ref_type="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_11_pan_direction="
+effect_value_names_11_pan_direction = "
 000|L<->R
 001|L->R
 002|L<-R
@@ -2217,14 +2217,14 @@ effect_value_names_11_pan_direction="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_12_mono_stereo="
+effect_value_names_12_mono_stereo = "
 000|Mono
 001|Stereo
 ";
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_13_amp_type="
+effect_value_names_13_amp_type = "
 000|Off
 001|Stack
 002|Combo
@@ -2233,7 +2233,7 @@ effect_value_names_13_amp_type="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_14_eq_gain="
+effect_value_names_14_eq_gain = "
 052|-12 dB
 053|-11 dB
 054|-10 dB
@@ -2263,7 +2263,7 @@ effect_value_names_14_eq_gain="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_15_er_rev="
+effect_value_names_15_er_rev = "
 001|E63>R
 002|E62>R
 003|E61>R
@@ -2395,7 +2395,7 @@ effect_value_names_15_er_rev="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_16_lfo_phase_diff="
+effect_value_names_16_lfo_phase_diff = "
 004|-180°
 005|-177°
 006|-174°
@@ -2521,14 +2521,14 @@ effect_value_names_16_lfo_phase_diff="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_17_gate_type="
+effect_value_names_17_gate_type = "
 000|A
 001|B
 ";
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_18_generic="
+effect_value_names_18_generic = "
 000|-64
 001|-63
 002|-62
@@ -2661,7 +2661,7 @@ effect_value_names_18_generic="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_19_high_damp="
+effect_value_names_19_high_damp = "
 001|0.1
 002|0.2
 003|0.3
@@ -2676,7 +2676,7 @@ effect_value_names_19_high_damp="
 
 //-----------------------------------------------------------------------------
 
-effect_value_names_20_mid_width="
+effect_value_names_20_mid_width = "
 010|1.0
 011|1.1
 012|1.2
@@ -2792,7 +2792,7 @@ effect_value_names_20_mid_width="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_send_return="
+param_value_names_send_return = "
 000|-oo dB
 001|-36.10 dB
 002|-30.10 dB
@@ -2925,7 +2925,7 @@ param_value_names_send_return="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_filter_mod="
+param_value_names_filter_mod = "
 000|-9600 cents
 001|-9450 cents
 002|-9300 cents
@@ -3058,7 +3058,7 @@ param_value_names_filter_mod="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_pan="
+param_value_names_pan = "
 000|Random
 001|L63
 002|L62
@@ -3191,7 +3191,7 @@ param_value_names_pan="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_percent="
+param_value_names_percent = "
 000|-100 %
 001|-98 %
 002|-94 %
@@ -3324,7 +3324,7 @@ param_value_names_percent="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_semitones="
+param_value_names_semitones = "
 040|-24 st
 041|-23 st
 042|-22 st
@@ -3378,7 +3378,7 @@ param_value_names_semitones="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_channel="
+param_value_names_channel = "
 000|1
 001|2
 002|3
@@ -3399,21 +3399,21 @@ param_value_names_channel="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_mono_poly="
+param_value_names_mono_poly = "
 000|Mono
 001|Poly
 ";
 
 //-----------------------------------------------------------------------------
 
-param_value_names_off_on="
+param_value_names_off_on = "
 000|Off
 001|On
 ";
 
 //-----------------------------------------------------------------------------
 
-param_value_names_same_note_assign="
+param_value_names_same_note_assign = "
 000|Single
 001|Multi
 002|Instrument
@@ -3421,7 +3421,7 @@ param_value_names_same_note_assign="
 
 //-----------------------------------------------------------------------------
 
-param_value_names_notes="
+param_value_names_notes = "
 000|C-2
 001|C#-2
 002|D-2

@@ -4,14 +4,14 @@
 @init
 
 function getthreadid() local(thisid) instance(counter) (
-  thisid ? thisid : (thisid = atomic_add(counter,1));
+  thisid ? thisid : (thisid = atomic_add(counter, 1));
 );
 
 function lock() (
   this.ownid == getthreadid() ? (
     this.l += 1;
   ) : (
-    while (atomic_setifequal(this.l,0,1));
+    while (atomic_setifequal(this.l, 0, 1));
     this.ownid = getthreadid();
   );
 );
