@@ -446,7 +446,7 @@ function gui_slider(slider_value, slider_min, slider_max, slider_caption, slider
   slider_value != slider_def ? set_color(color_bg_changed);
 
   // slider fill
-  slider_bipolar != 0 ? (
+  slider_bipolar ? (
     slider_value_width = abs(floor((gui_slider_halfwidth * ((slider_value_float * 2.0) - 1.0)) + 0.5));
 
     slider_value_float < 0.5 ? (
@@ -1788,11 +1788,11 @@ key=gfx_getchar();
 
 // main menu ------------------------------------------------------------------
 
-gui_menu_item(020, 10, "Voice Catalog", gui_page == 0 ? 1 : 0, 1) ? gui_page = 0;
-gui_menu_item(137, 10, "Voice Editor" , gui_page == 1 ? 1 : 0, 1) ? gui_page = 1;
-gui_menu_item(243, 10, "Reverb"       , gui_page == 2 ? 1 : 0, 1) ? gui_page = 2;
-gui_menu_item(314, 10, "Chorus"       , gui_page == 3 ? 1 : 0, 1) ? gui_page = 3;
-gui_menu_item(386, 10, "Variation"    , gui_page == 4 ? 1 : 0, 1) ? gui_page = 4;
+gui_menu_item(020, 10, "Voice Catalog", gui_page == 0, 1) ? gui_page = 0;
+gui_menu_item(137, 10, "Voice Editor" , gui_page == 1, 1) ? gui_page = 1;
+gui_menu_item(243, 10, "Reverb"       , gui_page == 2, 1) ? gui_page = 2;
+gui_menu_item(314, 10, "Chorus"       , gui_page == 3, 1) ? gui_page = 3;
+gui_menu_item(386, 10, "Variation"    , gui_page == 4, 1) ? gui_page = 4;
 
 sprintf(caption, "Part: %i", part_number + 1);
 
