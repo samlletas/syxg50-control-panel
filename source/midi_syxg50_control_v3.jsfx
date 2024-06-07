@@ -394,7 +394,7 @@ function xgsend_sysex(address, value, len) (
   );
 );
 
-function parse_number_dec(string, offset, length) (
+function parse_number_dec(string, offset, length) local(dec_value) (
   dec_value = 0;
 
   loop (length,
@@ -406,33 +406,34 @@ function parse_number_dec(string, offset, length) (
   dec_value;
 );
 
-function parse_to_line_end(string, offset) (
+function parse_to_line_end(string, offset) local(length) (
   length = strlen(string);
   while (str_getchar(string, offset) >= 32 && offset < length) (offset += 1);
   offset;
 );
 
-function parse_to_next_line(string, offset) (
+function parse_to_next_line(string, offset) local(length) (
   length = strlen(string);
   while (str_getchar(string, offset) < 32 && offset < length) (offset += 1);
   offset;
 );
 
-function gui_slider_float_to_value(slider_value_float, slider_min, slider_max) (
+function gui_slider_float_to_value(slider_value_float, slider_min, slider_max) local(slider_value) (
   slider_value = floor((slider_min + (slider_max - slider_min) * slider_value_float) + 0.5);
   slider_value < slider_min ? slider_value = slider_min;
   slider_value > slider_max ? slider_value = slider_max;
   slider_value;
 );
 
-function gui_slider_value_to_float(slider_value, slider_min, slider_max) (
+function gui_slider_value_to_float(slider_value, slider_min, slider_max) local(slider_value_float) (
   slider_value_float = (slider_value - slider_min) / (slider_max - slider_min);
   slider_value_float < 0 ? slider_value_float = 0;
   slider_value_float > 1 ? slider_value_float = 1;
   slider_value_float;
 );
 
-function gui_slider(slider_value, slider_min, slider_max, slider_caption, slider_def, slider_bipolar) (
+function gui_slider(slider_value, slider_min, slider_max, slider_caption, slider_def, slider_bipolar)
+    local(slider_value_old, slider_value_float, slider_value_temp, slider_range, step_size, slider_value_width, slider_value_display, w, h, table_len, table_ptr, table_ptr_old, table_value) (
   slider_value_old = slider_value;
   slider_value < 0 ? slider_value = slider_def;
   slider_value_float = gui_slider_value_to_float(slider_value, slider_min, slider_max);
@@ -521,7 +522,7 @@ function gui_slider(slider_value, slider_min, slider_max, slider_caption, slider
 );
 
 // mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
-function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) (
+function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(w, h) (
   gfx_x = item_x;
   gfx_y = item_y;
 
@@ -557,7 +558,8 @@ function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) (
   item_selected;
 );
 
-function gui_category(list_category, cursor_category, offset_category, highlight_category) (
+function gui_category(list_category, cursor_category, offset_category, highlight_category)
+    local(list_x, list_y, list_hover, category_list_count, category_display_count, list_category_length, list_string_ptr, list_string_old_ptr, list_item_text) (
   list_x = 0;
   list_y = menu_height + 20;
 
@@ -622,7 +624,7 @@ function gui_category(list_category, cursor_category, offset_category, highlight
   cursor_category;
 );
 
-function gui_category_adjust_view(list_offset, list_cursor, list_cursor_prev, list_length) (
+function gui_category_adjust_view(list_offset, list_cursor, list_cursor_prev, list_length) local(item_x, item_y) (
   category_list_height > 0 && (list_cursor != list_cursor_prev || gui_page != gui_page_prev) ? (
     // makes sure the selected item is always visible
     list_offset = min(list_offset, list_cursor);
@@ -647,7 +649,9 @@ function gui_category_adjust_view(list_offset, list_cursor, list_cursor_prev, li
   list_offset;
 );
 
-function gui_slider_list(list, cursor, effect_type) (
+function gui_slider_list(list, cursor, effect_type)
+    local(entry, entry_ptr, list_ptr, list_ptr_old, list_length, id, sysex_param, sysex_size, sysex_addr, 
+      slider_min, slider_max, slider_def, slider_table, slider_bipolar, slider_caption, param_offset) (
   entry = -1;
   entry_ptr = -1;
   list_ptr = 1;
@@ -782,7 +786,9 @@ function gui_slider_list(list, cursor, effect_type) (
   );
 );
 
-function gui_pages() (
+function gui_pages() 
+    local(list_x, list_y, list_hover, instrument_change, instrument_list_count, mode, msb, lsb
+      list_contents_length, list_string_ptr, list_string_old_ptr, list_item_text, value) (
   // voice catalog ------------------------------------------------------------
 
   gui_page == 0 ? (
