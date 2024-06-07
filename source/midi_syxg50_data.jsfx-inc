@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------
 
-list_voice_category = "
+list_category_voice = "
 00:Piano
 01:Chromatic Percussion
 02:Organ
@@ -24,7 +24,7 @@ list_voice_category = "
 
 //-----------------------------------------------------------------------------
 
-list_editor_category = "
+list_category_editor = "
 00:Common
 01:Modulation
 02:Keyboard
@@ -34,7 +34,7 @@ list_editor_category = "
 
 //-----------------------------------------------------------------------------
 
-list_reverb_category = "
+list_category_reverb = "
 00:No Effect
 01:Hall 1
 02:Hall 2
@@ -51,7 +51,7 @@ list_reverb_category = "
 
 //-----------------------------------------------------------------------------
 
-list_chorus_category = "
+list_category_chorus = "
 00:No Effect
 01:Chorus 1
 02:Chorus 2
@@ -68,7 +68,7 @@ list_chorus_category = "
 
 //-----------------------------------------------------------------------------
 
-list_variation_category = "
+list_category_variation = "
 00:No Effect
 01:Hall 1
 02:Hall 2
@@ -707,7 +707,7 @@ X057:120:000 GM2 SFX
 //param number (translated to sysex address in code), min, max, default, display table, type (0:normal, 1:bipolar), name
 //all numbers dec
 
-reverb_params_list = "
+list_params_reverb = "
 #00 Hall 1
 01|00000|00069|00018|4|0|Reverb Time
 02|00000|00010|00010|-|0|Diffusion
@@ -834,7 +834,7 @@ reverb_params_list = "
 
 //-----------------------------------------------------------------------------
 
-chorus_params_list = "
+list_params_chorus = "
 #00 Chorus 1
 01|00000|00127|00006|1|0|LFO Frequency
 02|00000|00127|00054|-|0|LFO Depth
@@ -949,7 +949,7 @@ chorus_params_list = "
 
 //-----------------------------------------------------------------------------
 
-variation_params_list = "
+list_params_variation = "
 #00 Hall 1
 01|00000|00069|00018|4|0|Reverb Time
 02|00000|00010|00010|-|0|Diffusion
