@@ -418,24 +418,19 @@ function parse_to_next_line(string, offset) local(length) (
 
 function gui_slider_float_to_value(value_float, value_min, value_max) local(value) (
   value = floor((value_min + (value_max - value_min) * value_float) + 0.5);
-  value < value_min ? value = value_min;
-  value > value_max ? value = value_max;
-  value;
+  min(max(value, value_min), value_max);
 );
 
 function gui_slider_value_to_float(value, value_min, value_max) local(value_float) (
   value_float = (value - value_min) / (value_max - value_min);
-  value_float < 0 ? value_float = 0;
-  value_float > 1 ? value_float = 1;
-  value_float;
+  min(max(value_float, 0), 1);
 );
 
 function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
-    local(value_old, value_float, value_temp, value_range, step_size, value_width, value_display, table_len, table_ptr, table_ptr_old, table_value, caption_width, caption_height) (
+    local(value_old, value_float, value_range, step_size, fill_width, fill_offset, value_display, table_len, table_ptr, table_ptr_old, table_value, caption_width, caption_height) (
   value_old = value;
   value < 0 ? value = value_def;
   value_float = gui_slider_value_to_float(value, value_min, value_max);
-  value_width = floor((gui_slider_width * value_float) + 0.5);
 
   // slider background
   set_color(color_bg_darker);
@@ -446,21 +441,16 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
 
   // slider fill
   is_bipolar ? (
-    value_width = abs(floor((gui_slider_halfwidth * ((value_float * 2.0) - 1.0)) + 0.5));
-
-    value_float < 0.5 ? (
-      value_temp = floor((gui_slider_width * value_float) + 0.5);
-      gfx_rect(gui_slider_x + value_temp, gui_slider_y, value_width, gui_slider_height);
-    ) : (
-      gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, value_width, gui_slider_height);
-    );
-
-    // center notch
-    gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, 1, gui_slider_height);
+    fill_width = abs(floor((gui_slider_halfwidth * ((value_float * 2.0) - 1.0)) + 0.5));
+    fill_offset = value_float < 0.5 ? floor((gui_slider_width * value_float) + 0.5) : gui_slider_halfwidth;
+    gfx_rect(gui_slider_x + fill_offset, gui_slider_y, fill_width, gui_slider_height);  // bipolar fill
+    gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, 1, gui_slider_height);  // center notch
   ) : (
-    gfx_rect(gui_slider_x, gui_slider_y, value_width, gui_slider_height);
+    fill_width = floor((gui_slider_width * value_float) + 0.5);
+    gfx_rect(gui_slider_x, gui_slider_y, fill_width, gui_slider_height);
   );
 
+  // slider input
   mouse_x >= gui_slider_x - 20 && mouse_x <= gui_slider_x + gui_slider_width + 20 && mouse_y >= gui_slider_y - 5 && mouse_y <= gui_slider_y + gui_slider_height + 5 ? (
     mouse_wheel != 0 ? (
       value_range = value_max - value_min;
@@ -477,8 +467,7 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
       value = value_def;
     );
 
-    value < value_min ? value = value_min;
-    value > value_max ? value = value_max;
+    value = min(max(value, value_min), value_max);
   );
 
   gui_slider_change = force_update | (value != value_old);
@@ -549,7 +538,7 @@ function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(
       gui_mouse_rmb == 1 ? item_selected |= 2;
     );
 
-    mode == 2 ? item_selected = 4;
+    mode == 2 ? item_selected = 1;
   );
 
   gfx_drawstr(item_caption);
@@ -612,21 +601,17 @@ function gui_category(list, cursor, offset, highlight)
   gui_categories_count = category_count;
 
   mouse_y >= gui_menu_height && mouse_x < gui_categories_width ? (
-    mouse_wheel != 0 ? (
-      mouse_wheel < 0 ? cursor += 1 : cursor -= 1;
-      cursor < 0 ? cursor = 0;
-      cursor >= category_count - 1 ? cursor = category_count - 1;
-    );
+    cursor -= sign(mouse_wheel);
+    cursor = min(max(cursor, 0), category_count - 1);
   );
 
   cursor;
 );
 
-function gui_category_adjust_view(offset, cursor, cursor_prev, list_len) local(item_x, item_y) (
+function gui_category_adjust_view(offset, cursor, cursor_prev) local(item_x, item_y) (
   gui_categories_visible > 0 && (cursor != cursor_prev || gui_page != gui_page_prev) ? (
     // makes sure the selected item is always visible
-    offset = min(offset, cursor);
-    offset = max(offset, cursor - gui_categories_visible + 1);
+    offset = min(max(offset, cursor - gui_categories_visible + 1), cursor);
   );
 
   item_x = 16;
@@ -638,13 +623,11 @@ function gui_category_adjust_view(offset, cursor, cursor_prev, list_len) local(i
 
   item_y = gui_menu_height + 24 + gui_categories_visible * gui_list_item_height;
 
-  gui_categories_visible < list_len && (offset + gui_categories_visible) < list_len ? (
+  gui_categories_visible < gui_categories_count && (offset + gui_categories_visible) < gui_categories_count ? (
     gui_menu_item(item_x, item_y, "                 ↓                 ", 0, 0) ? offset += 1;
   );
 
-  offset < 0 ? offset = 0;
-  offset > (list_len - gui_categories_visible) ? offset = list_len - gui_categories_visible;
-  offset;
+  min(max(offset, 0), gui_categories_count - gui_categories_visible);
 );
 
 function gui_slider_list(list, cursor, effect_type)
@@ -791,7 +774,7 @@ function gui_pages()
   gui_page == 0 ? (
     // render category list
     gui_categories_voice_cursor = gui_category(list_categories_voice, gui_categories_voice_cursor, gui_categories_voice_offset, voice_category[gui_part]);
-    gui_categories_voice_offset = gui_category_adjust_view(gui_categories_voice_offset, gui_categories_voice_cursor, gui_categories_voice_cursor_prev, gui_categories_count);
+    gui_categories_voice_offset = gui_category_adjust_view(gui_categories_voice_offset, gui_categories_voice_cursor, gui_categories_voice_cursor_prev);
 
     // render voice list
     list_voices = "";
@@ -860,9 +843,8 @@ function gui_pages()
     mouse_y >= gui_menu_height && mouse_x >= gui_categories_width ? (
       mouse_wheel != 0 ? (
         voice_change = voice_number[gui_part];
-        mouse_wheel < 0 ? voice_change += 1 : voice_change -= 1;
-        voice_change < 0 ? voice_change = 0;
-        voice_change >= voice_count - 1 ? voice_change = voice_count - 1;
+        voice_change -= sign(mouse_wheel);
+        voice_change = min(max(voice_change, 0), voice_count - 1);
       );
     );
 
@@ -908,7 +890,7 @@ function gui_pages()
 
   gui_page == 1 ? (
     gui_categories_editor_cursor = gui_category(list_categories_editor, gui_categories_editor_cursor, gui_categories_editor_offset, gui_categories_editor_cursor);
-    gui_categories_editor_offset = gui_category_adjust_view(gui_categories_editor_offset, gui_categories_editor_cursor, gui_categories_editor_cursor_prev, gui_categories_count);
+    gui_categories_editor_offset = gui_category_adjust_view(gui_categories_editor_offset, gui_categories_editor_cursor, gui_categories_editor_cursor_prev);
 
     force_update = 0;
 
@@ -1241,7 +1223,7 @@ function gui_pages()
 
   gui_page == 2 || gui_categories_reverb_cursor_prev < 0 ? (
     gui_categories_reverb_cursor = gui_category(list_categories_reverb, gui_categories_reverb_cursor, gui_categories_reverb_offset, gui_categories_reverb_cursor);
-    gui_categories_reverb_offset = gui_category_adjust_view(gui_categories_reverb_offset, gui_categories_reverb_cursor, gui_categories_reverb_cursor_prev, gui_categories_count);
+    gui_categories_reverb_offset = gui_category_adjust_view(gui_categories_reverb_offset, gui_categories_reverb_cursor, gui_categories_reverb_cursor_prev);
 
     gui_categories_reverb_cursor != gui_categories_reverb_cursor_prev ? (
       gui_categories_reverb_cursor == 0 ? value = 0x0000;
@@ -1287,7 +1269,7 @@ function gui_pages()
 
   gui_page == 3 || gui_categories_chorus_cursor_prev < 0 ? (
     gui_categories_chorus_cursor = gui_category(list_categories_chorus, gui_categories_chorus_cursor, gui_categories_chorus_offset, gui_categories_chorus_cursor);
-    gui_categories_chorus_offset = gui_category_adjust_view(gui_categories_chorus_offset, gui_categories_chorus_cursor, gui_categories_chorus_cursor_prev, gui_categories_count);
+    gui_categories_chorus_offset = gui_category_adjust_view(gui_categories_chorus_offset, gui_categories_chorus_cursor, gui_categories_chorus_cursor_prev);
 
     gui_categories_chorus_cursor != gui_categories_chorus_cursor_prev ? (
       gui_categories_chorus_cursor == 0 ? value = 0x0000;
@@ -1337,7 +1319,7 @@ function gui_pages()
 
   gui_page == 4 || gui_categories_variation_cursor_prev < 0 ? (
     gui_categories_variation_cursor = gui_category(list_categories_variation, gui_categories_variation_cursor, gui_categories_variation_offset, gui_categories_variation_cursor);
-    gui_categories_variation_offset = gui_category_adjust_view(gui_categories_variation_offset, gui_categories_variation_cursor, gui_categories_variation_cursor_prev, gui_categories_count);
+    gui_categories_variation_offset = gui_category_adjust_view(gui_categories_variation_offset, gui_categories_variation_cursor, gui_categories_variation_cursor_prev);
 
     gui_categories_variation_cursor != gui_categories_variation_cursor_prev ? (
       gui_categories_variation_cursor == 0 ? value = 0x0000;
@@ -1800,11 +1782,7 @@ sprintf(gui_part_caption, "Part: %i", gui_part + 1);
 
 gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 1) & 1 ? gui_part += 1;
 gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 1) & 2 ? gui_part -= 1;
-
-gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 2) ? (
-  mouse_wheel < 0 ? gui_part -= 1;
-  mouse_wheel > 0 ? gui_part += 1;
-);
+gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 2) ? gui_part += sign(mouse_wheel);
 
 gui_part > 15 ? gui_part = 0;
 gui_part < 0 ? gui_part = 15;
@@ -1837,7 +1815,7 @@ gui_part != gui_part_prev ? (
 // current page ---------------------------------------------------------------
 
 gui_categories_visible = floor((gfx_h - gui_menu_height - 20) / gui_list_item_height) - 1;
-gui_categories_visible < 1 ? gui_categories_visible = 1;
+gui_categories_visible = max(gui_categories_visible, 1);
 
 gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
   resend_midi();

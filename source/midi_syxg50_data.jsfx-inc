@@ -115,8 +115,8 @@ list_categories_variation = "
 ";
 
 //-----------------------------------------------------------------------------
-//X (XG) or T (TG300), program:bank  msb:bank lsb, patch name
-//numbers are decimal
+// X (XG) or T (TG300) program : bank msb : bank lsb , voice name
+// numbers are decimal
 
 list_voices_piano = "
 X001:000:000 Grand Piano
@@ -703,9 +703,9 @@ X057:120:000 GM2 SFX
 
 //-----------------------------------------------------------------------------
 
-//#entry number
-//param number (translated to sysex address in code), min, max, default, display table, type (0:normal, 1:bipolar), name
-//all numbers dec
+// #entry number
+// param number | value min | value max | value default | value table | type (0 = normal, 1 = bipolar) | caption
+// numbers are decimal
 
 list_params_reverb = "
 #00 Hall 1
@@ -2921,7 +2921,7 @@ param_value_names_send_return = "
 125|+5.61 dB
 126|+5.88 dB
 127|+6.00 dB
-"; // it's actually +5.95 dB as last value, but that looks ugly, so... meh
+";  // it's actually +5.95 dB as last value, but that looks ugly, so... meh
 
 //-----------------------------------------------------------------------------
 
