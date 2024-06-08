@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------
 
-list_category_voice = "
+list_categories_voice = "
 00:Piano
 01:Chromatic Percussion
 02:Organ
@@ -24,7 +24,7 @@ list_category_voice = "
 
 //-----------------------------------------------------------------------------
 
-list_category_editor = "
+list_categories_editor = "
 00:Common
 01:Modulation
 02:Keyboard
@@ -34,7 +34,7 @@ list_category_editor = "
 
 //-----------------------------------------------------------------------------
 
-list_category_reverb = "
+list_categories_reverb = "
 00:No Effect
 01:Hall 1
 02:Hall 2
@@ -51,7 +51,7 @@ list_category_reverb = "
 
 //-----------------------------------------------------------------------------
 
-list_category_chorus = "
+list_categories_chorus = "
 00:No Effect
 01:Chorus 1
 02:Chorus 2
@@ -68,7 +68,7 @@ list_category_chorus = "
 
 //-----------------------------------------------------------------------------
 
-list_category_variation = "
+list_categories_variation = "
 00:No Effect
 01:Hall 1
 02:Hall 2
@@ -118,7 +118,7 @@ list_category_variation = "
 //X (XG) or T (TG300), program:bank  msb:bank lsb, patch name
 //numbers are decimal
 
-list_contents_piano = "
+list_voices_piano = "
 X001:000:000 Grand Piano
 X001:000:001 Grand Piano KSP
 X001:000:018 Mellow Grand Piano
@@ -162,7 +162,7 @@ X008:000:065 Pierce Clavinet
 
 //-----------------------------------------------------------------------------
 
-list_contents_chromatic_percussion = "
+list_voices_chromatic_percussion = "
 X009:000:000 Celesta
 X010:000:000 Glockenspiel
 X011:000:000 Music Box
@@ -187,7 +187,7 @@ X016:000:097 Santur
 
 //-----------------------------------------------------------------------------
 
-list_contents_organ = "
+list_voices_organ = "
 X017:000:000 Drawbar Organ 1
 X017:000:032 Detuned Drawbar Organ
 X017:000:033 60s Drawbar Organ 1
@@ -228,7 +228,7 @@ X024:000:064 Tango Accordion 2
 
 //-----------------------------------------------------------------------------
 
-list_contents_guitar = "
+list_voices_guitar = "
 X025:000:000 Nylon Guitar 1
 X025:000:016 Nylon Guitar 2
 X025:000:025 Nylon Guitar 3
@@ -262,7 +262,7 @@ X032:000:066 Guitar Harmonics 2
 
 //-----------------------------------------------------------------------------
 
-list_contents_bass = "
+list_voices_bass = "
 X033:000:000 Acoustic Bass
 X033:000:040 Jazz Rhythm
 X033:000:045 Vel XF Upright Bass
@@ -309,7 +309,7 @@ X040:000:064 X Wire Bass
 
 //-----------------------------------------------------------------------------
 
-list_contents_strings = "
+list_voices_strings = "
 X041:000:000 Violin
 X041:000:008 Slow Violin
 X042:000:000 Viola
@@ -326,7 +326,7 @@ X048:000:000 Timpani
 
 //-----------------------------------------------------------------------------
 
-list_contents_ensemble = "
+list_voices_ensemble = "
 X049:000:000 Strings 1
 X049:000:003 Stereo Strings
 X049:000:008 Slow Strings
@@ -365,7 +365,7 @@ X056:000:064 Impact
 
 //-----------------------------------------------------------------------------
 
-list_contents_brass = "
+list_voices_brass = "
 X057:000:000 Trumpet 1
 X057:000:016 Trumpet 2
 X057:000:017 Bright Trumpet
@@ -402,7 +402,7 @@ X064:000:064 Analog Brass 2
 
 //-----------------------------------------------------------------------------
 
-list_contents_reed = "
+list_voices_reed = "
 X065:000:000 Soprano Sax
 X066:000:000 Alto Sax
 X066:000:040 Sax Section
@@ -420,7 +420,7 @@ X072:000:000 Clarinet
 
 //-----------------------------------------------------------------------------
 
-list_contents_pipe = "
+list_voices_pipe = "
 X073:000:000 Piccolo
 X074:000:000 Flute
 X075:000:000 Recorder
@@ -433,7 +433,7 @@ X080:000:000 Ocarina
 
 //-----------------------------------------------------------------------------
 
-list_contents_synth_lead = "
+list_voices_synth_lead = "
 X081:000:000 Square Lead 1
 X081:000:006 Square Lead 2
 X081:000:008 LM Square
@@ -474,7 +474,7 @@ X088:000:065 Soft Whirl
 
 //-----------------------------------------------------------------------------
 
-list_contents_synth_pad = "
+list_voices_synth_pad = "
 X089:000:000 New Age Pad
 X089:000:064 Fantasy
 X090:000:000 Warm Pad
@@ -508,7 +508,7 @@ X096:000:066 Celestial
 
 //-----------------------------------------------------------------------------
 
-list_contents_synth_effects = "
+list_voices_synth_effects = "
 X097:000:000 Rain
 X097:000:045 Clavi Pad
 X097:000:064 Harmo Rain
@@ -569,7 +569,7 @@ X104:000:064 Starz
 
 //-----------------------------------------------------------------------------
 
-list_contents_ethnic = "
+list_voices_ethnic = "
 X105:000:000 Sitar 1
 X105:000:032 Detuned Sitar 1
 X105:000:035 Sitar 2
@@ -595,7 +595,7 @@ X112:000:097 Hichiriki
 
 //-----------------------------------------------------------------------------
 
-list_contents_percussive = "
+list_voices_percussive = "
 X113:000:000 Tinkle Bell
 X113:000:096 Bonang
 X113:000:097 Gender
@@ -623,7 +623,7 @@ X120:000:000 Reverse Cymbal
 
 //-----------------------------------------------------------------------------
 
-list_contents_sound_effects = "
+list_voices_sound_effects = "
 X121:000:000 Fret Noise
 X122:000:000 Breath Noise
 X123:000:000 Seashore
@@ -678,7 +678,7 @@ X116:064:000 Firework
 
 //-----------------------------------------------------------------------------
 
-list_contents_drum_kits = "
+list_voices_drum_kits = "
 X001:127:000 XG Standard 1
 X002:127:000 XG Standard 2
 X009:127:000 XG Room
