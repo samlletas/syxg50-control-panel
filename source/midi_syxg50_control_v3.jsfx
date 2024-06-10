@@ -139,10 +139,6 @@ gui_mouse_rmb = 0;
 
 force_update = 0;
 midi_first_time = 1;
-midi_synth_mode_xg = 0;
-midi_synth_mode_tg300 = 1;
-midi_synth_mode = midi_synth_mode_xg;
-midi_synth_mode_prev = -1;  // send sysex only if changed
 
 sysex_buf = 100000;
 sysex_queue = 100100;
@@ -355,6 +351,10 @@ function set_color(color) (
   gfx_r = ((color >> 16) & 0xff) / 255;
   gfx_g = ((color >> 8 ) & 0xff) / 255;
   gfx_b = ( color        & 0xff) / 255;
+);
+
+function sysex_clear_queue() (
+  sysex_queue_ptr = 0;
 );
 
 function sysex_add_queue(address, value, length) (
@@ -767,7 +767,7 @@ function gui_slider_list(list, cursor, effect_type)
 );
 
 function gui_pages()
-    local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, list_item_text, mode, msb, lsb, value) (
+    local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, list_item_text, msb, lsb, value) (
 
   // voice catalog ------------------------------------------------------------
 
@@ -813,7 +813,7 @@ function gui_pages()
 
       list_ptr_old = list_ptr;
       list_ptr = parse_to_line_end(list_voices, list_ptr);
-      strcpy_substr(list_item_text, list_voices, list_ptr_old + 12, list_ptr - list_ptr_old - 12);
+      strcpy_substr(list_item_text, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
       list_ptr += 1;
 
       list_hover = 0;
@@ -855,28 +855,22 @@ function gui_pages()
       while (list_ptr < list_len) (
         list_ptr_old = list_ptr;
         list_ptr = parse_to_line_end(list_voices, list_ptr);
-        strcpy_substr(list_item_text, list_voices, list_ptr_old + 12, list_ptr - list_ptr_old - 12);
         list_ptr += 1;
 
         voice_count == voice_change ? (
           voice_number[gui_part] = voice_count;
           voice_category[gui_part] = gui_categories_voice_cursor;
 
-          mode = str_getchar(list_voices, list_ptr_old + 0);
+          part_program[gui_part] = parse_number_dec(list_voices, list_ptr_old + 0, 3) - 1;
 
-          mode == 0x58 ? midi_synth_mode = midi_synth_mode_xg;     // X
-          mode == 0x54 ? midi_synth_mode = midi_synth_mode_tg300;  // T
-
-          part_program[gui_part] = parse_number_dec(list_voices, list_ptr_old + 1, 3) - 1;
-
-          msb = parse_number_dec(list_voices, list_ptr_old + 5, 3);
-          lsb = parse_number_dec(list_voices, list_ptr_old + 9, 3);
+          msb = parse_number_dec(list_voices, list_ptr_old + 4, 3);
+          lsb = parse_number_dec(list_voices, list_ptr_old + 8, 3);
 
           part_bank[gui_part] = msb * 256 + lsb;
 
-          sysex_add_queue_multipart(gui_part, 0x01, (part_bank[gui_part] >> 8) & 0x7f, 1);  // bank change MSB
-          sysex_add_queue_multipart(gui_part, 0x02, (part_bank[gui_part] >> 0) & 0x7f, 1);  // bank change LSB
-          sysex_add_queue_multipart(gui_part, 0x03, part_program[gui_part], 1);             // program change
+          sysex_add_queue_multipart(gui_part, 0x01, (part_bank[gui_part] >> 8) & 0x7f, 1);  // bank select MSB
+          sysex_add_queue_multipart(gui_part, 0x02, (part_bank[gui_part] >> 0) & 0x7f, 1);  // bank select LSB
+          sysex_add_queue_multipart(gui_part, 0x03, part_program[gui_part], 1);             // program number
         );
 
         voice_count += 1;
@@ -1587,6 +1581,8 @@ spinlock.lock();
 
 midi_first_time ? (
   midi_first_time = 0;
+  sysex_clear_queue();
+  sysex_add_queue(0x00007e, 0, 1);  // send XG system on
   sysex_add_queue(0x02015a, 1, 1);  // set variation connection to system
   gui_pages();
 
@@ -1594,9 +1590,9 @@ midi_first_time ? (
 
   loop (16,
     // restore voice
-    sysex_add_queue_multipart(var_offset, 0x01, (part_bank[var_offset] >> 8) & 0x7f, 1);  // bank change MSB
-    sysex_add_queue_multipart(var_offset, 0x02, (part_bank[var_offset] >> 0) & 0x7f, 1);  // bank change LSB
-    sysex_add_queue_multipart(var_offset, 0x03, part_program[var_offset], 1);             // program change
+    sysex_add_queue_multipart(var_offset, 0x01, (part_bank[var_offset] >> 8) & 0x7f, 1);  // bank select MSB
+    sysex_add_queue_multipart(var_offset, 0x02, (part_bank[var_offset] >> 0) & 0x7f, 1);  // bank select LSB
+    sysex_add_queue_multipart(var_offset, 0x03, part_program[var_offset], 1);             // program number
 
     // restore voice params
     sysex_add_queue_multipart(var_offset, 0x04, part_rcv_channel[var_offset], 1);
@@ -1689,34 +1685,6 @@ midi_first_time ? (
     sysex_add_queue_multipart(var_offset, 0x14, part_variation_send[var_offset], 1);
 
     var_offset += 1;
-  );
-);
-
-midi_synth_mode != midi_synth_mode_prev ? (
-  midi_synth_mode_prev = midi_synth_mode;
-
-  midi_synth_mode == midi_synth_mode_xg ? (
-    buf = 100000;
-    buf[0x00] = 0x43;
-    buf[0x01] = 0x10;
-    buf[0x02] = 0x4c;
-    buf[0x03] = 0x00;
-    buf[0x04] = 0x00;
-    buf[0x05] = 0x7e;
-    buf[0x06] = 0x00;
-
-    midisend_buf(0, buf, 0x07);
-  );
-
-  midi_synth_mode == midi_synth_mode_tg300 ? (
-    buf = 100000;
-    buf[0x00] = 0x43;
-    buf[0x01] = 0x71;
-    buf[0x02] = 0x7e;
-    buf[0x03] = 0x09;
-    buf[0x04] = 0x01;
-
-    midisend_buf(0, buf, 0x05);
   );
 );
 

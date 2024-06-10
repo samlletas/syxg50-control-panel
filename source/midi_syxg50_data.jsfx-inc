@@ -115,590 +115,590 @@ list_categories_variation = "
 ";
 
 //-----------------------------------------------------------------------------
-// X (XG) or T (TG300) program : bank msb : bank lsb , voice name
+// program : bank-msb : bank-lsb   voice-name
 // numbers are decimal
 
 list_voices_piano = "
-X001:000:000 Grand Piano
-X001:000:001 Grand Piano KSP
-X001:000:018 Mellow Grand Piano
-X001:000:040 Piano Strings
-X001:000:041 Dream
-X002:000:000 Bright Piano
-X002:000:001 Bright Piano KSP
-X003:000:000 Electric Grand Piano
-X003:000:001 Electric Grand Piano KSP
-X003:000:032 Detuned CP80
-X003:000:040 Electric Grand Piano 1
-X003:000:041 Electric Grand Piano 2
-X004:000:000 Honky-Tonk
-X004:000:001 Honky-Tonk KSP
-X005:000:000 Electric Piano 1
-X005:000:001 Electric Piano 1 KSP
-X005:000:018 Mellow Electric Piano 1
-X005:000:032 Chorus Electric Piano 1
-X005:000:040 Hard Electric Piano
-X005:000:045 Vel XF Electric Piano 1
-X005:000:064 60s Electric Piano
-X006:000:000 Electric Piano 2
-X006:000:001 Electric Piano 2 KSP
-X006:000:032 Chorus Electric Piano 2
-X006:000:033 DX Electric Piano Hard
-X006:000:034 DX Legend
-X006:000:040 DX Phase Electric Piano
-X006:000:041 DX+Analog Electric Piano
-X006:000:042 DX Koto Electric Piano
-X006:000:045 Vel XF Electric Piano 2
-X007:000:000 Harpsichord 1
-X007:000:001 Harpsichord 1 KSP
-X007:000:025 Harpsichord 2
-X007:000:035 Harpsichord 3
-X008:000:000 Clavinet
-X008:000:001 Clavinet KSP
-X008:000:027 Clavinet Wah
-X008:000:064 Pulse Clavinet
-X008:000:065 Pierce Clavinet
+001:000:000 Grand Piano
+001:000:001 Grand Piano KSP
+001:000:018 Mellow Grand Piano
+001:000:040 Piano Strings
+001:000:041 Dream
+002:000:000 Bright Piano
+002:000:001 Bright Piano KSP
+003:000:000 Electric Grand Piano
+003:000:001 Electric Grand Piano KSP
+003:000:032 Detuned CP80
+003:000:040 Electric Grand Piano 1
+003:000:041 Electric Grand Piano 2
+004:000:000 Honky-Tonk
+004:000:001 Honky-Tonk KSP
+005:000:000 Electric Piano 1
+005:000:001 Electric Piano 1 KSP
+005:000:018 Mellow Electric Piano 1
+005:000:032 Chorus Electric Piano 1
+005:000:040 Hard Electric Piano
+005:000:045 Vel XF Electric Piano 1
+005:000:064 60s Electric Piano
+006:000:000 Electric Piano 2
+006:000:001 Electric Piano 2 KSP
+006:000:032 Chorus Electric Piano 2
+006:000:033 DX Electric Piano Hard
+006:000:034 DX Legend
+006:000:040 DX Phase Electric Piano
+006:000:041 DX+Analog Electric Piano
+006:000:042 DX Koto Electric Piano
+006:000:045 Vel XF Electric Piano 2
+007:000:000 Harpsichord 1
+007:000:001 Harpsichord 1 KSP
+007:000:025 Harpsichord 2
+007:000:035 Harpsichord 3
+008:000:000 Clavinet
+008:000:001 Clavinet KSP
+008:000:027 Clavinet Wah
+008:000:064 Pulse Clavinet
+008:000:065 Pierce Clavinet
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_chromatic_percussion = "
-X009:000:000 Celesta
-X010:000:000 Glockenspiel
-X011:000:000 Music Box
-X011:000:064 Orgel
-X012:000:000 Vibraphone
-X012:000:001 Vibraphone KSP
-X012:000:045 Hard Vibraphone
-X013:000:000 Marimba
-X013:000:001 Marimba KSP
-X013:000:064 Sine Marimba
-X013:000:097 Balafon
-X013:000:098 Log Drum
-X014:000:000 Xylophone
-X015:000:000 Tubular Bells
-X015:000:096 Church Bells
-X015:000:097 Carillon
-X016:000:000 Dulcimer 1
-X016:000:035 Dulcimer 2
-X016:000:096 Cimbalom
-X016:000:097 Santur
+009:000:000 Celesta
+010:000:000 Glockenspiel
+011:000:000 Music Box
+011:000:064 Orgel
+012:000:000 Vibraphone
+012:000:001 Vibraphone KSP
+012:000:045 Hard Vibraphone
+013:000:000 Marimba
+013:000:001 Marimba KSP
+013:000:064 Sine Marimba
+013:000:097 Balafon
+013:000:098 Log Drum
+014:000:000 Xylophone
+015:000:000 Tubular Bells
+015:000:096 Church Bells
+015:000:097 Carillon
+016:000:000 Dulcimer 1
+016:000:035 Dulcimer 2
+016:000:096 Cimbalom
+016:000:097 Santur
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_organ = "
-X017:000:000 Drawbar Organ 1
-X017:000:032 Detuned Drawbar Organ
-X017:000:033 60s Drawbar Organ 1
-X017:000:034 60s Drawbar Organ 2
-X017:000:035 70s Drawbar Organ 1
-X017:000:036 Drawbar Organ 2
-X017:000:037 60s Drawbar Organ 3
-X017:000:038 Even Bar
-X017:000:040 16\"+2 2/3\"
-X017:000:064 Organ Bass
-X017:000:065 70s Drawbar Organ 2
-X017:000:066 Cheezy Organ
-X017:000:067 Drawbar Organ 3
-X018:000:000 Percussive Organ
-X018:000:024 70s Percussive Organ
-X018:000:032 Detuned Percussive Organ
-X018:000:033 Light Organ
-X018:000:037 Percussive Organ 2
-X019:000:000 Rock Organ
-X019:000:064 Rotary Organ
-X019:000:065 Slow Rotary
-X019:000:066 Fast Rotary
-X020:000:000 Church Organ 1
-X020:000:032 Church Organ 3
-X020:000:035 Church Organ 2
-X020:000:040 Notre Dame
-X020:000:064 Organ Flute
-X020:000:065 Tremolo Organ Flute
-X021:000:000 Reed Organ
-X021:000:040 Puff Organ
-X022:000:000 Accordion
-X022:000:032 Accordion Italian
-X023:000:000 Harmonica 1
-X023:000:032 Harmonica 2
-X024:000:000 Tango Accordion 1
-X024:000:064 Tango Accordion 2
+017:000:000 Drawbar Organ 1
+017:000:032 Detuned Drawbar Organ
+017:000:033 60s Drawbar Organ 1
+017:000:034 60s Drawbar Organ 2
+017:000:035 70s Drawbar Organ 1
+017:000:036 Drawbar Organ 2
+017:000:037 60s Drawbar Organ 3
+017:000:038 Even Bar
+017:000:040 16\"+2 2/3\"
+017:000:064 Organ Bass
+017:000:065 70s Drawbar Organ 2
+017:000:066 Cheezy Organ
+017:000:067 Drawbar Organ 3
+018:000:000 Percussive Organ
+018:000:024 70s Percussive Organ
+018:000:032 Detuned Percussive Organ
+018:000:033 Light Organ
+018:000:037 Percussive Organ 2
+019:000:000 Rock Organ
+019:000:064 Rotary Organ
+019:000:065 Slow Rotary
+019:000:066 Fast Rotary
+020:000:000 Church Organ 1
+020:000:032 Church Organ 3
+020:000:035 Church Organ 2
+020:000:040 Notre Dame
+020:000:064 Organ Flute
+020:000:065 Tremolo Organ Flute
+021:000:000 Reed Organ
+021:000:040 Puff Organ
+022:000:000 Accordion
+022:000:032 Accordion Italian
+023:000:000 Harmonica 1
+023:000:032 Harmonica 2
+024:000:000 Tango Accordion 1
+024:000:064 Tango Accordion 2
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_guitar = "
-X025:000:000 Nylon Guitar 1
-X025:000:016 Nylon Guitar 2
-X025:000:025 Nylon Guitar 3
-X025:000:043 Velocity Guitar Harmonics
-X025:000:096 Ukulele
-X026:000:000 Steel Guitar 1
-X026:000:016 Steel Guitar 2
-X026:000:035 12 String Guitar
-X026:000:040 Nylon & Steel Guitar
-X026:000:041 Steel Guitar With Body
-X026:000:096 Mandolin
-X027:000:000 Jazz Guitar
-X027:000:018 Mellow Guitar
-X027:000:032 Jazz Amp
-X028:000:000 Clean Guitar
-X028:000:032 Chorus Guitar
-X029:000:000 Muted Guitar
-X029:000:040 Funk Guitar 1
-X029:000:041 Muted Steel Guitar
-X029:000:043 Funk Guitar 2
-X029:000:045 Jazz Man
-X030:000:000 Overdriven Guitar
-X030:000:043 Guitar Pinch
-X031:000:000 Distorted Guitar
-X031:000:040 Feedback Guitar 1
-X031:000:041 Feedback Guitar 2
-X032:000:000 Guitar Harmonics 1
-X032:000:065 Guitar Feedback
-X032:000:066 Guitar Harmonics 2
+025:000:000 Nylon Guitar 1
+025:000:016 Nylon Guitar 2
+025:000:025 Nylon Guitar 3
+025:000:043 Velocity Guitar Harmonics
+025:000:096 Ukulele
+026:000:000 Steel Guitar 1
+026:000:016 Steel Guitar 2
+026:000:035 12 String Guitar
+026:000:040 Nylon & Steel Guitar
+026:000:041 Steel Guitar With Body
+026:000:096 Mandolin
+027:000:000 Jazz Guitar
+027:000:018 Mellow Guitar
+027:000:032 Jazz Amp
+028:000:000 Clean Guitar
+028:000:032 Chorus Guitar
+029:000:000 Muted Guitar
+029:000:040 Funk Guitar 1
+029:000:041 Muted Steel Guitar
+029:000:043 Funk Guitar 2
+029:000:045 Jazz Man
+030:000:000 Overdriven Guitar
+030:000:043 Guitar Pinch
+031:000:000 Distorted Guitar
+031:000:040 Feedback Guitar 1
+031:000:041 Feedback Guitar 2
+032:000:000 Guitar Harmonics 1
+032:000:065 Guitar Feedback
+032:000:066 Guitar Harmonics 2
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_bass = "
-X033:000:000 Acoustic Bass
-X033:000:040 Jazz Rhythm
-X033:000:045 Vel XF Upright Bass
-X034:000:000 Finger Bass 1
-X034:000:018 Finger Dark
-X034:000:027 Flange Bass
-X034:000:040 Bass & Distorted Guitar
-X034:000:043 Finger Slap Bass
-X034:000:045 Finger Bass 2
-X034:000:065 Modulated Bass
-X035:000:000 Pick Bass
-X035:000:028 Muted Pick Bass
-X036:000:000 Fretless Bass 1
-X036:000:032 Fretless Bass 2
-X036:000:033 Fretless Bass 3
-X036:000:034 Fretless Bass 4
-X036:000:096 Synth Fretless
-X036:000:097 Smooth Fretless Bass
-X037:000:000 Slap Bass 1
-X037:000:027 Resonant Slap Bass
-X037:000:032 Punch Thumb Bass
-X038:000:000 Slap Bass 2
-X038:000:043 Velocity Slap Bass
-X039:000:000 Synth Bass 1
-X039:000:018 Synth Bass 1 Dark
-X039:000:020 Fast Resonant Bass
-X039:000:024 Acid Bass
-X039:000:035 Clavi Bass
-X039:000:040 Techno Synth Bass
-X039:000:064 Orbiter
-X039:000:065 Square Bass
-X039:000:066 Rubber Bass
-X039:000:096 Hammer
-X040:000:000 Synth Bass 2
-X040:000:006 Mellow Synth Bass
-X040:000:012 Sequenced Bass
-X040:000:018 Click Synth Bass
-X040:000:019 Synth Bass 2 Dark
-X040:000:032 Smooth Synth Bass
-X040:000:040 Modular Bass
-X040:000:041 DX Bass
-X040:000:064 X Wire Bass
+033:000:000 Acoustic Bass
+033:000:040 Jazz Rhythm
+033:000:045 Vel XF Upright Bass
+034:000:000 Finger Bass 1
+034:000:018 Finger Dark
+034:000:027 Flange Bass
+034:000:040 Bass & Distorted Guitar
+034:000:043 Finger Slap Bass
+034:000:045 Finger Bass 2
+034:000:065 Modulated Bass
+035:000:000 Pick Bass
+035:000:028 Muted Pick Bass
+036:000:000 Fretless Bass 1
+036:000:032 Fretless Bass 2
+036:000:033 Fretless Bass 3
+036:000:034 Fretless Bass 4
+036:000:096 Synth Fretless
+036:000:097 Smooth Fretless Bass
+037:000:000 Slap Bass 1
+037:000:027 Resonant Slap Bass
+037:000:032 Punch Thumb Bass
+038:000:000 Slap Bass 2
+038:000:043 Velocity Slap Bass
+039:000:000 Synth Bass 1
+039:000:018 Synth Bass 1 Dark
+039:000:020 Fast Resonant Bass
+039:000:024 Acid Bass
+039:000:035 Clavi Bass
+039:000:040 Techno Synth Bass
+039:000:064 Orbiter
+039:000:065 Square Bass
+039:000:066 Rubber Bass
+039:000:096 Hammer
+040:000:000 Synth Bass 2
+040:000:006 Mellow Synth Bass
+040:000:012 Sequenced Bass
+040:000:018 Click Synth Bass
+040:000:019 Synth Bass 2 Dark
+040:000:032 Smooth Synth Bass
+040:000:040 Modular Bass
+040:000:041 DX Bass
+040:000:064 X Wire Bass
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_strings = "
-X041:000:000 Violin
-X041:000:008 Slow Violin
-X042:000:000 Viola
-X043:000:000 Cello
-X044:000:000 Contrabass
-X045:000:000 Tremolo Strings
-X045:000:008 Slow Tremolo Strings
-X045:000:040 Suspense Strings
-X046:000:000 Pizzicato Strings
-X047:000:000 Harp
-X047:000:040 Yang Chin
-X048:000:000 Timpani
+041:000:000 Violin
+041:000:008 Slow Violin
+042:000:000 Viola
+043:000:000 Cello
+044:000:000 Contrabass
+045:000:000 Tremolo Strings
+045:000:008 Slow Tremolo Strings
+045:000:040 Suspense Strings
+046:000:000 Pizzicato Strings
+047:000:000 Harp
+047:000:040 Yang Chin
+048:000:000 Timpani
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_ensemble = "
-X049:000:000 Strings 1
-X049:000:003 Stereo Strings
-X049:000:008 Slow Strings
-X049:000:024 Arco Strings
-X049:000:035 60s Strings
-X049:000:040 Orchestra 1
-X049:000:041 Orchestra 2
-X049:000:042 Tremolo Orchestra
-X049:000:045 Velocity Strings
-X050:000:000 Strings 2
-X050:000:003 Stereo Slow Strings
-X050:000:008 Legato Strings
-X050:000:040 Warm Strings
-X050:000:041 Kingdom
-X050:000:064 70s Strings
-X050:000:065 String Ensemble 3
-X051:000:000 Synth Strings 1
-X051:000:027 Resonant Strings
-X051:000:064 Synth Strings 4
-X051:000:065 Synth Strings 5
-X052:000:000 Synth Strings 2
-X053:000:000 Choir Aahs 1
-X053:000:003 Stereo Choir
-X053:000:016 Choir Aahs 2
-X053:000:032 Mellow Choir
-X053:000:040 Choir Strings
-X054:000:000 Voice Oohs
-X055:000:000 Synth Voice 1
-X055:000:040 Synth Voice 2
-X055:000:041 Choral
-X055:000:064 Analog Voice
-X056:000:000 Orchestra Hit 1
-X056:000:035 Orchestra Hit 2
-X056:000:064 Impact
+049:000:000 Strings 1
+049:000:003 Stereo Strings
+049:000:008 Slow Strings
+049:000:024 Arco Strings
+049:000:035 60s Strings
+049:000:040 Orchestra 1
+049:000:041 Orchestra 2
+049:000:042 Tremolo Orchestra
+049:000:045 Velocity Strings
+050:000:000 Strings 2
+050:000:003 Stereo Slow Strings
+050:000:008 Legato Strings
+050:000:040 Warm Strings
+050:000:041 Kingdom
+050:000:064 70s Strings
+050:000:065 String Ensemble 3
+051:000:000 Synth Strings 1
+051:000:027 Resonant Strings
+051:000:064 Synth Strings 4
+051:000:065 Synth Strings 5
+052:000:000 Synth Strings 2
+053:000:000 Choir Aahs 1
+053:000:003 Stereo Choir
+053:000:016 Choir Aahs 2
+053:000:032 Mellow Choir
+053:000:040 Choir Strings
+054:000:000 Voice Oohs
+055:000:000 Synth Voice 1
+055:000:040 Synth Voice 2
+055:000:041 Choral
+055:000:064 Analog Voice
+056:000:000 Orchestra Hit 1
+056:000:035 Orchestra Hit 2
+056:000:064 Impact
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_brass = "
-X057:000:000 Trumpet 1
-X057:000:016 Trumpet 2
-X057:000:017 Bright Trumpet
-X057:000:032 Warm Trumpet
-X058:000:000 Trombone 1
-X058:000:018 Trombone 2
-X059:000:000 Tuba 1
-X059:000:016 Tuba 2
-X060:000:000 Muted Trumpet
-X061:000:000 French Horn 1
-X061:000:006 French Horn Solo
-X061:000:032 French Horn 2
-X061:000:037 Horn Orchestra
-X062:000:000 Brass Section 1
-X062:000:035 Trumpet & Trombone
-X062:000:040 Brass Section 2
-X062:000:041 High Brass
-X062:000:042 Mellow Brass
-X063:000:000 Synth Brass 1
-X063:000:012 Quack Brass
-X063:000:020 RezSynBr
-X063:000:024 Poly Brass
-X063:000:027 Synth Brass 3
-X063:000:032 Jump Brass
-X063:000:045 Analog Velocity Brass 1
-X063:000:064 Analog Brass 1
-X064:000:000 Synth Brass 2
-X064:000:018 Soft Brass
-X064:000:040 Synth Brass 4
-X064:000:041 Chorus Brass
-X064:000:045 Analog Velocity Brass 2
-X064:000:064 Analog Brass 2
+057:000:000 Trumpet 1
+057:000:016 Trumpet 2
+057:000:017 Bright Trumpet
+057:000:032 Warm Trumpet
+058:000:000 Trombone 1
+058:000:018 Trombone 2
+059:000:000 Tuba 1
+059:000:016 Tuba 2
+060:000:000 Muted Trumpet
+061:000:000 French Horn 1
+061:000:006 French Horn Solo
+061:000:032 French Horn 2
+061:000:037 Horn Orchestra
+062:000:000 Brass Section 1
+062:000:035 Trumpet & Trombone
+062:000:040 Brass Section 2
+062:000:041 High Brass
+062:000:042 Mellow Brass
+063:000:000 Synth Brass 1
+063:000:012 Quack Brass
+063:000:020 RezSynBr
+063:000:024 Poly Brass
+063:000:027 Synth Brass 3
+063:000:032 Jump Brass
+063:000:045 Analog Velocity Brass 1
+063:000:064 Analog Brass 1
+064:000:000 Synth Brass 2
+064:000:018 Soft Brass
+064:000:040 Synth Brass 4
+064:000:041 Chorus Brass
+064:000:045 Analog Velocity Brass 2
+064:000:064 Analog Brass 2
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_reed = "
-X065:000:000 Soprano Sax
-X066:000:000 Alto Sax
-X066:000:040 Sax Section
-X066:000:043 Hyper Alto Sax
-X067:000:000 Tenor Sax 1
-X067:000:040 Breathy Tenor Sax
-X067:000:041 Soft Tenor Sax
-X067:000:064 Tenor Sax 2
-X068:000:000 Baritone Sax
-X069:000:000 Oboe
-X070:000:000 English Horn
-X071:000:000 Bassoon
-X072:000:000 Clarinet
+065:000:000 Soprano Sax
+066:000:000 Alto Sax
+066:000:040 Sax Section
+066:000:043 Hyper Alto Sax
+067:000:000 Tenor Sax 1
+067:000:040 Breathy Tenor Sax
+067:000:041 Soft Tenor Sax
+067:000:064 Tenor Sax 2
+068:000:000 Baritone Sax
+069:000:000 Oboe
+070:000:000 English Horn
+071:000:000 Bassoon
+072:000:000 Clarinet
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_pipe = "
-X073:000:000 Piccolo
-X074:000:000 Flute
-X075:000:000 Recorder
-X076:000:000 Pan Flute
-X077:000:000 Bottle
-X078:000:000 Shakuhachi
-X079:000:000 Whistle
-X080:000:000 Ocarina
+073:000:000 Piccolo
+074:000:000 Flute
+075:000:000 Recorder
+076:000:000 Pan Flute
+077:000:000 Bottle
+078:000:000 Shakuhachi
+079:000:000 Whistle
+080:000:000 Ocarina
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_synth_lead = "
-X081:000:000 Square Lead 1
-X081:000:006 Square Lead 2
-X081:000:008 LM Square
-X081:000:018 Hollow
-X081:000:019 Shroud
-X081:000:064 Mellow
-X081:000:065 Solo Sine
-X081:000:066 Sine Lead
-X082:000:000 Sawtooth Lead 1
-X082:000:006 Sawtooth Lead 2
-X082:000:008 Thick Sawtooth
-X082:000:018 Dynamic Sawtooth
-X082:000:019 Digital Sawtooth
-X082:000:020 Big Lead
-X082:000:024 Heavy Synth
-X082:000:025 Waspy Synth
-X082:000:040 Pulse Sawtooth
-X082:000:041 Dr. Lead
-X082:000:045 Velocity Lead
-X082:000:096 Sequenced Analog
-X083:000:000 Caliope Lead
-X083:000:065 Pure Pad
-X084:000:000 Chiff Lead
-X084:000:064 Rubby
-X085:000:000 Charang Lead
-X085:000:064 Distorted Lead
-X085:000:065 Wire Lead
-X086:000:000 Voice Lead
-X086:000:024 Synth Aahs
-X086:000:064 Vox Lead
-X087:000:000 Fifths Lead
-X087:000:035 Big Five
-X088:000:000 Bass & Lead
-X088:000:016 Big & Low
-X088:000:064 Fat & Perky
-X088:000:065 Soft Whirl
+081:000:000 Square Lead 1
+081:000:006 Square Lead 2
+081:000:008 LM Square
+081:000:018 Hollow
+081:000:019 Shroud
+081:000:064 Mellow
+081:000:065 Solo Sine
+081:000:066 Sine Lead
+082:000:000 Sawtooth Lead 1
+082:000:006 Sawtooth Lead 2
+082:000:008 Thick Sawtooth
+082:000:018 Dynamic Sawtooth
+082:000:019 Digital Sawtooth
+082:000:020 Big Lead
+082:000:024 Heavy Synth
+082:000:025 Waspy Synth
+082:000:040 Pulse Sawtooth
+082:000:041 Dr. Lead
+082:000:045 Velocity Lead
+082:000:096 Sequenced Analog
+083:000:000 Caliope Lead
+083:000:065 Pure Pad
+084:000:000 Chiff Lead
+084:000:064 Rubby
+085:000:000 Charang Lead
+085:000:064 Distorted Lead
+085:000:065 Wire Lead
+086:000:000 Voice Lead
+086:000:024 Synth Aahs
+086:000:064 Vox Lead
+087:000:000 Fifths Lead
+087:000:035 Big Five
+088:000:000 Bass & Lead
+088:000:016 Big & Low
+088:000:064 Fat & Perky
+088:000:065 Soft Whirl
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_synth_pad = "
-X089:000:000 New Age Pad
-X089:000:064 Fantasy
-X090:000:000 Warm Pad
-X090:000:016 Thick Pad
-X090:000:017 Soft Pad
-X090:000:018 Sine Pad
-X090:000:064 Horn Pad
-X090:000:065 Rotary Strings
-X091:000:000 Polysynth Pad
-X091:000:064 Poly Pad 80
-X091:000:065 Click Pad
-X091:000:066 Analog Pad
-X091:000:067 Square Pad
-X092:000:000 Choir Pad
-X092:000:064 Heaven
-X092:000:066 Itopia
-X092:000:067 CC Pad
-X093:000:000 Bowed Pad
-X093:000:064 Glacier
-X093:000:065 Glass Pad
-X094:000:000 Metal Pad
-X094:000:064 Tine Pad
-X094:000:065 Pan Pad
-X095:000:000 Halo Pad
-X096:000:000 Sweep Pad
-X096:000:020 Shwimmer
-X096:000:027 Converge
-X096:000:064 Polar Pad
-X096:000:066 Celestial
+089:000:000 New Age Pad
+089:000:064 Fantasy
+090:000:000 Warm Pad
+090:000:016 Thick Pad
+090:000:017 Soft Pad
+090:000:018 Sine Pad
+090:000:064 Horn Pad
+090:000:065 Rotary Strings
+091:000:000 Polysynth Pad
+091:000:064 Poly Pad 80
+091:000:065 Click Pad
+091:000:066 Analog Pad
+091:000:067 Square Pad
+092:000:000 Choir Pad
+092:000:064 Heaven
+092:000:066 Itopia
+092:000:067 CC Pad
+093:000:000 Bowed Pad
+093:000:064 Glacier
+093:000:065 Glass Pad
+094:000:000 Metal Pad
+094:000:064 Tine Pad
+094:000:065 Pan Pad
+095:000:000 Halo Pad
+096:000:000 Sweep Pad
+096:000:020 Shwimmer
+096:000:027 Converge
+096:000:064 Polar Pad
+096:000:066 Celestial
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_synth_effects = "
-X097:000:000 Rain
-X097:000:045 Clavi Pad
-X097:000:064 Harmo Rain
-X097:000:065 African Wind
-X097:000:066 Caribbean
-X098:000:000 Soundtrack
-X098:000:027 Prologue
-X098:000:064 Ancestral
-X099:000:000 Crystal
-X099:000:012 Synth Drum Comp
-X099:000:014 Popcorn
-X099:000:018 Tiny Bells
-X099:000:035 Round Glockenspiel
-X099:000:040 Glockenspiel Chimes
-X099:000:041 Clear Bells
-X099:000:042 Chorus Bell
-X099:000:064 Synth Mallet
-X099:000:065 Soft Crystal
-X099:000:066 Loud Glockenspiel
-X099:000:067 Christmas Bells
-X099:000:068 Vibraphone Bells
-X099:000:069 Digital Bells
-X099:000:070 Air Bells
-X099:000:071 Bell Harp
-X099:000:072 Gamelimba
-X100:000:000 Atmosphere
-X100:000:018 Warm Atmosphere
-X100:000:019 Hollow Release
-X100:000:040 Nylon EP
-X100:000:064 Nylon Harp
-X100:000:065 Harp Vox
-X100:000:066 Atmosphere Pad
-X100:000:067 Planet
-X101:000:000 Brightness
-X101:000:064 Fantasy Bells
-X101:000:096 Smokey
-X102:000:000 Goblins
-X102:000:064 Goblins Synth
-X102:000:065 50s Sci-Fi
-X102:000:066 Ring Pad
-X102:000:067 Ritual
-X102:000:068 To Heaven
-X102:000:070 Night
-X102:000:071 Glisten
-X102:000:096 Bell Choir
-X103:000:000 Echoes 1
-X103:000:008 Echoes 2
-X103:000:014 Echo Pan
-X103:000:064 Echo Bell
-X103:000:065 Big Pan
-X103:000:066 Synth Piano
-X103:000:067 Creation
-X103:000:068 Stardust
-X103:000:069 Reso Pan
-X104:000:000 Sci-Fi
-X104:000:064 Starz
+097:000:000 Rain
+097:000:045 Clavi Pad
+097:000:064 Harmo Rain
+097:000:065 African Wind
+097:000:066 Caribbean
+098:000:000 Soundtrack
+098:000:027 Prologue
+098:000:064 Ancestral
+099:000:000 Crystal
+099:000:012 Synth Drum Comp
+099:000:014 Popcorn
+099:000:018 Tiny Bells
+099:000:035 Round Glockenspiel
+099:000:040 Glockenspiel Chimes
+099:000:041 Clear Bells
+099:000:042 Chorus Bell
+099:000:064 Synth Mallet
+099:000:065 Soft Crystal
+099:000:066 Loud Glockenspiel
+099:000:067 Christmas Bells
+099:000:068 Vibraphone Bells
+099:000:069 Digital Bells
+099:000:070 Air Bells
+099:000:071 Bell Harp
+099:000:072 Gamelimba
+100:000:000 Atmosphere
+100:000:018 Warm Atmosphere
+100:000:019 Hollow Release
+100:000:040 Nylon EP
+100:000:064 Nylon Harp
+100:000:065 Harp Vox
+100:000:066 Atmosphere Pad
+100:000:067 Planet
+101:000:000 Brightness
+101:000:064 Fantasy Bells
+101:000:096 Smokey
+102:000:000 Goblins
+102:000:064 Goblins Synth
+102:000:065 50s Sci-Fi
+102:000:066 Ring Pad
+102:000:067 Ritual
+102:000:068 To Heaven
+102:000:070 Night
+102:000:071 Glisten
+102:000:096 Bell Choir
+103:000:000 Echoes 1
+103:000:008 Echoes 2
+103:000:014 Echo Pan
+103:000:064 Echo Bell
+103:000:065 Big Pan
+103:000:066 Synth Piano
+103:000:067 Creation
+103:000:068 Stardust
+103:000:069 Reso Pan
+104:000:000 Sci-Fi
+104:000:064 Starz
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_ethnic = "
-X105:000:000 Sitar 1
-X105:000:032 Detuned Sitar 1
-X105:000:035 Sitar 2
-X105:000:096 Tambra
-X105:000:097 Tamboura
-X106:000:000 Banjo
-X106:000:028 Muted Banjo
-X106:000:096 Rabab
-X106:000:097 Gopichant
-X106:000:098 Oud
-X107:000:000 Shamisen
-X108:000:000 Koto
-X108:000:096 Taisho Koto
-X108:000:097 Kanoon
-X109:000:000 Kalimba
-X110:000:000 Bagpipe
-X111:000:000 Fiddle
-X112:000:000 Shanai 1
-X112:000:064 Shanai 2
-X112:000:096 Pungi
-X112:000:097 Hichiriki
+105:000:000 Sitar 1
+105:000:032 Detuned Sitar 1
+105:000:035 Sitar 2
+105:000:096 Tambra
+105:000:097 Tamboura
+106:000:000 Banjo
+106:000:028 Muted Banjo
+106:000:096 Rabab
+106:000:097 Gopichant
+106:000:098 Oud
+107:000:000 Shamisen
+108:000:000 Koto
+108:000:096 Taisho Koto
+108:000:097 Kanoon
+109:000:000 Kalimba
+110:000:000 Bagpipe
+111:000:000 Fiddle
+112:000:000 Shanai 1
+112:000:064 Shanai 2
+112:000:096 Pungi
+112:000:097 Hichiriki
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_percussive = "
-X113:000:000 Tinkle Bell
-X113:000:096 Bonang
-X113:000:097 Gender
-X113:000:098 Gamelan Gongs
-X113:000:099 Stereo Gamelan Gongs
-X113:000:100 Rama Cymbal
-X113:000:101 Asian Bells
-X114:000:000 Agogo
-X115:000:000 Steel Drums
-X115:000:097 Glass Percussion
-X115:000:098 Thai Bells
-X116:000:000 Woodblock
-X116:000:096 Castanets
-X117:000:000 Taiko Drum
-X117:000:096 Gran Cassa
-X118:000:000 Melodic Tom 1
-X118:000:064 Melodic Tom 2
-X118:000:065 Real Tom
-X118:000:066 Rock Tom
-X119:000:000 Synth Drum
-X119:000:064 Analog Tom
-X119:000:065 Electronic Percussion
-X120:000:000 Reverse Cymbal
+113:000:000 Tinkle Bell
+113:000:096 Bonang
+113:000:097 Gender
+113:000:098 Gamelan Gongs
+113:000:099 Stereo Gamelan Gongs
+113:000:100 Rama Cymbal
+113:000:101 Asian Bells
+114:000:000 Agogo
+115:000:000 Steel Drums
+115:000:097 Glass Percussion
+115:000:098 Thai Bells
+116:000:000 Woodblock
+116:000:096 Castanets
+117:000:000 Taiko Drum
+117:000:096 Gran Cassa
+118:000:000 Melodic Tom 1
+118:000:064 Melodic Tom 2
+118:000:065 Real Tom
+118:000:066 Rock Tom
+119:000:000 Synth Drum
+119:000:064 Analog Tom
+119:000:065 Electronic Percussion
+120:000:000 Reverse Cymbal
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_sound_effects = "
-X121:000:000 Fret Noise
-X122:000:000 Breath Noise
-X123:000:000 Seashore
-X124:000:000 Bird Tweet 1
-X125:000:000 Telephone Ring 1
-X126:000:000 Helicopter
-X127:000:000 Applause
-X128:000:000 Gunshot
-X001:064:000 Cutting Noise 1
-X002:064:000 Cutting Noise 2
-X004:064:000 String Slap
-X017:064:000 Flute Key Click
-X033:064:000 Rain
-X034:064:000 Thunder
-X035:064:000 Wind
-X036:064:000 Stream
-X037:064:000 Bubble
-X038:064:000 Feed
-X049:064:000 Dog
-X050:064:000 Horse
-X051:064:000 Bird Tweet 2
-X055:064:000 Ghost
-X056:064:000 Maou
-X065:064:000 Phone Call
-X066:064:000 Door Squeak
-X067:064:000 Door Slam
-X068:064:000 Scratch 1
-X069:064:000 Scratch 2
-X070:064:000 Wind Chime
-X071:064:000 Telephone Ring 2
-X081:064:000 Car Engine
-X082:064:000 Car Stop
-X083:064:000 Car Pass
-X084:064:000 Car Crash
-X085:064:000 Siren
-X086:064:000 Train
-X087:064:000 Jet Plane
-X088:064:000 Starship
-X089:064:000 Burst
-X090:064:000 Coaster
-X091:064:000 Submarine
-X097:064:000 Laughing
-X098:064:000 Scream
-X099:064:000 Punch
-X100:064:000 Heart
-X101:064:000 Footsteps
-X113:064:000 Machine Gun
-X114:064:000 Laser Gun
-X115:064:000 Explosion
-X116:064:000 Firework
+121:000:000 Fret Noise
+122:000:000 Breath Noise
+123:000:000 Seashore
+124:000:000 Bird Tweet 1
+125:000:000 Telephone Ring 1
+126:000:000 Helicopter
+127:000:000 Applause
+128:000:000 Gunshot
+001:064:000 Cutting Noise 1
+002:064:000 Cutting Noise 2
+004:064:000 String Slap
+017:064:000 Flute Key Click
+033:064:000 Rain
+034:064:000 Thunder
+035:064:000 Wind
+036:064:000 Stream
+037:064:000 Bubble
+038:064:000 Feed
+049:064:000 Dog
+050:064:000 Horse
+051:064:000 Bird Tweet 2
+055:064:000 Ghost
+056:064:000 Maou
+065:064:000 Phone Call
+066:064:000 Door Squeak
+067:064:000 Door Slam
+068:064:000 Scratch 1
+069:064:000 Scratch 2
+070:064:000 Wind Chime
+071:064:000 Telephone Ring 2
+081:064:000 Car Engine
+082:064:000 Car Stop
+083:064:000 Car Pass
+084:064:000 Car Crash
+085:064:000 Siren
+086:064:000 Train
+087:064:000 Jet Plane
+088:064:000 Starship
+089:064:000 Burst
+090:064:000 Coaster
+091:064:000 Submarine
+097:064:000 Laughing
+098:064:000 Scream
+099:064:000 Punch
+100:064:000 Heart
+101:064:000 Footsteps
+113:064:000 Machine Gun
+114:064:000 Laser Gun
+115:064:000 Explosion
+116:064:000 Firework
 ";
 
 //-----------------------------------------------------------------------------
 
 list_voices_drum_kits = "
-X001:127:000 XG Standard 1
-X002:127:000 XG Standard 2
-X009:127:000 XG Room
-X017:127:000 XG Rock
-X025:127:000 XG Electro
-X026:127:000 XG Analog
-X033:127:000 XG Jazz
-X041:127:000 XG Brush
-X049:127:000 XG Symphony
-X001:126:000 XG SFX 1
-X002:126:000 XG SFX 2
-X001:120:000 GM2 Standard
-X009:120:000 GM2 Room
-X017:120:000 GM2 Power
-X025:120:000 GM2 Electric
-X026:120:000 GM2 Analog
-X033:120:000 GM2 Jazz
-X041:120:000 GM2 Brush
-X049:120:000 GM2 Orchestra
-X057:120:000 GM2 SFX
+001:127:000 XG Standard 1
+002:127:000 XG Standard 2
+009:127:000 XG Room
+017:127:000 XG Rock
+025:127:000 XG Electro
+026:127:000 XG Analog
+033:127:000 XG Jazz
+041:127:000 XG Brush
+049:127:000 XG Symphony
+001:126:000 XG SFX 1
+002:126:000 XG SFX 2
+001:120:000 GM2 Standard
+009:120:000 GM2 Room
+017:120:000 GM2 Power
+025:120:000 GM2 Electric
+026:120:000 GM2 Analog
+033:120:000 GM2 Jazz
+041:120:000 GM2 Brush
+049:120:000 GM2 Orchestra
+057:120:000 GM2 SFX
 ";
 
 //-----------------------------------------------------------------------------
