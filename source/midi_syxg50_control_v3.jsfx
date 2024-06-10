@@ -137,7 +137,7 @@ gui_categories_variation_cursor_prev = -1;
 gui_mouse_lmb = 0;
 gui_mouse_rmb = 0;
 
-force_update = 0;
+midi_force_update = 0;
 midi_first_time = 1;
 
 sysex_buf = 100000;
@@ -154,19 +154,19 @@ part_reverb_send = 200400;
 part_chorus_send = 200500;
 part_variation_send = 200600;
 
-var_offset = 0;
+idx = 0;
 
 loop (16,
-  part_program[var_offset] = 0;
-  part_bank[var_offset] = 0;
-  voice_number[var_offset] = 0;
-  voice_category[var_offset] = 0;
+  part_program[idx] = 0;
+  part_bank[idx] = 0;
+  voice_number[idx] = 0;
+  voice_category[idx] = 0;
 
-  part_reverb_send[var_offset] = 40;
-  part_chorus_send[var_offset] = 0;
-  part_variation_send[var_offset] = 0;
+  part_reverb_send[idx] = 40;
+  part_chorus_send[idx] = 0;
+  part_variation_send[idx] = 0;
 
-  var_offset += 1;
+  idx += 1;
 );
 
 effect_chorus_send_reverb = -1;
@@ -182,11 +182,11 @@ effect_chorus_pan = -1;
 effect_variation_pan = -1;
 
 effect_params = 250000;
-var_offset = 0;
+idx = 0;
 
 loop (42 * 16 * 3,
-  effect_params[var_offset] = -1;
-  var_offset += 1;
+  effect_params[idx] = -1;
+  idx += 1;
 );
 
 part_rcv_channel = 300000;
@@ -265,86 +265,86 @@ part_recv_sost = 307700;
 part_recv_soft = 307800;
 part_recv_bs = 307900;
 
-var_offset = 0;
+idx = 0;
 
 loop (16,
-  part_rcv_channel[var_offset] = var_offset;
-  part_mode[var_offset] = 1;
-  part_volume[var_offset] = 100;
-  part_pan[var_offset] = 64;
-  part_transpose[var_offset] = 64;
-  part_detune[var_offset] = 2048;
-  part_filter_cutoff[var_offset] = 64;
-  part_filter_resonance[var_offset] = 64;
-  part_eg_attack[var_offset] = 64;
-  part_eg_decay[var_offset] = 64;
-  part_eg_release[var_offset] = 64;
-  part_portamento_switch[var_offset] = 0;
-  part_portamento_time[var_offset] = 0;
-  part_vibrato_rate[var_offset] = 64;
-  part_vibrato_depth[var_offset] = 64;
-  part_vibrato_delay[var_offset] = 64;
-  part_bend_pitch_control[var_offset] = 66;
-  part_bend_filter_control[var_offset] = 64;
-  part_bend_amplitude_control[var_offset] = 64;
-  part_bend_lfo_pmod_depth[var_offset] = 0;
-  part_bend_lfo_fmod_depth[var_offset] = 0;
-  part_bend_lfo_amod_depth[var_offset] = 0;
-  part_mw_pitch_control[var_offset] = 64;
-  part_mw_filter_control[var_offset] = 64;
-  part_mw_amplitude_control[var_offset] = 64;
-  part_mw_lfo_pmod_depth[var_offset] = 10;
-  part_mw_lfo_fmod_depth[var_offset] = 0;
-  part_mw_lfo_amod_depth[var_offset] = 0;
-  part_dry_level[var_offset] = 127;
-  part_note_limit_low[var_offset] = 0;
-  part_note_limit_high[var_offset] = 127;
-  part_velocity_limit_low[var_offset] = 1;
-  part_velocity_limit_high[var_offset] = 127;
-  part_velocity_sense_depth[var_offset] = 64;
-  part_velocity_sense_offset[var_offset] = 64;
-  part_same_note_assign[var_offset] = 1;
-  part_at_pitch_control[var_offset] = 64;
-  part_at_filter_control[var_offset] = 64;
-  part_at_amp_control[var_offset] = 64;
-  part_at_lfo_pmod_depth[var_offset] = 0;
-  part_at_lfo_fmod_depth[var_offset] = 0;
-  part_at_lfo_amod_depth[var_offset] = 0;
-  part_pitch_eg_init_level[var_offset] = 64;
-  part_pitch_eg_attack[var_offset] = 64;
-  part_pitch_eg_release_level[var_offset] = 64;
-  part_pitch_eg_release[var_offset] = 64;
-  part_scale_c[var_offset] = 64;
-  part_scale_cs[var_offset] = 64;
-  part_scale_d[var_offset] = 64;
-  part_scale_ds[var_offset] = 64;
-  part_scale_e[var_offset] = 64;
-  part_scale_f[var_offset] = 64;
-  part_scale_fs[var_offset] = 64;
-  part_scale_g[var_offset] = 64;
-  part_scale_gs[var_offset] = 64;
-  part_scale_a[var_offset] = 64;
-  part_scale_as[var_offset] = 64;
-  part_scale_b[var_offset] = 64;
-  part_recv_pb[var_offset] = 1;
-  part_recv_cat[var_offset] = 1;
-  part_recv_pc[var_offset] = 1;
-  part_recv_cc[var_offset] = 1;
-  part_recv_pat[var_offset] = 1;
-  part_recv_note[var_offset] = 1;
-  part_recv_rpn[var_offset] = 1;
-  part_recv_nrpn[var_offset] = 1;
-  part_recv_mod[var_offset] = 1;
-  part_recv_vol[var_offset] = 1;
-  part_recv_pan[var_offset] = 1;
-  part_recv_exp[var_offset] = 1;
-  part_recv_sus[var_offset] = 1;
-  part_recv_port[var_offset] = 1;
-  part_recv_sost[var_offset] = 1;
-  part_recv_soft[var_offset] = 1;
-  part_recv_bs[var_offset] = 1;
+  part_rcv_channel[idx] = idx;
+  part_mode[idx] = 1;
+  part_volume[idx] = 100;
+  part_pan[idx] = 64;
+  part_transpose[idx] = 64;
+  part_detune[idx] = 2048;
+  part_filter_cutoff[idx] = 64;
+  part_filter_resonance[idx] = 64;
+  part_eg_attack[idx] = 64;
+  part_eg_decay[idx] = 64;
+  part_eg_release[idx] = 64;
+  part_portamento_switch[idx] = 0;
+  part_portamento_time[idx] = 0;
+  part_vibrato_rate[idx] = 64;
+  part_vibrato_depth[idx] = 64;
+  part_vibrato_delay[idx] = 64;
+  part_bend_pitch_control[idx] = 66;
+  part_bend_filter_control[idx] = 64;
+  part_bend_amplitude_control[idx] = 64;
+  part_bend_lfo_pmod_depth[idx] = 0;
+  part_bend_lfo_fmod_depth[idx] = 0;
+  part_bend_lfo_amod_depth[idx] = 0;
+  part_mw_pitch_control[idx] = 64;
+  part_mw_filter_control[idx] = 64;
+  part_mw_amplitude_control[idx] = 64;
+  part_mw_lfo_pmod_depth[idx] = 10;
+  part_mw_lfo_fmod_depth[idx] = 0;
+  part_mw_lfo_amod_depth[idx] = 0;
+  part_dry_level[idx] = 127;
+  part_note_limit_low[idx] = 0;
+  part_note_limit_high[idx] = 127;
+  part_velocity_limit_low[idx] = 1;
+  part_velocity_limit_high[idx] = 127;
+  part_velocity_sense_depth[idx] = 64;
+  part_velocity_sense_offset[idx] = 64;
+  part_same_note_assign[idx] = 1;
+  part_at_pitch_control[idx] = 64;
+  part_at_filter_control[idx] = 64;
+  part_at_amp_control[idx] = 64;
+  part_at_lfo_pmod_depth[idx] = 0;
+  part_at_lfo_fmod_depth[idx] = 0;
+  part_at_lfo_amod_depth[idx] = 0;
+  part_pitch_eg_init_level[idx] = 64;
+  part_pitch_eg_attack[idx] = 64;
+  part_pitch_eg_release_level[idx] = 64;
+  part_pitch_eg_release[idx] = 64;
+  part_scale_c[idx] = 64;
+  part_scale_cs[idx] = 64;
+  part_scale_d[idx] = 64;
+  part_scale_ds[idx] = 64;
+  part_scale_e[idx] = 64;
+  part_scale_f[idx] = 64;
+  part_scale_fs[idx] = 64;
+  part_scale_g[idx] = 64;
+  part_scale_gs[idx] = 64;
+  part_scale_a[idx] = 64;
+  part_scale_as[idx] = 64;
+  part_scale_b[idx] = 64;
+  part_recv_pb[idx] = 1;
+  part_recv_cat[idx] = 1;
+  part_recv_pc[idx] = 1;
+  part_recv_cc[idx] = 1;
+  part_recv_pat[idx] = 1;
+  part_recv_note[idx] = 1;
+  part_recv_rpn[idx] = 1;
+  part_recv_nrpn[idx] = 1;
+  part_recv_mod[idx] = 1;
+  part_recv_vol[idx] = 1;
+  part_recv_pan[idx] = 1;
+  part_recv_exp[idx] = 1;
+  part_recv_sus[idx] = 1;
+  part_recv_port[idx] = 1;
+  part_recv_sost[idx] = 1;
+  part_recv_soft[idx] = 1;
+  part_recv_bs[idx] = 1;
 
-  var_offset += 1;
+  idx += 1;
 );
 
 function set_color(color) (
@@ -470,7 +470,7 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
     value = min(max(value, value_min), value_max);
   );
 
-  gui_slider_change = force_update | (value != value_old);
+  gui_slider_change = midi_force_update | (value != value_old);
 
   value == value_def ? set_color(color_fg_list);
   value != value_def ? set_color(color_bg_changed);
@@ -768,6 +768,7 @@ function gui_slider_list(list, cursor, effect_type)
 
 function gui_pages()
     local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, list_item_text, msb, lsb, value) (
+  midi_force_update = 0;
 
   // voice catalog ------------------------------------------------------------
 
@@ -885,8 +886,6 @@ function gui_pages()
   gui_page == 1 ? (
     gui_categories_editor_cursor = gui_category(list_categories_editor, gui_categories_editor_cursor, gui_categories_editor_offset, gui_categories_editor_cursor);
     gui_categories_editor_offset = gui_category_adjust_view(gui_categories_editor_offset, gui_categories_editor_cursor, gui_categories_editor_cursor_prev);
-
-    force_update = 0;
 
     gui_slider_x = gui_categories_width + 190;
     gui_slider_y = gui_menu_height + 20;
@@ -1234,9 +1233,9 @@ function gui_pages()
       gui_categories_reverb_cursor == 11 ? value = 0x1300;
 
       sysex_add_queue(0x020100, value, 2);
-      force_update = 1;
+      midi_force_update = 1;
     ) : (
-      force_update = 0;
+      midi_force_update = 0;
     );
 
     gui_categories_reverb_cursor > 0 ? (
@@ -1280,9 +1279,9 @@ function gui_pages()
       gui_categories_chorus_cursor == 11 ? value = 0x4308;
 
       sysex_add_queue(0x020120, value, 2);
-      force_update = 1;
+      midi_force_update = 1;
     ) : (
-      force_update = 0;
+      midi_force_update = 0;
     );
 
     gui_categories_chorus_cursor > 0 ? (
@@ -1361,9 +1360,9 @@ function gui_pages()
       gui_categories_variation_cursor == 42 ? value = 0x4e00;
 
       sysex_add_queue(0x020140, value, 2);
-      force_update = 1;
+      midi_force_update = 1;
     ) : (
-      force_update = 0;
+      midi_force_update = 0;
     );
 
     gui_categories_variation_cursor > 0 ? (
@@ -1415,19 +1414,19 @@ spinlock.lock();
 file_var(0, gui_page);
 file_var(0, gui_part);
 
-var_offset = 0;
+idx = 0;
 
 loop (16,
-  file_var(0, part_program[var_offset]);
-  file_var(0, part_bank[var_offset]);
-  file_var(0, voice_number[var_offset]);
-  file_var(0, voice_category[var_offset]);
+  file_var(0, part_program[idx]);
+  file_var(0, part_bank[idx]);
+  file_var(0, voice_number[idx]);
+  file_var(0, voice_category[idx]);
 
-  file_var(0, part_reverb_send[var_offset]);
-  file_var(0, part_chorus_send[var_offset]);
-  file_var(0, part_variation_send[var_offset]);
+  file_var(0, part_reverb_send[idx]);
+  file_var(0, part_chorus_send[idx]);
+  file_var(0, part_variation_send[idx]);
 
-  var_offset += 1;
+  idx += 1;
 );
 
 file_var(0, gui_categories_voice_cursor);
@@ -1448,121 +1447,121 @@ file_var(0, effect_reverb_pan);
 file_var(0, effect_chorus_pan);
 file_var(0, effect_variation_pan);
 
-var_offset = 0;
+idx = 0;
 
 loop (42 * 16 * 3,
-  file_var(0, effect_params[var_offset]);
-  var_offset += 1;
+  file_var(0, effect_params[idx]);
+  idx += 1;
 );
 
-var_offset = 0;
+idx = 0;
 
 loop (16,
-  file_var(0, part_rcv_channel[var_offset]);
-  file_var(0, part_mode[var_offset]);
+  file_var(0, part_rcv_channel[idx]);
+  file_var(0, part_mode[idx]);
 
-  file_var(0, part_volume[var_offset]);
-  file_var(0, part_pan[var_offset]);
-  file_var(0, part_transpose[var_offset]);
-  file_var(0, part_detune[var_offset]);
+  file_var(0, part_volume[idx]);
+  file_var(0, part_pan[idx]);
+  file_var(0, part_transpose[idx]);
+  file_var(0, part_detune[idx]);
 
-  file_var(0, part_filter_cutoff[var_offset]);
-  file_var(0, part_filter_resonance[var_offset]);
+  file_var(0, part_filter_cutoff[idx]);
+  file_var(0, part_filter_resonance[idx]);
 
-  file_var(0, part_eg_attack[var_offset]);
-  file_var(0, part_eg_decay[var_offset]);
-  file_var(0, part_eg_release[var_offset]);
+  file_var(0, part_eg_attack[idx]);
+  file_var(0, part_eg_decay[idx]);
+  file_var(0, part_eg_release[idx]);
 
-  file_var(0, part_portamento_switch[var_offset]);
-  file_var(0, part_portamento_time[var_offset]);
+  file_var(0, part_portamento_switch[idx]);
+  file_var(0, part_portamento_time[idx]);
 
-  file_var(0, part_vibrato_rate[var_offset]);
-  file_var(0, part_vibrato_depth[var_offset]);
-  file_var(0, part_vibrato_delay[var_offset]);
+  file_var(0, part_vibrato_rate[idx]);
+  file_var(0, part_vibrato_depth[idx]);
+  file_var(0, part_vibrato_delay[idx]);
 
-  file_var(0, part_bend_pitch_control[var_offset]);
+  file_var(0, part_bend_pitch_control[idx]);
 
-  file_var(0, part_mw_lfo_pmod_depth[var_offset]);
+  file_var(0, part_mw_lfo_pmod_depth[idx]);
 
-  file_var(0, part_dry_level[var_offset]);
+  file_var(0, part_dry_level[idx]);
 
-  var_offset += 1;
+  idx += 1;
 );
 
-var_offset = 0;
+idx = 0;
 
 loop (16,
-  file_var(0, part_bend_filter_control[var_offset]);
-  file_var(0, part_bend_amplitude_control[var_offset]);
-  file_var(0, part_bend_lfo_pmod_depth[var_offset]);
-  file_var(0, part_bend_lfo_fmod_depth[var_offset]);
-  file_var(0, part_bend_lfo_amod_depth[var_offset]);
+  file_var(0, part_bend_filter_control[idx]);
+  file_var(0, part_bend_amplitude_control[idx]);
+  file_var(0, part_bend_lfo_pmod_depth[idx]);
+  file_var(0, part_bend_lfo_fmod_depth[idx]);
+  file_var(0, part_bend_lfo_amod_depth[idx]);
 
-  file_var(0, part_mw_pitch_control[var_offset]);
-  file_var(0, part_mw_filter_control[var_offset]);
-  file_var(0, part_mw_amplitude_control[var_offset]);
-  file_var(0, part_mw_lfo_fmod_depth[var_offset]);
-  file_var(0, part_mw_lfo_amod_depth[var_offset]);
+  file_var(0, part_mw_pitch_control[idx]);
+  file_var(0, part_mw_filter_control[idx]);
+  file_var(0, part_mw_amplitude_control[idx]);
+  file_var(0, part_mw_lfo_fmod_depth[idx]);
+  file_var(0, part_mw_lfo_amod_depth[idx]);
 
-  file_var(0, part_note_limit_low[var_offset]);
-  file_var(0, part_note_limit_high[var_offset]);
-  file_var(0, part_velocity_limit_low[var_offset]);
-  file_var(0, part_velocity_limit_high[var_offset]);
-  file_var(0, part_velocity_sense_depth[var_offset]);
-  file_var(0, part_velocity_sense_offset[var_offset]);
+  file_var(0, part_note_limit_low[idx]);
+  file_var(0, part_note_limit_high[idx]);
+  file_var(0, part_velocity_limit_low[idx]);
+  file_var(0, part_velocity_limit_high[idx]);
+  file_var(0, part_velocity_sense_depth[idx]);
+  file_var(0, part_velocity_sense_offset[idx]);
 
-  var_offset += 1;
+  idx += 1;
 );
 
-var_offset = 0;
+idx = 0;
 
 loop (16,
-  file_var(0, part_same_note_assign[var_offset]);
+  file_var(0, part_same_note_assign[idx]);
 
-  file_var(0, part_pitch_eg_init_level[var_offset]);
-  file_var(0, part_pitch_eg_attack[var_offset]);
-  file_var(0, part_pitch_eg_release_level[var_offset]);
-  file_var(0, part_pitch_eg_release[var_offset]);
+  file_var(0, part_pitch_eg_init_level[idx]);
+  file_var(0, part_pitch_eg_attack[idx]);
+  file_var(0, part_pitch_eg_release_level[idx]);
+  file_var(0, part_pitch_eg_release[idx]);
 
-  file_var(0, part_at_pitch_control[var_offset]);
-  file_var(0, part_at_filter_control[var_offset]);
-  file_var(0, part_at_amp_control[var_offset]);
-  file_var(0, part_at_lfo_pmod_depth[var_offset]);
-  file_var(0, part_at_lfo_fmod_depth[var_offset]);
-  file_var(0, part_at_lfo_amod_depth[var_offset]);
+  file_var(0, part_at_pitch_control[idx]);
+  file_var(0, part_at_filter_control[idx]);
+  file_var(0, part_at_amp_control[idx]);
+  file_var(0, part_at_lfo_pmod_depth[idx]);
+  file_var(0, part_at_lfo_fmod_depth[idx]);
+  file_var(0, part_at_lfo_amod_depth[idx]);
 
-  file_var(0, part_scale_c[var_offset]);
-  file_var(0, part_scale_cs[var_offset]);
-  file_var(0, part_scale_d[var_offset]);
-  file_var(0, part_scale_ds[var_offset]);
-  file_var(0, part_scale_e[var_offset]);
-  file_var(0, part_scale_f[var_offset]);
-  file_var(0, part_scale_fs[var_offset]);
-  file_var(0, part_scale_g[var_offset]);
-  file_var(0, part_scale_gs[var_offset]);
-  file_var(0, part_scale_a[var_offset]);
-  file_var(0, part_scale_as[var_offset]);
-  file_var(0, part_scale_b[var_offset]);
+  file_var(0, part_scale_c[idx]);
+  file_var(0, part_scale_cs[idx]);
+  file_var(0, part_scale_d[idx]);
+  file_var(0, part_scale_ds[idx]);
+  file_var(0, part_scale_e[idx]);
+  file_var(0, part_scale_f[idx]);
+  file_var(0, part_scale_fs[idx]);
+  file_var(0, part_scale_g[idx]);
+  file_var(0, part_scale_gs[idx]);
+  file_var(0, part_scale_a[idx]);
+  file_var(0, part_scale_as[idx]);
+  file_var(0, part_scale_b[idx]);
 
-  file_var(0, part_recv_pb[var_offset]);
-  file_var(0, part_recv_cat[var_offset]);
-  file_var(0, part_recv_pc[var_offset]);
-  file_var(0, part_recv_cc[var_offset]);
-  file_var(0, part_recv_pat[var_offset]);
-  file_var(0, part_recv_note[var_offset]);
-  file_var(0, part_recv_rpn[var_offset]);
-  file_var(0, part_recv_nrpn[var_offset]);
-  file_var(0, part_recv_mod[var_offset]);
-  file_var(0, part_recv_vol[var_offset]);
-  file_var(0, part_recv_pan[var_offset]);
-  file_var(0, part_recv_exp[var_offset]);
-  file_var(0, part_recv_sus[var_offset]);
-  file_var(0, part_recv_port[var_offset]);
-  file_var(0, part_recv_sost[var_offset]);
-  file_var(0, part_recv_soft[var_offset]);
-  file_var(0, part_recv_bs[var_offset]);
+  file_var(0, part_recv_pb[idx]);
+  file_var(0, part_recv_cat[idx]);
+  file_var(0, part_recv_pc[idx]);
+  file_var(0, part_recv_cc[idx]);
+  file_var(0, part_recv_pat[idx]);
+  file_var(0, part_recv_note[idx]);
+  file_var(0, part_recv_rpn[idx]);
+  file_var(0, part_recv_nrpn[idx]);
+  file_var(0, part_recv_mod[idx]);
+  file_var(0, part_recv_vol[idx]);
+  file_var(0, part_recv_pan[idx]);
+  file_var(0, part_recv_exp[idx]);
+  file_var(0, part_recv_sus[idx]);
+  file_var(0, part_recv_port[idx]);
+  file_var(0, part_recv_sost[idx]);
+  file_var(0, part_recv_soft[idx]);
+  file_var(0, part_recv_bs[idx]);
 
-  var_offset += 1;
+  idx += 1;
 );
 
 // force update after data was loaded
@@ -1586,105 +1585,105 @@ midi_first_time ? (
   sysex_add_queue(0x02015a, 1, 1);  // set variation connection to system
   gui_pages();
 
-  var_offset = 0;
+  idx = 0;
 
   loop (16,
     // restore voice
-    sysex_add_queue_multipart(var_offset, 0x01, (part_bank[var_offset] >> 8) & 0x7f, 1);  // bank select MSB
-    sysex_add_queue_multipart(var_offset, 0x02, (part_bank[var_offset] >> 0) & 0x7f, 1);  // bank select LSB
-    sysex_add_queue_multipart(var_offset, 0x03, part_program[var_offset], 1);             // program number
+    sysex_add_queue_multipart(idx, 0x01, (part_bank[idx] >> 8) & 0x7f, 1);  // bank select MSB
+    sysex_add_queue_multipart(idx, 0x02, (part_bank[idx] >> 0) & 0x7f, 1);  // bank select LSB
+    sysex_add_queue_multipart(idx, 0x03, part_program[idx], 1);             // program number
 
     // restore voice params
-    sysex_add_queue_multipart(var_offset, 0x04, part_rcv_channel[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x05, part_mode[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x0b, part_volume[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x0e, part_pan[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x08, part_transpose[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x09, part_detune[var_offset], 2);
-    sysex_add_queue_multipart(var_offset, 0x18, part_filter_cutoff[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x19, part_filter_resonance[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x1a, part_eg_attack[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x1b, part_eg_decay[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x1c, part_eg_release[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x69, part_pitch_eg_init_level[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x6a, part_pitch_eg_attack[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x6b, part_pitch_eg_release_level[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x6c, part_pitch_eg_release[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x67, part_portamento_switch[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x68, part_portamento_time[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x15, part_vibrato_rate[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x16, part_vibrato_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x17, part_vibrato_delay[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x23, part_bend_pitch_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x24, part_bend_filter_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x25, part_bend_amplitude_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x26, part_bend_lfo_pmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x27, part_bend_lfo_fmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x28, part_bend_lfo_amod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x1d, part_mw_pitch_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x1e, part_mw_filter_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x1f, part_mw_amplitude_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x20, part_mw_lfo_pmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x21, part_mw_lfo_fmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x22, part_mw_lfo_amod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x4d, part_at_pitch_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x53, part_at_pitch_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x4e, part_at_filter_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x54, part_at_filter_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x4f, part_at_amp_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x55, part_at_amp_control[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x50, part_at_lfo_pmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x56, part_at_lfo_pmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x51, part_at_lfo_fmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x57, part_at_lfo_fmod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x52, part_at_lfo_amod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x58, part_at_lfo_amod_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x11, part_dry_level[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x0f, part_note_limit_low[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x10, part_note_limit_high[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x6d, part_velocity_limit_low[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x6e, part_velocity_limit_high[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x0c, part_velocity_sense_depth[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x0d, part_velocity_sense_offset[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x06, part_same_note_assign[var_offset], 1);
+    sysex_add_queue_multipart(idx, 0x04, part_rcv_channel[idx], 1);
+    sysex_add_queue_multipart(idx, 0x05, part_mode[idx], 1);
+    sysex_add_queue_multipart(idx, 0x0b, part_volume[idx], 1);
+    sysex_add_queue_multipart(idx, 0x0e, part_pan[idx], 1);
+    sysex_add_queue_multipart(idx, 0x08, part_transpose[idx], 1);
+    sysex_add_queue_multipart(idx, 0x09, part_detune[idx], 2);
+    sysex_add_queue_multipart(idx, 0x18, part_filter_cutoff[idx], 1);
+    sysex_add_queue_multipart(idx, 0x19, part_filter_resonance[idx], 1);
+    sysex_add_queue_multipart(idx, 0x1a, part_eg_attack[idx], 1);
+    sysex_add_queue_multipart(idx, 0x1b, part_eg_decay[idx], 1);
+    sysex_add_queue_multipart(idx, 0x1c, part_eg_release[idx], 1);
+    sysex_add_queue_multipart(idx, 0x69, part_pitch_eg_init_level[idx], 1);
+    sysex_add_queue_multipart(idx, 0x6a, part_pitch_eg_attack[idx], 1);
+    sysex_add_queue_multipart(idx, 0x6b, part_pitch_eg_release_level[idx], 1);
+    sysex_add_queue_multipart(idx, 0x6c, part_pitch_eg_release[idx], 1);
+    sysex_add_queue_multipart(idx, 0x67, part_portamento_switch[idx], 1);
+    sysex_add_queue_multipart(idx, 0x68, part_portamento_time[idx], 1);
+    sysex_add_queue_multipart(idx, 0x15, part_vibrato_rate[idx], 1);
+    sysex_add_queue_multipart(idx, 0x16, part_vibrato_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x17, part_vibrato_delay[idx], 1);
+    sysex_add_queue_multipart(idx, 0x23, part_bend_pitch_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x24, part_bend_filter_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x25, part_bend_amplitude_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x26, part_bend_lfo_pmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x27, part_bend_lfo_fmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x28, part_bend_lfo_amod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x1d, part_mw_pitch_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x1e, part_mw_filter_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x1f, part_mw_amplitude_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x20, part_mw_lfo_pmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x21, part_mw_lfo_fmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x22, part_mw_lfo_amod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4d, part_at_pitch_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x53, part_at_pitch_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4e, part_at_filter_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x54, part_at_filter_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4f, part_at_amp_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x55, part_at_amp_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x50, part_at_lfo_pmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x56, part_at_lfo_pmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x51, part_at_lfo_fmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x57, part_at_lfo_fmod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x52, part_at_lfo_amod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x58, part_at_lfo_amod_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x11, part_dry_level[idx], 1);
+    sysex_add_queue_multipart(idx, 0x0f, part_note_limit_low[idx], 1);
+    sysex_add_queue_multipart(idx, 0x10, part_note_limit_high[idx], 1);
+    sysex_add_queue_multipart(idx, 0x6d, part_velocity_limit_low[idx], 1);
+    sysex_add_queue_multipart(idx, 0x6e, part_velocity_limit_high[idx], 1);
+    sysex_add_queue_multipart(idx, 0x0c, part_velocity_sense_depth[idx], 1);
+    sysex_add_queue_multipart(idx, 0x0d, part_velocity_sense_offset[idx], 1);
+    sysex_add_queue_multipart(idx, 0x06, part_same_note_assign[idx], 1);
 
-    sysex_add_queue_multipart(var_offset, 0x41, part_scale_c[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x42, part_scale_cs[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x43, part_scale_d[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x44, part_scale_ds[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x45, part_scale_e[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x46, part_scale_f[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x47, part_scale_fs[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x48, part_scale_g[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x49, part_scale_gs[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x4a, part_scale_a[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x4b, part_scale_as[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x4c, part_scale_b[var_offset], 1);
+    sysex_add_queue_multipart(idx, 0x41, part_scale_c[idx], 1);
+    sysex_add_queue_multipart(idx, 0x42, part_scale_cs[idx], 1);
+    sysex_add_queue_multipart(idx, 0x43, part_scale_d[idx], 1);
+    sysex_add_queue_multipart(idx, 0x44, part_scale_ds[idx], 1);
+    sysex_add_queue_multipart(idx, 0x45, part_scale_e[idx], 1);
+    sysex_add_queue_multipart(idx, 0x46, part_scale_f[idx], 1);
+    sysex_add_queue_multipart(idx, 0x47, part_scale_fs[idx], 1);
+    sysex_add_queue_multipart(idx, 0x48, part_scale_g[idx], 1);
+    sysex_add_queue_multipart(idx, 0x49, part_scale_gs[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4a, part_scale_a[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4b, part_scale_as[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4c, part_scale_b[idx], 1);
 
-    sysex_add_queue_multipart(var_offset, 0x30, part_recv_pb[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x31, part_recv_cat[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x32, part_recv_pc[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x33, part_recv_cc[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x34, part_recv_pat[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x35, part_recv_note[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x36, part_recv_rpn[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x37, part_recv_nrpn[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x38, part_recv_mod[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x39, part_recv_vol[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x3a, part_recv_pan[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x3b, part_recv_exp[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x3c, part_recv_sus[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x3d, part_recv_port[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x3e, part_recv_sost[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x3f, part_recv_soft[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x40, part_recv_bs[var_offset], 1);
+    sysex_add_queue_multipart(idx, 0x30, part_recv_pb[idx], 1);
+    sysex_add_queue_multipart(idx, 0x31, part_recv_cat[idx], 1);
+    sysex_add_queue_multipart(idx, 0x32, part_recv_pc[idx], 1);
+    sysex_add_queue_multipart(idx, 0x33, part_recv_cc[idx], 1);
+    sysex_add_queue_multipart(idx, 0x34, part_recv_pat[idx], 1);
+    sysex_add_queue_multipart(idx, 0x35, part_recv_note[idx], 1);
+    sysex_add_queue_multipart(idx, 0x36, part_recv_rpn[idx], 1);
+    sysex_add_queue_multipart(idx, 0x37, part_recv_nrpn[idx], 1);
+    sysex_add_queue_multipart(idx, 0x38, part_recv_mod[idx], 1);
+    sysex_add_queue_multipart(idx, 0x39, part_recv_vol[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3a, part_recv_pan[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3b, part_recv_exp[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3c, part_recv_sus[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3d, part_recv_port[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3e, part_recv_sost[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3f, part_recv_soft[idx], 1);
+    sysex_add_queue_multipart(idx, 0x40, part_recv_bs[idx], 1);
 
     // restore effect sends
-    sysex_add_queue_multipart(var_offset, 0x13, part_reverb_send[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x12, part_chorus_send[var_offset], 1);
-    sysex_add_queue_multipart(var_offset, 0x14, part_variation_send[var_offset], 1);
+    sysex_add_queue_multipart(idx, 0x13, part_reverb_send[idx], 1);
+    sysex_add_queue_multipart(idx, 0x12, part_chorus_send[idx], 1);
+    sysex_add_queue_multipart(idx, 0x14, part_variation_send[idx], 1);
 
-    var_offset += 1;
+    idx += 1;
   );
 );
 
