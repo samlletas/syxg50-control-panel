@@ -426,8 +426,34 @@ function gui_slider_value_to_float(value, value_min, value_max) local(value_floa
   min(max(value_float, 0), 1);
 );
 
+function get_value_display(value)
+    local(value_display, table_len, table_ptr, table_ptr_old, table_value) (
+  table_len = strlen(gui_slider_value_table);
+
+  table_len > 0 ? (
+    strcpy(value_display, "not found");
+    table_ptr = 1;
+
+    while (table_ptr < table_len) (
+      table_value = parse_number_dec(gui_slider_value_table, table_ptr, 3);
+      table_ptr += 4;
+      table_ptr_old = table_ptr;
+      table_ptr = parse_to_line_end(gui_slider_value_table, table_ptr) + 1;
+
+      table_value == value ? (
+        strcpy_substr(value_display, gui_slider_value_table, table_ptr_old, table_ptr - table_ptr_old);
+        table_ptr = table_len;
+      );
+    );
+  ) : (
+    sprintf(value_display, "%i", value);
+  );
+
+  value_display;
+);
+
 function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
-    local(value_old, value_float, value_range, step_size, fill_width, fill_offset, value_display, table_len, table_ptr, table_ptr_old, table_value, caption_width, caption_height) (
+    local(value_old, value_float, value_range, step_size, fill_width, fill_offset, caption_width, caption_height) (
   value_old = value;
   value < 0 ? value = value_def;
   value_float = gui_slider_value_to_float(value, value_min, value_max);
@@ -475,34 +501,15 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
   value == value_def ? set_color(color_fg_list);
   value != value_def ? set_color(color_bg_changed);
 
+  // slider caption
   gfx_measurestr(caption, caption_width, caption_height);
   gfx_x = gui_slider_x - caption_width - 8;
   gfx_y = gui_slider_y - 6;
   gfx_drawstr(caption);
 
+  // slider value
   gfx_x = gui_slider_x + gui_slider_width + 5;
-  table_len = strlen(gui_slider_value_table);
-
-  table_len > 0 ? (
-    strcpy(value_display, "not found");
-    table_ptr = 1;
-
-    while (table_ptr < table_len) (
-      table_value = parse_number_dec(gui_slider_value_table, table_ptr, 3);
-      table_ptr += 4;
-      table_ptr_old = table_ptr;
-      table_ptr = parse_to_line_end(gui_slider_value_table, table_ptr) + 1;
-
-      table_value == value ? (
-        strcpy_substr(value_display, gui_slider_value_table, table_ptr_old, table_ptr - table_ptr_old);
-        table_ptr = table_len;
-      );
-    );
-
-    gfx_drawstr(value_display);
-  ) : (
-    gfx_drawnumber(value, 0);
-  );
+  gfx_drawstr(get_value_display(value));
 
   gui_slider_y += gui_slider_spacing;
   value;
