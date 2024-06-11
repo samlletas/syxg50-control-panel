@@ -145,34 +145,6 @@ sysex_queue = 100100;
 sysex_queue_ptr = 0;
 sysex_delay = 0;
 
-part_program = 200000;
-part_bank = 200100;
-voice_number = 200200;
-voice_category = 200300;
-
-part_reverb_send = 200400;
-part_chorus_send = 200500;
-part_variation_send = 200600;
-
-idx = 0;
-
-loop (16,
-  part_program[idx] = 0;
-  part_bank[idx] = 0;
-  voice_number[idx] = 0;
-  voice_category[idx] = 0;
-
-  part_reverb_send[idx] = 40;
-  part_chorus_send[idx] = 0;
-  part_variation_send[idx] = 0;
-
-  idx += 1;
-);
-
-effect_chorus_send_reverb = -1;
-effect_variation_send_reverb = -1;
-effect_variation_send_chorus = -1;
-
 effect_reverb_return = -1;
 effect_chorus_return = -1;
 effect_variation_return = -1;
@@ -180,6 +152,10 @@ effect_variation_return = -1;
 effect_reverb_pan = -1;
 effect_chorus_pan = -1;
 effect_variation_pan = -1;
+
+effect_chorus_send_reverb = -1;
+effect_variation_send_reverb = -1;
+effect_variation_send_chorus = -1;
 
 effect_params = 250000;
 idx = 0;
@@ -189,8 +165,14 @@ loop (42 * 16 * 3,
   idx += 1;
 );
 
+voice_category = 200300;
+voice_number = 200200;
+part_bank = 200100;
+part_program = 200000;
 part_rcv_channel = 300000;
 part_mode = 300100;
+part_portamento_switch = 301100;
+part_portamento_time = 301200;
 part_volume = 300200;
 part_pan = 300300;
 part_transpose = 300400;
@@ -200,8 +182,14 @@ part_filter_resonance = 300700;
 part_eg_attack = 300800;
 part_eg_decay = 300900;
 part_eg_release = 301000;
-part_portamento_switch = 301100;
-part_portamento_time = 301200;
+part_pitch_eg_init_level = 304100;
+part_pitch_eg_attack = 304200;
+part_pitch_eg_release_level = 304300;
+part_pitch_eg_release = 304400;
+part_reverb_send = 200400;
+part_chorus_send = 200500;
+part_variation_send = 200600;
+part_dry_level = 302800;
 part_vibrato_rate = 301300;
 part_vibrato_depth = 301400;
 part_vibrato_delay = 301500;
@@ -217,23 +205,19 @@ part_mw_amplitude_control = 302400;
 part_mw_lfo_pmod_depth = 302500;
 part_mw_lfo_fmod_depth = 302600;
 part_mw_lfo_amod_depth = 302700;
-part_dry_level = 302800;
+part_at_pitch_control = 303500;
+part_at_filter_control = 303600;
+part_at_amplitude_control = 303700;
+part_at_lfo_pmod_depth = 303800;
+part_at_lfo_fmod_depth = 303900;
+part_at_lfo_amod_depth = 304000;
 part_note_limit_low = 302900;
 part_note_limit_high = 303000;
 part_velocity_limit_low = 303100;
 part_velocity_limit_high = 303200;
 part_velocity_sense_depth = 303300;
 part_velocity_sense_offset = 303400;
-part_at_pitch_control = 303500;
-part_at_filter_control = 303600;
-part_at_amp_control = 303700;
-part_at_lfo_pmod_depth = 303800;
-part_at_lfo_fmod_depth = 303900;
-part_at_lfo_amod_depth = 304000;
-part_pitch_eg_init_level = 304100;
-part_pitch_eg_attack = 304200;
-part_pitch_eg_release_level = 304300;
-part_pitch_eg_release = 304400;
+part_same_note_assign = 306200;
 part_scale_c = 305000;
 part_scale_cs = 305100;
 part_scale_d = 305200;
@@ -246,30 +230,35 @@ part_scale_gs = 305800;
 part_scale_a = 305900;
 part_scale_as = 306000;
 part_scale_b = 306100;
-part_same_note_assign = 306200;
-part_recv_pb = 306300;
-part_recv_cat = 306400;
-part_recv_pc = 306500;
-part_recv_cc = 306600;
-part_recv_pat = 306700;
 part_recv_note = 306800;
-part_recv_rpn = 306900;
-part_recv_nrpn = 307000;
+part_recv_pc = 306500;
+part_recv_bs = 307900;
+part_recv_cat = 306400;
+part_recv_pat = 306700;
+part_recv_pb = 306300;
+part_recv_cc = 306600;
 part_recv_mod = 307100;
 part_recv_vol = 307200;
 part_recv_pan = 307300;
 part_recv_exp = 307400;
 part_recv_sus = 307500;
-part_recv_port = 307600;
 part_recv_sost = 307700;
 part_recv_soft = 307800;
-part_recv_bs = 307900;
+part_recv_port = 307600;
+part_recv_rpn = 306900;
+part_recv_nrpn = 307000;
 
 idx = 0;
 
 loop (16,
+  voice_category[idx] = 0;
+  voice_number[idx] = 0;
+  part_bank[idx] = 0;
+  part_program[idx] = 0;
   part_rcv_channel[idx] = idx;
   part_mode[idx] = 1;
+  part_portamento_switch[idx] = 0;
+  part_portamento_time[idx] = 0;
   part_volume[idx] = 100;
   part_pan[idx] = 64;
   part_transpose[idx] = 64;
@@ -279,8 +268,14 @@ loop (16,
   part_eg_attack[idx] = 64;
   part_eg_decay[idx] = 64;
   part_eg_release[idx] = 64;
-  part_portamento_switch[idx] = 0;
-  part_portamento_time[idx] = 0;
+  part_pitch_eg_init_level[idx] = 64;
+  part_pitch_eg_attack[idx] = 64;
+  part_pitch_eg_release_level[idx] = 64;
+  part_pitch_eg_release[idx] = 64;
+  part_reverb_send[idx] = 40;
+  part_chorus_send[idx] = 0;
+  part_variation_send[idx] = 0;
+  part_dry_level[idx] = 127;
   part_vibrato_rate[idx] = 64;
   part_vibrato_depth[idx] = 64;
   part_vibrato_delay[idx] = 64;
@@ -296,7 +291,12 @@ loop (16,
   part_mw_lfo_pmod_depth[idx] = 10;
   part_mw_lfo_fmod_depth[idx] = 0;
   part_mw_lfo_amod_depth[idx] = 0;
-  part_dry_level[idx] = 127;
+  part_at_pitch_control[idx] = 64;
+  part_at_filter_control[idx] = 64;
+  part_at_amplitude_control[idx] = 64;
+  part_at_lfo_pmod_depth[idx] = 0;
+  part_at_lfo_fmod_depth[idx] = 0;
+  part_at_lfo_amod_depth[idx] = 0;
   part_note_limit_low[idx] = 0;
   part_note_limit_high[idx] = 127;
   part_velocity_limit_low[idx] = 1;
@@ -304,16 +304,6 @@ loop (16,
   part_velocity_sense_depth[idx] = 64;
   part_velocity_sense_offset[idx] = 64;
   part_same_note_assign[idx] = 1;
-  part_at_pitch_control[idx] = 64;
-  part_at_filter_control[idx] = 64;
-  part_at_amp_control[idx] = 64;
-  part_at_lfo_pmod_depth[idx] = 0;
-  part_at_lfo_fmod_depth[idx] = 0;
-  part_at_lfo_amod_depth[idx] = 0;
-  part_pitch_eg_init_level[idx] = 64;
-  part_pitch_eg_attack[idx] = 64;
-  part_pitch_eg_release_level[idx] = 64;
-  part_pitch_eg_release[idx] = 64;
   part_scale_c[idx] = 64;
   part_scale_cs[idx] = 64;
   part_scale_d[idx] = 64;
@@ -326,23 +316,23 @@ loop (16,
   part_scale_a[idx] = 64;
   part_scale_as[idx] = 64;
   part_scale_b[idx] = 64;
-  part_recv_pb[idx] = 1;
-  part_recv_cat[idx] = 1;
-  part_recv_pc[idx] = 1;
-  part_recv_cc[idx] = 1;
-  part_recv_pat[idx] = 1;
   part_recv_note[idx] = 1;
-  part_recv_rpn[idx] = 1;
-  part_recv_nrpn[idx] = 1;
+  part_recv_pc[idx] = 1;
+  part_recv_bs[idx] = 1;
+  part_recv_cat[idx] = 1;
+  part_recv_pat[idx] = 1;
+  part_recv_pb[idx] = 1;
+  part_recv_cc[idx] = 1;
   part_recv_mod[idx] = 1;
   part_recv_vol[idx] = 1;
   part_recv_pan[idx] = 1;
   part_recv_exp[idx] = 1;
   part_recv_sus[idx] = 1;
-  part_recv_port[idx] = 1;
   part_recv_sost[idx] = 1;
   part_recv_soft[idx] = 1;
-  part_recv_bs[idx] = 1;
+  part_recv_port[idx] = 1;
+  part_recv_rpn[idx] = 1;
+  part_recv_nrpn[idx] = 1;
 
   idx += 1;
 );
@@ -416,16 +406,6 @@ function parse_to_next_line(string, offset) local(length) (
   offset;
 );
 
-function lerp(fraction, value_min, value_max) local(value) (
-  value = floor((value_min + (value_max - value_min) * fraction) + 0.5);
-  min(max(value, value_min), value_max);
-);
-
-function inverse_lerp(value, value_min, value_max) local(fraction) (
-  fraction = (value - value_min) / (value_max - value_min);
-  min(max(fraction, 0), 1);
-);
-
 function get_value_display(value)
     local(value_display, table_len, table_ptr, table_ptr_old, table_value) (
   table_len = strlen(gui_value_table);
@@ -450,6 +430,16 @@ function get_value_display(value)
   );
 
   value_display;
+);
+
+function lerp(fraction, value_min, value_max) local(value) (
+  value = floor((value_min + (value_max - value_min) * fraction) + 0.5);
+  min(max(value, value_min), value_max);
+);
+
+function inverse_lerp(value, value_min, value_max) local(fraction) (
+  fraction = (value - value_min) / (value_max - value_min);
+  min(max(fraction, 0), 1);
 );
 
 function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
@@ -1060,10 +1050,10 @@ function gui_pages()
       );
 
       gui_value_table = param_value_names_percent;
-      part_at_amp_control[gui_part] = gui_slider(part_at_amp_control[gui_part], 0, 127, "AT Amp Control", 64, 1);
+      part_at_amplitude_control[gui_part] = gui_slider(part_at_amplitude_control[gui_part], 0, 127, "AT Amp Control", 64, 1);
       gui_slider_change ? (
-        sysex_add_queue_multipart(gui_part, 0x4f, part_at_amp_control[gui_part], 1);
-        sysex_add_queue_multipart(gui_part, 0x55, part_at_amp_control[gui_part], 1);
+        sysex_add_queue_multipart(gui_part, 0x4f, part_at_amplitude_control[gui_part], 1);
+        sysex_add_queue_multipart(gui_part, 0x55, part_at_amplitude_control[gui_part], 1);
       );
 
       gui_value_table = "";
@@ -1421,30 +1411,11 @@ spinlock.lock();
 file_var(0, gui_page);
 file_var(0, gui_part);
 
-idx = 0;
-
-loop (16,
-  file_var(0, part_program[idx]);
-  file_var(0, part_bank[idx]);
-  file_var(0, voice_number[idx]);
-  file_var(0, voice_category[idx]);
-
-  file_var(0, part_reverb_send[idx]);
-  file_var(0, part_chorus_send[idx]);
-  file_var(0, part_variation_send[idx]);
-
-  idx += 1;
-);
-
 file_var(0, gui_categories_voice_cursor);
 file_var(0, gui_categories_editor_cursor);
 file_var(0, gui_categories_reverb_cursor);
 file_var(0, gui_categories_chorus_cursor);
 file_var(0, gui_categories_variation_cursor);
-
-file_var(0, effect_chorus_send_reverb);
-file_var(0, effect_variation_send_reverb);
-file_var(0, effect_variation_send_chorus);
 
 file_var(0, effect_reverb_return);
 file_var(0, effect_chorus_return);
@@ -1453,6 +1424,10 @@ file_var(0, effect_variation_return);
 file_var(0, effect_reverb_pan);
 file_var(0, effect_chorus_pan);
 file_var(0, effect_variation_pan);
+
+file_var(0, effect_chorus_send_reverb);
+file_var(0, effect_variation_send_reverb);
+file_var(0, effect_variation_send_chorus);
 
 idx = 0;
 
@@ -1464,8 +1439,15 @@ loop (42 * 16 * 3,
 idx = 0;
 
 loop (16,
+  file_var(0, voice_category[idx]);
+  file_var(0, voice_number[idx]);
+  file_var(0, part_bank[idx]);
+  file_var(0, part_program[idx]);
+
   file_var(0, part_rcv_channel[idx]);
   file_var(0, part_mode[idx]);
+  file_var(0, part_portamento_switch[idx]);
+  file_var(0, part_portamento_time[idx]);
 
   file_var(0, part_volume[idx]);
   file_var(0, part_pan[idx]);
@@ -1479,25 +1461,21 @@ loop (16,
   file_var(0, part_eg_decay[idx]);
   file_var(0, part_eg_release[idx]);
 
-  file_var(0, part_portamento_switch[idx]);
-  file_var(0, part_portamento_time[idx]);
+  file_var(0, part_pitch_eg_init_level[idx]);
+  file_var(0, part_pitch_eg_attack[idx]);
+  file_var(0, part_pitch_eg_release_level[idx]);
+  file_var(0, part_pitch_eg_release[idx]);
+
+  file_var(0, part_reverb_send[idx]);
+  file_var(0, part_chorus_send[idx]);
+  file_var(0, part_variation_send[idx]);
+  file_var(0, part_dry_level[idx]);
 
   file_var(0, part_vibrato_rate[idx]);
   file_var(0, part_vibrato_depth[idx]);
   file_var(0, part_vibrato_delay[idx]);
 
   file_var(0, part_bend_pitch_control[idx]);
-
-  file_var(0, part_mw_lfo_pmod_depth[idx]);
-
-  file_var(0, part_dry_level[idx]);
-
-  idx += 1;
-);
-
-idx = 0;
-
-loop (16,
   file_var(0, part_bend_filter_control[idx]);
   file_var(0, part_bend_amplitude_control[idx]);
   file_var(0, part_bend_lfo_pmod_depth[idx]);
@@ -1507,8 +1485,16 @@ loop (16,
   file_var(0, part_mw_pitch_control[idx]);
   file_var(0, part_mw_filter_control[idx]);
   file_var(0, part_mw_amplitude_control[idx]);
+  file_var(0, part_mw_lfo_pmod_depth[idx]);
   file_var(0, part_mw_lfo_fmod_depth[idx]);
   file_var(0, part_mw_lfo_amod_depth[idx]);
+
+  file_var(0, part_at_pitch_control[idx]);
+  file_var(0, part_at_filter_control[idx]);
+  file_var(0, part_at_amplitude_control[idx]);
+  file_var(0, part_at_lfo_pmod_depth[idx]);
+  file_var(0, part_at_lfo_fmod_depth[idx]);
+  file_var(0, part_at_lfo_amod_depth[idx]);
 
   file_var(0, part_note_limit_low[idx]);
   file_var(0, part_note_limit_high[idx]);
@@ -1516,26 +1502,7 @@ loop (16,
   file_var(0, part_velocity_limit_high[idx]);
   file_var(0, part_velocity_sense_depth[idx]);
   file_var(0, part_velocity_sense_offset[idx]);
-
-  idx += 1;
-);
-
-idx = 0;
-
-loop (16,
   file_var(0, part_same_note_assign[idx]);
-
-  file_var(0, part_pitch_eg_init_level[idx]);
-  file_var(0, part_pitch_eg_attack[idx]);
-  file_var(0, part_pitch_eg_release_level[idx]);
-  file_var(0, part_pitch_eg_release[idx]);
-
-  file_var(0, part_at_pitch_control[idx]);
-  file_var(0, part_at_filter_control[idx]);
-  file_var(0, part_at_amp_control[idx]);
-  file_var(0, part_at_lfo_pmod_depth[idx]);
-  file_var(0, part_at_lfo_fmod_depth[idx]);
-  file_var(0, part_at_lfo_amod_depth[idx]);
 
   file_var(0, part_scale_c[idx]);
   file_var(0, part_scale_cs[idx]);
@@ -1550,23 +1517,23 @@ loop (16,
   file_var(0, part_scale_as[idx]);
   file_var(0, part_scale_b[idx]);
 
-  file_var(0, part_recv_pb[idx]);
-  file_var(0, part_recv_cat[idx]);
-  file_var(0, part_recv_pc[idx]);
-  file_var(0, part_recv_cc[idx]);
-  file_var(0, part_recv_pat[idx]);
   file_var(0, part_recv_note[idx]);
-  file_var(0, part_recv_rpn[idx]);
-  file_var(0, part_recv_nrpn[idx]);
+  file_var(0, part_recv_pc[idx]);
+  file_var(0, part_recv_bs[idx]);
+  file_var(0, part_recv_cat[idx]);
+  file_var(0, part_recv_pat[idx]);
+  file_var(0, part_recv_pb[idx]);
+  file_var(0, part_recv_cc[idx]);
   file_var(0, part_recv_mod[idx]);
   file_var(0, part_recv_vol[idx]);
   file_var(0, part_recv_pan[idx]);
   file_var(0, part_recv_exp[idx]);
   file_var(0, part_recv_sus[idx]);
-  file_var(0, part_recv_port[idx]);
   file_var(0, part_recv_sost[idx]);
   file_var(0, part_recv_soft[idx]);
-  file_var(0, part_recv_bs[idx]);
+  file_var(0, part_recv_port[idx]);
+  file_var(0, part_recv_rpn[idx]);
+  file_var(0, part_recv_nrpn[idx]);
 
   idx += 1;
 );
@@ -1603,6 +1570,8 @@ midi_first_time ? (
     // restore voice params
     sysex_add_queue_multipart(idx, 0x04, part_rcv_channel[idx], 1);
     sysex_add_queue_multipart(idx, 0x05, part_mode[idx], 1);
+    sysex_add_queue_multipart(idx, 0x67, part_portamento_switch[idx], 1);
+    sysex_add_queue_multipart(idx, 0x68, part_portamento_time[idx], 1);
     sysex_add_queue_multipart(idx, 0x0b, part_volume[idx], 1);
     sysex_add_queue_multipart(idx, 0x0e, part_pan[idx], 1);
     sysex_add_queue_multipart(idx, 0x08, part_transpose[idx], 1);
@@ -1616,8 +1585,10 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x6a, part_pitch_eg_attack[idx], 1);
     sysex_add_queue_multipart(idx, 0x6b, part_pitch_eg_release_level[idx], 1);
     sysex_add_queue_multipart(idx, 0x6c, part_pitch_eg_release[idx], 1);
-    sysex_add_queue_multipart(idx, 0x67, part_portamento_switch[idx], 1);
-    sysex_add_queue_multipart(idx, 0x68, part_portamento_time[idx], 1);
+    sysex_add_queue_multipart(idx, 0x13, part_reverb_send[idx], 1);
+    sysex_add_queue_multipart(idx, 0x12, part_chorus_send[idx], 1);
+    sysex_add_queue_multipart(idx, 0x14, part_variation_send[idx], 1);
+    sysex_add_queue_multipart(idx, 0x11, part_dry_level[idx], 1);
     sysex_add_queue_multipart(idx, 0x15, part_vibrato_rate[idx], 1);
     sysex_add_queue_multipart(idx, 0x16, part_vibrato_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x17, part_vibrato_delay[idx], 1);
@@ -1637,15 +1608,14 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x53, part_at_pitch_control[idx], 1);
     sysex_add_queue_multipart(idx, 0x4e, part_at_filter_control[idx], 1);
     sysex_add_queue_multipart(idx, 0x54, part_at_filter_control[idx], 1);
-    sysex_add_queue_multipart(idx, 0x4f, part_at_amp_control[idx], 1);
-    sysex_add_queue_multipart(idx, 0x55, part_at_amp_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x4f, part_at_amplitude_control[idx], 1);
+    sysex_add_queue_multipart(idx, 0x55, part_at_amplitude_control[idx], 1);
     sysex_add_queue_multipart(idx, 0x50, part_at_lfo_pmod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x56, part_at_lfo_pmod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x51, part_at_lfo_fmod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x57, part_at_lfo_fmod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x52, part_at_lfo_amod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x58, part_at_lfo_amod_depth[idx], 1);
-    sysex_add_queue_multipart(idx, 0x11, part_dry_level[idx], 1);
     sysex_add_queue_multipart(idx, 0x0f, part_note_limit_low[idx], 1);
     sysex_add_queue_multipart(idx, 0x10, part_note_limit_high[idx], 1);
     sysex_add_queue_multipart(idx, 0x6d, part_velocity_limit_low[idx], 1);
@@ -1667,28 +1637,23 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x4b, part_scale_as[idx], 1);
     sysex_add_queue_multipart(idx, 0x4c, part_scale_b[idx], 1);
 
-    sysex_add_queue_multipart(idx, 0x30, part_recv_pb[idx], 1);
-    sysex_add_queue_multipart(idx, 0x31, part_recv_cat[idx], 1);
-    sysex_add_queue_multipart(idx, 0x32, part_recv_pc[idx], 1);
-    sysex_add_queue_multipart(idx, 0x33, part_recv_cc[idx], 1);
-    sysex_add_queue_multipart(idx, 0x34, part_recv_pat[idx], 1);
     sysex_add_queue_multipart(idx, 0x35, part_recv_note[idx], 1);
-    sysex_add_queue_multipart(idx, 0x36, part_recv_rpn[idx], 1);
-    sysex_add_queue_multipart(idx, 0x37, part_recv_nrpn[idx], 1);
+    sysex_add_queue_multipart(idx, 0x32, part_recv_pc[idx], 1);
+    sysex_add_queue_multipart(idx, 0x40, part_recv_bs[idx], 1);
+    sysex_add_queue_multipart(idx, 0x31, part_recv_cat[idx], 1);
+    sysex_add_queue_multipart(idx, 0x34, part_recv_pat[idx], 1);
+    sysex_add_queue_multipart(idx, 0x30, part_recv_pb[idx], 1);
+    sysex_add_queue_multipart(idx, 0x33, part_recv_cc[idx], 1);
     sysex_add_queue_multipart(idx, 0x38, part_recv_mod[idx], 1);
     sysex_add_queue_multipart(idx, 0x39, part_recv_vol[idx], 1);
     sysex_add_queue_multipart(idx, 0x3a, part_recv_pan[idx], 1);
     sysex_add_queue_multipart(idx, 0x3b, part_recv_exp[idx], 1);
     sysex_add_queue_multipart(idx, 0x3c, part_recv_sus[idx], 1);
-    sysex_add_queue_multipart(idx, 0x3d, part_recv_port[idx], 1);
     sysex_add_queue_multipart(idx, 0x3e, part_recv_sost[idx], 1);
     sysex_add_queue_multipart(idx, 0x3f, part_recv_soft[idx], 1);
-    sysex_add_queue_multipart(idx, 0x40, part_recv_bs[idx], 1);
-
-    // restore effect sends
-    sysex_add_queue_multipart(idx, 0x13, part_reverb_send[idx], 1);
-    sysex_add_queue_multipart(idx, 0x12, part_chorus_send[idx], 1);
-    sysex_add_queue_multipart(idx, 0x14, part_variation_send[idx], 1);
+    sysex_add_queue_multipart(idx, 0x3d, part_recv_port[idx], 1);
+    sysex_add_queue_multipart(idx, 0x36, part_recv_rpn[idx], 1);
+    sysex_add_queue_multipart(idx, 0x37, part_recv_nrpn[idx], 1);
 
     idx += 1;
   );
