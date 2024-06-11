@@ -1440,6 +1440,7 @@ file_var(0, gui_categories_reverb_cursor);
 file_var(0, gui_categories_chorus_cursor);
 file_var(0, gui_categories_variation_cursor);
 
+// effect parameters
 file_var(0, effect_reverb_return);
 file_var(0, effect_chorus_return);
 file_var(0, effect_variation_return);
@@ -1452,112 +1453,101 @@ file_var(0, effect_chorus_send_reverb);
 file_var(0, effect_variation_send_reverb);
 file_var(0, effect_variation_send_chorus);
 
-idx = 0;
+file_mem(0, effect_params, 42 * 16 * 3);
 
-loop (42 * 16 * 3,
-  file_var(0, effect_params[idx]);
-  idx += 1;
-);
+// voice parameters
+file_mem(0, voice_category, 16);
+file_mem(0, voice_number, 16);
+file_mem(0, part_bank, 16);
+file_mem(0, part_program, 16);
 
-idx = 0;
+// common parameters
+file_mem(0, part_rcv_channel, 16);
+file_mem(0, part_mode, 16);
+file_mem(0, part_portamento_switch, 16);
+file_mem(0, part_portamento_time, 16);
+file_mem(0, part_volume, 16);
+file_mem(0, part_pan, 16);
+file_mem(0, part_transpose, 16);
+file_mem(0, part_detune, 16);
+file_mem(0, part_filter_cutoff, 16);
+file_mem(0, part_filter_resonance, 16);
+file_mem(0, part_eg_attack, 16);
+file_mem(0, part_eg_decay, 16);
+file_mem(0, part_eg_release, 16);
+file_mem(0, part_pitch_eg_init_level, 16);
+file_mem(0, part_pitch_eg_attack, 16);
+file_mem(0, part_pitch_eg_release_level, 16);
+file_mem(0, part_pitch_eg_release, 16);
+file_mem(0, part_reverb_send, 16);
+file_mem(0, part_chorus_send, 16);
+file_mem(0, part_variation_send, 16);
+file_mem(0, part_dry_level, 16);
 
-loop (16,
-  // voice parameters
-  file_var(0, voice_category[idx]);
-  file_var(0, voice_number[idx]);
-  file_var(0, part_bank[idx]);
-  file_var(0, part_program[idx]);
+// modulation parameters
+file_mem(0, part_vibrato_rate, 16);
+file_mem(0, part_vibrato_depth, 16);
+file_mem(0, part_vibrato_delay, 16);
+file_mem(0, part_bend_pitch_control, 16);
+file_mem(0, part_bend_filter_control, 16);
+file_mem(0, part_bend_amplitude_control, 16);
+file_mem(0, part_bend_lfo_pmod_depth, 16);
+file_mem(0, part_bend_lfo_fmod_depth, 16);
+file_mem(0, part_bend_lfo_amod_depth, 16);
+file_mem(0, part_mw_pitch_control, 16);
+file_mem(0, part_mw_filter_control, 16);
+file_mem(0, part_mw_amplitude_control, 16);
+file_mem(0, part_mw_lfo_pmod_depth, 16);
+file_mem(0, part_mw_lfo_fmod_depth, 16);
+file_mem(0, part_mw_lfo_amod_depth, 16);
+file_mem(0, part_at_pitch_control, 16);
+file_mem(0, part_at_filter_control, 16);
+file_mem(0, part_at_amplitude_control, 16);
+file_mem(0, part_at_lfo_pmod_depth, 16);
+file_mem(0, part_at_lfo_fmod_depth, 16);
+file_mem(0, part_at_lfo_amod_depth, 16);
 
-  // common parameters
-  file_var(0, part_rcv_channel[idx]);
-  file_var(0, part_mode[idx]);
-  file_var(0, part_portamento_switch[idx]);
-  file_var(0, part_portamento_time[idx]);
-  file_var(0, part_volume[idx]);
-  file_var(0, part_pan[idx]);
-  file_var(0, part_transpose[idx]);
-  file_var(0, part_detune[idx]);
-  file_var(0, part_filter_cutoff[idx]);
-  file_var(0, part_filter_resonance[idx]);
-  file_var(0, part_eg_attack[idx]);
-  file_var(0, part_eg_decay[idx]);
-  file_var(0, part_eg_release[idx]);
-  file_var(0, part_pitch_eg_init_level[idx]);
-  file_var(0, part_pitch_eg_attack[idx]);
-  file_var(0, part_pitch_eg_release_level[idx]);
-  file_var(0, part_pitch_eg_release[idx]);
-  file_var(0, part_reverb_send[idx]);
-  file_var(0, part_chorus_send[idx]);
-  file_var(0, part_variation_send[idx]);
-  file_var(0, part_dry_level[idx]);
+// keyboard parameters
+file_mem(0, part_note_limit_low, 16);
+file_mem(0, part_note_limit_high, 16);
+file_mem(0, part_velocity_limit_low, 16);
+file_mem(0, part_velocity_limit_high, 16);
+file_mem(0, part_velocity_sense_depth, 16);
+file_mem(0, part_velocity_sense_offset, 16);
+file_mem(0, part_same_note_assign, 16);
 
-  // modulation parameters
-  file_var(0, part_vibrato_rate[idx]);
-  file_var(0, part_vibrato_depth[idx]);
-  file_var(0, part_vibrato_delay[idx]);
-  file_var(0, part_bend_pitch_control[idx]);
-  file_var(0, part_bend_filter_control[idx]);
-  file_var(0, part_bend_amplitude_control[idx]);
-  file_var(0, part_bend_lfo_pmod_depth[idx]);
-  file_var(0, part_bend_lfo_fmod_depth[idx]);
-  file_var(0, part_bend_lfo_amod_depth[idx]);
-  file_var(0, part_mw_pitch_control[idx]);
-  file_var(0, part_mw_filter_control[idx]);
-  file_var(0, part_mw_amplitude_control[idx]);
-  file_var(0, part_mw_lfo_pmod_depth[idx]);
-  file_var(0, part_mw_lfo_fmod_depth[idx]);
-  file_var(0, part_mw_lfo_amod_depth[idx]);
-  file_var(0, part_at_pitch_control[idx]);
-  file_var(0, part_at_filter_control[idx]);
-  file_var(0, part_at_amplitude_control[idx]);
-  file_var(0, part_at_lfo_pmod_depth[idx]);
-  file_var(0, part_at_lfo_fmod_depth[idx]);
-  file_var(0, part_at_lfo_amod_depth[idx]);
+// tuning parameters
+file_mem(0, part_scale_c, 16);
+file_mem(0, part_scale_cs, 16);
+file_mem(0, part_scale_d, 16);
+file_mem(0, part_scale_ds, 16);
+file_mem(0, part_scale_e, 16);
+file_mem(0, part_scale_f, 16);
+file_mem(0, part_scale_fs, 16);
+file_mem(0, part_scale_g, 16);
+file_mem(0, part_scale_gs, 16);
+file_mem(0, part_scale_a, 16);
+file_mem(0, part_scale_as, 16);
+file_mem(0, part_scale_b, 16);
 
-  // keyboard parameters
-  file_var(0, part_note_limit_low[idx]);
-  file_var(0, part_note_limit_high[idx]);
-  file_var(0, part_velocity_limit_low[idx]);
-  file_var(0, part_velocity_limit_high[idx]);
-  file_var(0, part_velocity_sense_depth[idx]);
-  file_var(0, part_velocity_sense_offset[idx]);
-  file_var(0, part_same_note_assign[idx]);
-
-  // tuning parameters
-  file_var(0, part_scale_c[idx]);
-  file_var(0, part_scale_cs[idx]);
-  file_var(0, part_scale_d[idx]);
-  file_var(0, part_scale_ds[idx]);
-  file_var(0, part_scale_e[idx]);
-  file_var(0, part_scale_f[idx]);
-  file_var(0, part_scale_fs[idx]);
-  file_var(0, part_scale_g[idx]);
-  file_var(0, part_scale_gs[idx]);
-  file_var(0, part_scale_a[idx]);
-  file_var(0, part_scale_as[idx]);
-  file_var(0, part_scale_b[idx]);
-
-  // MIDI filter parameters
-  file_var(0, part_recv_note[idx]);
-  file_var(0, part_recv_pc[idx]);
-  file_var(0, part_recv_bs[idx]);
-  file_var(0, part_recv_cat[idx]);
-  file_var(0, part_recv_pat[idx]);
-  file_var(0, part_recv_pb[idx]);
-  file_var(0, part_recv_cc[idx]);
-  file_var(0, part_recv_mod[idx]);
-  file_var(0, part_recv_vol[idx]);
-  file_var(0, part_recv_pan[idx]);
-  file_var(0, part_recv_exp[idx]);
-  file_var(0, part_recv_sus[idx]);
-  file_var(0, part_recv_sost[idx]);
-  file_var(0, part_recv_soft[idx]);
-  file_var(0, part_recv_port[idx]);
-  file_var(0, part_recv_rpn[idx]);
-  file_var(0, part_recv_nrpn[idx]);
-
-  idx += 1;
-);
+// MIDI filter parameters
+file_mem(0, part_recv_note, 16);
+file_mem(0, part_recv_pc, 16);
+file_mem(0, part_recv_bs, 16);
+file_mem(0, part_recv_cat, 16);
+file_mem(0, part_recv_pat, 16);
+file_mem(0, part_recv_pb, 16);
+file_mem(0, part_recv_cc, 16);
+file_mem(0, part_recv_mod, 16);
+file_mem(0, part_recv_vol, 16);
+file_mem(0, part_recv_pan, 16);
+file_mem(0, part_recv_exp, 16);
+file_mem(0, part_recv_sus, 16);
+file_mem(0, part_recv_sost, 16);
+file_mem(0, part_recv_soft, 16);
+file_mem(0, part_recv_port, 16);
+file_mem(0, part_recv_rpn, 16);
+file_mem(0, part_recv_nrpn, 16);
 
 // force update after data was loaded
 file_avail(0) >= 0 ? (
