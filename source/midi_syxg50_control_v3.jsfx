@@ -1437,6 +1437,9 @@ spinlock.unlock();
 
 spinlock.lock();
 
+file_version = 1;
+file_var(0, file_version);
+
 file_var(0, gui_page);
 file_var(0, gui_part);
 
