@@ -145,6 +145,7 @@ sysex_queue = 100100;
 sysex_queue_ptr = 0;
 sysex_delay = 0;
 
+// effect parameters
 effect_reverb_return = -1;
 effect_chorus_return = -1;
 effect_variation_return = -1;
@@ -165,10 +166,13 @@ loop (42 * 16 * 3,
   idx += 1;
 );
 
+// voice parameters
 voice_category = 300000;
 voice_number = 300100;
 part_bank = 300200;
 part_program = 300300;
+
+// common parameters
 part_rcv_channel = 300400;
 part_mode = 300500;
 part_portamento_switch = 300600;
@@ -190,6 +194,8 @@ part_reverb_send = 302100;
 part_chorus_send = 302200;
 part_variation_send = 302300;
 part_dry_level = 302400;
+
+// modulation parameters
 part_vibrato_rate = 302500;
 part_vibrato_depth = 302600;
 part_vibrato_delay = 302700;
@@ -211,6 +217,8 @@ part_at_amplitude_control = 304200;
 part_at_lfo_pmod_depth = 304300;
 part_at_lfo_fmod_depth = 304400;
 part_at_lfo_amod_depth = 304500;
+
+// keyboard parameters
 part_note_limit_low = 304600;
 part_note_limit_high = 304700;
 part_velocity_limit_low = 304800;
@@ -218,6 +226,8 @@ part_velocity_limit_high = 304900;
 part_velocity_sense_depth = 305000;
 part_velocity_sense_offset = 305100;
 part_same_note_assign = 305200;
+
+// tuning parameters
 part_scale_c = 305300;
 part_scale_cs = 305400;
 part_scale_d = 305500;
@@ -230,6 +240,8 @@ part_scale_gs = 306100;
 part_scale_a = 306200;
 part_scale_as = 306300;
 part_scale_b = 306400;
+
+// MIDI filter parameters
 part_recv_note = 306500;
 part_recv_pc = 306600;
 part_recv_bs = 306700;
@@ -251,10 +263,13 @@ part_recv_nrpn = 308100;
 idx = 0;
 
 loop (16,
+  // voice parameters defaults
   voice_category[idx] = 0;
   voice_number[idx] = 0;
   part_bank[idx] = 0;
   part_program[idx] = 0;
+
+  // common parameters defaults
   part_rcv_channel[idx] = idx;
   part_mode[idx] = 1;
   part_portamento_switch[idx] = 0;
@@ -276,6 +291,8 @@ loop (16,
   part_chorus_send[idx] = 0;
   part_variation_send[idx] = 0;
   part_dry_level[idx] = 127;
+
+  // modulation parameters defaults
   part_vibrato_rate[idx] = 64;
   part_vibrato_depth[idx] = 64;
   part_vibrato_delay[idx] = 64;
@@ -297,6 +314,8 @@ loop (16,
   part_at_lfo_pmod_depth[idx] = 0;
   part_at_lfo_fmod_depth[idx] = 0;
   part_at_lfo_amod_depth[idx] = 0;
+
+  // keyboard parameters defaults
   part_note_limit_low[idx] = 0;
   part_note_limit_high[idx] = 127;
   part_velocity_limit_low[idx] = 1;
@@ -304,6 +323,8 @@ loop (16,
   part_velocity_sense_depth[idx] = 64;
   part_velocity_sense_offset[idx] = 64;
   part_same_note_assign[idx] = 1;
+
+  // tuning parameters defaults
   part_scale_c[idx] = 64;
   part_scale_cs[idx] = 64;
   part_scale_d[idx] = 64;
@@ -316,6 +337,8 @@ loop (16,
   part_scale_a[idx] = 64;
   part_scale_as[idx] = 64;
   part_scale_b[idx] = 64;
+
+  // MIDI filter parameters defaults
   part_recv_note[idx] = 1;
   part_recv_pc[idx] = 1;
   part_recv_bs[idx] = 1;
@@ -368,13 +391,13 @@ function xgsend_sysex(address, value, length) (
     sysex_buf[0x05] =  address        & 0x7f;  // address low
 
     length == 1 ? (
-      sysex_buf[0x06] = value & 0x7f;  // value lsb
+      sysex_buf[0x06] = value & 0x7f;          // value lsb
       midisend_buf(sysex_delay, sysex_buf, 0x07);
     );
 
     length == 2 ? (
-      sysex_buf[0x06] = (value >> 8) & 0x7f;  // value msb
-      sysex_buf[0x07] =  value       & 0x7f;  // value lsb
+      sysex_buf[0x06] = (value >> 8) & 0x7f;   // value msb
+      sysex_buf[0x07] =  value       & 0x7f;   // value lsb
       midisend_buf(sysex_delay, sysex_buf, 0x08);
     );
 
@@ -770,11 +793,9 @@ function gui_pages()
   // voice catalog ------------------------------------------------------------
 
   gui_page == 0 ? (
-    // render category list
     gui_categories_voice_cursor = gui_category(list_categories_voice, gui_categories_voice_cursor, gui_categories_voice_offset, voice_category[gui_part]);
     gui_categories_voice_offset = gui_category_adjust_view(gui_categories_voice_offset, gui_categories_voice_cursor, gui_categories_voice_cursor_prev);
 
-    // render voice list
     list_voices = "";
     gui_categories_voice_cursor == 0 ? list_voices = list_voices_piano;
     gui_categories_voice_cursor == 1 ? list_voices = list_voices_chromatic_percussion;
@@ -803,8 +824,9 @@ function gui_pages()
     voice_count = 0;
     list_len = strlen(list_voices);
 
+    // render voice list
     while (list_ptr < list_len) (
-      (list_y + gui_list_item_height) >= gfx_h ? (
+      list_y + gui_list_item_height >= gfx_h ? (
         list_y = gui_menu_height + 10;
         list_x += gui_list_item_width;
       );
@@ -846,6 +868,7 @@ function gui_pages()
       );
     );
 
+    // handle voice changes
     voice_change >= 0 && (voice_change != voice_number[gui_part] || gui_categories_voice_cursor != voice_category[gui_part]) ? (
       list_ptr = 1;
       voice_count = 0;
@@ -1439,56 +1462,51 @@ loop (42 * 16 * 3,
 idx = 0;
 
 loop (16,
+  // voice parameters
   file_var(0, voice_category[idx]);
   file_var(0, voice_number[idx]);
   file_var(0, part_bank[idx]);
   file_var(0, part_program[idx]);
 
+  // common parameters
   file_var(0, part_rcv_channel[idx]);
   file_var(0, part_mode[idx]);
   file_var(0, part_portamento_switch[idx]);
   file_var(0, part_portamento_time[idx]);
-
   file_var(0, part_volume[idx]);
   file_var(0, part_pan[idx]);
   file_var(0, part_transpose[idx]);
   file_var(0, part_detune[idx]);
-
   file_var(0, part_filter_cutoff[idx]);
   file_var(0, part_filter_resonance[idx]);
-
   file_var(0, part_eg_attack[idx]);
   file_var(0, part_eg_decay[idx]);
   file_var(0, part_eg_release[idx]);
-
   file_var(0, part_pitch_eg_init_level[idx]);
   file_var(0, part_pitch_eg_attack[idx]);
   file_var(0, part_pitch_eg_release_level[idx]);
   file_var(0, part_pitch_eg_release[idx]);
-
   file_var(0, part_reverb_send[idx]);
   file_var(0, part_chorus_send[idx]);
   file_var(0, part_variation_send[idx]);
   file_var(0, part_dry_level[idx]);
 
+  // modulation parameters
   file_var(0, part_vibrato_rate[idx]);
   file_var(0, part_vibrato_depth[idx]);
   file_var(0, part_vibrato_delay[idx]);
-
   file_var(0, part_bend_pitch_control[idx]);
   file_var(0, part_bend_filter_control[idx]);
   file_var(0, part_bend_amplitude_control[idx]);
   file_var(0, part_bend_lfo_pmod_depth[idx]);
   file_var(0, part_bend_lfo_fmod_depth[idx]);
   file_var(0, part_bend_lfo_amod_depth[idx]);
-
   file_var(0, part_mw_pitch_control[idx]);
   file_var(0, part_mw_filter_control[idx]);
   file_var(0, part_mw_amplitude_control[idx]);
   file_var(0, part_mw_lfo_pmod_depth[idx]);
   file_var(0, part_mw_lfo_fmod_depth[idx]);
   file_var(0, part_mw_lfo_amod_depth[idx]);
-
   file_var(0, part_at_pitch_control[idx]);
   file_var(0, part_at_filter_control[idx]);
   file_var(0, part_at_amplitude_control[idx]);
@@ -1496,6 +1514,7 @@ loop (16,
   file_var(0, part_at_lfo_fmod_depth[idx]);
   file_var(0, part_at_lfo_amod_depth[idx]);
 
+  // keyboard parameters
   file_var(0, part_note_limit_low[idx]);
   file_var(0, part_note_limit_high[idx]);
   file_var(0, part_velocity_limit_low[idx]);
@@ -1504,6 +1523,7 @@ loop (16,
   file_var(0, part_velocity_sense_offset[idx]);
   file_var(0, part_same_note_assign[idx]);
 
+  // tuning parameters
   file_var(0, part_scale_c[idx]);
   file_var(0, part_scale_cs[idx]);
   file_var(0, part_scale_d[idx]);
@@ -1517,6 +1537,7 @@ loop (16,
   file_var(0, part_scale_as[idx]);
   file_var(0, part_scale_b[idx]);
 
+  // MIDI filter parameters
   file_var(0, part_recv_note[idx]);
   file_var(0, part_recv_pc[idx]);
   file_var(0, part_recv_bs[idx]);
@@ -1557,17 +1578,17 @@ midi_first_time ? (
   sysex_clear_queue();
   sysex_add_queue(0x00007e, 0, 1);  // send XG system on
   sysex_add_queue(0x02015a, 1, 1);  // set variation connection to system
-  gui_pages();
+  gui_pages();                      // restore effect parameters
 
   idx = 0;
 
   loop (16,
-    // restore voice
+    // restore voice parameters
     sysex_add_queue_multipart(idx, 0x01, (part_bank[idx] >> 8) & 0x7f, 1);  // bank select MSB
     sysex_add_queue_multipart(idx, 0x02, (part_bank[idx] >> 0) & 0x7f, 1);  // bank select LSB
     sysex_add_queue_multipart(idx, 0x03, part_program[idx], 1);             // program number
 
-    // restore voice params
+    // restore common parameters
     sysex_add_queue_multipart(idx, 0x04, part_rcv_channel[idx], 1);
     sysex_add_queue_multipart(idx, 0x05, part_mode[idx], 1);
     sysex_add_queue_multipart(idx, 0x67, part_portamento_switch[idx], 1);
@@ -1589,6 +1610,8 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x12, part_chorus_send[idx], 1);
     sysex_add_queue_multipart(idx, 0x14, part_variation_send[idx], 1);
     sysex_add_queue_multipart(idx, 0x11, part_dry_level[idx], 1);
+
+    // restore modulation parameters
     sysex_add_queue_multipart(idx, 0x15, part_vibrato_rate[idx], 1);
     sysex_add_queue_multipart(idx, 0x16, part_vibrato_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x17, part_vibrato_delay[idx], 1);
@@ -1616,6 +1639,8 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x57, part_at_lfo_fmod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x52, part_at_lfo_amod_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x58, part_at_lfo_amod_depth[idx], 1);
+
+    // restore keyboard parameters
     sysex_add_queue_multipart(idx, 0x0f, part_note_limit_low[idx], 1);
     sysex_add_queue_multipart(idx, 0x10, part_note_limit_high[idx], 1);
     sysex_add_queue_multipart(idx, 0x6d, part_velocity_limit_low[idx], 1);
@@ -1624,6 +1649,7 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x0d, part_velocity_sense_offset[idx], 1);
     sysex_add_queue_multipart(idx, 0x06, part_same_note_assign[idx], 1);
 
+    // restore tuning parameters
     sysex_add_queue_multipart(idx, 0x41, part_scale_c[idx], 1);
     sysex_add_queue_multipart(idx, 0x42, part_scale_cs[idx], 1);
     sysex_add_queue_multipart(idx, 0x43, part_scale_d[idx], 1);
@@ -1637,6 +1663,7 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x4b, part_scale_as[idx], 1);
     sysex_add_queue_multipart(idx, 0x4c, part_scale_b[idx], 1);
 
+    // restore MIDI filter parameters
     sysex_add_queue_multipart(idx, 0x35, part_recv_note[idx], 1);
     sysex_add_queue_multipart(idx, 0x32, part_recv_pc[idx], 1);
     sysex_add_queue_multipart(idx, 0x40, part_recv_bs[idx], 1);
@@ -1663,6 +1690,7 @@ sysex_delay = 0;
 sysex_queue_len = sysex_queue_ptr;
 sysex_queue_ptr = 0;
 
+// send queued sysex messages
 while (sysex_queue_ptr < sysex_queue_len) (
   xgsend_sysex(sysex_queue[sysex_queue_ptr + 0], sysex_queue[sysex_queue_ptr + 1], sysex_queue[sysex_queue_ptr + 2]);
   sysex_queue_ptr += 3;
