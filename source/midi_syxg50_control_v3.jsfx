@@ -226,39 +226,40 @@ part_velocity_limit_high = 304900;
 part_velocity_sense_depth = 305000;
 part_velocity_sense_offset = 305100;
 part_same_note_assign = 305200;
+part_element_reserve = 305300;
 
 // tuning parameters
-part_scale_c = 305300;
-part_scale_cs = 305400;
-part_scale_d = 305500;
-part_scale_ds = 305600;
-part_scale_e = 305700;
-part_scale_f = 305800;
-part_scale_fs = 305900;
-part_scale_g = 306000;
-part_scale_gs = 306100;
-part_scale_a = 306200;
-part_scale_as = 306300;
-part_scale_b = 306400;
+part_scale_c = 305400;
+part_scale_cs = 305500;
+part_scale_d = 305600;
+part_scale_ds = 305700;
+part_scale_e = 305800;
+part_scale_f = 305900;
+part_scale_fs = 306000;
+part_scale_g = 306100;
+part_scale_gs = 306200;
+part_scale_a = 306300;
+part_scale_as = 306400;
+part_scale_b = 306500;
 
 // MIDI filter parameters
-part_recv_note = 306500;
-part_recv_pc = 306600;
-part_recv_bs = 306700;
-part_recv_cat = 306800;
-part_recv_pat = 306900;
-part_recv_pb = 307000;
-part_recv_cc = 307100;
-part_recv_mod = 307200;
-part_recv_vol = 307300;
-part_recv_pan = 307400;
-part_recv_exp = 307500;
-part_recv_sus = 307600;
-part_recv_sost = 307700;
-part_recv_soft = 307800;
-part_recv_port = 307900;
-part_recv_rpn = 308000;
-part_recv_nrpn = 308100;
+part_recv_note = 306600;
+part_recv_pc = 306700;
+part_recv_bs = 306800;
+part_recv_cat = 306900;
+part_recv_pat = 307000;
+part_recv_pb = 307100;
+part_recv_cc = 307200;
+part_recv_mod = 307300;
+part_recv_vol = 307400;
+part_recv_pan = 307500;
+part_recv_exp = 307600;
+part_recv_sus = 307700;
+part_recv_sost = 307800;
+part_recv_soft = 307900;
+part_recv_port = 308000;
+part_recv_rpn = 308100;
+part_recv_nrpn = 308200;
 
 idx = 0;
 
@@ -323,6 +324,7 @@ loop (16,
   part_velocity_sense_depth[idx] = 64;
   part_velocity_sense_offset[idx] = 64;
   part_same_note_assign[idx] = 1;
+  part_element_reserve[idx] = idx == 9 ? 0 : 2;
 
   // tuning parameters defaults
   part_scale_c[idx] = 64;
@@ -1130,6 +1132,10 @@ function gui_pages()
       gui_value_table = param_value_names_same_note_assign;
       part_same_note_assign[gui_part] = gui_slider(part_same_note_assign[gui_part], 0, 2, "Same Note Assign", 1, 0);
       gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x06, part_same_note_assign[gui_part], 1);
+
+      gui_value_table = "";
+      part_element_reserve[gui_part] = gui_slider(part_element_reserve[gui_part], 0, 32, "Element Reserve", gui_part == 9 ? 0 : 2, 0);
+      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x00, part_element_reserve[gui_part], 1);
     );
 
     // tuning parameters
@@ -1515,6 +1521,7 @@ file_mem(0, part_velocity_limit_high, 16);
 file_mem(0, part_velocity_sense_depth, 16);
 file_mem(0, part_velocity_sense_offset, 16);
 file_mem(0, part_same_note_assign, 16);
+file_mem(0, part_element_reserve, 16);
 
 // tuning parameters
 file_mem(0, part_scale_c, 16);
@@ -1637,6 +1644,7 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x0c, part_velocity_sense_depth[idx], 1);
     sysex_add_queue_multipart(idx, 0x0d, part_velocity_sense_offset[idx], 1);
     sysex_add_queue_multipart(idx, 0x06, part_same_note_assign[idx], 1);
+    sysex_add_queue_multipart(idx, 0x00, part_element_reserve[idx], 1);
 
     // restore tuning parameters
     sysex_add_queue_multipart(idx, 0x41, part_scale_c[idx], 1);
