@@ -1576,7 +1576,6 @@ spinlock.lock();
 midi_first_time ? (
   midi_first_time = 0;
   sysex_clear_queue();
-  sysex_add_queue(0x00007e, 0, 1);  // send XG system on
   sysex_add_queue(0x02015a, 1, 1);  // set variation connection to system
   gui_pages();                      // restore effect parameters
 
