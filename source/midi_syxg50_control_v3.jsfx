@@ -264,9 +264,9 @@ idx = 0;
 
 loop (16,
   // voice parameters defaults
-  voice_category[idx] = 0;
+  voice_category[idx] = idx == 9 ? 16 : 0;
   voice_number[idx] = 0;
-  part_bank[idx] = 0;
+  part_bank[idx] = idx == 9 ? 127 << 8 : 0;
   part_program[idx] = 0;
 
   // common parameters defaults
