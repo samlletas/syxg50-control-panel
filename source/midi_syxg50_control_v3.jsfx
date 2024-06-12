@@ -70,13 +70,6 @@ import midi_syxg50_mutex.jsfx-inc
 
 spinlock.lock();
 
-CAP_LMB = 0x01;
-CAP_RMB = 0x02;
-CAP_MMB = 0x40;
-CAP_CTRL = 0x04;
-CAP_ALT = 0x10;
-CAP_SHIFT = 0X08;
-
 ext_noinit = 1;
 gfx_clear = -1;
 gfx_a = 1;
@@ -134,8 +127,10 @@ gui_categories_variation_cursor = 9;
 gui_categories_variation_offset = 0;
 gui_categories_variation_cursor_prev = -1;
 
-gui_mouse_lmb = 0;
-gui_mouse_rmb = 0;
+gui_key = 0;
+gui_key_ctrl = 0;
+gui_mouse_left = 0;
+gui_mouse_right = 0;
 
 midi_force_update = 0;
 midi_first_time = 1;
@@ -467,6 +462,10 @@ function inverse_lerp(value, value_min, value_max) local(fraction) (
   min(max(fraction, 0), 1);
 );
 
+function gui_mouse_over(item_x, item_width, item_y, item_height) (
+  mouse_x >= item_x && mouse_x < item_x + item_width && mouse_y >= item_y && mouse_y < item_y + item_height;
+);
+
 function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
     local(value_old, value_fraction, value_range, step_size, fill_width, fill_offset, caption_width, caption_height) (
   value_old = value;
@@ -492,19 +491,19 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
   );
 
   // slider input
-  mouse_x >= gui_slider_x - 20 && mouse_x <= gui_slider_x + gui_slider_width + 20 && mouse_y >= gui_slider_y - 5 && mouse_y <= gui_slider_y + gui_slider_height + 5 ? (
+  gui_mouse_over(gui_slider_x - 20, gui_slider_width + 40, gui_slider_y - 5, gui_slider_height + 10) ? (
     mouse_wheel != 0 ? (
       value_range = value_max - value_min;
       value_range > 127 ? step_size = floor((value_range / 64) + 0.5) : step_size = 1;
       value += sign(mouse_wheel) * max(step_size, 1);
     );
 
-    mouse_cap & CAP_LMB && !(mouse_cap & CAP_CTRL) ? (
+    gui_mouse_left && !gui_key_ctrl ? (
       value_fraction = (mouse_x - gui_slider_x) / gui_slider_width;
       value = lerp(value_fraction, value_min, value_max);
     );
 
-    mouse_cap & CAP_RMB || (mouse_cap & CAP_LMB && mouse_cap & CAP_CTRL) ? (
+    gui_mouse_right || (gui_mouse_left && gui_key_ctrl) ? (
       value = value_def;
     );
 
@@ -547,17 +546,17 @@ function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(
 
   item_selected = 0;
 
-  mouse_x >= item_x - 8 && mouse_x < item_x + item_width + 8 && mouse_y >= item_y - 4 && mouse_y < item_y + item_height + 4 ? (
+  gui_mouse_over(item_x - 8, item_width + 16, item_y - 4, item_height + 8) ? (
     set_color(color_bg_cursor);
 
     mode == 0 ? (
-      gui_mouse_lmb > 0 ? item_selected |= 1;
-      gui_mouse_rmb > 0 ? item_selected |= 2;
+      gui_mouse_left > 0 ? item_selected |= 1;
+      gui_mouse_right > 0 ? item_selected |= 2;
     );
 
     mode == 1 ? (
-      gui_mouse_lmb == 1 ? item_selected |= 1;
-      gui_mouse_rmb == 1 ? item_selected |= 2;
+      gui_mouse_left == 1 ? item_selected |= 1;
+      gui_mouse_right == 1 ? item_selected |= 2;
     );
 
     mode == 2 ? item_selected = 1;
@@ -603,8 +602,8 @@ function gui_category(list, cursor, offset, highlight)
           gfx_rect(0, list_y, 8, gui_list_item_height);
         );
 
-        mouse_x >= list_x && mouse_x < (list_x + gui_categories_width) && mouse_y >= list_y && mouse_y < (list_y + gui_list_item_height) ? (
-          gui_mouse_lmb == 1 ? cursor = category_count;
+        gui_mouse_over(list_x, gui_categories_width, list_y, gui_list_item_height) ? (
+          gui_mouse_left == 1 ? cursor = category_count;
           list_hover = 1;
         );
 
@@ -622,7 +621,7 @@ function gui_category(list, cursor, offset, highlight)
 
   gui_categories_count = category_count;
 
-  mouse_y >= gui_menu_height && mouse_x < gui_categories_width ? (
+  gui_mouse_over(0, gui_categories_width, gui_menu_height, gfx_h) ? (
     cursor -= sign(mouse_wheel);
     cursor = min(max(cursor, 0), category_count - 1);
   );
@@ -846,8 +845,8 @@ function gui_pages()
         gfx_rect(list_x, list_y, gui_list_item_width, gui_list_item_height);
       );
 
-      mouse_x >= list_x && mouse_x < (list_x + gui_list_item_width) && mouse_y >= list_y && mouse_y < (list_y + gui_list_item_height) ? (
-        gui_mouse_lmb ? voice_change = voice_count;
+      gui_mouse_over(list_x, gui_list_item_width, list_y, gui_list_item_height) ? (
+        gui_mouse_left == 1 ? voice_change = voice_count;
         list_hover = 1;
       );
 
@@ -862,7 +861,7 @@ function gui_pages()
       list_y += gui_list_item_height;
     );
 
-    mouse_y >= gui_menu_height && mouse_x >= gui_categories_width ? (
+    gui_mouse_over(gui_categories_width, gfx_w, gui_menu_height, gfx_h) ? (
       mouse_wheel != 0 ? (
         voice_change = voice_number[gui_part];
         voice_change -= sign(mouse_wheel);
@@ -1724,18 +1723,9 @@ gfx_rect(gui_categories_width, gui_menu_height, gfx_w - gui_categories_width, gf
 spinlock.lock();
 
 gui_key = gfx_getchar();
-
-!gui_mouse_lmb ? (
-  mouse_cap & CAP_LMB ? gui_mouse_lmb = 1;
-) : (
-  !(mouse_cap & CAP_LMB) ? gui_mouse_lmb = 0;
-);
-
-!gui_mouse_rmb ? (
-  mouse_cap & CAP_RMB ? gui_mouse_rmb = 1;
-) : (
-  !(mouse_cap & CAP_RMB) ? gui_mouse_rmb = 0;
-);
+gui_key_ctrl = mouse_cap & 0x04;
+gui_mouse_left = mouse_cap & 0x01 ? gui_mouse_left + 1 : 0;
+gui_mouse_right = mouse_cap & 0x02 ? gui_mouse_right + 1 : 0;
 
 // main menu ------------------------------------------------------------------
 
@@ -1793,8 +1783,8 @@ gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
 
 // cleanup --------------------------------------------------------------------
 
-gui_mouse_lmb ? gui_mouse_lmb = 2;
-gui_mouse_rmb ? gui_mouse_rmb = 2;
+gui_key = 0;
+gui_key_ctrl = 0;
 mouse_wheel = 0;
 
 spinlock.unlock();
