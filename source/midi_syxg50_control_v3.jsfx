@@ -98,6 +98,8 @@ gui_slider_height = 12;
 gui_slider_spacing = 26;
 gui_slider_x = 0;
 gui_slider_y = 0;
+gui_focus_x = 0;
+gui_focus_y = 0;
 gui_slider_change = 0;
 gui_value_table = "";
 
@@ -498,18 +500,23 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
       value += sign(mouse_wheel) * max(step_size, 1);
     );
 
-    gui_mouse_left && !gui_key_ctrl ? (
-      value_fraction = (mouse_x - gui_slider_x) / gui_slider_width;
-      value = lerp(value_fraction, value_min, value_max);
+    gui_mouse_left == 1 && !gui_key_ctrl ? (
+      gui_focus_x = gui_slider_x;
+      gui_focus_y = gui_slider_y;
     );
 
-    gui_mouse_right || (gui_mouse_left && gui_key_ctrl) ? (
+    gui_mouse_right == 1 || (gui_mouse_left == 1 && gui_key_ctrl) ? (
       value = value_def;
     );
-
-    value = min(max(value, value_min), value_max);
   );
 
+  gui_mouse_left > 0 && gui_slider_x == gui_focus_x && gui_slider_y == gui_focus_y ? (
+    value_fraction = (mouse_x - gui_slider_x) / gui_slider_width;
+    value = lerp(value_fraction, value_min, value_max);
+  );
+
+  // slider change
+  value = min(max(value, value_min), value_max);
   gui_slider_change = midi_force_update | (value != value_old);
 
   value == value_def ? set_color(color_fg_list);
@@ -1726,6 +1733,11 @@ gui_key = gfx_getchar();
 gui_key_ctrl = mouse_cap & 0x04;
 gui_mouse_left = mouse_cap & 0x01 ? gui_mouse_left + 1 : 0;
 gui_mouse_right = mouse_cap & 0x02 ? gui_mouse_right + 1 : 0;
+
+!gui_mouse_left ? (
+  gui_focus_x = 0;
+  gui_focus_y = 0;
+);
 
 // main menu ------------------------------------------------------------------
 
