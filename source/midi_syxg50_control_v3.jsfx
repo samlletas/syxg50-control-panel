@@ -493,7 +493,7 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
   );
 
   // slider input
-  gui_mouse_over(gui_slider_x - 20, gui_slider_width + 40, gui_slider_y - 5, gui_slider_height + 10) ? (
+  gui_mouse_over(gui_slider_x - 5, gui_slider_width + 10, gui_slider_y - 5, gui_slider_height + 10) ? (
     mouse_wheel != 0 ? (
       value_range = value_max - value_min;
       value_range > 127 ? step_size = floor((value_range / 64) + 0.5) : step_size = 1;
