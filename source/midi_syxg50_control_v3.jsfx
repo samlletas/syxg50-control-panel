@@ -72,7 +72,6 @@ spinlock.lock();
 
 ext_noinit = 1;
 gfx_clear = -1;
-gfx_a = 1;
 
 color_bg_darkest = 0x161616;
 color_bg_darker  = 0x202020;
@@ -98,10 +97,16 @@ gui_slider_height = 12;
 gui_slider_spacing = 26;
 gui_slider_x = 0;
 gui_slider_y = 0;
-gui_focus_x = 0;
-gui_focus_y = 0;
-gui_slider_change = 0;
+
+gui_focus_x = -1;
+gui_focus_y = -1;
+gui_value_change = 0;
 gui_value_table = "";
+
+gui_key = 0;
+gui_key_ctrl = 0;
+gui_mouse_left = 0;
+gui_mouse_right = 0;
 
 gui_page = 0;
 gui_page_prev = -1;
@@ -128,11 +133,6 @@ gui_categories_chorus_cursor_prev = -1;
 gui_categories_variation_cursor = 9;
 gui_categories_variation_offset = 0;
 gui_categories_variation_cursor_prev = -1;
-
-gui_key = 0;
-gui_key_ctrl = 0;
-gui_mouse_left = 0;
-gui_mouse_right = 0;
 
 midi_force_update = 0;
 midi_first_time = 1;
@@ -517,7 +517,7 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
 
   // slider change
   value = min(max(value, value_min), value_max);
-  gui_slider_change = midi_force_update | (value != value_old);
+  gui_value_change = midi_force_update | (value != value_old);
 
   value == value_def ? set_color(color_fg_list);
   value != value_def ? set_color(color_bg_changed);
@@ -725,7 +725,7 @@ function gui_slider_list(list, cursor, effect_type)
 
       effect_params[param_offset] = gui_slider(effect_params[param_offset], param_min, param_max, caption, param_def, param_type);
 
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_size = 1;
 
         effect_type == 0 ? (  // reverb
@@ -922,186 +922,186 @@ function gui_pages()
     gui_categories_editor_cursor == 0 ? (
       gui_value_table = param_value_names_channel;
       part_rcv_channel[gui_part] = gui_slider(part_rcv_channel[gui_part], 0, 15, "Receive Channel", gui_part, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x04, part_rcv_channel[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x04, part_rcv_channel[gui_part], 1);
 
       gui_value_table = param_value_names_mono_poly;
       part_mode[gui_part] = gui_slider(part_mode[gui_part], 0, 1, "Mode", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x05, part_mode[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x05, part_mode[gui_part], 1);
 
       gui_value_table = param_value_names_off_on;
       part_portamento_switch[gui_part] = gui_slider(part_portamento_switch[gui_part], 0, 1, "Portamento", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x67, part_portamento_switch[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x67, part_portamento_switch[gui_part], 1);
 
       gui_value_table = "";
       part_portamento_time[gui_part] = gui_slider(part_portamento_time[gui_part], 0, 127, "Portamento Time", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x68, part_portamento_time[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x68, part_portamento_time[gui_part], 1);
 
       gui_slider_y += 25;
 
       part_volume[gui_part] = gui_slider(part_volume[gui_part], 0, 127, "Volume", 100, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x0b, part_volume[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x0b, part_volume[gui_part], 1);
 
       gui_value_table = param_value_names_pan;
       part_pan[gui_part] = gui_slider(part_pan[gui_part], 0, 127, "Pan", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x0e, part_pan[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x0e, part_pan[gui_part], 1);
 
       gui_value_table = param_value_names_semitones;
       part_transpose[gui_part] = gui_slider(part_transpose[gui_part], 40, 88, "Transpose", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x08, part_transpose[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x08, part_transpose[gui_part], 1);
 
       gui_value_table = "";
       part_detune[gui_part] = gui_slider(part_detune[gui_part], 0, 4096, "Detune", 2048, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x09, part_detune[gui_part], 2);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x09, part_detune[gui_part], 2);
 
       gui_slider_y += 25;
 
       gui_value_table = effect_value_names_18_generic;
       part_filter_cutoff[gui_part] = gui_slider(part_filter_cutoff[gui_part], 0, 127, "Filter Cutoff", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x18, part_filter_cutoff[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x18, part_filter_cutoff[gui_part], 1);
 
       part_filter_resonance[gui_part] = gui_slider(part_filter_resonance[gui_part], 0, 127, "Filter Resonance", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x19, part_filter_resonance[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x19, part_filter_resonance[gui_part], 1);
 
       gui_slider_y += 25;
 
       part_eg_attack[gui_part] = gui_slider(part_eg_attack[gui_part], 0, 127, "EG Attack", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x1a, part_eg_attack[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x1a, part_eg_attack[gui_part], 1);
 
       part_eg_decay[gui_part] = gui_slider(part_eg_decay[gui_part], 0, 127, "EG Decay", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x1b, part_eg_decay[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x1b, part_eg_decay[gui_part], 1);
 
       part_eg_release[gui_part] = gui_slider(part_eg_release[gui_part], 0, 127, "EG Release", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x1c, part_eg_release[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x1c, part_eg_release[gui_part], 1);
 
       gui_slider_y += 25;
 
       part_pitch_eg_init_level[gui_part] = gui_slider(part_pitch_eg_init_level[gui_part], 0, 127, "Pitch EG Init Level", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x69, part_pitch_eg_init_level[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x69, part_pitch_eg_init_level[gui_part], 1);
 
       part_pitch_eg_attack[gui_part] = gui_slider(part_pitch_eg_attack[gui_part], 0, 127, "Pitch EG Attack", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x6a, part_pitch_eg_attack[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x6a, part_pitch_eg_attack[gui_part], 1);
 
       part_pitch_eg_release_level[gui_part] = gui_slider(part_pitch_eg_release_level[gui_part], 0, 127, "Pitch EG Release Level", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x6b, part_pitch_eg_release_level[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x6b, part_pitch_eg_release_level[gui_part], 1);
 
       part_pitch_eg_release[gui_part] = gui_slider(part_pitch_eg_release[gui_part], 0, 127, "Pitch EG Release", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x6c, part_pitch_eg_release[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x6c, part_pitch_eg_release[gui_part], 1);
 
       gui_slider_y += 25;
 
       gui_value_table = "";
       part_reverb_send[gui_part] = gui_slider(part_reverb_send[gui_part], 0, 127, "Reverb Send", 40, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x13, part_reverb_send[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x13, part_reverb_send[gui_part], 1);
 
       part_chorus_send[gui_part] = gui_slider(part_chorus_send[gui_part], 0, 127, "Chorus Send", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x12, part_chorus_send[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x12, part_chorus_send[gui_part], 1);
 
       part_variation_send[gui_part] = gui_slider(part_variation_send[gui_part], 0, 127, "Variation Send", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x14, part_variation_send[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x14, part_variation_send[gui_part], 1);
 
       part_dry_level[gui_part] = gui_slider(part_dry_level[gui_part], 0, 127, "Dry", 127, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x11, part_dry_level[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x11, part_dry_level[gui_part], 1);
     );
 
     // modulation parameters
     gui_categories_editor_cursor == 1 ? (
       gui_value_table = effect_value_names_18_generic;
       part_vibrato_rate[gui_part] = gui_slider(part_vibrato_rate[gui_part], 0, 127, "Vibrato Rate", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x15, part_vibrato_rate[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x15, part_vibrato_rate[gui_part], 1);
 
       part_vibrato_depth[gui_part] = gui_slider(part_vibrato_depth[gui_part], 0, 127, "Vibrato Depth", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x16, part_vibrato_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x16, part_vibrato_depth[gui_part], 1);
 
       part_vibrato_delay[gui_part] = gui_slider(part_vibrato_delay[gui_part], 0, 127, "Vibrato Delay", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x17, part_vibrato_delay[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x17, part_vibrato_delay[gui_part], 1);
 
       gui_slider_y += 25;
 
       gui_value_table = param_value_names_semitones;
       part_bend_pitch_control[gui_part] = gui_slider(part_bend_pitch_control[gui_part], 40, 88, "PB Pitch Control", 66, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x23, part_bend_pitch_control[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x23, part_bend_pitch_control[gui_part], 1);
 
       gui_value_table = param_value_names_filter_mod;
       part_bend_filter_control[gui_part] = gui_slider(part_bend_filter_control[gui_part], 0, 127, "PB Filter Control", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x24, part_bend_filter_control[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x24, part_bend_filter_control[gui_part], 1);
 
       gui_value_table = param_value_names_percent;
       part_bend_amplitude_control[gui_part] = gui_slider(part_bend_amplitude_control[gui_part], 0, 127, "PB Amp Control", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x25, part_bend_amplitude_control[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x25, part_bend_amplitude_control[gui_part], 1);
 
       gui_value_table = "";
       part_bend_lfo_pmod_depth[gui_part] = gui_slider(part_bend_lfo_pmod_depth[gui_part], 0, 127, "PB LFO Pitch Depth", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x26, part_bend_lfo_pmod_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x26, part_bend_lfo_pmod_depth[gui_part], 1);
 
       part_bend_lfo_fmod_depth[gui_part] = gui_slider(part_bend_lfo_fmod_depth[gui_part], 0, 127, "PB LFO Filter Depth", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x27, part_bend_lfo_fmod_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x27, part_bend_lfo_fmod_depth[gui_part], 1);
 
       part_bend_lfo_amod_depth[gui_part] = gui_slider(part_bend_lfo_amod_depth[gui_part], 0, 127, "PB LFO Amp Depth", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x28, part_bend_lfo_amod_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x28, part_bend_lfo_amod_depth[gui_part], 1);
 
       gui_slider_y += 25;
 
       gui_value_table = param_value_names_semitones;
       part_mw_pitch_control[gui_part] = gui_slider(part_mw_pitch_control[gui_part], 40, 88, "MW Pitch Control", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x1d, part_mw_pitch_control[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x1d, part_mw_pitch_control[gui_part], 1);
 
       gui_value_table = param_value_names_filter_mod;
       part_mw_filter_control[gui_part] = gui_slider(part_mw_filter_control[gui_part], 0, 127, "MW Filter Control", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x1e, part_mw_filter_control[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x1e, part_mw_filter_control[gui_part], 1);
 
       gui_value_table = param_value_names_percent;
       part_mw_amplitude_control[gui_part] = gui_slider(part_mw_amplitude_control[gui_part], 0, 127, "MW Amp Control", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x1f, part_mw_amplitude_control[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x1f, part_mw_amplitude_control[gui_part], 1);
 
       gui_value_table = "";
       part_mw_lfo_pmod_depth[gui_part] = gui_slider(part_mw_lfo_pmod_depth[gui_part], 0, 127, "MW LFO Pitch Depth", 10, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x20, part_mw_lfo_pmod_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x20, part_mw_lfo_pmod_depth[gui_part], 1);
 
       part_mw_lfo_fmod_depth[gui_part] = gui_slider(part_mw_lfo_fmod_depth[gui_part], 0, 127, "MW LFO Filter Depth", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x21, part_mw_lfo_fmod_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x21, part_mw_lfo_fmod_depth[gui_part], 1);
 
       part_mw_lfo_amod_depth[gui_part] = gui_slider(part_mw_lfo_amod_depth[gui_part], 0, 127, "MW LFO Amp Depth", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x22, part_mw_lfo_amod_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x22, part_mw_lfo_amod_depth[gui_part], 1);
 
       gui_slider_y += 25;
 
       // these control both channel and poly aftertouch assignments (because why the hell not)!
       gui_value_table = param_value_names_semitones;
       part_at_pitch_control[gui_part] = gui_slider(part_at_pitch_control[gui_part], 40, 88, "AT Pitch Control", 64, 1);
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_add_queue_multipart(gui_part, 0x4d, part_at_pitch_control[gui_part], 1);
         sysex_add_queue_multipart(gui_part, 0x53, part_at_pitch_control[gui_part], 1);
       );
 
       gui_value_table = param_value_names_filter_mod;
       part_at_filter_control[gui_part] = gui_slider(part_at_filter_control[gui_part], 0, 127, "AT Filter Control", 64, 1);
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_add_queue_multipart(gui_part, 0x4e, part_at_filter_control[gui_part], 1);
         sysex_add_queue_multipart(gui_part, 0x54, part_at_filter_control[gui_part], 1);
       );
 
       gui_value_table = param_value_names_percent;
       part_at_amplitude_control[gui_part] = gui_slider(part_at_amplitude_control[gui_part], 0, 127, "AT Amp Control", 64, 1);
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_add_queue_multipart(gui_part, 0x4f, part_at_amplitude_control[gui_part], 1);
         sysex_add_queue_multipart(gui_part, 0x55, part_at_amplitude_control[gui_part], 1);
       );
 
       gui_value_table = "";
       part_at_lfo_pmod_depth[gui_part] = gui_slider(part_at_lfo_pmod_depth[gui_part], 0, 127, "AT LFO Pitch Depth", 0, 0);
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_add_queue_multipart(gui_part, 0x50, part_at_lfo_pmod_depth[gui_part], 1);
         sysex_add_queue_multipart(gui_part, 0x56, part_at_lfo_pmod_depth[gui_part], 1);
       );
 
       part_at_lfo_fmod_depth[gui_part] = gui_slider(part_at_lfo_fmod_depth[gui_part], 0, 127, "AT LFO Filter Depth", 0, 0);
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_add_queue_multipart(gui_part, 0x51, part_at_lfo_fmod_depth[gui_part], 1);
         sysex_add_queue_multipart(gui_part, 0x57, part_at_lfo_fmod_depth[gui_part], 1);
       );
 
       part_at_lfo_amod_depth[gui_part] = gui_slider(part_at_lfo_amod_depth[gui_part], 0, 127, "AT LFO Amp Depth", 0, 0);
-      gui_slider_change ? (
+      gui_value_change ? (
         sysex_add_queue_multipart(gui_part, 0x52, part_at_lfo_amod_depth[gui_part], 1);
         sysex_add_queue_multipart(gui_part, 0x58, part_at_lfo_amod_depth[gui_part], 1);
       );
@@ -1111,37 +1111,37 @@ function gui_pages()
     gui_categories_editor_cursor == 2 ? (
       gui_value_table = param_value_names_notes;
       part_note_limit_low[gui_part] = gui_slider(part_note_limit_low[gui_part], 0, 127, "Note Limit Low", 0, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x0f, part_note_limit_low[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x0f, part_note_limit_low[gui_part], 1);
 
       part_note_limit_high[gui_part] = gui_slider(part_note_limit_high[gui_part], 0, 127, "Note Limit High", 127, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x10, part_note_limit_high[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x10, part_note_limit_high[gui_part], 1);
 
       gui_slider_y += 25;
 
       gui_value_table = "";
       part_velocity_limit_low[gui_part] = gui_slider(part_velocity_limit_low[gui_part], 1, 127, "Velocity Limit Low", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x6d, part_velocity_limit_low[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x6d, part_velocity_limit_low[gui_part], 1);
 
       part_velocity_limit_high[gui_part] = gui_slider(part_velocity_limit_high[gui_part], 1, 127, "Velocity Limit High", 127, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x6e, part_velocity_limit_high[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x6e, part_velocity_limit_high[gui_part], 1);
 
       gui_slider_y += 25;
 
       part_velocity_sense_depth[gui_part] = gui_slider(part_velocity_sense_depth[gui_part], 0, 127, "Velocity Sense Depth", 64, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x0c, part_velocity_sense_depth[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x0c, part_velocity_sense_depth[gui_part], 1);
 
       part_velocity_sense_offset[gui_part] = gui_slider(part_velocity_sense_offset[gui_part], 0, 127, "Velocity Sense Offset", 64, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x0d, part_velocity_sense_offset[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x0d, part_velocity_sense_offset[gui_part], 1);
 
       gui_slider_y += 25;
 
       gui_value_table = param_value_names_same_note_assign;
       part_same_note_assign[gui_part] = gui_slider(part_same_note_assign[gui_part], 0, 2, "Same Note Assign", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x06, part_same_note_assign[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x06, part_same_note_assign[gui_part], 1);
 
       gui_value_table = "";
       part_element_reserve[gui_part] = gui_slider(part_element_reserve[gui_part], 0, 32, "Element Reserve", gui_part == 9 ? 0 : 2, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x00, part_element_reserve[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x00, part_element_reserve[gui_part], 1);
     );
 
     // tuning parameters
@@ -1149,40 +1149,40 @@ function gui_pages()
       gui_value_table = effect_value_names_18_generic;
 
       part_scale_c[gui_part] = gui_slider(part_scale_c[gui_part], 0, 127, "C", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x41, part_scale_c[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x41, part_scale_c[gui_part], 1);
 
       part_scale_cs[gui_part] = gui_slider(part_scale_cs[gui_part], 0, 127, "C#", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x42, part_scale_cs[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x42, part_scale_cs[gui_part], 1);
 
       part_scale_d[gui_part] = gui_slider(part_scale_d[gui_part], 0, 127, "D", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x43, part_scale_d[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x43, part_scale_d[gui_part], 1);
 
       part_scale_ds[gui_part] = gui_slider(part_scale_ds[gui_part], 0, 127, "D#", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x44, part_scale_ds[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x44, part_scale_ds[gui_part], 1);
 
       part_scale_e[gui_part] = gui_slider(part_scale_e[gui_part], 0, 127, "E", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x45, part_scale_e[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x45, part_scale_e[gui_part], 1);
 
       part_scale_f[gui_part] = gui_slider(part_scale_f[gui_part], 0, 127, "F", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x46, part_scale_f[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x46, part_scale_f[gui_part], 1);
 
       part_scale_fs[gui_part] = gui_slider(part_scale_fs[gui_part], 0, 127, "F#", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x47, part_scale_fs[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x47, part_scale_fs[gui_part], 1);
 
       part_scale_g[gui_part] = gui_slider(part_scale_g[gui_part], 0, 127, "G", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x48, part_scale_g[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x48, part_scale_g[gui_part], 1);
 
       part_scale_gs[gui_part] = gui_slider(part_scale_gs[gui_part], 0, 127, "G#", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x49, part_scale_gs[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x49, part_scale_gs[gui_part], 1);
 
       part_scale_a[gui_part] = gui_slider(part_scale_a[gui_part], 0, 127, "A", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x4a, part_scale_a[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x4a, part_scale_a[gui_part], 1);
 
       part_scale_as[gui_part] = gui_slider(part_scale_as[gui_part], 0, 127, "A#", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x4b, part_scale_as[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x4b, part_scale_as[gui_part], 1);
 
       part_scale_b[gui_part] = gui_slider(part_scale_b[gui_part], 0, 127, "B", 64, 1);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x4c, part_scale_b[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x4c, part_scale_b[gui_part], 1);
     );
 
     // MIDI filter parameters
@@ -1190,55 +1190,55 @@ function gui_pages()
       gui_value_table = param_value_names_off_on;
 
       part_recv_note[gui_part] = gui_slider(part_recv_note[gui_part], 0, 1, "Note On/Off", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x35, part_recv_note[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x35, part_recv_note[gui_part], 1);
 
       part_recv_pc[gui_part] = gui_slider(part_recv_pc[gui_part], 0, 1, "Program Change", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x32, part_recv_pc[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x32, part_recv_pc[gui_part], 1);
 
       part_recv_bs[gui_part] = gui_slider(part_recv_bs[gui_part], 0, 1, "Bank Select", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x40, part_recv_bs[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x40, part_recv_bs[gui_part], 1);
 
       part_recv_cat[gui_part] = gui_slider(part_recv_cat[gui_part], 0, 1, "Channel AT", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x31, part_recv_cat[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x31, part_recv_cat[gui_part], 1);
 
       part_recv_pat[gui_part] = gui_slider(part_recv_pat[gui_part], 0, 1, "Poly AT", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x34, part_recv_pat[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x34, part_recv_pat[gui_part], 1);
 
       part_recv_pb[gui_part] = gui_slider(part_recv_pb[gui_part], 0, 1, "Pitch Bend", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x30, part_recv_pb[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x30, part_recv_pb[gui_part], 1);
 
       part_recv_cc[gui_part] = gui_slider(part_recv_cc[gui_part], 0, 1, "Control Change", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x33, part_recv_cc[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x33, part_recv_cc[gui_part], 1);
 
       part_recv_mod[gui_part] = gui_slider(part_recv_mod[gui_part], 0, 1, "Modulation", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x38, part_recv_mod[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x38, part_recv_mod[gui_part], 1);
 
       part_recv_vol[gui_part] = gui_slider(part_recv_vol[gui_part], 0, 1, "Volume", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x39, part_recv_vol[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x39, part_recv_vol[gui_part], 1);
 
       part_recv_pan[gui_part] = gui_slider(part_recv_pan[gui_part], 0, 1, "Pan", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x3a, part_recv_pan[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3a, part_recv_pan[gui_part], 1);
 
       part_recv_exp[gui_part] = gui_slider(part_recv_exp[gui_part], 0, 1, "Expression", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x3b, part_recv_exp[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3b, part_recv_exp[gui_part], 1);
 
       part_recv_sus[gui_part] = gui_slider(part_recv_sus[gui_part], 0, 1, "Sustain Pedal", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x3c, part_recv_sus[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3c, part_recv_sus[gui_part], 1);
 
       part_recv_sost[gui_part] = gui_slider(part_recv_sost[gui_part], 0, 1, "Sostenuto Pedal", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x3e, part_recv_sost[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3e, part_recv_sost[gui_part], 1);
 
       part_recv_soft[gui_part] = gui_slider(part_recv_soft[gui_part], 0, 1, "Soft Pedal", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x3f, part_recv_soft[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3f, part_recv_soft[gui_part], 1);
 
       part_recv_port[gui_part] = gui_slider(part_recv_port[gui_part], 0, 1, "Portamento", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x3d, part_recv_port[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3d, part_recv_port[gui_part], 1);
 
       part_recv_rpn[gui_part] = gui_slider(part_recv_rpn[gui_part], 0, 1, "RPN", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x36, part_recv_rpn[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x36, part_recv_rpn[gui_part], 1);
 
       part_recv_nrpn[gui_part] = gui_slider(part_recv_nrpn[gui_part], 0, 1, "NRPN", 1, 0);
-      gui_slider_change ? sysex_add_queue_multipart(gui_part, 0x37, part_recv_nrpn[gui_part], 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x37, part_recv_nrpn[gui_part], 1);
     );
 
     gui_categories_editor_cursor_prev = gui_categories_editor_cursor;
@@ -1276,11 +1276,11 @@ function gui_pages()
 
       gui_value_table = param_value_names_send_return;
       effect_reverb_return = gui_slider(effect_reverb_return, 0, 127, "Return", 64, 1);
-      gui_slider_change ? sysex_add_queue(0x02010c, effect_reverb_return, 1);
+      gui_value_change ? sysex_add_queue(0x02010c, effect_reverb_return, 1);
 
       gui_value_table = param_value_names_pan;
       effect_reverb_pan = gui_slider(effect_reverb_pan, 1, 127, "Pan", 64, 1);
-      gui_slider_change ? sysex_add_queue(0x02010d, effect_reverb_pan, 1);
+      gui_value_change ? sysex_add_queue(0x02010d, effect_reverb_pan, 1);
 
       gui_slider_y += 25;
 
@@ -1322,15 +1322,15 @@ function gui_pages()
 
       gui_value_table = param_value_names_send_return;
       effect_chorus_return = gui_slider(effect_chorus_return, 0, 127, "Return", 64, 1);
-      gui_slider_change ? sysex_add_queue(0x02012c, effect_chorus_return, 1);
+      gui_value_change ? sysex_add_queue(0x02012c, effect_chorus_return, 1);
 
       gui_value_table = param_value_names_pan;
       effect_chorus_pan = gui_slider(effect_chorus_pan, 1, 127, "Pan", 64, 1);
-      gui_slider_change ? sysex_add_queue(0x02012d, effect_chorus_pan, 1);
+      gui_value_change ? sysex_add_queue(0x02012d, effect_chorus_pan, 1);
 
       gui_value_table = param_value_names_send_return;
       effect_chorus_send_reverb = gui_slider(effect_chorus_send_reverb, 0, 127, "Reverb Send", 0, 0);
-      gui_slider_change ? sysex_add_queue(0x02012e, effect_chorus_send_reverb, 1);
+      gui_value_change ? sysex_add_queue(0x02012e, effect_chorus_send_reverb, 1);
 
       gui_slider_y += 25;
 
@@ -1403,18 +1403,18 @@ function gui_pages()
 
       gui_value_table = param_value_names_send_return;
       effect_variation_return = gui_slider(effect_variation_return, 0, 127, "Return", 64, 1);
-      gui_slider_change ? sysex_add_queue(0x020156, effect_variation_return, 1);
+      gui_value_change ? sysex_add_queue(0x020156, effect_variation_return, 1);
 
       gui_value_table = param_value_names_pan;
       effect_variation_pan = gui_slider(effect_variation_pan, 1, 127, "Pan", 64, 1);
-      gui_slider_change ? sysex_add_queue(0x020157, effect_variation_pan, 1);
+      gui_value_change ? sysex_add_queue(0x020157, effect_variation_pan, 1);
 
       gui_value_table = param_value_names_send_return;
       effect_variation_send_reverb = gui_slider(effect_variation_send_reverb, 0, 127, "Reverb Send", 0, 0);
-      gui_slider_change ? sysex_add_queue(0x020158, effect_variation_send_reverb, 1);
+      gui_value_change ? sysex_add_queue(0x020158, effect_variation_send_reverb, 1);
 
       effect_variation_send_chorus = gui_slider(effect_variation_send_chorus, 0, 127, "Chorus Send", 0, 0);
-      gui_slider_change ? sysex_add_queue(0x020159, effect_variation_send_chorus, 1);
+      gui_value_change ? sysex_add_queue(0x020159, effect_variation_send_chorus, 1);
 
       gui_slider_y += 25;
 
@@ -1425,7 +1425,7 @@ function gui_pages()
   );
 );
 
-function resend_midi() (
+function gui_restore() (
   midi_first_time = 1;
   gui_page_prev = -1;
   gui_part_prev = -1;
@@ -1567,7 +1567,7 @@ file_mem(0, part_recv_nrpn, 16);
 
 // force update after data was loaded
 file_avail(0) >= 0 ? (
-  resend_midi();
+  gui_restore();
 );
 
 spinlock.unlock();
@@ -1735,8 +1735,8 @@ gui_mouse_left = mouse_cap & 0x01 ? gui_mouse_left + 1 : 0;
 gui_mouse_right = mouse_cap & 0x02 ? gui_mouse_right + 1 : 0;
 
 !gui_mouse_left ? (
-  gui_focus_x = 0;
-  gui_focus_y = 0;
+  gui_focus_x = -1;
+  gui_focus_y = -1;
 );
 
 // main menu ------------------------------------------------------------------
@@ -1787,7 +1787,7 @@ gui_categories_visible = floor((gfx_h - gui_menu_height - 20) / gui_list_item_he
 gui_categories_visible = max(gui_categories_visible, 1);
 
 gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
-  resend_midi();
+  gui_restore();
 ) : (
   gui_pages();
   gui_page_prev = gui_page;
