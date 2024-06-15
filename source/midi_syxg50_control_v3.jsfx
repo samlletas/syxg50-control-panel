@@ -83,8 +83,12 @@ color_bg_voice   = 0x514631;
 color_fg_menu    = 0x707070;
 color_fg_list    = 0xD4D4D4;
 
-gui_font = "Segoe UI";
-gui_font_size = 22;
+font_default = 1;
+font_small   = 2;
+
+gfx_setfont(font_default, "Segoe UI", 22);
+gfx_setfont(font_small, "Segoe UI", 20);
+
 gui_menu_height = 44;
 gui_list_item_width = 200;
 gui_list_item_height = 27;
@@ -549,7 +553,7 @@ function gui_switch(value, value_min, value_max, caption, value_def)
   value < 0 ? value = value_def;
   option_count = value_max - value_min + 1;
   option_width = (gui_switch_width - (gui_switch_margin * (option_count - 1))) / option_count;
-  gfx_setfont(1, gui_font, gui_switch_font_size);
+  gfx_setfont(font_small);
 
   idx = 0;
 
@@ -594,7 +598,7 @@ function gui_switch(value, value_min, value_max, caption, value_def)
 
   // switch caption
   value == value_def ? set_color(color_fg_list) : set_color(color_bg_changed);
-  gfx_setfont(1, gui_font, gui_font_size);
+  gfx_setfont(font_default);
   gfx_measurestr(caption, caption_width, caption_height);
   gfx_x = gui_slider_x - caption_width - 8;
   gfx_y = gui_slider_y - 6;
@@ -1784,7 +1788,7 @@ spinlock.unlock();
 
 // main window ----------------------------------------------------------------
 
-gfx_setfont(1, gui_font, gui_font_size);
+gfx_setfont(font_default);
 
 set_color(color_bg_darkest);
 gfx_rect(0, 0, gfx_w, gui_menu_height - 10);
