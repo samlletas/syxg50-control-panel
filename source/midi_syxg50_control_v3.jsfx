@@ -104,7 +104,6 @@ gui_slider_spacing = 26;
 gui_slider_x = 0;
 gui_slider_y = 0;
 
-gui_switch_font_size = 20;
 gui_switch_width = gui_slider_width;
 gui_switch_height = 18;
 gui_switch_margin = 8;
@@ -440,11 +439,11 @@ function parse_to_next_line(string, offset) local(length) (
 );
 
 function get_value_display(value)
-    local(value_display, table_len, table_ptr, table_ptr_old, table_value) (
+    local(table_len, table_ptr, table_ptr_old, table_value) (
   table_len = strlen(gui_value_table);
 
   table_len > 0 ? (
-    strcpy(value_display, "not found");
+    strcpy(#param_value, "not found");
     table_ptr = 1;
 
     while (table_ptr < table_len) (
@@ -454,15 +453,15 @@ function get_value_display(value)
       table_ptr = parse_to_line_end(gui_value_table, table_ptr) + 1;
 
       table_value == value ? (
-        strcpy_substr(value_display, gui_value_table, table_ptr_old, table_ptr - table_ptr_old);
+        strcpy_substr(#param_value, gui_value_table, table_ptr_old, table_ptr - table_ptr_old);
         table_ptr = table_len;
       );
     );
   ) : (
-    sprintf(value_display, "%i", value);
+    sprintf(#param_value, "%i", value);
   );
 
-  value_display;
+  #param_value;
 );
 
 function lerp(fraction, value_min, value_max) local(value) (
@@ -647,7 +646,7 @@ function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(
 );
 
 function gui_category(list, cursor, offset, highlight)
-    local(list_x, list_y, list_hover, category_count, category_render_count, list_len, list_ptr, list_ptr_old, list_item_text) (
+    local(list_x, list_y, list_hover, category_count, category_render_count, list_len, list_ptr, list_ptr_old) (
   list_x = 0;
   list_y = gui_menu_height + 20;
 
@@ -661,7 +660,7 @@ function gui_category(list, cursor, offset, highlight)
     list_ptr_old = list_ptr;
     list_ptr = parse_to_line_end(list, list_ptr);
 
-    strcpy_substr(list_item_text, list, list_ptr_old + 3, list_ptr - list_ptr_old - 3);
+    strcpy_substr(#category_name, list, list_ptr_old + 3, list_ptr - list_ptr_old - 3);
     list_ptr += 1;
 
     category_count >= offset ? (
@@ -688,7 +687,7 @@ function gui_category(list, cursor, offset, highlight)
         );
 
         list_hover ? set_color(color_bg_cursor) : set_color(color_fg_menu);
-        gfx_drawstr(list_item_text);
+        gfx_drawstr(#category_name);
 
         category_render_count += 1;
       );
@@ -732,7 +731,7 @@ function gui_category_adjust_view(offset, cursor, cursor_prev) local(item_x, ite
 );
 
 function gui_slider_list(list, cursor, effect_type)
-    local(entry, entry_ptr, list_len, list_ptr, list_ptr_old, id, param_number, param_offset, param_min, param_max, param_def, param_table, param_type, caption, sysex_addr, sysex_size) (
+    local(entry, entry_ptr, list_len, list_ptr, list_ptr_old, id, param_number, param_offset, param_min, param_max, param_def, param_table, param_type, sysex_addr, sysex_size) (
   entry = -1;
   entry_ptr = -1;
   list_ptr = 1;
@@ -793,13 +792,13 @@ function gui_slider_list(list, cursor, effect_type)
       list_ptr += 25;
       list_ptr_old = list_ptr;
       list_ptr = parse_to_line_end(list, list_ptr);
-      strcpy_substr(caption, list, list_ptr_old, list_ptr - list_ptr_old);
+      strcpy_substr(#param_name, list, list_ptr_old, list_ptr - list_ptr_old);
       list_ptr = parse_to_next_line(list, list_ptr);
 
       param_type == 2 ? (
-        effect_params[param_offset] = gui_switch(effect_params[param_offset], param_min, param_max, caption, param_def);
+        effect_params[param_offset] = gui_switch(effect_params[param_offset], param_min, param_max, #param_name, param_def);
       ) : (
-        effect_params[param_offset] = gui_slider(effect_params[param_offset], param_min, param_max, caption, param_def, param_type == 1);
+        effect_params[param_offset] = gui_slider(effect_params[param_offset], param_min, param_max, #param_name, param_def, param_type == 1);
       );
 
       gui_value_change ? (
@@ -872,7 +871,7 @@ function gui_slider_list(list, cursor, effect_type)
 );
 
 function gui_pages()
-    local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, list_item_text, msb, lsb, value) (
+    local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
   midi_force_update = 0;
 
   // voice catalog ------------------------------------------------------------
@@ -918,7 +917,7 @@ function gui_pages()
 
       list_ptr_old = list_ptr;
       list_ptr = parse_to_line_end(list_voices, list_ptr);
-      strcpy_substr(list_item_text, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
+      strcpy_substr(#voice_name, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
       list_ptr += 1;
 
       list_hover = 0;
@@ -939,7 +938,7 @@ function gui_pages()
       gfx_x = list_x + 3;
       gfx_y = list_y + 2;
 
-      gfx_drawstr(list_item_text);
+      gfx_drawstr(#voice_name);
 
       voice_count += 1;
       list_y += gui_list_item_height;
@@ -1824,11 +1823,10 @@ gui_menu_item(243, 10, "Reverb"       , gui_page == 2, 1) ? gui_page = 2;
 gui_menu_item(314, 10, "Chorus"       , gui_page == 3, 1) ? gui_page = 3;
 gui_menu_item(386, 10, "Variation"    , gui_page == 4, 1) ? gui_page = 4;
 
-sprintf(gui_part_caption, "Part: %i", gui_part + 1);
-
-gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 1) & 1 ? gui_part += 1;
-gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 1) & 2 ? gui_part -= 1;
-gui_menu_item(gfx_w - 64, 10, gui_part_caption, 0, 2) ? gui_part += sign(mouse_wheel);
+sprintf(#part_menu, "Part: %i", gui_part + 1);
+gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 1 ? gui_part += 1;
+gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 2 ? gui_part -= 1;
+gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 2) ? gui_part += sign(mouse_wheel);
 
 gui_part > 15 ? gui_part = 0;
 gui_part < 0 ? gui_part = 15;
