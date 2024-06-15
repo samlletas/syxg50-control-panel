@@ -704,7 +704,7 @@ list_voices_drum_kits = "
 //-----------------------------------------------------------------------------
 
 // #entry number
-// param number | value min | value max | value default | value table | type (0 = normal, 1 = bipolar) | caption
+// param number | value min | value max | value default | value table | type (0 = slider, 1 = bipolar, 2 = switch) | caption
 // numbers are decimal
 
 list_params_reverb = "
@@ -844,7 +844,7 @@ list_params_chorus = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #01 Chorus 2
 01|00000|00127|00008|1|0|LFO Frequency
 02|00000|00127|00063|-|0|LFO Depth
@@ -854,7 +854,7 @@ list_params_chorus = "
 07|00052|00076|00062|E|1|EQ Low Gain
 08|00028|00058|00042|3|0|EQ High Frequency
 09|00052|00076|00058|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #02 Chorus 3
 01|00000|00127|00004|1|0|LFO Frequency
 02|00000|00127|00044|-|0|LFO Depth
@@ -864,7 +864,7 @@ list_params_chorus = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00066|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #03 Chorus 4
 01|00000|00127|00009|1|0|LFO Frequency
 02|00000|00127|00032|-|0|LFO Depth
@@ -874,7 +874,7 @@ list_params_chorus = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
-15|00000|00001|00001|C|0|Input Mode
+15|00000|00001|00001|C|2|Input Mode
 #04 Celeste 1
 01|00000|00127|00012|1|0|LFO Frequency
 02|00000|00127|00032|-|0|LFO Depth
@@ -884,7 +884,7 @@ list_params_chorus = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #05 Celeste 2
 01|00000|00127|00028|1|0|LFO Frequency
 02|00000|00127|00018|-|0|LFO Depth
@@ -894,7 +894,7 @@ list_params_chorus = "
 07|00052|00076|00062|E|1|EQ Low Gain
 08|00028|00058|00042|3|0|EQ High Frequency
 09|00052|00076|00060|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #06 Celeste 3
 01|00000|00127|00004|1|0|LFO Frequency
 02|00000|00127|00063|-|0|LFO Depth
@@ -904,7 +904,7 @@ list_params_chorus = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00068|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #07 Celeste 4
 01|00000|00127|00008|1|0|LFO Frequency
 02|00000|00127|00029|-|0|LFO Depth
@@ -914,7 +914,7 @@ list_params_chorus = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00051|3|0|EQ High Frequency
 09|00052|00076|00066|E|1|EQ High Gain
-15|00000|00001|00001|C|0|Input Mode
+15|00000|00001|00001|C|2|Input Mode
 #08 Flanger 1
 01|00000|00127|00014|1|0|LFO Frequency
 02|00000|00127|00014|-|0|LFO Depth
@@ -1070,7 +1070,7 @@ list_params_variation = "
 01|00001|07006|03364|-|0|L->R Delay
 02|00001|07006|03414|-|0|R->L Delay
 03|00001|00127|00111|I|1|Feedback Level
-04|00000|00002|00001|9|0|Input Select
+04|00000|00002|00001|9|2|Input Select
 05|00001|00010|00010|J|0|High Damp
 13|00008|00040|00028|3|0|EQ Low Frequency
 14|00052|00076|00064|E|1|EQ Low Gain
@@ -1099,7 +1099,7 @@ list_params_variation = "
 12|00000|00003|00002|-|0|Density
 13|00001|00010|00010|J|0|High Damp
 #14 Gate Reverb
-01|00000|00001|00000|H|0|Type
+01|00000|00001|00000|H|2|Type
 02|00000|00044|00015|6|0|Room Size
 03|00000|00010|00006|-|0|Diffusion
 04|00000|00063|00002|5|0|Initial Delay
@@ -1110,7 +1110,7 @@ list_params_variation = "
 12|00000|00003|00003|-|0|Density
 13|00001|00010|00010|J|0|High Damp
 #15 Reverse Gate
-01|00000|00001|00001|H|0|Type
+01|00000|00001|00001|H|2|Type
 02|00000|00044|00019|6|0|Room Size
 03|00000|00010|00008|-|0|Diffusion
 04|00000|00063|00003|5|0|Initial Delay
@@ -1144,7 +1144,7 @@ list_params_variation = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #20 Chorus 2
 01|00000|00127|00008|1|0|LFO Frequency
 02|00000|00127|00063|-|0|LFO Depth
@@ -1154,7 +1154,7 @@ list_params_variation = "
 07|00052|00076|00062|E|1|EQ Low Gain
 08|00028|00058|00042|3|0|EQ High Frequency
 09|00052|00076|00058|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #21 Chorus 3
 01|00000|00127|00004|1|0|LFO Frequency
 02|00000|00127|00044|-|0|LFO Depth
@@ -1164,7 +1164,7 @@ list_params_variation = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00066|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #22 Chorus 4
 01|00000|00127|00009|1|0|LFO Frequency
 02|00000|00127|00032|-|0|LFO Depth
@@ -1174,7 +1174,7 @@ list_params_variation = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
-15|00000|00001|00001|C|0|Input Mode
+15|00000|00001|00001|C|2|Input Mode
 #23 Celeste 1
 01|00000|00127|00012|1|0|LFO Frequency
 02|00000|00127|00032|-|0|LFO Depth
@@ -1184,7 +1184,7 @@ list_params_variation = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #24 Celeste 2
 01|00000|00127|00028|1|0|LFO Frequency
 02|00000|00127|00018|-|0|LFO Depth
@@ -1194,7 +1194,7 @@ list_params_variation = "
 07|00052|00076|00062|E|1|EQ Low Gain
 08|00028|00058|00042|3|0|EQ High Frequency
 09|00052|00076|00060|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #25 Celeste 3
 01|00000|00127|00004|1|0|LFO Frequency
 02|00000|00127|00063|-|0|LFO Depth
@@ -1204,7 +1204,7 @@ list_params_variation = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00068|E|1|EQ High Gain
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #26 Celeste 4
 01|00000|00127|00008|1|0|LFO Frequency
 02|00000|00127|00029|-|0|LFO Depth
@@ -1214,7 +1214,7 @@ list_params_variation = "
 07|00052|00076|00064|E|1|EQ Low Gain
 08|00028|00058|00051|3|0|EQ High Frequency
 09|00052|00076|00066|E|1|EQ High Gain
-15|00000|00001|00001|C|0|Input Mode
+15|00000|00001|00001|C|2|Input Mode
 #27 Flanger 1
 01|00000|00127|00014|1|0|LFO Frequency
 02|00000|00127|00014|-|0|LFO Depth
@@ -1269,7 +1269,7 @@ list_params_variation = "
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
 14|00004|00124|00064|G|1|LFO Phase Difference
-15|00000|00001|00000|C|0|Input Mode
+15|00000|00001|00000|C|2|Input Mode
 #33 Auto Pan
 01|00000|00127|00076|1|0|LFO Frequency
 02|00000|00127|00080|-|0|Left/Right Depth
@@ -1289,7 +1289,7 @@ list_params_variation = "
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
 11|00006|00010|00006|-|0|Stages
-12|00000|00001|00001|C|0|Diffusion
+12|00000|00001|00001|C|2|Diffusion
 #35 Phaser 2
 01|00000|00127|00008|1|0|LFO Frequency
 02|00000|00127|00111|-|0|LFO Depth
@@ -1300,7 +1300,7 @@ list_params_variation = "
 08|00028|00058|00046|3|0|EQ High Frequency
 09|00052|00076|00064|E|1|EQ High Gain
 11|00003|00005|00005|-|0|Stages
-12|00000|00001|00001|C|0|Diffusion
+12|00000|00001|00001|C|2|Diffusion
 13|00004|00124|00004|G|1|LFO Phase Difference
 #36 Distortion
 01|00000|00127|00040|-|0|Drive
@@ -1324,7 +1324,7 @@ list_params_variation = "
 11|00000|00127|00104|-|0|Clip Curve
 #38 Guitar Amp Simulator
 01|00000|00127|00039|-|0|Drive
-02|00000|00003|00001|D|0|Amp Type
+02|00000|00003|00001|D|2|Amp Type
 03|00034|00060|00048|3|0|LPF Cutoff
 04|00000|00127|00055|-|0|Output Level
 11|00000|00127|00112|-|0|Clip Curve

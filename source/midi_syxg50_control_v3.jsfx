@@ -83,6 +83,8 @@ color_bg_voice   = 0x514631;
 color_fg_menu    = 0x707070;
 color_fg_list    = 0xD4D4D4;
 
+gui_font = "Segoe UI";
+gui_font_size = 22;
 gui_menu_height = 44;
 gui_list_item_width = 200;
 gui_list_item_height = 27;
@@ -97,6 +99,11 @@ gui_slider_height = 12;
 gui_slider_spacing = 26;
 gui_slider_x = 0;
 gui_slider_y = 0;
+
+gui_switch_font_size = 20;
+gui_switch_width = gui_slider_width;
+gui_switch_height = 18;
+gui_switch_margin = 8;
 
 gui_focus_x = -1;
 gui_focus_y = -1;
@@ -536,6 +543,68 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
   value;
 );
 
+function gui_switch(value, value_min, value_max, caption, value_def)
+    local(value_old, option_count, option_width, option_value, option_x, option_y, option_caption, caption_width, caption_height) (
+  value_old = value;
+  value < 0 ? value = value_def;
+  option_count = value_max - value_min + 1;
+  option_width = (gui_switch_width - (gui_switch_margin * (option_count - 1))) / option_count;
+  gfx_setfont(1, gui_font, gui_switch_font_size);
+
+  idx = 0;
+
+  loop (option_count,
+    option_value = value_min + idx;
+    option_x = gui_slider_x + ((option_width + gui_switch_margin) * idx);
+    option_y = gui_slider_y - 3;
+
+    // option input
+    gui_mouse_over(option_x - 4, option_width + 8, option_y - 4, gui_switch_height + 8) ? (
+      mouse_wheel != 0 ? (
+        value += sign(mouse_wheel);
+      );
+
+      gui_mouse_left == 1 && !gui_key_ctrl ? (
+        value = option_value;
+      );
+
+      gui_mouse_right == 1 || (gui_mouse_left == 1 && gui_key_ctrl) ? (
+        value = value_def;
+      );
+
+      value = min(max(value, value_min), value_max);
+    );
+
+    // option fill
+    set_color(color_bg_darker);
+    option_value == value && value == value_def ? set_color(color_bg_cursor);
+    option_value == value && value != value_def ? set_color(color_bg_changed);
+    gfx_rect(option_x, option_y, option_width, gui_switch_height);
+
+    // option caption
+    option_value == value ? set_color(color_bg_darker) : set_color(color_fg_menu);
+    option_caption = get_value_display(option_value);
+    gfx_measurestr(option_caption, caption_width, caption_height);
+    gfx_x = option_x + (option_width / 2) - (caption_width / 2);
+    gfx_y = option_y + (gui_switch_height / 2) - (caption_height / 2) - 1;
+    gfx_drawstr(option_caption);
+
+    idx += 1;
+  );
+
+  // switch caption
+  value == value_def ? set_color(color_fg_list) : set_color(color_bg_changed);
+  gfx_setfont(1, gui_font, gui_font_size);
+  gfx_measurestr(caption, caption_width, caption_height);
+  gfx_x = gui_slider_x - caption_width - 8;
+  gfx_y = gui_slider_y - 6;
+  gfx_drawstr(caption);
+
+  gui_slider_y += gui_slider_spacing;
+  gui_value_change = midi_force_update | (value != value_old);
+  value;
+);
+
 // mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
 function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(item_width, item_height) (
   gfx_x = item_x;
@@ -723,7 +792,11 @@ function gui_slider_list(list, cursor, effect_type)
       strcpy_substr(caption, list, list_ptr_old, list_ptr - list_ptr_old);
       list_ptr = parse_to_next_line(list, list_ptr);
 
-      effect_params[param_offset] = gui_slider(effect_params[param_offset], param_min, param_max, caption, param_def, param_type);
+      param_type == 2 ? (
+        effect_params[param_offset] = gui_switch(effect_params[param_offset], param_min, param_max, caption, param_def);
+      ) : (
+        effect_params[param_offset] = gui_slider(effect_params[param_offset], param_min, param_max, caption, param_def, param_type == 1);
+      );
 
       gui_value_change ? (
         sysex_size = 1;
@@ -925,11 +998,11 @@ function gui_pages()
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x04, part_rcv_channel[gui_part], 1);
 
       gui_value_table = param_value_names_mono_poly;
-      part_mode[gui_part] = gui_slider(part_mode[gui_part], 0, 1, "Mode", 1, 0);
+      part_mode[gui_part] = gui_switch(part_mode[gui_part], 0, 1, "Mode", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x05, part_mode[gui_part], 1);
 
       gui_value_table = param_value_names_off_on;
-      part_portamento_switch[gui_part] = gui_slider(part_portamento_switch[gui_part], 0, 1, "Portamento", 0, 0);
+      part_portamento_switch[gui_part] = gui_switch(part_portamento_switch[gui_part], 0, 1, "Portamento", 0);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x67, part_portamento_switch[gui_part], 1);
 
       gui_value_table = "";
@@ -1136,7 +1209,7 @@ function gui_pages()
       gui_slider_y += 25;
 
       gui_value_table = param_value_names_same_note_assign;
-      part_same_note_assign[gui_part] = gui_slider(part_same_note_assign[gui_part], 0, 2, "Same Note Assign", 1, 0);
+      part_same_note_assign[gui_part] = gui_switch(part_same_note_assign[gui_part], 0, 2, "Same Note Assign", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x06, part_same_note_assign[gui_part], 1);
 
       gui_value_table = "";
@@ -1189,55 +1262,55 @@ function gui_pages()
     gui_categories_editor_cursor == 4 ? (
       gui_value_table = param_value_names_off_on;
 
-      part_recv_note[gui_part] = gui_slider(part_recv_note[gui_part], 0, 1, "Note On/Off", 1, 0);
+      part_recv_note[gui_part] = gui_switch(part_recv_note[gui_part], 0, 1, "Note On/Off", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x35, part_recv_note[gui_part], 1);
 
-      part_recv_pc[gui_part] = gui_slider(part_recv_pc[gui_part], 0, 1, "Program Change", 1, 0);
+      part_recv_pc[gui_part] = gui_switch(part_recv_pc[gui_part], 0, 1, "Program Change", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x32, part_recv_pc[gui_part], 1);
 
-      part_recv_bs[gui_part] = gui_slider(part_recv_bs[gui_part], 0, 1, "Bank Select", 1, 0);
+      part_recv_bs[gui_part] = gui_switch(part_recv_bs[gui_part], 0, 1, "Bank Select", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x40, part_recv_bs[gui_part], 1);
 
-      part_recv_cat[gui_part] = gui_slider(part_recv_cat[gui_part], 0, 1, "Channel AT", 1, 0);
+      part_recv_cat[gui_part] = gui_switch(part_recv_cat[gui_part], 0, 1, "Channel AT", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x31, part_recv_cat[gui_part], 1);
 
-      part_recv_pat[gui_part] = gui_slider(part_recv_pat[gui_part], 0, 1, "Poly AT", 1, 0);
+      part_recv_pat[gui_part] = gui_switch(part_recv_pat[gui_part], 0, 1, "Poly AT", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x34, part_recv_pat[gui_part], 1);
 
-      part_recv_pb[gui_part] = gui_slider(part_recv_pb[gui_part], 0, 1, "Pitch Bend", 1, 0);
+      part_recv_pb[gui_part] = gui_switch(part_recv_pb[gui_part], 0, 1, "Pitch Bend", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x30, part_recv_pb[gui_part], 1);
 
-      part_recv_cc[gui_part] = gui_slider(part_recv_cc[gui_part], 0, 1, "Control Change", 1, 0);
+      part_recv_cc[gui_part] = gui_switch(part_recv_cc[gui_part], 0, 1, "Control Change", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x33, part_recv_cc[gui_part], 1);
 
-      part_recv_mod[gui_part] = gui_slider(part_recv_mod[gui_part], 0, 1, "Modulation", 1, 0);
+      part_recv_mod[gui_part] = gui_switch(part_recv_mod[gui_part], 0, 1, "Modulation", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x38, part_recv_mod[gui_part], 1);
 
-      part_recv_vol[gui_part] = gui_slider(part_recv_vol[gui_part], 0, 1, "Volume", 1, 0);
+      part_recv_vol[gui_part] = gui_switch(part_recv_vol[gui_part], 0, 1, "Volume", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x39, part_recv_vol[gui_part], 1);
 
-      part_recv_pan[gui_part] = gui_slider(part_recv_pan[gui_part], 0, 1, "Pan", 1, 0);
+      part_recv_pan[gui_part] = gui_switch(part_recv_pan[gui_part], 0, 1, "Pan", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3a, part_recv_pan[gui_part], 1);
 
-      part_recv_exp[gui_part] = gui_slider(part_recv_exp[gui_part], 0, 1, "Expression", 1, 0);
+      part_recv_exp[gui_part] = gui_switch(part_recv_exp[gui_part], 0, 1, "Expression", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3b, part_recv_exp[gui_part], 1);
 
-      part_recv_sus[gui_part] = gui_slider(part_recv_sus[gui_part], 0, 1, "Sustain Pedal", 1, 0);
+      part_recv_sus[gui_part] = gui_switch(part_recv_sus[gui_part], 0, 1, "Sustain Pedal", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3c, part_recv_sus[gui_part], 1);
 
-      part_recv_sost[gui_part] = gui_slider(part_recv_sost[gui_part], 0, 1, "Sostenuto Pedal", 1, 0);
+      part_recv_sost[gui_part] = gui_switch(part_recv_sost[gui_part], 0, 1, "Sostenuto Pedal", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3e, part_recv_sost[gui_part], 1);
 
-      part_recv_soft[gui_part] = gui_slider(part_recv_soft[gui_part], 0, 1, "Soft Pedal", 1, 0);
+      part_recv_soft[gui_part] = gui_switch(part_recv_soft[gui_part], 0, 1, "Soft Pedal", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3f, part_recv_soft[gui_part], 1);
 
-      part_recv_port[gui_part] = gui_slider(part_recv_port[gui_part], 0, 1, "Portamento", 1, 0);
+      part_recv_port[gui_part] = gui_switch(part_recv_port[gui_part], 0, 1, "Portamento", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x3d, part_recv_port[gui_part], 1);
 
-      part_recv_rpn[gui_part] = gui_slider(part_recv_rpn[gui_part], 0, 1, "RPN", 1, 0);
+      part_recv_rpn[gui_part] = gui_switch(part_recv_rpn[gui_part], 0, 1, "RPN", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x36, part_recv_rpn[gui_part], 1);
 
-      part_recv_nrpn[gui_part] = gui_slider(part_recv_nrpn[gui_part], 0, 1, "NRPN", 1, 0);
+      part_recv_nrpn[gui_part] = gui_switch(part_recv_nrpn[gui_part], 0, 1, "NRPN", 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x37, part_recv_nrpn[gui_part], 1);
     );
 
@@ -1711,7 +1784,7 @@ spinlock.unlock();
 
 // main window ----------------------------------------------------------------
 
-gfx_setfont(1, "Segoe UI", 22);
+gfx_setfont(1, gui_font, gui_font_size);
 
 set_color(color_bg_darkest);
 gfx_rect(0, 0, gfx_w, gui_menu_height - 10);
