@@ -482,25 +482,6 @@ function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
     local(value_old, value_fraction, value_range, step_size, fill_width, fill_offset, name_width, name_height) (
   value_old = value;
   value < 0 ? value = value_def;
-  value_fraction = inverse_lerp(value, value_min, value_max);
-
-  // slider background
-  set_color(color_bg_darker);
-  gfx_rect(gui_slider_x, gui_slider_y, gui_slider_width, gui_slider_height);
-
-  value == value_def ? set_color(color_bg_cursor);
-  value != value_def ? set_color(color_bg_changed);
-
-  // slider fill
-  is_bipolar ? (
-    fill_width = abs(floor((gui_slider_halfwidth * ((value_fraction * 2.0) - 1.0)) + 0.5));
-    fill_offset = value_fraction < 0.5 ? floor((gui_slider_width * value_fraction) + 0.5) : gui_slider_halfwidth;
-    gfx_rect(gui_slider_x + fill_offset, gui_slider_y, fill_width, gui_slider_height);  // bipolar fill
-    gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, 1, gui_slider_height);  // center notch
-  ) : (
-    fill_width = floor((gui_slider_width * value_fraction) + 0.5);
-    gfx_rect(gui_slider_x, gui_slider_y, fill_width, gui_slider_height);
-  );
 
   // slider input
   gui_mouse_over(gui_slider_x - 5, gui_slider_width + 10, gui_slider_y - 5, gui_slider_height + 10) ? (
@@ -525,14 +506,30 @@ function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
     value = lerp(value_fraction, value_min, value_max);
   );
 
-  // slider change
   value = min(max(value, value_min), value_max);
-  gui_value_change = midi_force_update | (value != value_old);
 
-  value == value_def ? set_color(color_fg_list);
+  // slider background
+  set_color(color_bg_darker);
+  gfx_rect(gui_slider_x, gui_slider_y, gui_slider_width, gui_slider_height);
+
+  // slider fill
+  value == value_def ? set_color(color_bg_cursor);
   value != value_def ? set_color(color_bg_changed);
+  value_fraction = inverse_lerp(value, value_min, value_max);
+
+  is_bipolar ? (
+    fill_width = abs(floor((gui_slider_halfwidth * ((value_fraction * 2.0) - 1.0)) + 0.5));
+    fill_offset = value_fraction < 0.5 ? floor((gui_slider_width * value_fraction) + 0.5) : gui_slider_halfwidth;
+    gfx_rect(gui_slider_x + fill_offset, gui_slider_y, fill_width, gui_slider_height);  // bipolar fill
+    gfx_rect(gui_slider_x + gui_slider_halfwidth, gui_slider_y, 1, gui_slider_height);  // center notch
+  ) : (
+    fill_width = floor((gui_slider_width * value_fraction) + 0.5);
+    gfx_rect(gui_slider_x, gui_slider_y, fill_width, gui_slider_height);
+  );
 
   // slider name
+  value == value_def ? set_color(color_fg_list);
+  value != value_def ? set_color(color_bg_changed);
   gfx_measurestr(name, name_width, name_height);
   gfx_x = gui_slider_x - name_width - 8;
   gfx_y = gui_slider_y - 6;
@@ -543,6 +540,7 @@ function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
   gfx_drawstr(get_value_display(value));
 
   gui_slider_y += gui_slider_spacing;
+  gui_value_change = midi_force_update | (value != value_old);
   value;
 );
 
