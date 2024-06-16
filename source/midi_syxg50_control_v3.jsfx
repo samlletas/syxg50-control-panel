@@ -474,8 +474,12 @@ function inverse_lerp(value, value_min, value_max) local(fraction) (
   min(max(fraction, 0), 1);
 );
 
+function gui_param_focused() (
+  gui_focus_x >= 0 && gui_focus_y >= 0;
+);
+
 function gui_mouse_over(item_x, item_width, item_y, item_height) (
-  mouse_x >= item_x && mouse_x < item_x + item_width && mouse_y >= item_y && mouse_y < item_y + item_height;
+  !gui_param_focused() && mouse_x >= item_x && mouse_x < item_x + item_width && mouse_y >= item_y && mouse_y < item_y + item_height;
 );
 
 function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
@@ -1811,6 +1815,11 @@ gui_mouse_right = mouse_cap & 0x02 ? gui_mouse_right + 1 : 0;
 !gui_mouse_left ? (
   gui_focus_x = -1;
   gui_focus_y = -1;
+);
+
+gui_param_focused() ? (
+  gui_key = 0;
+  gui_key_ctrl = 0;
 );
 
 // main menu ------------------------------------------------------------------
