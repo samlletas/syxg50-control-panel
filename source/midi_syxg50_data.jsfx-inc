@@ -704,7 +704,7 @@ list_voices_drum_kits = "
 //-----------------------------------------------------------------------------
 
 // #entry number
-// param number | value min | value max | value default | value table | type (0 = slider, 1 = bipolar, 2 = switch) | caption
+// param number | value min | value max | value default | value table | param type (0 = slider, 1 = bipolar, 2 = switch) | param name
 // numbers are decimal
 
 list_params_reverb = "

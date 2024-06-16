@@ -478,8 +478,8 @@ function gui_mouse_over(item_x, item_width, item_y, item_height) (
   mouse_x >= item_x && mouse_x < item_x + item_width && mouse_y >= item_y && mouse_y < item_y + item_height;
 );
 
-function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
-    local(value_old, value_fraction, value_range, step_size, fill_width, fill_offset, caption_width, caption_height) (
+function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
+    local(value_old, value_fraction, value_range, step_size, fill_width, fill_offset, name_width, name_height) (
   value_old = value;
   value < 0 ? value = value_def;
   value_fraction = inverse_lerp(value, value_min, value_max);
@@ -532,11 +532,11 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
   value == value_def ? set_color(color_fg_list);
   value != value_def ? set_color(color_bg_changed);
 
-  // slider caption
-  gfx_measurestr(caption, caption_width, caption_height);
-  gfx_x = gui_slider_x - caption_width - 8;
+  // slider name
+  gfx_measurestr(name, name_width, name_height);
+  gfx_x = gui_slider_x - name_width - 8;
   gfx_y = gui_slider_y - 6;
-  gfx_drawstr(caption);
+  gfx_drawstr(name);
 
   // slider value
   gfx_x = gui_slider_x + gui_slider_width + 5;
@@ -546,8 +546,8 @@ function gui_slider(value, value_min, value_max, caption, value_def, is_bipolar)
   value;
 );
 
-function gui_switch(value, value_min, value_max, caption, value_def)
-    local(value_old, option_count, option_width, option_value, option_x, option_y, option_caption, caption_width, caption_height) (
+function gui_switch(value, value_min, value_max, name, value_def)
+    local(value_old, option_count, option_width, option_value, option_x, option_y, option_name, name_width, name_height) (
   value_old = value;
   value < 0 ? value = value_def;
   option_count = value_max - value_min + 1;
@@ -584,24 +584,24 @@ function gui_switch(value, value_min, value_max, caption, value_def)
     option_value == value && value != value_def ? set_color(color_bg_changed);
     gfx_rect(option_x, option_y, option_width, gui_switch_height);
 
-    // option caption
+    // option name
     option_value == value ? set_color(color_bg_darker) : set_color(color_fg_menu);
-    option_caption = get_value_display(option_value);
-    gfx_measurestr(option_caption, caption_width, caption_height);
-    gfx_x = option_x + (option_width / 2) - (caption_width / 2);
-    gfx_y = option_y + (gui_switch_height / 2) - (caption_height / 2) - 1;
-    gfx_drawstr(option_caption);
+    option_name = get_value_display(option_value);
+    gfx_measurestr(option_name, name_width, name_height);
+    gfx_x = option_x + (option_width / 2) - (name_width / 2);
+    gfx_y = option_y + (gui_switch_height / 2) - (name_height / 2) - 1;
+    gfx_drawstr(option_name);
 
     idx += 1;
   );
 
-  // switch caption
+  // switch name
   value == value_def ? set_color(color_fg_list) : set_color(color_bg_changed);
   gfx_setfont(font_default);
-  gfx_measurestr(caption, caption_width, caption_height);
-  gfx_x = gui_slider_x - caption_width - 8;
+  gfx_measurestr(name, name_width, name_height);
+  gfx_x = gui_slider_x - name_width - 8;
   gfx_y = gui_slider_y - 6;
-  gfx_drawstr(caption);
+  gfx_drawstr(name);
 
   gui_slider_y += gui_slider_spacing;
   gui_value_change = midi_force_update | (value != value_old);
@@ -609,11 +609,11 @@ function gui_switch(value, value_min, value_max, caption, value_def)
 );
 
 // mode 0: check if mouse is down, 1: check for single click, 2: check for hovering
-function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(item_width, item_height) (
+function gui_menu_item(item_x, item_y, item_name, item_selected, mode) local(item_width, item_height) (
   gfx_x = item_x;
   gfx_y = item_y;
 
-  gfx_measurestr(item_caption, item_width, item_height);
+  gfx_measurestr(item_name, item_width, item_height);
 
   item_selected ? (
     set_color(color_bg_dark);
@@ -641,7 +641,7 @@ function gui_menu_item(item_x, item_y, item_caption, item_selected, mode) local(
     mode == 2 ? item_selected = 1;
   );
 
-  gfx_drawstr(item_caption);
+  gfx_drawstr(item_name);
   item_selected;
 );
 
