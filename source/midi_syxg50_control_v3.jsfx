@@ -396,6 +396,12 @@ function sysex_add_queue_detune(address_part, value) local(msb, lsb) (
   sysex_add_queue_multipart(address_part, 0x09, msb * 256 + lsb, 2);
 );
 
+function sysex_add_queue_delay(address, value) local(msb, lsb) (
+  msb = floor(value / 128);
+  lsb = value - (msb * 128);
+  sysex_add_queue(address, msb * 256 + lsb, 2);
+);
+
 function xgsend_sysex(address, value, length) (
   address >= 0 ? (
     sysex_buf[0x00] = 0x43;                    // Yamaha ID
@@ -451,6 +457,9 @@ function get_value_display(value)
     value = (value - 128) / 10;
     format = value != 0 ? "%+.1f Hz" : "%.1f Hz";
     sprintf(#param_value, format, value);
+  ) : gui_value_table == effect_value_names_21_delay_longtime ? (
+    // @delay-formatter
+    sprintf(#param_value, "%.1f ms", value / 10);
   ) : (
     table_len = strlen(gui_value_table);
 
@@ -496,17 +505,13 @@ function gui_mouse_over(item_x, item_width, item_y, item_height) (
 );
 
 function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
-    local(value_old, value_fraction, value_range, step_size, fill_width, fill_offset, name_width, name_height) (
+    local(value_old, value_fraction, fill_width, fill_offset, name_width, name_height) (
   value_old = value;
   value < 0 ? value = value_def;
 
   // slider input
   gui_mouse_over(gui_slider_x - 4, gui_slider_width + 8, gui_slider_y - 4, gui_slider_height + 8) ? (
-    mouse_wheel != 0 ? (
-      value_range = value_max - value_min;
-      value_range > 255 ? step_size = floor((value_range / 64) + 0.5) : step_size = 1;
-      value += sign(mouse_wheel) * max(step_size, 1);
-    );
+    value += sign(mouse_wheel);
 
     gui_mouse_left == 1 && !gui_key_ctrl ? (
       gui_focus_x = gui_slider_x;
@@ -578,9 +583,7 @@ function gui_switch(value, value_min, value_max, name, value_def)
 
     // option input
     gui_mouse_over(option_x - 4, option_width + 8, option_y - 4, gui_switch_height + 8) ? (
-      mouse_wheel != 0 ? (
-        value += sign(mouse_wheel);
-      );
+      value += sign(mouse_wheel);
 
       gui_mouse_left == 1 && !gui_key_ctrl ? (
         value = option_value;
@@ -803,6 +806,7 @@ function gui_slider_list(list, cursor, effect_type)
       param_table == 0x49 ? gui_value_table = effect_value_names_18_generic;
       param_table == 0x4A ? gui_value_table = effect_value_names_19_high_damp;
       param_table == 0x4B ? gui_value_table = effect_value_names_20_mid_width;
+      param_table == 0x4C ? gui_value_table = effect_value_names_21_delay_longtime;
 
       list_ptr += 25;
       list_ptr_old = list_ptr;
@@ -877,7 +881,11 @@ function gui_slider_list(list, cursor, effect_type)
           param_number == 16 ? sysex_addr = 0x020175;
         );
 
-        sysex_add_queue(sysex_addr, effect_params[param_offset], sysex_size);
+        param_type == 3 ? (
+          sysex_add_queue_delay(sysex_addr, effect_params[param_offset]);
+        ) : (
+          sysex_add_queue(sysex_addr, effect_params[param_offset], sysex_size);
+        );
       );
 
       str_getchar(list, list_ptr) == 0x23 ? list_ptr = list_len;

@@ -704,7 +704,7 @@ list_voices_drum_kits = "
 //-----------------------------------------------------------------------------
 
 // #entry number
-// param number | value min | value max | value default | value table | param type (0 = slider, 1 = bipolar, 2 = switch) | param name
+// param number | value min | value max | value default | value table | param type (0 = slider, 1 = bipolar, 2 = switch, 3 = delay) | param name
 // numbers are decimal
 
 list_params_reverb = "
@@ -1031,10 +1031,10 @@ list_params_variation = "
 13|00001|00127|00064|F|1|ER/Rev Balance
 15|00001|00127|00064|I|1|Feedback Level
 #08 Delay LCR
-01|00001|14190|06661|-|0|Left Delay
-02|00001|14190|03331|-|0|Right Delay
-03|00001|14190|09992|-|0|Center Delay
-04|00001|14190|09992|-|0|Feedback Delay
+01|00001|07150|03333|L|3|Left Delay
+02|00001|07150|01667|L|3|Right Delay
+03|00001|07150|05000|L|3|Center Delay
+04|00001|07150|05000|L|3|Feedback Delay
 05|00001|00127|00074|I|1|Feedback Level
 06|00000|00127|00100|-|0|Center Level
 07|00001|00010|00010|J|0|High Damp
@@ -1043,10 +1043,10 @@ list_params_variation = "
 15|00028|00058|00046|3|0|EQ High Frequency
 16|00052|00076|00064|E|1|EQ High Gain
 #09 Delay LR
-01|00001|14190|04932|-|0|Left Delay
-02|00001|14190|07462|-|0|Right Delay
-03|00001|14190|07464|-|0|Feedback Delay 1
-04|00001|14190|07462|-|0|Feedback Delay 2
+01|00001|07150|02500|L|3|Left Delay
+02|00001|07150|03750|L|3|Right Delay
+03|00001|07150|03752|L|3|Feedback Delay 1
+04|00001|07150|03750|L|3|Feedback Delay 2
 05|00001|00127|00087|I|1|Feedback Level
 06|00001|00010|00010|J|0|High Damp
 13|00008|00040|00028|3|0|EQ Low Frequency
@@ -1054,21 +1054,21 @@ list_params_variation = "
 15|00028|00058|00046|3|0|EQ High Frequency
 16|00052|00076|00064|E|1|EQ High Gain
 #10 Echo
-01|00001|07006|03364|-|0|Left Delay 1
+01|00001|03550|01700|L|3|Left Delay 1
 02|00001|00127|00080|I|0|Left Feedback Level
-03|00001|07006|03444|-|0|Right Delay 1
+03|00001|03550|01780|L|3|Right Delay 1
 04|00001|00127|00080|I|0|Right Feedback Level
 05|00001|00010|00010|J|0|High Damp
-06|00001|07006|03364|-|0|Left Delay 2
-07|00001|07006|03444|-|0|Right Delay 2
+06|00001|03550|01700|L|3|Left Delay 2
+07|00001|03550|01780|L|3|Right Delay 2
 08|00000|00127|00000|-|0|Delay 2 Level
 13|00008|00040|00028|3|0|EQ Low Frequency
 14|00052|00076|00064|E|1|EQ Low Gain
 15|00028|00058|00046|3|0|EQ High Frequency
 16|00052|00076|00064|E|1|EQ High Gain
 #11 Cross Delay
-01|00001|07006|03364|-|0|L->R Delay
-02|00001|07006|03414|-|0|R->L Delay
+01|00001|03550|01700|L|3|L->R Delay
+02|00001|03550|01750|L|3|R->L Delay
 03|00001|00127|00111|I|1|Feedback Level
 04|00000|00002|00001|9|2|Input Select
 05|00001|00010|00010|J|0|High Damp
@@ -2788,6 +2788,12 @@ effect_value_names_20_mid_width = "
 118|11.8
 119|11.9
 120|12.0
+";
+
+//-----------------------------------------------------------------------------
+
+effect_value_names_21_delay_longtime = "
+\@delay-formatter
 ";
 
 //-----------------------------------------------------------------------------
