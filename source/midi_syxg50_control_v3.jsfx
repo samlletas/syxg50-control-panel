@@ -285,7 +285,7 @@ loop (16,
   part_volume[idx] = 100;
   part_pan[idx] = 64;
   part_transpose[idx] = 64;
-  part_detune[idx] = 2048;
+  part_detune[idx] = 128;
   part_filter_cutoff[idx] = 64;
   part_filter_resonance[idx] = 64;
   part_eg_attack[idx] = 64;
@@ -390,6 +390,12 @@ function sysex_add_queue_multipart(address_part, address_parameter, value, lengt
   sysex_add_queue((0x08 << 16) | (address_part << 8) | (address_parameter << 0), value, length);
 );
 
+function sysex_add_queue_detune(address_part, value) local(msb, lsb) (
+  msb = (value >> 4) & 0x0f;
+  lsb =  value       & 0x0f;
+  sysex_add_queue_multipart(address_part, 0x09, msb * 256 + lsb, 2);
+);
+
 function xgsend_sysex(address, value, length) (
   address >= 0 ? (
     sysex_buf[0x00] = 0x43;                    // Yamaha ID
@@ -439,26 +445,33 @@ function parse_to_next_line(string, offset) local(length) (
 );
 
 function get_value_display(value)
-    local(table_len, table_ptr, table_ptr_old, table_value) (
-  table_len = strlen(gui_value_table);
-
-  table_len > 0 ? (
-    strcpy(#param_value, "not found");
-    table_ptr = 1;
-
-    while (table_ptr < table_len) (
-      table_value = parse_number_dec(gui_value_table, table_ptr, 3);
-      table_ptr += 4;
-      table_ptr_old = table_ptr;
-      table_ptr = parse_to_line_end(gui_value_table, table_ptr) + 1;
-
-      table_value == value ? (
-        strcpy_substr(#param_value, gui_value_table, table_ptr_old, table_ptr - table_ptr_old);
-        table_ptr = table_len;
-      );
-    );
+    local(format, table_len, table_ptr, table_ptr_old, table_value) (
+  gui_value_table == param_value_names_detune ? (
+    // @detune-formatter
+    value = (value - 128) / 10;
+    format = value != 0 ? "%+.1f Hz" : "%.1f Hz";
+    sprintf(#param_value, format, value);
   ) : (
-    sprintf(#param_value, "%i", value);
+    table_len = strlen(gui_value_table);
+
+    table_len > 0 ? (
+      strcpy(#param_value, "not found");
+      table_ptr = 1;
+
+      while (table_ptr < table_len) (
+        table_value = parse_number_dec(gui_value_table, table_ptr, 3);
+        table_ptr += 4;
+        table_ptr_old = table_ptr;
+        table_ptr = parse_to_line_end(gui_value_table, table_ptr) + 1;
+
+        table_value == value ? (
+          strcpy_substr(#param_value, gui_value_table, table_ptr_old, table_ptr - table_ptr_old);
+          table_ptr = table_len;
+        );
+      );
+    ) : (
+      sprintf(#param_value, "%i", value);
+    );
   );
 
   #param_value;
@@ -491,7 +504,7 @@ function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
   gui_mouse_over(gui_slider_x - 4, gui_slider_width + 8, gui_slider_y - 4, gui_slider_height + 8) ? (
     mouse_wheel != 0 ? (
       value_range = value_max - value_min;
-      value_range > 127 ? step_size = floor((value_range / 64) + 0.5) : step_size = 1;
+      value_range > 255 ? step_size = floor((value_range / 64) + 0.5) : step_size = 1;
       value += sign(mouse_wheel) * max(step_size, 1);
     );
 
@@ -1027,9 +1040,9 @@ function gui_pages()
       part_transpose[gui_part] = gui_slider(part_transpose[gui_part], 40, 88, "Transpose", 64, 1);
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x08, part_transpose[gui_part], 1);
 
-      gui_value_table = "";
-      part_detune[gui_part] = gui_slider(part_detune[gui_part], 0, 4096, "Detune", 2048, 1);
-      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x09, part_detune[gui_part], 2);
+      gui_value_table = param_value_names_detune;
+      part_detune[gui_part] = gui_slider(part_detune[gui_part], 0, 255, "Detune", 128, 1);
+      gui_value_change ? sysex_add_queue_detune(gui_part, part_detune[gui_part]);
 
       gui_slider_y += 25;
 
@@ -1679,7 +1692,7 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x0b, part_volume[idx], 1);
     sysex_add_queue_multipart(idx, 0x0e, part_pan[idx], 1);
     sysex_add_queue_multipart(idx, 0x08, part_transpose[idx], 1);
-    sysex_add_queue_multipart(idx, 0x09, part_detune[idx], 2);
+    sysex_add_queue_detune(idx, part_detune[idx]);
     sysex_add_queue_multipart(idx, 0x18, part_filter_cutoff[idx], 1);
     sysex_add_queue_multipart(idx, 0x19, part_filter_resonance[idx], 1);
     sysex_add_queue_multipart(idx, 0x1a, part_eg_attack[idx], 1);
