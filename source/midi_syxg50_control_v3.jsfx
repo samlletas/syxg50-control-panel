@@ -144,6 +144,9 @@ gui_categories_variation_cursor = 9;
 gui_categories_variation_offset = 0;
 gui_categories_variation_cursor_prev = -1;
 
+incoming_cc_queue = 50000;
+incoming_cc_queue_ptr = 0;
+
 midi_force_update = 0;
 midi_first_time = 1;
 
@@ -1674,9 +1677,54 @@ spinlock.unlock();
 
 @block
 
-while (midirecv(midi_offset, midi_msg1, midi_msg23) ? midisend(midi_offset, midi_msg1, midi_msg23));
+while (midirecv(midi_offset, midi_msg1, midi_msg2, midi_msg3)) (
+  midi_status = midi_msg1 & 0xf0;
+
+  // add incoming midi CCs to queue
+  midi_status == 0xb0 ? (
+    incoming_cc_queue[incoming_cc_queue_ptr + 0] = midi_msg1;
+    incoming_cc_queue[incoming_cc_queue_ptr + 1] = midi_msg2;
+    incoming_cc_queue[incoming_cc_queue_ptr + 2] = midi_msg3;
+    incoming_cc_queue_ptr += 3;
+  );
+
+  // passthrough events
+  midisend(midi_offset, midi_msg1, midi_msg2, midi_msg3);
+);
 
 spinlock.lock();
+
+incoming_cc_queue_len = incoming_cc_queue_ptr;
+incoming_cc_queue_ptr = 0;
+
+// update state on incoming midi CCs
+while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
+  midi_msg1 = incoming_cc_queue[incoming_cc_queue_ptr + 0];
+  midi_msg2 = incoming_cc_queue[incoming_cc_queue_ptr + 1];
+  midi_msg3 = incoming_cc_queue[incoming_cc_queue_ptr + 2];
+  midi_status = midi_msg1 & 0xf0;
+  midi_channel = midi_msg1 & 0x0f;
+
+  midi_msg2 == 5  ? part_portamento_time[midi_channel] = midi_msg3;
+  midi_msg2 == 7  ? part_volume[midi_channel] = midi_msg3;
+  midi_msg2 == 10 ? part_pan[midi_channel] = midi_msg3;
+  midi_msg2 == 65 ? part_portamento_switch[midi_channel] = floor(midi_msg3 / 64);
+  midi_msg2 == 71 ? part_filter_resonance[midi_channel] = midi_msg3;
+  midi_msg2 == 72 ? part_eg_release[midi_channel] = midi_msg3;
+  midi_msg2 == 73 ? part_eg_attack[midi_channel] = midi_msg3;
+  midi_msg2 == 74 ? part_filter_cutoff[midi_channel] = midi_msg3;
+  midi_msg2 == 75 ? part_eg_decay[midi_channel] = midi_msg3;
+  midi_msg2 == 76 ? part_vibrato_rate[midi_channel] = midi_msg3;
+  midi_msg2 == 77 ? part_vibrato_depth[midi_channel] = midi_msg3;
+  midi_msg2 == 78 ? part_vibrato_delay[midi_channel] = midi_msg3;
+  midi_msg2 == 91 ? part_reverb_send[midi_channel] = midi_msg3;
+  midi_msg2 == 93 ? part_chorus_send[midi_channel] = midi_msg3;
+  midi_msg2 == 94 ? part_variation_send[midi_channel] = midi_msg3;
+
+  incoming_cc_queue_ptr += 3;
+);
+
+incoming_cc_queue_ptr = 0;
 
 midi_first_time ? (
   midi_first_time = 0;
