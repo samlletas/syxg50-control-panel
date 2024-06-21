@@ -179,97 +179,98 @@ loop (42 * 16 * 3,
 // voice parameters
 voice_category = 300000;
 voice_number = 300100;
-part_bank = 300200;
-part_program = 300300;
+part_bank_msb = 300200;
+part_bank_lsb = 300300;
+part_program = 300400;
 
 // common parameters
-part_rcv_channel = 300400;
-part_mode = 300500;
-part_portamento_switch = 300600;
-part_portamento_time = 300700;
-part_volume = 300800;
-part_pan = 300900;
-part_transpose = 301000;
-part_detune = 301100;
-part_filter_cutoff = 301200;
-part_filter_resonance = 301300;
-part_eg_attack = 301400;
-part_eg_decay = 301500;
-part_eg_release = 301600;
-part_pitch_eg_init_level = 301700;
-part_pitch_eg_attack = 301800;
-part_pitch_eg_release_level = 301900;
-part_pitch_eg_release = 302000;
-part_reverb_send = 302100;
-part_chorus_send = 302200;
-part_variation_send = 302300;
-part_dry_level = 302400;
+part_rcv_channel = 300500;
+part_mode = 300600;
+part_portamento_switch = 300700;
+part_portamento_time = 300800;
+part_volume = 300900;
+part_pan = 301000;
+part_transpose = 301100;
+part_detune = 301200;
+part_filter_cutoff = 301300;
+part_filter_resonance = 301400;
+part_eg_attack = 301500;
+part_eg_decay = 301600;
+part_eg_release = 301700;
+part_pitch_eg_init_level = 301800;
+part_pitch_eg_attack = 301900;
+part_pitch_eg_release_level = 302000;
+part_pitch_eg_release = 302100;
+part_reverb_send = 302200;
+part_chorus_send = 302300;
+part_variation_send = 302400;
+part_dry_level = 302500;
 
 // modulation parameters
-part_vibrato_rate = 302500;
-part_vibrato_depth = 302600;
-part_vibrato_delay = 302700;
-part_bend_pitch_control = 302800;
-part_bend_filter_control = 302900;
-part_bend_amplitude_control = 303000;
-part_bend_lfo_pmod_depth = 303100;
-part_bend_lfo_fmod_depth = 303200;
-part_bend_lfo_amod_depth = 303300;
-part_mw_pitch_control = 303400;
-part_mw_filter_control = 303500;
-part_mw_amplitude_control = 303600;
-part_mw_lfo_pmod_depth = 303700;
-part_mw_lfo_fmod_depth = 303800;
-part_mw_lfo_amod_depth = 303900;
-part_at_pitch_control = 304000;
-part_at_filter_control = 304100;
-part_at_amplitude_control = 304200;
-part_at_lfo_pmod_depth = 304300;
-part_at_lfo_fmod_depth = 304400;
-part_at_lfo_amod_depth = 304500;
+part_vibrato_rate = 302600;
+part_vibrato_depth = 302700;
+part_vibrato_delay = 302800;
+part_bend_pitch_control = 302900;
+part_bend_filter_control = 303000;
+part_bend_amplitude_control = 303100;
+part_bend_lfo_pmod_depth = 303200;
+part_bend_lfo_fmod_depth = 303300;
+part_bend_lfo_amod_depth = 303400;
+part_mw_pitch_control = 303500;
+part_mw_filter_control = 303600;
+part_mw_amplitude_control = 303700;
+part_mw_lfo_pmod_depth = 303800;
+part_mw_lfo_fmod_depth = 303900;
+part_mw_lfo_amod_depth = 304000;
+part_at_pitch_control = 304100;
+part_at_filter_control = 304200;
+part_at_amplitude_control = 304300;
+part_at_lfo_pmod_depth = 304400;
+part_at_lfo_fmod_depth = 304500;
+part_at_lfo_amod_depth = 304600;
 
 // keyboard parameters
-part_note_limit_low = 304600;
-part_note_limit_high = 304700;
-part_velocity_limit_low = 304800;
-part_velocity_limit_high = 304900;
-part_velocity_sense_depth = 305000;
-part_velocity_sense_offset = 305100;
-part_same_note_assign = 305200;
-part_element_reserve = 305300;
+part_note_limit_low = 304700;
+part_note_limit_high = 304800;
+part_velocity_limit_low = 304900;
+part_velocity_limit_high = 305000;
+part_velocity_sense_depth = 305100;
+part_velocity_sense_offset = 305200;
+part_same_note_assign = 305300;
+part_element_reserve = 305400;
 
 // tuning parameters
-part_scale_c = 305400;
-part_scale_cs = 305500;
-part_scale_d = 305600;
-part_scale_ds = 305700;
-part_scale_e = 305800;
-part_scale_f = 305900;
-part_scale_fs = 306000;
-part_scale_g = 306100;
-part_scale_gs = 306200;
-part_scale_a = 306300;
-part_scale_as = 306400;
-part_scale_b = 306500;
+part_scale_c = 305500;
+part_scale_cs = 305600;
+part_scale_d = 305700;
+part_scale_ds = 305800;
+part_scale_e = 305900;
+part_scale_f = 306000;
+part_scale_fs = 306100;
+part_scale_g = 306200;
+part_scale_gs = 306300;
+part_scale_a = 306400;
+part_scale_as = 306500;
+part_scale_b = 306600;
 
 // MIDI filter parameters
-part_recv_note = 306600;
-part_recv_pc = 306700;
-part_recv_bs = 306800;
-part_recv_cat = 306900;
-part_recv_pat = 307000;
-part_recv_pb = 307100;
-part_recv_cc = 307200;
-part_recv_mod = 307300;
-part_recv_vol = 307400;
-part_recv_pan = 307500;
-part_recv_exp = 307600;
-part_recv_sus = 307700;
-part_recv_sost = 307800;
-part_recv_soft = 307900;
-part_recv_port = 308000;
-part_recv_rpn = 308100;
-part_recv_nrpn = 308200;
+part_recv_note = 306700;
+part_recv_pc = 306800;
+part_recv_bs = 306900;
+part_recv_cat = 307000;
+part_recv_pat = 307100;
+part_recv_pb = 307200;
+part_recv_cc = 307300;
+part_recv_mod = 307400;
+part_recv_vol = 307500;
+part_recv_pan = 307600;
+part_recv_exp = 307700;
+part_recv_sus = 307800;
+part_recv_sost = 307900;
+part_recv_soft = 308000;
+part_recv_port = 308100;
+part_recv_rpn = 308200;
+part_recv_nrpn = 308300;
 
 idx = 0;
 
@@ -277,7 +278,8 @@ loop (16,
   // voice parameters defaults
   voice_category[idx] = idx == 9 ? 16 : 0;
   voice_number[idx] = 0;
-  part_bank[idx] = idx == 9 ? 127 << 8 : 0;
+  part_bank_msb[idx] = idx == 9 ? 127 : 0;
+  part_bank_lsb[idx] = 0;
   part_program[idx] = 0;
 
   // common parameters defaults
@@ -993,15 +995,12 @@ function gui_pages()
           voice_category[gui_part] = gui_categories_voice_cursor;
 
           part_program[gui_part] = parse_number_dec(list_voices, list_ptr_old + 0, 3) - 1;
+          part_bank_msb[gui_part] = parse_number_dec(list_voices, list_ptr_old + 4, 3);
+          part_bank_lsb[gui_part] = parse_number_dec(list_voices, list_ptr_old + 8, 3);
 
-          msb = parse_number_dec(list_voices, list_ptr_old + 4, 3);
-          lsb = parse_number_dec(list_voices, list_ptr_old + 8, 3);
-
-          part_bank[gui_part] = msb * 256 + lsb;
-
-          sysex_add_queue_multipart(gui_part, 0x01, (part_bank[gui_part] >> 8) & 0x7f, 1);  // bank select MSB
-          sysex_add_queue_multipart(gui_part, 0x02, (part_bank[gui_part] >> 0) & 0x7f, 1);  // bank select LSB
-          sysex_add_queue_multipart(gui_part, 0x03, part_program[gui_part], 1);             // program number
+          sysex_add_queue_multipart(gui_part, 0x01, part_bank_msb[gui_part], 1);
+          sysex_add_queue_multipart(gui_part, 0x02, part_bank_lsb[gui_part], 1);
+          sysex_add_queue_multipart(gui_part, 0x03, part_program[gui_part], 1);
         );
 
         voice_count += 1;
@@ -1575,7 +1574,8 @@ file_mem(0, effect_params, 42 * 16 * 3);
 // voice parameters
 file_mem(0, voice_category, 16);
 file_mem(0, voice_number, 16);
-file_mem(0, part_bank, 16);
+file_mem(0, part_bank_msb, 16);
+file_mem(0, part_bank_lsb, 16);
 file_mem(0, part_program, 16);
 
 // common parameters
@@ -1736,9 +1736,9 @@ midi_first_time ? (
 
   loop (16,
     // restore voice parameters
-    sysex_add_queue_multipart(idx, 0x01, (part_bank[idx] >> 8) & 0x7f, 1);  // bank select MSB
-    sysex_add_queue_multipart(idx, 0x02, (part_bank[idx] >> 0) & 0x7f, 1);  // bank select LSB
-    sysex_add_queue_multipart(idx, 0x03, part_program[idx], 1);             // program number
+    sysex_add_queue_multipart(idx, 0x01, part_bank_msb[idx], 1);
+    sysex_add_queue_multipart(idx, 0x02, part_bank_lsb[idx], 1);
+    sysex_add_queue_multipart(idx, 0x03, part_program[idx], 1);
 
     // restore common parameters
     sysex_add_queue_multipart(idx, 0x04, part_rcv_channel[idx], 1);
