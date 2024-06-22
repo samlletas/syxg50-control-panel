@@ -1766,7 +1766,7 @@ while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
     midi_msg2 == 7 ? part_volume[midi_channel] = midi_msg3;
     midi_msg2 == 10 ? part_pan[midi_channel] = midi_msg3;
     midi_msg2 == 32 ? incoming_bank_lsb[midi_channel] = midi_msg3;
-    midi_msg2 == 65 ? part_portamento_switch[midi_channel] = floor(midi_msg3 / 64);
+    midi_msg2 == 65 ? part_portamento_switch[midi_channel] = midi_msg3 >= 64;
     midi_msg2 == 71 ? part_filter_resonance[midi_channel] = midi_msg3;
     midi_msg2 == 72 ? part_eg_release[midi_channel] = midi_msg3;
     midi_msg2 == 73 ? part_eg_attack[midi_channel] = midi_msg3;
@@ -1778,6 +1778,8 @@ while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
     midi_msg2 == 91 ? part_reverb_send[midi_channel] = midi_msg3;
     midi_msg2 == 93 ? part_chorus_send[midi_channel] = midi_msg3;
     midi_msg2 == 94 ? part_variation_send[midi_channel] = midi_msg3;
+    midi_msg2 == 126 && midi_msg3 <= 16 ? part_mode[midi_channel] = 0;  // mono
+    midi_msg2 == 127 && midi_msg3 == 0 ? part_mode[midi_channel] = 1;   // poly
   );
 
   // program change
