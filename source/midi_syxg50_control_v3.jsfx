@@ -144,7 +144,9 @@ gui_categories_variation_cursor = 9;
 gui_categories_variation_offset = 0;
 gui_categories_variation_cursor_prev = -1;
 
-incoming_cc_queue = 50000;
+incoming_bank_msb = 000;
+incoming_bank_lsb = 100;
+incoming_cc_queue = 200;
 incoming_cc_queue_ptr = 0;
 
 midi_force_update = 0;
@@ -489,6 +491,73 @@ function get_value_display(value)
   );
 
   #param_value;
+);
+
+function get_voice_list(category) local(list_voices) (
+  list_voices = "";
+  category == 0 ? list_voices = list_voices_piano;
+  category == 1 ? list_voices = list_voices_chromatic_percussion;
+  category == 2 ? list_voices = list_voices_organ;
+  category == 3 ? list_voices = list_voices_guitar;
+  category == 4 ? list_voices = list_voices_bass;
+  category == 5 ? list_voices = list_voices_strings;
+  category == 6 ? list_voices = list_voices_ensemble;
+  category == 7 ? list_voices = list_voices_brass;
+  category == 8 ? list_voices = list_voices_reed;
+  category == 9 ? list_voices = list_voices_pipe;
+  category == 10 ? list_voices = list_voices_ethnic;
+  category == 11 ? list_voices = list_voices_synth_lead;
+  category == 12 ? list_voices = list_voices_synth_pad;
+  category == 13 ? list_voices = list_voices_synth_effects;
+  category == 14 ? list_voices = list_voices_sound_effects;
+  category == 15 ? list_voices = list_voices_percussive;
+  category == 16 ? list_voices = list_voices_drum_kits;
+  list_voices;
+);
+
+function change_voice(part, new_msb, new_lsb, new_program)
+    local(category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old, program, msb, lsb, found) (
+  found = 0;
+  category_count = 0;
+
+  while (category_count < 17 && !found) (
+    list_voices = get_voice_list(category_count);
+    list_ptr = 1;
+    list_len = strlen(list_voices);
+    voice_count = 0;
+
+    while (list_ptr < list_len && !found) (
+      list_ptr_old = list_ptr;
+      list_ptr = parse_to_line_end(list_voices, list_ptr);
+      list_ptr += 1;
+
+      program = parse_number_dec(list_voices, list_ptr_old + 0, 3) - 1;
+      msb = parse_number_dec(list_voices, list_ptr_old + 4, 3);
+      lsb = parse_number_dec(list_voices, list_ptr_old + 8, 3);
+
+      new_msb == msb && new_lsb == lsb && new_program == program ? (
+        found = 1;
+      );
+
+      !found ? voice_count += 1;
+    );
+
+    !found ? category_count += 1;
+  );
+
+  found ? (
+    voice_category[part] = category_count;
+    voice_number[part] = voice_count;
+    part_bank_msb[part] = msb;
+    part_bank_lsb[part] = lsb;
+    part_program[part] = program;
+    gui_part_prev = -1;
+  ) : (
+    // continue using the current voice if the specified bank/program is not found
+    sysex_add_queue_multipart(part, 0x01, part_bank_msb[part], 1);
+    sysex_add_queue_multipart(part, 0x02, part_bank_lsb[part], 1);
+    sysex_add_queue_multipart(part, 0x03, part_program[part], 1);
+  );
 );
 
 function lerp(fraction, value_min, value_max) local(value) (
@@ -908,25 +977,7 @@ function gui_pages()
     gui_categories_voice_cursor = gui_category(list_categories_voice, gui_categories_voice_cursor, gui_categories_voice_offset, voice_category[gui_part]);
     gui_categories_voice_offset = gui_category_adjust_view(gui_categories_voice_offset, gui_categories_voice_cursor, gui_categories_voice_cursor_prev);
 
-    list_voices = "";
-    gui_categories_voice_cursor == 0 ? list_voices = list_voices_piano;
-    gui_categories_voice_cursor == 1 ? list_voices = list_voices_chromatic_percussion;
-    gui_categories_voice_cursor == 2 ? list_voices = list_voices_organ;
-    gui_categories_voice_cursor == 3 ? list_voices = list_voices_guitar;
-    gui_categories_voice_cursor == 4 ? list_voices = list_voices_bass;
-    gui_categories_voice_cursor == 5 ? list_voices = list_voices_strings;
-    gui_categories_voice_cursor == 6 ? list_voices = list_voices_ensemble;
-    gui_categories_voice_cursor == 7 ? list_voices = list_voices_brass;
-    gui_categories_voice_cursor == 8 ? list_voices = list_voices_reed;
-    gui_categories_voice_cursor == 9 ? list_voices = list_voices_pipe;
-    gui_categories_voice_cursor == 10 ? list_voices = list_voices_ethnic;
-    gui_categories_voice_cursor == 11 ? list_voices = list_voices_synth_lead;
-    gui_categories_voice_cursor == 12 ? list_voices = list_voices_synth_pad;
-    gui_categories_voice_cursor == 13 ? list_voices = list_voices_synth_effects;
-    gui_categories_voice_cursor == 14 ? list_voices = list_voices_sound_effects;
-    gui_categories_voice_cursor == 15 ? list_voices = list_voices_percussive;
-    gui_categories_voice_cursor == 16 ? list_voices = list_voices_drum_kits;
-
+    list_voices = get_voice_list(gui_categories_voice_cursor);
     list_x = gui_categories_width + 10 - gui_list_item_width;
     list_y = gfx_h;
 
@@ -1680,12 +1731,15 @@ spinlock.unlock();
 while (midirecv(midi_offset, midi_msg1, midi_msg2, midi_msg3)) (
   midi_status = midi_msg1 & 0xf0;
 
-  // add incoming midi CCs to queue
-  midi_status == 0xb0 ? (
+  // add incoming midi control/program changes to queue
+  midi_status == 0xb0 || midi_status == 0xc0 ? (
     incoming_cc_queue[incoming_cc_queue_ptr + 0] = midi_msg1;
     incoming_cc_queue[incoming_cc_queue_ptr + 1] = midi_msg2;
     incoming_cc_queue[incoming_cc_queue_ptr + 2] = midi_msg3;
     incoming_cc_queue_ptr += 3;
+
+    // send outgoing sysex messages after incoming midi
+    sysex_delay = max(sysex_delay, midi_offset + 1);
   );
 
   // passthrough events
@@ -1697,7 +1751,7 @@ spinlock.lock();
 incoming_cc_queue_len = incoming_cc_queue_ptr;
 incoming_cc_queue_ptr = 0;
 
-// update state on incoming midi CCs
+// update state on incoming midi data
 while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
   midi_msg1 = incoming_cc_queue[incoming_cc_queue_ptr + 0];
   midi_msg2 = incoming_cc_queue[incoming_cc_queue_ptr + 1];
@@ -1705,21 +1759,31 @@ while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
   midi_status = midi_msg1 & 0xf0;
   midi_channel = midi_msg1 & 0x0f;
 
-  midi_msg2 == 5  ? part_portamento_time[midi_channel] = midi_msg3;
-  midi_msg2 == 7  ? part_volume[midi_channel] = midi_msg3;
-  midi_msg2 == 10 ? part_pan[midi_channel] = midi_msg3;
-  midi_msg2 == 65 ? part_portamento_switch[midi_channel] = floor(midi_msg3 / 64);
-  midi_msg2 == 71 ? part_filter_resonance[midi_channel] = midi_msg3;
-  midi_msg2 == 72 ? part_eg_release[midi_channel] = midi_msg3;
-  midi_msg2 == 73 ? part_eg_attack[midi_channel] = midi_msg3;
-  midi_msg2 == 74 ? part_filter_cutoff[midi_channel] = midi_msg3;
-  midi_msg2 == 75 ? part_eg_decay[midi_channel] = midi_msg3;
-  midi_msg2 == 76 ? part_vibrato_rate[midi_channel] = midi_msg3;
-  midi_msg2 == 77 ? part_vibrato_depth[midi_channel] = midi_msg3;
-  midi_msg2 == 78 ? part_vibrato_delay[midi_channel] = midi_msg3;
-  midi_msg2 == 91 ? part_reverb_send[midi_channel] = midi_msg3;
-  midi_msg2 == 93 ? part_chorus_send[midi_channel] = midi_msg3;
-  midi_msg2 == 94 ? part_variation_send[midi_channel] = midi_msg3;
+  // control change
+  midi_status == 0xb0 ? (
+    midi_msg2 == 0 ? incoming_bank_msb[midi_channel] = midi_msg3;
+    midi_msg2 == 5 ? part_portamento_time[midi_channel] = midi_msg3;
+    midi_msg2 == 7 ? part_volume[midi_channel] = midi_msg3;
+    midi_msg2 == 10 ? part_pan[midi_channel] = midi_msg3;
+    midi_msg2 == 32 ? incoming_bank_lsb[midi_channel] = midi_msg3;
+    midi_msg2 == 65 ? part_portamento_switch[midi_channel] = floor(midi_msg3 / 64);
+    midi_msg2 == 71 ? part_filter_resonance[midi_channel] = midi_msg3;
+    midi_msg2 == 72 ? part_eg_release[midi_channel] = midi_msg3;
+    midi_msg2 == 73 ? part_eg_attack[midi_channel] = midi_msg3;
+    midi_msg2 == 74 ? part_filter_cutoff[midi_channel] = midi_msg3;
+    midi_msg2 == 75 ? part_eg_decay[midi_channel] = midi_msg3;
+    midi_msg2 == 76 ? part_vibrato_rate[midi_channel] = midi_msg3;
+    midi_msg2 == 77 ? part_vibrato_depth[midi_channel] = midi_msg3;
+    midi_msg2 == 78 ? part_vibrato_delay[midi_channel] = midi_msg3;
+    midi_msg2 == 91 ? part_reverb_send[midi_channel] = midi_msg3;
+    midi_msg2 == 93 ? part_chorus_send[midi_channel] = midi_msg3;
+    midi_msg2 == 94 ? part_variation_send[midi_channel] = midi_msg3;
+  );
+
+  // program change
+  midi_status == 0xc0 ? (
+    change_voice(midi_channel, incoming_bank_msb[midi_channel], incoming_bank_lsb[midi_channel], midi_msg2);
+  );
 
   incoming_cc_queue_ptr += 3;
 );
@@ -1839,7 +1903,6 @@ midi_first_time ? (
   );
 );
 
-sysex_delay = 0;
 sysex_queue_len = sysex_queue_ptr;
 sysex_queue_ptr = 0;
 
@@ -1850,6 +1913,7 @@ while (sysex_queue_ptr < sysex_queue_len) (
 );
 
 sysex_queue_ptr = 0;
+sysex_delay = 0;
 
 spinlock.unlock();
 
