@@ -568,13 +568,13 @@ function update_state_midi(midi_msg1, midi_msg2, midi_msg3) local(midi_status, m
   loop (16,
     part_rcv_channel[part] == midi_channel ? (
       // control change
-      midi_status == 0xb0 ? (
-        midi_msg2 == 0 ? incoming_bank_msb[part] = midi_msg3;
+      midi_status == 0xb0 && part_recv_cc[part] ? (
+        midi_msg2 == 0 && part_recv_bs[part] ? incoming_bank_msb[part] = midi_msg3;
         midi_msg2 == 5 ? part_portamento_time[part] = midi_msg3;
-        midi_msg2 == 7 ? part_volume[part] = midi_msg3;
-        midi_msg2 == 10 ? part_pan[part] = midi_msg3;
-        midi_msg2 == 32 ? incoming_bank_lsb[part] = midi_msg3;
-        midi_msg2 == 65 ? part_portamento_switch[part] = midi_msg3 >= 64;
+        midi_msg2 == 7 && part_recv_vol[part] ? part_volume[part] = midi_msg3;
+        midi_msg2 == 10 && part_recv_pan[part] ? part_pan[part] = midi_msg3;
+        midi_msg2 == 32 && part_recv_bs[part] ? incoming_bank_lsb[part] = midi_msg3;
+        midi_msg2 == 65 && part_recv_port[part] ? part_portamento_switch[part] = midi_msg3 >= 64;
         midi_msg2 == 71 ? part_filter_resonance[part] = midi_msg3;
         midi_msg2 == 72 ? part_eg_release[part] = midi_msg3;
         midi_msg2 == 73 ? part_eg_attack[part] = midi_msg3;
@@ -586,12 +586,16 @@ function update_state_midi(midi_msg1, midi_msg2, midi_msg3) local(midi_status, m
         midi_msg2 == 91 ? part_reverb_send[part] = midi_msg3;
         midi_msg2 == 93 ? part_chorus_send[part] = midi_msg3;
         midi_msg2 == 94 ? part_variation_send[part] = midi_msg3;
+      );
+
+      // channel mode
+      midi_status == 0xb0 ? (
         midi_msg2 == 126 && midi_msg3 <= 16 ? part_mode[part] = 0;  // mono
         midi_msg2 == 127 && midi_msg3 == 0 ? part_mode[part] = 1;   // poly
       );
 
       // program change
-      midi_status == 0xc0 ? (
+      midi_status == 0xc0 && part_recv_pc[part] ? (
         change_voice(part, incoming_bank_msb[part], incoming_bank_lsb[part], midi_msg2);
       );
     );
