@@ -761,7 +761,7 @@ function gui_menu_item(item_x, item_y, item_name, item_selected, mode) local(ite
 
   item_selected = 0;
 
-  gui_mouse_over(item_x - 8, item_width + 16, item_y - 4, item_height + 8) ? (
+  mode >= 0 && gui_mouse_over(item_x - 8, item_width + 16, item_y - 4, item_height + 8) ? (
     set_color(color_bg_cursor);
 
     mode == 0 ? (
@@ -1979,39 +1979,41 @@ gui_menu_item(243, 10, "Reverb"       , gui_page == 3, 1) ? gui_page = 3;
 gui_menu_item(314, 10, "Chorus"       , gui_page == 4, 1) ? gui_page = 4;
 gui_menu_item(386, 10, "Variation"    , gui_page == 5, 1) ? gui_page = 5;
 
-sprintf(#part_menu, "Part: %i", gui_part + 1);
-gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 1 ? gui_part += 1;
-gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 2 ? gui_part -= 1;
-gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 2) ? gui_part += sign(mouse_wheel);
+gui_page == 1 || gui_page == 2 ? (
+  sprintf(#part_menu, "Part: %i", gui_part + 1);
+  gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 1 ? gui_part += 1;
+  gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 2 ? gui_part -= 1;
+  gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 2) ? gui_part += sign(mouse_wheel);
 
-gui_part > 15 ? gui_part = 0;
-gui_part < 0 ? gui_part = 15;
+  gui_part > 15 ? gui_part = 0;
+  gui_part < 0 ? gui_part = 15;
 
-// change part number with number keys (1-10)
-gui_key == 49 ? gui_part = 0;
-gui_key == 50 ? gui_part = 1;
-gui_key == 51 ? gui_part = 2;
-gui_key == 52 ? gui_part = 3;
-gui_key == 53 ? gui_part = 4;
-gui_key == 54 ? gui_part = 5;
-gui_key == 55 ? gui_part = 6;
-gui_key == 56 ? gui_part = 7;
-gui_key == 57 ? gui_part = 8;
-gui_key == 48 ? gui_part = 9;
+  // change part number with number keys (1-10)
+  gui_key == 49 ? gui_part = 0;
+  gui_key == 50 ? gui_part = 1;
+  gui_key == 51 ? gui_part = 2;
+  gui_key == 52 ? gui_part = 3;
+  gui_key == 53 ? gui_part = 4;
+  gui_key == 54 ? gui_part = 5;
+  gui_key == 55 ? gui_part = 6;
+  gui_key == 56 ? gui_part = 7;
+  gui_key == 57 ? gui_part = 8;
+  gui_key == 48 ? gui_part = 9;
 
-// change part number with qwerty keys (11-16)
-gui_key == 81 || gui_key == 113 ? gui_part = 10;
-gui_key == 87 || gui_key == 119 ? gui_part = 11;
-gui_key == 69 || gui_key == 101 ? gui_part = 12;
-gui_key == 82 || gui_key == 114 ? gui_part = 13;
-gui_key == 84 || gui_key == 116 ? gui_part = 14;
-gui_key == 89 || gui_key == 121 ? gui_part = 15;
-
-gui_part != gui_part_prev || gui_page != gui_page_prev ? (
-  gui_categories_voice_cursor = voice_category[gui_part];
+  // change part number with qwerty keys (11-16)
+  gui_key == 81 || gui_key == 113 ? gui_part = 10;
+  gui_key == 87 || gui_key == 119 ? gui_part = 11;
+  gui_key == 69 || gui_key == 101 ? gui_part = 12;
+  gui_key == 82 || gui_key == 114 ? gui_part = 13;
+  gui_key == 84 || gui_key == 116 ? gui_part = 14;
+  gui_key == 89 || gui_key == 121 ? gui_part = 15;
+) : (
+  gui_menu_item(gfx_w - 64, 10, "System", 0, -1);
 );
 
-gui_part_prev = gui_part;
+gui_page != gui_page_prev || gui_part != gui_part_prev ? (
+  gui_categories_voice_cursor = voice_category[gui_part];
+);
 
 // current page ---------------------------------------------------------------
 
@@ -2022,7 +2024,6 @@ gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
   gui_restore();
 ) : (
   gui_pages();
-  gui_page_prev = gui_page;
 );
 
 // cleanup --------------------------------------------------------------------
@@ -2030,5 +2031,7 @@ gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
 gui_key = 0;
 gui_key_ctrl = 0;
 mouse_wheel = 0;
+gui_page_prev = gui_page;
+gui_part_prev = gui_part;
 
 spinlock.unlock();
