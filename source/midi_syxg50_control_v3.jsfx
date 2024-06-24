@@ -118,7 +118,7 @@ gui_key_ctrl = 0;
 gui_mouse_left = 0;
 gui_mouse_right = 0;
 
-gui_page = 0;
+gui_page = 1;
 gui_page_prev = -1;
 
 gui_part = 0;
@@ -1017,7 +1017,7 @@ function gui_pages()
 
   // voice catalog ------------------------------------------------------------
 
-  gui_page == 0 ? (
+  gui_page == 1 ? (
     gui_categories_voice_cursor = gui_category(list_categories_voice, gui_categories_voice_cursor, gui_categories_voice_offset, voice_category[gui_part]);
     gui_categories_voice_offset = gui_category_adjust_view(gui_categories_voice_offset, gui_categories_voice_cursor, gui_categories_voice_cursor_prev);
 
@@ -1107,7 +1107,7 @@ function gui_pages()
 
   // voice editor -------------------------------------------------------------
 
-  gui_page == 1 ? (
+  gui_page == 2 ? (
     gui_categories_editor_cursor = gui_category(list_categories_editor, gui_categories_editor_cursor, gui_categories_editor_offset, gui_categories_editor_cursor);
     gui_categories_editor_offset = gui_category_adjust_view(gui_categories_editor_offset, gui_categories_editor_cursor, gui_categories_editor_cursor_prev);
 
@@ -1442,7 +1442,7 @@ function gui_pages()
 
   // reverb editor ------------------------------------------------------------
 
-  gui_page == 2 || gui_categories_reverb_cursor_prev < 0 ? (
+  gui_page == 3 || gui_categories_reverb_cursor_prev < 0 ? (
     gui_categories_reverb_cursor = gui_category(list_categories_reverb, gui_categories_reverb_cursor, gui_categories_reverb_offset, gui_categories_reverb_cursor);
     gui_categories_reverb_offset = gui_category_adjust_view(gui_categories_reverb_offset, gui_categories_reverb_cursor, gui_categories_reverb_cursor_prev);
 
@@ -1488,7 +1488,7 @@ function gui_pages()
 
   // chorus editor ------------------------------------------------------------
 
-  gui_page == 3 || gui_categories_chorus_cursor_prev < 0 ? (
+  gui_page == 4 || gui_categories_chorus_cursor_prev < 0 ? (
     gui_categories_chorus_cursor = gui_category(list_categories_chorus, gui_categories_chorus_cursor, gui_categories_chorus_offset, gui_categories_chorus_cursor);
     gui_categories_chorus_offset = gui_category_adjust_view(gui_categories_chorus_offset, gui_categories_chorus_cursor, gui_categories_chorus_cursor_prev);
 
@@ -1538,7 +1538,7 @@ function gui_pages()
 
   // variation editor ---------------------------------------------------------
 
-  gui_page == 4 || gui_categories_variation_cursor_prev < 0 ? (
+  gui_page == 5 || gui_categories_variation_cursor_prev < 0 ? (
     gui_categories_variation_cursor = gui_category(list_categories_variation, gui_categories_variation_cursor, gui_categories_variation_offset, gui_categories_variation_cursor);
     gui_categories_variation_offset = gui_category_adjust_view(gui_categories_variation_offset, gui_categories_variation_cursor, gui_categories_variation_cursor_prev);
 
@@ -1973,11 +1973,11 @@ gui_param_focused() ? (
 
 // main menu ------------------------------------------------------------------
 
-gui_menu_item(020, 10, "Voice Catalog", gui_page == 0, 1) ? gui_page = 0;
-gui_menu_item(137, 10, "Voice Editor" , gui_page == 1, 1) ? gui_page = 1;
-gui_menu_item(243, 10, "Reverb"       , gui_page == 2, 1) ? gui_page = 2;
-gui_menu_item(314, 10, "Chorus"       , gui_page == 3, 1) ? gui_page = 3;
-gui_menu_item(386, 10, "Variation"    , gui_page == 4, 1) ? gui_page = 4;
+gui_menu_item(020, 10, "Voice Catalog", gui_page == 1, 1) ? gui_page = 1;
+gui_menu_item(137, 10, "Voice Editor" , gui_page == 2, 1) ? gui_page = 2;
+gui_menu_item(243, 10, "Reverb"       , gui_page == 3, 1) ? gui_page = 3;
+gui_menu_item(314, 10, "Chorus"       , gui_page == 4, 1) ? gui_page = 4;
+gui_menu_item(386, 10, "Variation"    , gui_page == 5, 1) ? gui_page = 5;
 
 sprintf(#part_menu, "Part: %i", gui_part + 1);
 gui_menu_item(gfx_w - 64, 10, #part_menu, 0, 1) & 1 ? gui_part += 1;
