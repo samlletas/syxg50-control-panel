@@ -2007,10 +2007,11 @@ gui_key == 82 || gui_key == 114 ? gui_part = 13;
 gui_key == 84 || gui_key == 116 ? gui_part = 14;
 gui_key == 89 || gui_key == 121 ? gui_part = 15;
 
-gui_part != gui_part_prev ? (
+gui_part != gui_part_prev || gui_page != gui_page_prev ? (
   gui_categories_voice_cursor = voice_category[gui_part];
-  gui_part_prev = gui_part;
 );
+
+gui_part_prev = gui_part;
 
 // current page ---------------------------------------------------------------
 
