@@ -376,6 +376,16 @@ loop (16,
   idx += 1;
 );
 
+function lerp(fraction, value_min, value_max) local(value) (
+  value = floor((value_min + (value_max - value_min) * fraction) + 0.5);
+  min(max(value, value_min), value_max);
+);
+
+function inverse_lerp(value, value_min, value_max) local(fraction) (
+  fraction = (value - value_min) / (value_max - value_min);
+  min(max(fraction, 0), 1);
+);
+
 function set_color(color) (
   gfx_r = ((color >> 16) & 0xff) / 255;
   gfx_g = ((color >> 8 ) & 0xff) / 255;
@@ -599,19 +609,9 @@ function update_state_midi(midi_msg1, midi_msg2, midi_msg3) local(midi_status, m
         change_voice(part, incoming_bank_msb[part], incoming_bank_lsb[part], midi_msg2);
       );
     );
-    
-    part += 1; 
+
+    part += 1;
   );
-);
-
-function lerp(fraction, value_min, value_max) local(value) (
-  value = floor((value_min + (value_max - value_min) * fraction) + 0.5);
-  min(max(value, value_min), value_max);
-);
-
-function inverse_lerp(value, value_min, value_max) local(fraction) (
-  fraction = (value - value_min) / (value_max - value_min);
-  min(max(fraction, 0), 1);
 );
 
 function gui_param_focused() (
@@ -685,18 +685,18 @@ function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
 );
 
 function gui_switch(value, value_min, value_max, name, value_def)
-    local(value_old, option_count, option_width, option_value, option_x, option_y, option_name, name_width, name_height) (
+    local(value_old, option_idx, option_count, option_width, option_value, option_x, option_y, option_name, name_width, name_height) (
   value_old = value;
   value < 0 ? value = value_def;
   option_count = value_max - value_min + 1;
   option_width = (gui_switch_width - (gui_switch_margin * (option_count - 1))) / option_count;
   gfx_setfont(font_small);
 
-  idx = 0;
+  option_idx = 0;
 
   loop (option_count,
-    option_value = value_min + idx;
-    option_x = gui_slider_x + ((option_width + gui_switch_margin) * idx);
+    option_value = value_min + option_idx;
+    option_x = gui_slider_x + ((option_width + gui_switch_margin) * option_idx);
     option_y = gui_slider_y - 3;
 
     // option input
@@ -728,7 +728,7 @@ function gui_switch(value, value_min, value_max, name, value_def)
     gfx_y = option_y + (gui_switch_height / 2) - (name_height / 2) - 1;
     gfx_drawstr(option_name);
 
-    idx += 1;
+    option_idx += 1;
   );
 
   // switch name
