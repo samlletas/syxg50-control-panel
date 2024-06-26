@@ -82,6 +82,8 @@ color_bg_changed = 0x5CCFE6;
 color_bg_voice   = 0x514631;
 color_fg_menu    = 0x707070;
 color_fg_list    = 0xD4D4D4;
+color_bg_col_alt = 0x252525;
+color_bg_row_alt = 0x313131;
 
 font_default = 1;
 font_small   = 2;
@@ -90,12 +92,17 @@ gfx_setfont(font_default, "Segoe UI", 22);
 gfx_setfont(font_small, "Segoe UI", 20);
 
 gui_menu_height = 44;
-gui_list_item_width = 200;
-gui_list_item_height = 27;
+
+gui_overview_header_height = 66;
+gui_overview_cell_width = 44;
+gui_overview_cell_height = 40;
 
 gui_categories_width = 180;
 gui_categories_count = 0;
 gui_categories_visible = 0;
+
+gui_list_item_width = 200;
+gui_list_item_height = 27;
 
 gui_slider_width = 256;
 gui_slider_halfwidth = gui_slider_width * 0.5;
@@ -118,11 +125,13 @@ gui_key_ctrl = 0;
 gui_mouse_left = 0;
 gui_mouse_right = 0;
 
-gui_page = 1;
+gui_page = 0;
 gui_page_prev = -1;
 
 gui_part = 0;
 gui_part_prev = -1;
+
+gui_overview_mode = 0;
 
 gui_categories_voice_cursor = 0;
 gui_categories_voice_offset = 0;
@@ -1014,6 +1023,16 @@ function gui_slider_list(list, cursor, effect_type)
 function gui_pages()
     local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
   midi_force_update = 0;
+
+  // overview -----------------------------------------------------------------
+
+  gui_page == 0 ? (
+    gui_slider_x = 257;
+    gui_slider_y = 53;
+
+    gui_value_table = param_value_names_overview_mode;
+    gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", 0);
+  );
 
   // voice catalog ------------------------------------------------------------
 
@@ -1936,8 +1955,6 @@ spinlock.unlock();
 
 @gfx 750 750
 
-// main window ----------------------------------------------------------------
-
 gfx_setfont(font_default);
 
 set_color(color_bg_darkest);
@@ -1945,12 +1962,6 @@ gfx_rect(0, 0, gfx_w, gui_menu_height - 10);
 
 set_color(color_bg_dark);
 gfx_rect(0, gui_menu_height - 10, gfx_w, 10);
-
-set_color(color_bg_dark);
-gfx_rect(0, gui_menu_height, gui_categories_width, gfx_h - gui_menu_height);
-
-set_color(color_bg_light);
-gfx_rect(gui_categories_width, gui_menu_height, gfx_w - gui_categories_width, gfx_h - gui_menu_height);
 
 // setup ----------------------------------------------------------------------
 
@@ -1973,11 +1984,12 @@ gui_param_focused() ? (
 
 // main menu ------------------------------------------------------------------
 
-gui_menu_item(020, 10, "Voice Catalog", gui_page == 1, 1) ? gui_page = 1;
-gui_menu_item(137, 10, "Voice Editor" , gui_page == 2, 1) ? gui_page = 2;
-gui_menu_item(243, 10, "Reverb"       , gui_page == 3, 1) ? gui_page = 3;
-gui_menu_item(314, 10, "Chorus"       , gui_page == 4, 1) ? gui_page = 4;
-gui_menu_item(386, 10, "Variation"    , gui_page == 5, 1) ? gui_page = 5;
+gui_menu_item(020, 10, "Overview"   , gui_page == 0, 1) ? gui_page = 0;
+gui_menu_item(116, 10, "Voice List" , gui_page == 1, 1) ? gui_page = 1;
+gui_menu_item(212, 10, "Part Editor", gui_page == 2, 1) ? gui_page = 2;
+gui_menu_item(314, 10, "Reverb"     , gui_page == 3, 1) ? gui_page = 3;
+gui_menu_item(392, 10, "Chorus"     , gui_page == 4, 1) ? gui_page = 4;
+gui_menu_item(472, 10, "Variation"  , gui_page == 5, 1) ? gui_page = 5;
 
 gui_page == 1 || gui_page == 2 ? (
   sprintf(#part_menu, "Part: %i", gui_part + 1);
@@ -2008,7 +2020,8 @@ gui_page == 1 || gui_page == 2 ? (
   gui_key == 84 || gui_key == 116 ? gui_part = 14;
   gui_key == 89 || gui_key == 121 ? gui_part = 15;
 ) : (
-  gui_menu_item(gfx_w - 64, 10, "System", 0, -1);
+  #part_menu = gui_page == 0 ? "Multi" : "System";
+  gui_menu_item(gfx_w - 64, 10, #part_menu, 0, -1);
 );
 
 gui_page != gui_page_prev || gui_part != gui_part_prev ? (
@@ -2017,10 +2030,37 @@ gui_page != gui_page_prev || gui_part != gui_part_prev ? (
 
 // current page ---------------------------------------------------------------
 
+spinlock.unlock();
+
+gui_page == 0 ? (
+  set_color(color_bg_dark);
+  gfx_rect(0, gui_menu_height, gfx_w, gui_overview_header_height);
+
+  row = 0;
+
+  loop (16,
+    row % 2 == 0 ? set_color(color_bg_dark) : set_color(color_bg_col_alt);
+    gfx_rect(0, gui_menu_height + gui_overview_header_height + (gui_overview_cell_height * row), gui_overview_cell_width, gui_overview_cell_height);
+
+    row % 2 == 0 ? set_color(color_bg_light) : set_color(color_bg_row_alt);
+    gfx_rect(gui_overview_cell_width, gui_menu_height + gui_overview_header_height + (gui_overview_cell_height * row), gfx_w - gui_overview_cell_width, gui_overview_cell_height);
+
+    row += 1;
+  );
+) : (
+  set_color(color_bg_dark);
+  gfx_rect(0, gui_menu_height, gui_categories_width, gfx_h - gui_menu_height);
+
+  set_color(color_bg_light);
+  gfx_rect(gui_categories_width, gui_menu_height, gfx_w - gui_categories_width, gfx_h - gui_menu_height);
+);
+
+spinlock.lock();
+
 gui_categories_visible = floor((gfx_h - gui_menu_height - 20) / gui_list_item_height) - 1;
 gui_categories_visible = max(gui_categories_visible, 1);
 
-gui_menu_item(gfx_w - 104, 10, "XG", 0, 1) ? (
+gui_menu_item(gfx_w - 107, 10, "XG", 0, 1) ? (
   gui_restore();
 ) : (
   gui_pages();
