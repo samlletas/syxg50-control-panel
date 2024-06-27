@@ -1020,6 +1020,28 @@ function gui_slider_list(list, cursor, effect_type)
   );
 );
 
+function gui_overview_header(name, size) local(name_width, name_height, header_width) (
+  header_width = gui_overview_cell_width * size;
+  gfx_setfont(font_small);
+  gfx_measurestr(name, name_width, name_height);
+  gfx_x = gui_slider_x + (header_width / 2) - (name_width / 2);
+  gfx_y = gui_slider_y + (gui_overview_cell_height / 2) - (name_height / 2) + 6;
+  set_color(color_fg_menu);
+  gfx_drawstr(name);
+  gfx_setfont(font_default);
+  gui_slider_x += header_width;
+);
+
+function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos_y) (
+  pos_x = gui_slider_x;
+  pos_y = gui_slider_y;
+  gui_slider_y -= 14;
+  gui_overview_header(name_top, size);
+  gui_slider_x = pos_x;
+  gui_slider_y = pos_y;
+  gui_overview_header(name_bottom, size);
+);
+
 function gui_pages()
     local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
   midi_force_update = 0;
@@ -1028,10 +1050,48 @@ function gui_pages()
 
   gui_page == 0 ? (
     gui_slider_x = 257;
-    gui_slider_y = 53;
+    gui_slider_y = 52;
 
     gui_value_table = param_value_names_overview_mode;
     gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", 0);
+
+    gui_slider_x = 0;
+    gui_slider_y = 70;
+
+    // mixing mode
+    gui_overview_mode == 0 ? (
+      gui_overview_header("Part", 1);
+      gui_overview_header("Voice", 4);
+      gui_overview_header("Cutoff", 1);
+      gui_overview_header("Reso", 1);
+      gui_overview_header("Atk", 1);
+      gui_overview_header("Dec", 1);
+      gui_overview_header("Rel", 1);
+      gui_overview_header("Rev", 1);
+      gui_overview_header("Cho", 1);
+      gui_overview_header("Var", 1);
+      gui_overview_header("Dry", 1);
+      gui_overview_header("Pan", 1);
+      gui_overview_header("Volume", 2);
+    );
+
+    // performance mode
+    gui_overview_mode == 1 ? (
+      gui_overview_header("Part", 1);
+      gui_overview_header("Ch", 1);
+      gui_overview_header("Voice", 4);
+      gui_overview_header("Mode", 1);
+      gui_overview_header("Port", 1);
+      gui_overview_header_stack("Port", "Time", 1);
+      gui_overview_header_stack("Vib", "Rate", 1);
+      gui_overview_header_stack("Vib", "Depth", 1);
+      gui_overview_header_stack("Vib", " Delay", 1);
+      gui_overview_header(" Tran", 1);
+      gui_overview_header_stack("Key", "Low", 1);
+      gui_overview_header_stack("Key", "High", 1);
+      gui_overview_header_stack("Vel", "Low", 1);
+      gui_overview_header_stack("Vel", "High", 1);
+    );
   );
 
   // voice catalog ------------------------------------------------------------
