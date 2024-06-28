@@ -203,7 +203,7 @@ part_portamento_switch = 300700;
 part_portamento_time = 300800;
 part_volume = 300900;
 part_pan = 301000;
-part_transpose = 301100;
+part_note_shift = 301100;
 part_detune = 301200;
 part_filter_cutoff = 301300;
 part_filter_resonance = 301400;
@@ -302,7 +302,7 @@ loop (16,
   part_portamento_time[idx] = 0;
   part_volume[idx] = 100;
   part_pan[idx] = 64;
-  part_transpose[idx] = 64;
+  part_note_shift[idx] = 64;
   part_detune[idx] = 128;
   part_filter_cutoff[idx] = 64;
   part_filter_resonance[idx] = 64;
@@ -1223,8 +1223,8 @@ function gui_pages()
       gui_value_change ? sysex_add_queue_multipart(gui_part, 0x0e, part_pan[gui_part], 1);
 
       gui_value_table = param_value_names_semitones;
-      part_transpose[gui_part] = gui_slider(part_transpose[gui_part], 40, 88, "Transpose", 64, 1);
-      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x08, part_transpose[gui_part], 1);
+      part_note_shift[gui_part] = gui_slider(part_note_shift[gui_part], 40, 88, "Note Shift", 64, 1);
+      gui_value_change ? sysex_add_queue_multipart(gui_part, 0x08, part_note_shift[gui_part], 1);
 
       gui_value_table = param_value_names_detune;
       part_detune[gui_part] = gui_slider(part_detune[gui_part], 0, 255, "Detune", 128, 1);
@@ -1761,7 +1761,7 @@ file_mem(0, part_portamento_switch, 16);
 file_mem(0, part_portamento_time, 16);
 file_mem(0, part_volume, 16);
 file_mem(0, part_pan, 16);
-file_mem(0, part_transpose, 16);
+file_mem(0, part_note_shift, 16);
 file_mem(0, part_detune, 16);
 file_mem(0, part_filter_cutoff, 16);
 file_mem(0, part_filter_resonance, 16);
@@ -1908,7 +1908,7 @@ midi_first_time ? (
     sysex_add_queue_multipart(idx, 0x68, part_portamento_time[idx], 1);
     sysex_add_queue_multipart(idx, 0x0b, part_volume[idx], 1);
     sysex_add_queue_multipart(idx, 0x0e, part_pan[idx], 1);
-    sysex_add_queue_multipart(idx, 0x08, part_transpose[idx], 1);
+    sysex_add_queue_multipart(idx, 0x08, part_note_shift[idx], 1);
     sysex_add_queue_detune(idx, part_detune[idx]);
     sysex_add_queue_multipart(idx, 0x18, part_filter_cutoff[idx], 1);
     sysex_add_queue_multipart(idx, 0x19, part_filter_resonance[idx], 1);
