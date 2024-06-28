@@ -87,9 +87,11 @@ color_bg_row_alt = 0x313131;
 
 font_default = 1;
 font_small   = 2;
+font_smaller = 3;
 
 gfx_setfont(font_default, "Segoe UI", 22);
 gfx_setfont(font_small, "Segoe UI", 20);
+gfx_setfont(font_smaller, "Segoe UI", 19);
 
 gui_menu_height = 44;
 
@@ -1022,10 +1024,10 @@ function gui_slider_list(list, cursor, effect_type)
 
 function gui_overview_header(name, size) local(name_width, name_height, header_width) (
   header_width = gui_overview_cell_width * size;
-  gfx_setfont(font_small);
+  gfx_setfont(font_smaller);
   gfx_measurestr(name, name_width, name_height);
   gfx_x = gui_control_x + (header_width / 2) - (name_width / 2);
-  gfx_y = gui_control_y + (gui_overview_cell_height / 2) - (name_height / 2) + 6;
+  gfx_y = gui_control_y + (gui_overview_cell_height / 2) - (name_height / 2) + 8;
   set_color(color_fg_menu);
   gfx_drawstr(name);
   gfx_setfont(font_default);
@@ -1035,7 +1037,7 @@ function gui_overview_header(name, size) local(name_width, name_height, header_w
 function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos_y) (
   pos_x = gui_control_x;
   pos_y = gui_control_y;
-  gui_control_y -= 14;
+  gui_control_y -= 13;
   gui_overview_header(name_top, size);
   gui_control_x = pos_x;
   gui_control_y = pos_y;
@@ -1050,7 +1052,7 @@ function gui_pages()
 
   gui_page == 0 ? (
     gui_control_x = 257;
-    gui_control_y = 52;
+    gui_control_y = 53;
 
     gui_value_table = param_value_names_overview_mode;
     gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", 0);
@@ -1086,11 +1088,11 @@ function gui_pages()
       gui_overview_header_stack("Vib", "Rate", 1);
       gui_overview_header_stack("Vib", "Depth", 1);
       gui_overview_header_stack("Vib", " Delay", 1);
-      gui_overview_header(" Tran", 1);
+      gui_overview_header_stack("Note", "Shift", 1);
       gui_overview_header_stack("Key", "Low", 1);
       gui_overview_header_stack("Key", "High", 1);
-      gui_overview_header_stack("Vel", "Low", 1);
-      gui_overview_header_stack("Vel", "High", 1);
+      gui_overview_header_stack("Vel", "Depth", 1);
+      gui_overview_header_stack("Vel", " Offset", 1);
     );
   );
 
