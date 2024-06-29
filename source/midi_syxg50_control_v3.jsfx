@@ -514,6 +514,29 @@ function get_value_display(value)
   #param_value;
 );
 
+function get_voice_category(category) local(category_count, list_len, list_ptr, list_ptr_old) (
+  category_count = 0;
+
+  strcpy(#category_name, "not found");
+  list_ptr = 1;
+  list_len = strlen(list_categories_voice);
+
+  while (list_ptr < list_len) (
+    list_ptr_old = list_ptr;
+    list_ptr = parse_to_line_end(list_categories_voice, list_ptr);
+
+    category_count == category ? (
+      strcpy_substr(#category_name, list_categories_voice, list_ptr_old + 3, list_ptr - list_ptr_old - 3);
+      list_ptr = list_len;
+    );
+
+    list_ptr += 1;
+    category_count += 1;
+  );
+
+  #category_name;
+);
+
 function get_voice_list(category) local(list_voices) (
   list_voices = "";
   category == 0 ? list_voices = list_voices_piano;
@@ -534,6 +557,21 @@ function get_voice_list(category) local(list_voices) (
   category == 15 ? list_voices = list_voices_percussive;
   category == 16 ? list_voices = list_voices_drum_kits;
   list_voices;
+);
+
+function get_voice_count(category) local(voice_count, list_voices, list_len, list_ptr) (
+  list_voices = get_voice_list(category);
+  list_ptr = 1;
+  list_len = strlen(list_voices);
+  voice_count = 0;
+
+  while (list_ptr < list_len) (
+    list_ptr = parse_to_line_end(list_voices, list_ptr);
+    list_ptr += 1;
+    voice_count += 1;
+  );
+
+  voice_count;
 );
 
 function change_voice(part, new_msb, new_lsb, new_program)
@@ -1064,7 +1102,49 @@ function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos
   gui_overview_header(name_bottom, size);
 );
 
-function gui_overview_voice(part) local(voice_change, category_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
+function gui_overview_voice_menu(part) local(category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old, selection) (
+  category_count = 0;
+  strcpy(#voice_menu, "");
+  strcpy(#voice_menu_item, "");
+
+  while (category_count < 17) (
+    list_voices = get_voice_list(category_count);
+    list_ptr = 1;
+    list_len = strlen(list_voices);
+    voice_count = 0;
+
+    strcat(#voice_menu, ">");
+    strcat(#voice_menu, get_voice_category(category_count));
+    strcat(#voice_menu, "|");
+
+    while (list_ptr < list_len) (
+      list_ptr_old = list_ptr;
+      list_ptr = parse_to_line_end(list_voices, list_ptr);
+      strcpy_substr(#voice_menu_item, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
+      list_ptr += 1;
+
+      voice_count == voice_number[part] && category_count == voice_category[part] ? strcat(#voice_menu, "!");
+      list_ptr >= list_len ? strcat(#voice_menu, "<");
+      strcat(#voice_menu, #voice_menu_item);
+      strcat(#voice_menu, "|");
+
+      voice_count += 1;
+    );
+
+    category_count += 1;
+  );
+
+  gfx_x = mouse_x;
+  gfx_y = mouse_y;
+
+  spinlock.unlock();
+  selection = gfx_showmenu(#voice_menu);
+  spinlock.lock();
+
+  selection;
+);
+
+function gui_overview_voice(part) local(category_change, voice_change, category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
   voice_change = -1;
   category_change = -1;
 
@@ -1105,6 +1185,29 @@ function gui_overview_voice(part) local(voice_change, category_change, voice_cou
         voice_change = 1000;  // Hack: select the category's last voice
         category_change -= 1;
       );
+    );
+
+    // voice menu
+    gui_mouse_left == 1 ? (
+      voice_change = gui_overview_voice_menu(part);
+
+      voice_change > 0 ? (
+        category_count = 0;
+
+        while (category_count < 17) (
+          voice_count = get_voice_count(category_count);
+
+          voice_change > voice_count ? (
+            voice_change -= voice_count;
+            category_count += 1;
+          ) : (
+            category_change = category_count;
+            category_count = 17;
+          );
+        );
+      );
+
+      voice_change -= 1;
     );
   );
 
