@@ -679,26 +679,26 @@ list_voices_sound_effects = "
 //-----------------------------------------------------------------------------
 
 list_voices_drum_kits = "
-001:127:000 XG Standard 1
-002:127:000 XG Standard 2
-009:127:000 XG Room
-017:127:000 XG Rock
-025:127:000 XG Electro
-026:127:000 XG Analog
-033:127:000 XG Jazz
-041:127:000 XG Brush
-049:127:000 XG Symphony
-001:126:000 XG SFX 1
-002:126:000 XG SFX 2
-001:120:000 GM2 Standard
-009:120:000 GM2 Room
-017:120:000 GM2 Power
-025:120:000 GM2 Electric
-026:120:000 GM2 Analog
-033:120:000 GM2 Jazz
-041:120:000 GM2 Brush
-049:120:000 GM2 Orchestra
-057:120:000 GM2 SFX
+001:127:000 XG Standard Kit 1
+002:127:000 XG Standard Kit 2
+009:127:000 XG Room Kit
+017:127:000 XG Rock Kit
+025:127:000 XG Electro Kit
+026:127:000 XG Analog Kit
+033:127:000 XG Jazz Kit
+041:127:000 XG Brush Kit
+049:127:000 XG Symphony Kit
+001:126:000 XG SFX Kit 1
+002:126:000 XG SFX Kit 2
+001:120:000 GM2 Standard Kit
+009:120:000 GM2 Room Kit
+017:120:000 GM2 Power Kit
+025:120:000 GM2 Electric Kit
+026:120:000 GM2 Analog Kit
+033:120:000 GM2 Jazz Kit
+041:120:000 GM2 Brush Kit
+049:120:000 GM2 Orchestra Kit
+057:120:000 GM2 SFX Kit
 ";
 
 //-----------------------------------------------------------------------------
