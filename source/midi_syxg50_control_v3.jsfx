@@ -1022,16 +1022,36 @@ function gui_slider_list(list, cursor, effect_type)
   );
 );
 
-function gui_overview_header(name, size) local(name_width, name_height, header_width) (
-  header_width = gui_overview_cell_width * size;
-  gfx_setfont(font_smaller);
-  gfx_measurestr(name, name_width, name_height);
-  gfx_x = gui_control_x + (header_width / 2) - (name_width / 2);
-  gfx_y = gui_control_y + (gui_overview_cell_height / 2) - (name_height / 2) + 8;
-  set_color(color_fg_menu);
-  gfx_drawstr(name);
-  gfx_setfont(font_default);
-  gui_control_x += header_width;
+// align 0: center, 1: bottom, 2: left
+function gui_overview_cell(text, size, color, align, has_border) local(text_width, text_height, cell_width) (
+  cell_width = gui_overview_cell_width * size;
+  gfx_measurestr(text, text_width, text_height);
+
+  align <= 1 ? (
+    gfx_x = gui_control_x + (cell_width / 2) - (text_width / 2);
+  ) : (
+    gfx_x = gui_control_x + 2;
+  );
+
+  align != 1 ? (
+    gfx_y = gui_control_y + (gui_overview_cell_height / 2) - (text_height / 2)
+  ) : (
+    gfx_y = gui_control_y + gui_overview_cell_height - text_height - 3;
+  );
+
+  set_color(color);
+  gfx_drawstr(text);
+
+  has_border ? (
+    set_color(color_bg_darker);
+    gfx_line(gui_control_x, gui_control_y, gui_control_x, gui_control_y + gui_overview_cell_height);
+  );
+
+  gui_control_x += cell_width;
+);
+
+function gui_overview_header(name, size) (
+  gui_overview_cell(name, size, color_fg_menu, 1, 0);
 );
 
 function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos_y) (
@@ -1044,8 +1064,66 @@ function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos
   gui_overview_header(name_bottom, size);
 );
 
+function gui_overview_voice_selector(part) local(voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
+  voice_change = -1;
+
+  list_voices = get_voice_list(voice_category[part]);
+  list_ptr = 1;
+  list_len = strlen(list_voices);
+  voice_count = 0;
+
+  while (list_ptr < list_len) (
+    list_ptr_old = list_ptr;
+    list_ptr = parse_to_line_end(list_voices, list_ptr);
+
+    voice_count == voice_number[part] ? (
+      strcpy_substr(#voice_name, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
+      list_ptr = list_len;
+    ) : (
+      list_ptr += 1;
+      voice_count += 1;
+    );
+  );
+
+  gui_mouse_over(gui_control_x, gui_overview_cell_width * 4, gui_control_y, gui_overview_cell_height) ? (
+    mouse_wheel != 0 ? (
+      voice_change = voice_number[part];
+      voice_change -= sign(mouse_wheel);
+    );
+  );
+
+  gui_overview_cell(#voice_name, 4, color_fg_list, 2, 1);
+
+  // handle voice changes
+  voice_change >= 0 ? (
+    list_ptr = 1;
+    voice_count = 0;
+
+    while (list_ptr < list_len) (
+      list_ptr_old = list_ptr;
+      list_ptr = parse_to_line_end(list_voices, list_ptr);
+      list_ptr += 1;
+
+      voice_count == voice_change ? (
+        voice_number[part] = voice_count;
+        voice_category[part] = voice_category[part];
+
+        part_program[part] = parse_number_dec(list_voices, list_ptr_old + 0, 3) - 1;
+        part_bank_msb[part] = parse_number_dec(list_voices, list_ptr_old + 4, 3);
+        part_bank_lsb[part] = parse_number_dec(list_voices, list_ptr_old + 8, 3);
+
+        sysex_add_queue_multipart(part, 0x01, part_bank_msb[part], 1);
+        sysex_add_queue_multipart(part, 0x02, part_bank_lsb[part], 1);
+        sysex_add_queue_multipart(part, 0x03, part_program[part], 1);
+      );
+
+      voice_count += 1;
+    );
+  );
+);
+
 function gui_pages()
-    local(list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
+    local(part, list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
   midi_force_update = 0;
 
   // overview -----------------------------------------------------------------
@@ -1057,8 +1135,9 @@ function gui_pages()
     gui_value_table = param_value_names_overview_mode;
     gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", 0);
 
+    gfx_setfont(font_smaller);
     gui_control_x = 0;
-    gui_control_y = 70;
+    gui_control_y = gui_menu_height + gui_overview_header_height - gui_overview_cell_height;
 
     // mixing mode
     gui_overview_mode == 0 ? (
@@ -1075,6 +1154,18 @@ function gui_pages()
       gui_overview_header("Dry", 1);
       gui_overview_header("Pan", 1);
       gui_overview_header("Volume", 2);
+
+      part = 0;
+
+      loop (16,
+        gui_control_x = 0;
+        gui_control_y += gui_overview_cell_height;
+
+        gui_overview_cell(sprintf(#, "%i", part + 1), 1, color_fg_menu, 0, 0);
+        gui_overview_voice_selector(part);
+
+        part += 1;
+      );
     );
 
     // performance mode
