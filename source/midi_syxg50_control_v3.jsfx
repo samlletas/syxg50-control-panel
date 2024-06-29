@@ -1064,7 +1064,7 @@ function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos
   gui_overview_header(name_bottom, size);
 );
 
-function gui_overview_voice_selector(part) local(voice_change, category_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
+function gui_overview_voice(part) local(voice_change, category_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
   voice_change = -1;
   category_change = -1;
 
@@ -1087,7 +1087,7 @@ function gui_overview_voice_selector(part) local(voice_change, category_change, 
     voice_count += 1;
   );
 
-  // selector input
+  // handle input
   gui_mouse_over(gui_control_x, gui_overview_cell_width * 4, gui_control_y, gui_overview_cell_height) ? (
     mouse_wheel != 0 ? (
       voice_change = voice_number[part];
@@ -1098,20 +1098,19 @@ function gui_overview_voice_selector(part) local(voice_change, category_change, 
       voice_change >= voice_count ? (
         voice_change = 0;
         category_change += 1;
-        list_voices = get_voice_list(category_change);
       );
 
       // move to prev category
       voice_change < 0 ? (
         voice_change = 1000;  // Hack: select the category's last voice
         category_change -= 1;
-        list_voices = get_voice_list(category_change);
       );
     );
   );
 
   // handle voice changes
   voice_change >= 0 ? (
+    list_voices = get_voice_list(category_change);
     list_ptr = 1;
     list_len = strlen(list_voices);
     voice_count = 0;
@@ -1184,7 +1183,7 @@ function gui_pages()
 
         sprintf(#part_menu, "%i", part + 1);
         gui_overview_cell(#part_menu, 1, color_fg_menu, 0, 0);
-        gui_overview_voice_selector(part);
+        gui_overview_voice(part);
 
         part += 1;
       );
