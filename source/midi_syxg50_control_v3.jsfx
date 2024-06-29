@@ -1149,7 +1149,7 @@ function gui_pages()
 
   // overview -----------------------------------------------------------------
 
-  gui_page == 0 ? (
+  gui_page == 0 && !midi_first_time ? (
     gui_control_x = 257;
     gui_control_y = 53;
 
@@ -1182,7 +1182,8 @@ function gui_pages()
         gui_control_x = 0;
         gui_control_y += gui_overview_cell_height;
 
-        gui_overview_cell(sprintf(#, "%i", part + 1), 1, color_fg_menu, 0, 0);
+        sprintf(#part_menu, "%i", part + 1);
+        gui_overview_cell(#part_menu, 1, color_fg_menu, 0, 0);
         gui_overview_voice_selector(part);
 
         part += 1;
@@ -1208,9 +1209,9 @@ function gui_pages()
     );
   );
 
-  // voice catalog ------------------------------------------------------------
+  // voice list ---------------------------------------------------------------
 
-  gui_page == 1 ? (
+  gui_page == 1 && !midi_first_time ? (
     gui_categories_voice_cursor = gui_category(list_categories_voice, gui_categories_voice_cursor, gui_categories_voice_offset, voice_category[gui_part]);
     gui_categories_voice_offset = gui_category_adjust_view(gui_categories_voice_offset, gui_categories_voice_cursor, gui_categories_voice_cursor_prev);
 
@@ -1298,9 +1299,9 @@ function gui_pages()
     gui_categories_voice_cursor_prev = gui_categories_voice_cursor;
   );
 
-  // voice editor -------------------------------------------------------------
+  // part editor --------------------------------------------------------------
 
-  gui_page == 2 ? (
+  gui_page == 2 && !midi_first_time ? (
     gui_categories_editor_cursor = gui_category(list_categories_editor, gui_categories_editor_cursor, gui_categories_editor_offset, gui_categories_editor_cursor);
     gui_categories_editor_offset = gui_category_adjust_view(gui_categories_editor_offset, gui_categories_editor_cursor, gui_categories_editor_cursor_prev);
 
