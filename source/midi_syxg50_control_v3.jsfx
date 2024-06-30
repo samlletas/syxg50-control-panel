@@ -68,8 +68,6 @@ import midi_syxg50_mutex.jsfx-inc
 
 @init
 
-spinlock.lock();
-
 ext_noinit = 1;
 gfx_clear = -1;
 
@@ -1943,8 +1941,6 @@ function gui_restore() (
   gui_categories_variation_cursor_prev = -1;
 );
 
-spinlock.unlock();
-
 
 @serialize
 
@@ -2101,23 +2097,26 @@ while (midirecv(midi_offset, midi_msg1, midi_msg2, midi_msg3)) (
   midisend(midi_offset, midi_msg1, midi_msg2, midi_msg3);
 );
 
-spinlock.lock();
+incoming_cc_queue_ptr > 0 ? (
+  spinlock.lock();
+  incoming_cc_queue_len = incoming_cc_queue_ptr;
+  incoming_cc_queue_ptr = 0;
 
-incoming_cc_queue_len = incoming_cc_queue_ptr;
-incoming_cc_queue_ptr = 0;
+  // update state on incoming midi data
+  while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
+    midi_msg1 = incoming_cc_queue[incoming_cc_queue_ptr + 0];
+    midi_msg2 = incoming_cc_queue[incoming_cc_queue_ptr + 1];
+    midi_msg3 = incoming_cc_queue[incoming_cc_queue_ptr + 2];
+    update_state_midi(midi_msg1, midi_msg2, midi_msg3);
+    incoming_cc_queue_ptr += 3;
+  );
 
-// update state on incoming midi data
-while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
-  midi_msg1 = incoming_cc_queue[incoming_cc_queue_ptr + 0];
-  midi_msg2 = incoming_cc_queue[incoming_cc_queue_ptr + 1];
-  midi_msg3 = incoming_cc_queue[incoming_cc_queue_ptr + 2];
-  update_state_midi(midi_msg1, midi_msg2, midi_msg3);
-  incoming_cc_queue_ptr += 3;
+  incoming_cc_queue_ptr = 0;
+  spinlock.unlock();
 );
 
-incoming_cc_queue_ptr = 0;
-
 midi_first_time ? (
+  spinlock.lock();
   midi_first_time = 0;
   sysex_clear_queue();
   sysex_add_queue(0x02015a, 1, 1);  // set variation connection to system
@@ -2228,32 +2227,27 @@ midi_first_time ? (
 
     idx += 1;
   );
+  spinlock.unlock();
 );
 
-sysex_queue_len = sysex_queue_ptr;
-sysex_queue_ptr = 0;
+sysex_queue_ptr > 0 ? (
+  spinlock.lock();
+  sysex_queue_len = sysex_queue_ptr;
+  sysex_queue_ptr = 0;
 
-// send queued sysex messages
-while (sysex_queue_ptr < sysex_queue_len) (
-  xgsend_sysex(sysex_queue[sysex_queue_ptr + 0], sysex_queue[sysex_queue_ptr + 1], sysex_queue[sysex_queue_ptr + 2]);
-  sysex_queue_ptr += 3;
+  // send queued sysex messages
+  while (sysex_queue_ptr < sysex_queue_len) (
+    xgsend_sysex(sysex_queue[sysex_queue_ptr + 0], sysex_queue[sysex_queue_ptr + 1], sysex_queue[sysex_queue_ptr + 2]);
+    sysex_queue_ptr += 3;
+  );
+
+  sysex_queue_ptr = 0;
+  sysex_delay = 0;
+  spinlock.unlock();
 );
-
-sysex_queue_ptr = 0;
-sysex_delay = 0;
-
-spinlock.unlock();
 
 
 @gfx 750 750
-
-gfx_setfont(font_default);
-
-set_color(color_bg_darkest);
-gfx_rect(0, 0, gfx_w, gui_menu_height - 10);
-
-set_color(color_bg_dark);
-gfx_rect(0, gui_menu_height - 10, gfx_w, 10);
 
 // setup ----------------------------------------------------------------------
 
@@ -2274,7 +2268,15 @@ gui_param_focused() ? (
   gui_key_ctrl = 0;
 );
 
+gfx_setfont(font_default);
+
 // main menu ------------------------------------------------------------------
+
+set_color(color_bg_darkest);
+gfx_rect(0, 0, gfx_w, gui_menu_height - 10);
+
+set_color(color_bg_dark);
+gfx_rect(0, gui_menu_height - 10, gfx_w, 10);
 
 gui_menu_item(020, 10, "Overview"   , gui_page == 0, 1) ? gui_page = 0;
 gui_menu_item(116, 10, "Voice List" , gui_page == 1, 1) ? gui_page = 1;
