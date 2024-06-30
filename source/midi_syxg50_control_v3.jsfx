@@ -1954,6 +1954,7 @@ file_var(0, file_version);
 file_var(0, gui_page);
 file_var(0, gui_part);
 
+file_var(0, gui_overview_mode);
 file_var(0, gui_categories_voice_cursor);
 file_var(0, gui_categories_editor_cursor);
 file_var(0, gui_categories_reverb_cursor);
