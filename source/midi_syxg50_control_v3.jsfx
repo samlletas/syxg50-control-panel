@@ -1127,6 +1127,7 @@ function gui_overview_voice_menu(part) local(category_count, voice_count, list_v
     list_len = strlen(list_voices);
     voice_count = 0;
 
+    category_count == voice_category[part] ? strcat(#voice_menu, "!");
     strcat(#voice_menu, ">");
     strcat(#voice_menu, get_voice_category(category_count));
     strcat(#voice_menu, "|");
@@ -1137,7 +1138,7 @@ function gui_overview_voice_menu(part) local(category_count, voice_count, list_v
       strcpy_substr(#voice_menu_item, list_voices, list_ptr_old + 12, list_ptr - list_ptr_old - 12);
       list_ptr += 1;
 
-      voice_count == voice_number[part] && category_count == voice_category[part] ? strcat(#voice_menu, "!");
+      category_count == voice_category[part] && voice_count == voice_number[part] ? strcat(#voice_menu, "!");
       list_ptr >= list_len ? strcat(#voice_menu, "<");
       strcat(#voice_menu, escape_ampersand(#voice_menu_item));
       strcat(#voice_menu, "|");
