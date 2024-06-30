@@ -1082,7 +1082,7 @@ function gui_overview_cell(text, size, color, align, has_border) local(text_widt
   align <= 1 ? (
     gfx_x = gui_control_x + (cell_width / 2) - (text_width / 2);
   ) : (
-    gfx_x = gui_control_x + 2;
+    gfx_x = gui_control_x + 7;
   );
 
   align != 1 ? (
@@ -1134,7 +1134,7 @@ function gui_overview_voice_menu(part) local(category_count, voice_count, list_v
     while (list_ptr < list_len) (
       list_ptr_old = list_ptr;
       list_ptr = parse_to_line_end(list_voices, list_ptr);
-      strcpy_substr(#voice_menu_item, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
+      strcpy_substr(#voice_menu_item, list_voices, list_ptr_old + 12, list_ptr - list_ptr_old - 12);
       list_ptr += 1;
 
       voice_count == voice_number[part] && category_count == voice_category[part] ? strcat(#voice_menu, "!");
@@ -1174,7 +1174,7 @@ function gui_overview_voice(part) local(category_change, voice_change, category_
     list_ptr = parse_to_line_end(list_voices, list_ptr);
 
     voice_count == voice_number[part] ? (
-      strcpy_substr(#voice_name, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
+      strcpy_substr(#voice_name, list_voices, list_ptr_old + 12, list_ptr - list_ptr_old - 12);
     );
 
     list_ptr += 1;
@@ -1298,8 +1298,8 @@ function gui_pages()
         gui_control_x = 0;
         gui_control_y += gui_overview_cell_height;
 
-        sprintf(#part_menu, "%i", part + 1);
-        gui_overview_cell(#part_menu, 1, color_fg_menu, 0, 0);
+        sprintf(#temp, "%i", part + 1);
+        gui_overview_cell(#temp, 1, color_fg_menu, 0, 0);
         gui_overview_voice(part);
 
         part += 1;
@@ -1350,7 +1350,7 @@ function gui_pages()
 
       list_ptr_old = list_ptr;
       list_ptr = parse_to_line_end(list_voices, list_ptr);
-      strcpy_substr(#voice_name, list_voices, list_ptr_old + 11, list_ptr - list_ptr_old - 11);
+      strcpy_substr(#voice_name, list_voices, list_ptr_old + 12, list_ptr - list_ptr_old - 12);
       list_ptr += 1;
 
       list_hover = 0;
@@ -1368,7 +1368,7 @@ function gui_pages()
 
       list_hover ? set_color(color_bg_cursor) : set_color(color_fg_list);
 
-      gfx_x = list_x + 3;
+      gfx_x = list_x + 7;
       gfx_y = list_y + 2;
 
       gfx_drawstr(#voice_name);
@@ -2321,8 +2321,6 @@ gui_page != gui_page_prev || gui_part != gui_part_prev ? (
 
 // current page ---------------------------------------------------------------
 
-spinlock.unlock();
-
 gui_page == 0 ? (
   set_color(color_bg_dark);
   gfx_rect(0, gui_menu_height, gfx_w, gui_overview_header_height);
@@ -2345,8 +2343,6 @@ gui_page == 0 ? (
   set_color(color_bg_light);
   gfx_rect(gui_categories_width, gui_menu_height, gfx_w - gui_categories_width, gfx_h - gui_menu_height);
 );
-
-spinlock.lock();
 
 gui_categories_visible = floor((gfx_h - gui_menu_height - 20) / gui_list_item_height) - 1;
 gui_categories_visible = max(gui_categories_visible, 1);
