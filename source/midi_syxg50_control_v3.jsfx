@@ -748,7 +748,7 @@ function gui_slider(value, value_min, value_max, name, value_def, is_bipolar)
 function gui_switch(value, value_min, value_max, name, value_def)
     local(value_old, option_idx, option_count, option_width, option_value, option_x, option_y, option_name, name_width, name_height) (
   value_old = value;
-  value < 0 ? value = value_def;
+  value < 0 && value_def >= 0 ? value = value_def;
   option_count = value_max - value_min + 1;
   option_width = (gui_switch_width - (gui_switch_margin * (option_count - 1))) / option_count;
   gfx_setfont(font_small);
@@ -769,7 +769,7 @@ function gui_switch(value, value_min, value_max, name, value_def)
       );
 
       gui_mouse_right == 1 || (gui_mouse_left == 1 && gui_key_ctrl) ? (
-        value = value_def;
+        value_def >= 0 ? value = value_def;
       );
 
       value = min(max(value, value_min), value_max);
@@ -779,6 +779,7 @@ function gui_switch(value, value_min, value_max, name, value_def)
     set_color(color_bg_darker);
     option_value == value && value == value_def ? set_color(color_bg_cursor);
     option_value == value && value != value_def ? set_color(color_bg_changed);
+    option_value == value && value_def < 0 ? set_color(color_bg_cursor);
     gfx_rect(option_x, option_y, option_width, gui_switch_height);
 
     // option name
@@ -793,7 +794,7 @@ function gui_switch(value, value_min, value_max, name, value_def)
   );
 
   // switch name
-  value == value_def ? set_color(color_fg_list) : set_color(color_bg_changed);
+  value == value_def || value_def < 0 ? set_color(color_fg_list) : set_color(color_bg_changed);
   gfx_setfont(font_default);
   gfx_measurestr(name, name_width, name_height);
   gfx_x = gui_control_x - name_width - 8;
@@ -1269,7 +1270,7 @@ function gui_pages()
     gui_control_y = 53;
 
     gui_value_table = param_value_names_overview_mode;
-    gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", 0);
+    gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", -1);
 
     gfx_setfont(font_smaller);
     gui_control_x = 0;
