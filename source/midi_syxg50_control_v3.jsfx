@@ -1949,6 +1949,7 @@ spinlock.lock();
 file_version = 1;
 file_var(0, file_version);
 
+// gui state
 file_var(0, gui_page);
 file_var(0, gui_part);
 
@@ -2097,12 +2098,12 @@ while (midirecv(midi_offset, midi_msg1, midi_msg2, midi_msg3)) (
   midisend(midi_offset, midi_msg1, midi_msg2, midi_msg3);
 );
 
+// update state on incoming midi data
 incoming_cc_queue_ptr > 0 ? (
   spinlock.lock();
   incoming_cc_queue_len = incoming_cc_queue_ptr;
   incoming_cc_queue_ptr = 0;
 
-  // update state on incoming midi data
   while (incoming_cc_queue_ptr < incoming_cc_queue_len) (
     midi_msg1 = incoming_cc_queue[incoming_cc_queue_ptr + 0];
     midi_msg2 = incoming_cc_queue[incoming_cc_queue_ptr + 1];
@@ -2115,6 +2116,7 @@ incoming_cc_queue_ptr > 0 ? (
   spinlock.unlock();
 );
 
+// restore all parameters
 midi_first_time ? (
   spinlock.lock();
   midi_first_time = 0;
@@ -2230,12 +2232,12 @@ midi_first_time ? (
   spinlock.unlock();
 );
 
+// send queued sysex messages
 sysex_queue_ptr > 0 ? (
   spinlock.lock();
   sysex_queue_len = sysex_queue_ptr;
   sysex_queue_ptr = 0;
 
-  // send queued sysex messages
   while (sysex_queue_ptr < sysex_queue_len) (
     xgsend_sysex(sysex_queue[sysex_queue_ptr + 0], sysex_queue[sysex_queue_ptr + 1], sysex_queue[sysex_queue_ptr + 2]);
     sysex_queue_ptr += 3;
