@@ -117,6 +117,9 @@ gui_control_x = 0;
 gui_control_y = 0;
 gui_focus_x = -1;
 gui_focus_y = -1;
+gui_drag_range = 127;
+gui_drag_center = 0;
+gui_drag_value = 0;
 gui_value_change = 0;
 gui_value_table = "";
 
@@ -388,6 +391,10 @@ loop (16,
 function lerp(fraction, value_min, value_max) local(value) (
   value = floor((value_min + (value_max - value_min) * fraction) + 0.5);
   min(max(value, value_min), value_max);
+);
+
+function lerp_unclamped(fraction, value_min, value_max) local(value) (
+  value = floor((value_min + (value_max - value_min) * fraction) + 0.5);
 );
 
 function inverse_lerp(value, value_min, value_max) local(fraction) (
@@ -1259,6 +1266,43 @@ function gui_overview_voice(part) local(category_change, voice_change, category_
   gui_overview_cell(#voice_name, 4, color_fg_list, 2, 1);
 );
 
+function gui_overview_param(value, value_min, value_max, value_def) local(value_old, value_range, drag_offset, color) (
+  value_old = value;
+  value < 0 ? value = value_def;
+  value_range = value_max - value_min;
+
+  // param input
+  gui_mouse_over(gui_control_x, gui_overview_cell_width, gui_control_y, gui_overview_cell_height) ? (
+    value += sign(mouse_wheel);
+
+    gui_mouse_left == 1 && !gui_key_ctrl ? (
+      gui_focus_x = gui_control_x;
+      gui_focus_y = gui_control_y;
+      gui_drag_center = mouse_y;
+      gui_drag_value = value;
+    );
+
+    gui_mouse_right == 1 || (gui_mouse_left == 1 && gui_key_ctrl) ? (
+      value = value_def;
+    );
+  );
+
+  gui_mouse_left > 0 && gui_control_x == gui_focus_x && gui_control_y == gui_focus_y ? (
+    drag_offset = (gui_drag_center - mouse_y) / gui_drag_range;
+    value = gui_drag_value + lerp_unclamped(drag_offset, 0, value_range);
+  );
+
+  value = min(max(value, value_min), value_max);
+
+  // param value
+  #param_value = get_value_display(value);
+  color = value == value_def ? color_fg_list : color_bg_changed;
+  gui_overview_cell(#param_value, 1, color, 0, 1);
+
+  gui_value_change = midi_force_update | (value != value_old);
+  value;
+);
+
 function gui_pages()
     local(part, list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
   midi_force_update = 0;
@@ -1302,6 +1346,35 @@ function gui_pages()
         gui_overview_cell(#temp, 1, color_fg_menu, 0, 0);
         gui_overview_voice(part);
 
+        gui_value_table = effect_value_names_18_generic;
+        part_filter_cutoff[part] = gui_overview_param(part_filter_cutoff[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x18, part_filter_cutoff[part], 1);
+
+        part_filter_resonance[part] = gui_overview_param(part_filter_resonance[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x19, part_filter_resonance[part], 1);
+
+        part_eg_attack[part] = gui_overview_param(part_eg_attack[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x1a, part_eg_attack[part], 1);
+
+        part_eg_decay[part] = gui_overview_param(part_eg_decay[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x1b, part_eg_decay[part], 1);
+
+        part_eg_release[part] = gui_overview_param(part_eg_release[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x1c, part_eg_release[part], 1);
+
+        gui_value_table = "";
+        part_reverb_send[part] = gui_overview_param(part_reverb_send[part], 0, 127, 40);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x13, part_reverb_send[part], 1);
+
+        part_chorus_send[part] = gui_overview_param(part_chorus_send[part], 0, 127, 0);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x12, part_chorus_send[part], 1);
+
+        part_variation_send[part] = gui_overview_param(part_variation_send[part], 0, 127, 0);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x14, part_variation_send[part], 1);
+
+        part_dry_level[part] = gui_overview_param(part_dry_level[part], 0, 127, 127);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x11, part_dry_level[part], 1);
+
         part += 1;
       );
     );
@@ -1322,6 +1395,64 @@ function gui_pages()
       gui_overview_header_stack("Key", "High", 1);
       gui_overview_header_stack("Vel", "Depth", 1);
       gui_overview_header_stack("Vel", " Offset", 1);
+
+      part = 0;
+
+      loop (16,
+        gui_control_x = 0;
+        gui_control_y += gui_overview_cell_height;
+
+        sprintf(#temp, "%i", part + 1);
+        gui_overview_cell(#temp, 1, color_fg_menu, 0, 0);
+
+        gui_value_table = param_value_names_channel;
+        part_rcv_channel[part] = gui_overview_param(part_rcv_channel[part], 0, 15, part);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x04, part_rcv_channel[part], 1);
+
+        gui_overview_voice(part);
+
+        gui_value_table = param_value_names_mono_poly;
+        part_mode[part] = gui_overview_param(part_mode[part], 0, 1, 1);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x05, part_mode[part], 1);
+
+        gui_value_table = param_value_names_off_on;
+        part_portamento_switch[part] = gui_overview_param(part_portamento_switch[part], 0, 1, 0);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x67, part_portamento_switch[part], 1);
+
+        gui_value_table = "";
+        part_portamento_time[part] = gui_overview_param(part_portamento_time[part], 0, 127, 0);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x68, part_portamento_time[part], 1);
+
+        gui_value_table = effect_value_names_18_generic;
+        part_vibrato_rate[part] = gui_overview_param(part_vibrato_rate[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x15, part_vibrato_rate[part], 1);
+
+        part_vibrato_depth[part] = gui_overview_param(part_vibrato_depth[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x16, part_vibrato_depth[part], 1);
+
+        part_vibrato_delay[part] = gui_overview_param(part_vibrato_delay[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x17, part_vibrato_delay[part], 1);
+
+        gui_value_table = param_value_names_semitones;
+        part_note_shift[part] = gui_overview_param(part_note_shift[part], 40, 88, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x08, part_note_shift[part], 1);
+
+        gui_value_table = param_value_names_notes;
+        part_note_limit_low[part] = gui_overview_param(part_note_limit_low[part], 0, 127, 0);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x0f, part_note_limit_low[part], 1);
+
+        part_note_limit_high[part] = gui_overview_param(part_note_limit_high[part], 0, 127, 127);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x10, part_note_limit_high[part], 1);
+
+        gui_value_table = "";
+        part_velocity_sense_depth[part] = gui_overview_param(part_velocity_sense_depth[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x0c, part_velocity_sense_depth[part], 1);
+
+        part_velocity_sense_offset[part] = gui_overview_param(part_velocity_sense_offset[part], 0, 127, 64);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x0d, part_velocity_sense_offset[part], 1);
+
+        part += 1;
+      );
     );
   );
 
@@ -1341,7 +1472,7 @@ function gui_pages()
     voice_count = 0;
     list_len = strlen(list_voices);
 
-    // render voice list
+    // render voices
     while (list_ptr < list_len) (
       list_y + gui_list_item_height >= gfx_h ? (
         list_y = gui_menu_height + 10;
