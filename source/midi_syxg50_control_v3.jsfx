@@ -499,7 +499,10 @@ function escape_ampersand(string) local(offset, length, char) (
 
 function get_value_display(value)
     local(format, table_len, table_ptr, table_ptr_old, table_value) (
-  gui_value_table == param_value_names_detune ? (
+  gui_value_table == param_value_names_empty ? (
+    // @empty-formatter
+    strcpy(#param_value, "");
+  ) : gui_value_table == param_value_names_detune ? (
     // @detune-formatter
     value = (value - 128) / 10;
     format = value != 0 ? "%+.1f Hz" : "%.1f Hz";
@@ -1082,7 +1085,7 @@ function gui_slider_list(list, cursor, effect_type)
 
 // align 0: center, 1: bottom, 2: left
 function gui_overview_cell(text, size, color, align, has_border) local(text_width, text_height, cell_width) (
-  cell_width = gui_overview_cell_width * size;
+  cell_width = floor(gui_overview_cell_width * size);
   gfx_measurestr(text, text_width, text_height);
 
   align <= 1 ? (
@@ -1303,6 +1306,27 @@ function gui_overview_param(value, value_min, value_max, value_def) local(value_
   value;
 );
 
+function gui_overview_slider(value, value_min, value_max, value_def, is_bipolar, size) local(original_x, original_y, original_width, cell_width) (
+  original_x = gui_control_x;
+  original_y = gui_control_y;
+  original_width = gui_slider_width;
+
+  cell_width = floor(gui_overview_cell_width * size);
+  gui_slider_width = cell_width - 16;
+  gui_slider_halfwidth = gui_slider_width * 0.5;
+  gui_control_x += (cell_width / 2) - (gui_slider_width / 2);
+  gui_control_y += (gui_overview_cell_height / 2) - (gui_slider_height / 2);
+  value = gui_slider(value, value_min, value_max, "", value_def, is_bipolar);
+
+  gui_control_x = original_x;
+  gui_control_y = original_y;
+  gui_slider_width = original_width;
+  gui_slider_halfwidth = gui_slider_width * 0.5;
+  gui_overview_cell("", size, 0x0, 0, 1);
+
+  value;
+);
+
 function gui_pages()
     local(part, list_x, list_y, list_hover, voice_change, voice_count, list_voices, list_len, list_ptr, list_ptr_old, msb, lsb, value) (
   midi_force_update = 0;
@@ -1333,8 +1357,8 @@ function gui_pages()
       gui_overview_header("Cho", 1);
       gui_overview_header("Var", 1);
       gui_overview_header("Dry", 1);
-      gui_overview_header("Pan", 1);
-      gui_overview_header("Volume", 2);
+      gui_overview_header("Pan", 1.55);
+      gui_overview_header("Volume", 1.55);
 
       part = 0;
 
@@ -1374,6 +1398,13 @@ function gui_pages()
 
         part_dry_level[part] = gui_overview_param(part_dry_level[part], 0, 127, 127);
         gui_value_change ? sysex_add_queue_multipart(part, 0x11, part_dry_level[part], 1);
+
+        gui_value_table = param_value_names_empty;
+        part_pan[part] = gui_overview_slider(part_pan[part], 0, 127, 64, 1, 1.55);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x0e, part_pan[part], 1);
+
+        part_volume[part] = gui_overview_slider(part_volume[part], 0, 127, 100, 0, 1.55);
+        gui_value_change ? sysex_add_queue_multipart(part, 0x0b, part_volume[part], 1);
 
         part += 1;
       );

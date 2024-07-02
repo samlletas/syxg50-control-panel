@@ -3560,15 +3560,21 @@ param_value_names_notes = "
 
 //-----------------------------------------------------------------------------
 
+param_value_names_overview_mode = "
+000|Mixing
+001|Performance
+";
+
+//-----------------------------------------------------------------------------
+
 param_value_names_detune = "
 \@detune-formatter
 ";
 
 //-----------------------------------------------------------------------------
 
-param_value_names_overview_mode = "
-000|Mixing
-001|Performance
+param_value_names_empty = "
+\@empty-formatter
 ";
 
 //-----------------------------------------------------------------------------
