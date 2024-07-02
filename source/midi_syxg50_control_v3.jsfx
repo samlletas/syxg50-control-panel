@@ -88,7 +88,7 @@ font_small   = 2;
 font_smaller = 3;
 
 gfx_setfont(font_default, "Segoe UI", 22);
-gfx_setfont(font_small, "Segoe UI", 20);
+gfx_setfont(font_small,   "Segoe UI", 20);
 gfx_setfont(font_smaller, "Segoe UI", 19);
 
 gui_menu_height = 44;
@@ -497,8 +497,7 @@ function escape_ampersand(string) local(offset, length, char) (
   #temp;
 );
 
-function get_value_display(value)
-    local(format, table_len, table_ptr, table_ptr_old, table_value) (
+function get_value_display(value) local(format, table_len, table_ptr, table_ptr_old, table_value) (
   gui_value_table == param_value_names_empty ? (
     // @empty-formatter
     strcpy(#param_value, "");
@@ -1132,7 +1131,8 @@ function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos
   gui_overview_header(name_bottom, size);
 );
 
-function gui_overview_voice_menu(part) local(category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old, selection) (
+function gui_overview_voice_menu(part)
+    local(category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old, selection) (
   category_count = 0;
   strcpy(#voice_menu, "");
   strcpy(#voice_menu_item, "");
@@ -1175,7 +1175,8 @@ function gui_overview_voice_menu(part) local(category_count, voice_count, list_v
   selection;
 );
 
-function gui_overview_voice(part) local(category_change, voice_change, category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
+function gui_overview_voice(part)
+    local(category_change, voice_change, category_count, voice_count, list_voices, list_len, list_ptr, list_ptr_old) (
   voice_change = -1;
   category_change = -1;
 
@@ -1318,7 +1319,8 @@ function gui_overview_param(value, value_min, value_max, value_def) local(value_
   value;
 );
 
-function gui_overview_slider(value, value_min, value_max, value_def, is_bipolar, size) local(original_x, original_y, original_width, cell_width) (
+function gui_overview_slider(value, value_min, value_max, value_def, is_bipolar, size)
+    local(original_x, original_y, original_width, cell_width) (
   original_x = gui_control_x;
   original_y = gui_control_y;
   original_width = gui_slider_width;
@@ -1380,6 +1382,7 @@ function gui_pages()
 
         sprintf(#temp, "%i", part + 1);
         gui_overview_cell(#temp, 1, color_fg_menu, 0, 0);
+
         gui_overview_voice(part);
 
         gui_value_table = effect_value_names_18_generic;
