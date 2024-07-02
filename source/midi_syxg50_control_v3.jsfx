@@ -1360,7 +1360,7 @@ function gui_pages()
       gui_overview_header("Reso", 1);
       gui_overview_header("Atk", 1);
       gui_overview_header("Dec", 1);
-      gui_overview_header("Rel", 1);
+      gui_overview_header("Rls", 1);
       gui_overview_header("Rev", 1);
       gui_overview_header("Cho", 1);
       gui_overview_header("Var", 1);
@@ -1421,7 +1421,7 @@ function gui_pages()
     // performance mode
     gui_overview_mode == 1 ? (
       gui_overview_header("Part", 1);
-      gui_overview_header("Ch", 1);
+      gui_overview_header("Chan", 1);
       gui_overview_header("Voice", 4);
       gui_overview_header("Mode", 1);
       gui_overview_header("Port", 1);
