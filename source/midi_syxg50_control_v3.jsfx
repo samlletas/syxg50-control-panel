@@ -775,7 +775,11 @@ function gui_switch(value, value_min, value_max, name, value_def)
       value += sign(mouse_wheel);
 
       gui_mouse_left == 1 && !gui_key_ctrl ? (
-        value = option_value;
+        option_count > 2 ? (
+          value = option_value;
+        ) : (
+          value = !value;
+        );
       );
 
       gui_mouse_right == 1 || (gui_mouse_left == 1 && gui_key_ctrl) ? (
@@ -1279,10 +1283,14 @@ function gui_overview_param(value, value_min, value_max, value_def) local(value_
     value += sign(mouse_wheel);
 
     gui_mouse_left == 1 && !gui_key_ctrl ? (
-      gui_focus_x = gui_control_x;
-      gui_focus_y = gui_control_y;
-      gui_drag_center = mouse_y;
-      gui_drag_value = value;
+      value_range > 2 ? (
+        gui_focus_x = gui_control_x;
+        gui_focus_y = gui_control_y;
+        gui_drag_center = mouse_y;
+        gui_drag_value = value;
+      ) : (
+        value = !value;
+      );
     );
 
     gui_mouse_right == 1 || (gui_mouse_left == 1 && gui_key_ctrl) ? (
