@@ -1428,8 +1428,8 @@ function gui_pages()
     // performance mode
     gui_overview_mode == 1 ? (
       gui_overview_header("Part", 1);
-      gui_overview_header("Chan", 1);
       gui_overview_header("Voice", 4);
+      gui_overview_header("Chan", 1);
       gui_overview_header("Mode", 1);
       gui_overview_header("Port", 1);
       gui_overview_header_stack("Port", "Time", 1);
@@ -1451,11 +1451,11 @@ function gui_pages()
         sprintf(#temp, "%i", part + 1);
         gui_overview_cell(#temp, 1, color_fg_menu, 0, 0);
 
+        gui_overview_voice(part);
+
         gui_value_table = param_value_names_channel;
         part_rcv_channel[part] = gui_overview_param(part_rcv_channel[part], 0, 15, part);
         gui_value_change ? sysex_add_queue_multipart(part, 0x04, part_rcv_channel[part], 1);
-
-        gui_overview_voice(part);
 
         gui_value_table = param_value_names_mono_poly;
         part_mode[part] = gui_overview_param(part_mode[part], 0, 1, 1);
