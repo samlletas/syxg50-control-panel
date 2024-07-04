@@ -1386,7 +1386,7 @@ function gui_pages()
       gui_overview_header("Atk", 1);
       gui_overview_header("Dec", 1);
       gui_overview_header("Rls", 1);
-      gui_overview_header_group("FX", 3);
+      gui_overview_header_group("FX", 4);
       gui_overview_header("Rev", 1);
       gui_overview_header("Cho", 1);
       gui_overview_header("Var", 1);
@@ -1452,7 +1452,7 @@ function gui_pages()
       gui_overview_header("Chan", 1);
       gui_overview_header("Mode", 1);
       gui_overview_header_group("Porta", 2);
-      gui_overview_header("Switch", 1);
+      gui_overview_header("Active", 1);
       gui_overview_header("Time", 1);
       gui_overview_header_group("Vibrato", 3);
       gui_overview_header("Rate", 1);
