@@ -80,6 +80,7 @@ color_bg_changed = 0x5CCFE6;
 color_bg_voice   = 0x514631;
 color_fg_menu    = 0x707070;
 color_fg_list    = 0xD4D4D4;
+color_bg_group   = 0x575757;
 color_bg_col_alt = 0x252525;
 color_bg_row_alt = 0x313131;
 
@@ -1121,14 +1122,30 @@ function gui_overview_header(name, size) (
   gui_overview_cell(name, size, color_fg_menu, 1, 0);
 );
 
-function gui_overview_header_stack(name_top, name_bottom, size) local(pos_x, pos_y) (
+function gui_overview_header_group(name, size) local(pos_x, pos_y, name_width, name_height, cell_width) (
   pos_x = gui_control_x;
   pos_y = gui_control_y;
-  gui_control_y -= 13;
-  gui_overview_header(name_top, size);
+  gui_control_y -= 17;
+
+  cell_width = floor(gui_overview_cell_width * size);
+  gfx_measurestr(name, name_width, name_height);
+  set_color(color_bg_group);
+
+  // left bracket
+  gfx_x = gui_control_x + (cell_width / 2) - (name_width / 2) - 3;
+  gfx_y = gui_control_y + gui_overview_cell_height - 11;
+  gfx_lineto(gui_control_x + 10, gfx_y);
+  gfx_lineto(gfx_x, gfx_y + 5);
+
+  // right bracket
+  gfx_x = gui_control_x + (cell_width / 2) + (name_width / 2) + 3;
+  gfx_y = gui_control_y + gui_overview_cell_height - 11;
+  gfx_lineto(gui_control_x + cell_width - 10, gfx_y);
+  gfx_lineto(gfx_x, gfx_y + 5);
+
+  gui_overview_header(name, size);
   gui_control_x = pos_x;
   gui_control_y = pos_y;
-  gui_overview_header(name_bottom, size);
 );
 
 function gui_overview_voice_menu(part)
@@ -1349,7 +1366,7 @@ function gui_pages()
 
   gui_page == 0 && !midi_first_time ? (
     gui_control_x = 257;
-    gui_control_y = 53;
+    gui_control_y = 50;
 
     gui_value_table = param_value_names_overview_mode;
     gui_overview_mode = gui_switch(gui_overview_mode, 0, 1, "", -1);
@@ -1362,11 +1379,14 @@ function gui_pages()
     gui_overview_mode == 0 ? (
       gui_overview_header("Part", 1);
       gui_overview_header("Voice", 4);
+      gui_overview_header_group("Filter", 2);
       gui_overview_header("Cutoff", 1);
       gui_overview_header("Reso", 1);
+      gui_overview_header_group("Envelope", 3);
       gui_overview_header("Atk", 1);
       gui_overview_header("Dec", 1);
       gui_overview_header("Rls", 1);
+      gui_overview_header_group("FX", 3);
       gui_overview_header("Rev", 1);
       gui_overview_header("Cho", 1);
       gui_overview_header("Var", 1);
@@ -1431,16 +1451,20 @@ function gui_pages()
       gui_overview_header("Voice", 4);
       gui_overview_header("Chan", 1);
       gui_overview_header("Mode", 1);
-      gui_overview_header("Port", 1);
-      gui_overview_header_stack("Port", "Time", 1);
-      gui_overview_header_stack("Vib", "Rate", 1);
-      gui_overview_header_stack("Vib", "Depth", 1);
-      gui_overview_header_stack("Vib", " Delay", 1);
-      gui_overview_header_stack("Note", "Shift", 1);
-      gui_overview_header_stack("Key", "Low", 1);
-      gui_overview_header_stack("Key", "High", 1);
-      gui_overview_header_stack("Vel", "Depth", 1);
-      gui_overview_header_stack("Vel", " Offset", 1);
+      gui_overview_header_group("Porta", 2);
+      gui_overview_header("Switch", 1);
+      gui_overview_header("Time", 1);
+      gui_overview_header_group("Vibrato", 3);
+      gui_overview_header("Rate", 1);
+      gui_overview_header("Depth", 1);
+      gui_overview_header(" Delay", 1);
+      gui_overview_header_group("Note", 3);
+      gui_overview_header("Shift", 1);
+      gui_overview_header("Low", 1);
+      gui_overview_header("High", 1);
+      gui_overview_header_group("Vel", 2);
+      gui_overview_header("Depth", 1);
+      gui_overview_header(" Offset", 1);
 
       part = 0;
 
