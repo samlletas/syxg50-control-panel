@@ -2,6 +2,16 @@
 // https://www.patreon.com/shiru8bit shiru@mail.ru
 // released under the CC0 terms
 
+// v3.0 05.07.24 - Add overview tab for editing all 16 parts at once;
+//                 Plugin state is now updated on incoming MIDI CC and Bank Select+Program Change;
+//                 Add switch control for parameters with multiple options;
+//                 Better value display for detune and delay time parameters;
+//                 Merge both "Sound Effects" banks into a single bank;
+//                 Add "Element Reserve" parameter;
+//                 Only allow changes on 1 slider at a time;
+//                 Serialize file version for better state loading between versions;
+//                 Fix wrong default voice for part 10 (drums);
+//                 Codebase improvements;
 // v2.6 04.06.24 - Use full names for all voices;
 //                 Increase the GUI size once again;
 //                 Tweak colors for better contrast a bit;
