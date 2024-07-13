@@ -201,7 +201,7 @@ list_voices_organ = "
 017:000:065 70s Drawbar Organ 2
 017:000:066 Cheezy Organ
 017:000:067 Drawbar Organ 3
-018:000:000 Percussive Organ
+018:000:000 Percussive Organ 1
 018:000:024 70s Percussive Organ
 018:000:032 Detuned Percussive Organ
 018:000:033 Light Organ
@@ -327,7 +327,7 @@ list_voices_strings = "
 //-----------------------------------------------------------------------------
 
 list_voices_ensemble = "
-049:000:000 Strings 1
+049:000:000 String Ensemble 1
 049:000:003 Stereo Strings
 049:000:008 Slow Strings
 049:000:024 Arco Strings
@@ -336,7 +336,7 @@ list_voices_ensemble = "
 049:000:041 Orchestra 2
 049:000:042 Tremolo Orchestra
 049:000:045 Velocity Strings
-050:000:000 Strings 2
+050:000:000 String Ensemble 2
 050:000:003 Stereo Slow Strings
 050:000:008 Legato Strings
 050:000:040 Warm Strings
